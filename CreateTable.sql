@@ -89,6 +89,7 @@ CREATE TABLE MultiChoice (
 	Question TEXT,
 	Choices TEXT,
 	Answer TEXT,
+	Count INT,
 	PRIMARY KEY (QuestionID)
 );
 

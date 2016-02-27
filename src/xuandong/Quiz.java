@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Quiz {
-//	fafaff
+	private int pbCount = 0;
+	
 	private String name;
 	private String quizID;
 	private String userID;
@@ -23,10 +24,12 @@ public class Quiz {
 	
 	private Long startTime;
 	private Long endTime;
-	private Long duration;
-	private String date;
+	private String duration;
+	private String startDate;
+	private String endDate;
 	
 	static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	static final SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 	
 	DBConnection database;
 
@@ -45,7 +48,22 @@ public class Quiz {
 				this.authorID = res.getString(3);
 				String[] prs = res.getString(4).split("|");
 				for (int i = 0; i < prs.length; i++) {
-					
+					String type = prs[i].substring(0, 2);
+					switch (type) {
+						case "FB": this.problems.add(new FillBlank(prs[i]));
+								   break;
+						case "MC": this.problems.add(new MultiChoice(prs[i]));
+								   break;
+						case "MR": this.problems.add(new MultiResponse(prs[i]));
+								   break;
+						case "PR": this.problems.add(new PictureResponse(prs[i]));
+						   		   break;
+						case "QR": this.problems.add(new QuestionResponse(prs[i]));
+						   		   break;
+						case "SC": this.problems.add(new SingleChoice(prs[i]));
+						   		   break;
+					}
+					pbCount += problems.get(problems.size() - 1).getAnswer().length;
 				}
 				this.isRandomQuiz = res.getBoolean(5);
 				this.isOnePage = res.getBoolean(6);
@@ -154,18 +172,22 @@ public class Quiz {
 	}
 	
 	public Long quizStart() {
-		this.startTime = System.currentTimeMillis();
-		date = df.format(new Date());
+		this.startTime = (new Date()).getTime();
+		startDate = df.format(startTime);
 		return this.startTime;
 	}
 	
-	public Long quizEnd() {
-		this.endTime = System.currentTimeMillis();
-		this.duration = this.startTime - this.endTime;
-		int score = this.getScore();
+	public String quizEnd() {
+		this.endTime = (new Date()).getTime();
+		endDate = df.format(endTime);
+		Long dura = this.startTime - this.endTime;
+		Date tempDate = new Date();
+		tempDate.setTime(dura);
+		duration = format.format(tempDate);
+		double score = this.getScore();
 		Statement stmt = database.getStmt();
 		try {
-			String sql = "INSERT INTO QuizRecord VALUES ('" + quizID + "','" + userID + "','" + startTime + "','" + endTime + "','" + score + "');";
+			String sql = "INSERT INTO QuizRecord VALUES ('" + quizID + "','" + userID + "','" + startDate + "','" + endDate + "','" + duration + "," + score + "');";
 			stmt.executeUpdate(sql);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -173,11 +195,11 @@ public class Quiz {
 		return duration;
 	}
 	
-	public int getScore() {
+	public double getScore() {
 		int score = 0;
 		for (Problem pr : problems) {
 			score += pr.getScore();
 		}
-		return score;
+		return score / pbCount;
 	}
 }

@@ -7,8 +7,6 @@ import java.sql.Statement;
 public class MultiResponse extends Problem {
 	int count;
 	
-	String[] choices;
-	
 	public MultiResponse(String id) {
 		super(id);
 		try {

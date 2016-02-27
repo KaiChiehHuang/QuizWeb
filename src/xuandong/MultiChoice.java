@@ -6,16 +6,18 @@ import java.sql.Statement;
 
 public class MultiChoice extends Problem {
 	String[] choices;
+	int count;
 	
 	public MultiChoice(String id) {
 		super(id);
 		try {
 			Statement stmt = database.getStmt();
-			String sql = "SELECT Choices FROM " + Problem.problemType.get(questionID.substring(0,2)) + " WHERE QuestionID = " + questionID + ";";
+			String sql = "SELECT Choices, Count FROM " + Problem.problemType.get(questionID.substring(0,2)) + " WHERE QuestionID = " + questionID + ";";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
 				res.absolute(1);
 				this.choices = res.getString(1).split("|");
+				this.count = res.getInt(2);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -27,9 +29,13 @@ public class MultiChoice extends Problem {
 		int count = 0;
 		String[] userAnswers = userAnswer.split("|");
 		for (int i = 0; i < answers.length; i++) {
-			for (int j = 0; j < userAnswers.length; j++) {
-				if (answers[i].toLowerCase().equals(userAnswers[j].toLowerCase())) {
-					count++;
+			String[] temp = answers[i].split("#");
+			for (int k = 0; k < temp.length; k++) {
+				for (int j = 0; j < userAnswers.length; j++) {
+					if (temp[k].toLowerCase().equals(userAnswers[j].toLowerCase())) {
+						count++;
+						break;
+					}
 				}
 			}
 		}

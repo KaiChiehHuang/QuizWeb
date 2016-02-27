@@ -47,12 +47,17 @@ public class Problem {
 	};
 	
 	public int getScore() {
+		int score = 0;
 		for (int i = 0; i < answers.length; i++) {
-			if (answers[i].toLowerCase().equals(userAnswer)) {
-				return 1;
+			String[] temp = answers[i].split("#");
+			for (int j = 0; j < temp.length; j++) {
+				if (temp[j].toLowerCase().equals(userAnswer)) {
+					score++;
+					break;
+				}
 			}
 		}
-		return 0;
+		return score;
 	}
 	
 	public void setUserAnswer(String userAnswer) {

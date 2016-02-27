@@ -41,25 +41,16 @@ public class UserLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userID = request.getParameter("userName");
+		String userID = request.getParameter("userID");
 		String password = request.getParameter("password");
 		ServletContext context = getServletContext();
 		AccountManager manager = (AccountManager) context.getAttribute("AccountManager");
 		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
 		if(manager.idPasswordMatch(userID, password)) {
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<meta charset=\"UTF-8\" />");
-			out.println("<title>Welcome " +userID+ "</title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>Welcome " +userID+"</h1>");
-			out.println("</body>");
-			out.println("</html>");	
+			RequestDispatcher dispatcher = request.getRequestDispatcher("HomePage.jsp");
+			dispatcher.forward(request, response);
 		}else{
-			RequestDispatcher dispatcher = request.getRequestDispatcher("loginFailed.html");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("LoginFailed.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

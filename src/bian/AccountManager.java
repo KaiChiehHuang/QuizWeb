@@ -56,8 +56,9 @@ public class AccountManager {
 		password = hashSHAPassword(password);
 		try {
 			rs = stmt.executeQuery("SELECT * FROM Users WHERE UserID = \"" + id + "\";");
+			rs.absolute(1);
 			String right_password = rs.getString("Password");
-			if (right_password == password) {
+			if (right_password.equals(password)) {
 				return true;
 			}
 		} catch (SQLException e) {

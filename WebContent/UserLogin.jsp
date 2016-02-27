@@ -4,9 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Online Quizbook</title>
 </head>
 <body>
-
+		<h1>Welcome to Homework 5</h1>
+		<p> Please log in. </p>
+		<form action="UserLogin" method="post">
+		<p>User Name: <input type="text" name="userName" />
+		<p>Password: <input type="text" name="password" />
+		<input type="submit" value="Login"/></p>
+		</form>
+		<a href="createNewAccount.html"> Create New Account </a>
 </body>
 </html>

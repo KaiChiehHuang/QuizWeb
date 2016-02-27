@@ -22,9 +22,9 @@ CREATE TABLE Friendship (
 	User2ID     VARCHAR(255),
 	PRIMARY KEY (User1ID, User2ID),
 	FOREIGN KEY (User1ID)
-		REFERENCES Users deferrable initially deferred,
+		REFERENCES Users(UserID),
 	FOREIGN KEY (User2ID)
-		REFERENCES Users deferrable initially deferred
+		REFERENCES Users(UserID)
 );
 
 DROP TABLE IF EXISTS Quiz;
@@ -41,7 +41,7 @@ CREATE TABLE Quiz (
 	IsPracticeMode        BOOLEAN,
 	PRIMARY KEY (QuizID),
 	FOREIGN KEY (AuthorID)
-		REFERENCES Users deferrable initially deferred
+		REFERENCES Users(UserID)
 );
 
 DROP TABLE IF EXISTS SingleChoice;
@@ -114,9 +114,9 @@ CREATE TABLE QuizRecord (
 	Score DECIMAL(5,2),
 	PRIMARY KEY (QuizID, UserID, StartTime),
 	FOREIGN KEY (QuizID)
-		REFERENCES Quiz deferrable initially deferred,
+		REFERENCES Quiz(QuizID),
 	FOREIGN KEY (UserID)
-		REFERENCES Users deferrable initially deferred
+		REFERENCES Users(UserID)
 );
 
 

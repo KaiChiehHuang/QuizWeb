@@ -1,11 +1,15 @@
 package KaiChieh;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import bian.*;
 
 /**
  * Servlet implementation class CreateNewAccount
@@ -35,7 +39,20 @@ public class CreateNewAccount extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String userID = request.getParameter("userID");
+		String password = request.getParameter("password");
+		ServletContext context = getServletContext();
+		AccountManager manager = (AccountManager) context.getAttribute("AccountManager");
+		response.setContentType("text/html; charset=UTF-8");
+		if(manager.accountExist(userID)) {
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("userExist.jsp");
+//			dispatcher.forward(request, response);
+		}else{
+			manager.createAccount(userID, password);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("HomePage.jsp");
+			dispatcher.forward(request, response);
+		}
+
 	}
 
 }

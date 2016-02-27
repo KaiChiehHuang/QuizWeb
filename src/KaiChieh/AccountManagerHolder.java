@@ -33,7 +33,11 @@ public class AccountManagerHolder implements ServletContextListener {
      */
     public void contextDestroyed(ServletContextEvent arg0)  { 
          // TODO Auto-generated method stub
-    	
+    	try {
+    		con.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
     }
 
 	/**

@@ -9,9 +9,9 @@ public class AccountManager {
 	private MessageDigest md;
 	
 	
-	AccountManager(Statement stmt) throws SQLException {
+	public AccountManager(Statement stmt) throws SQLException {
 		this.stmt = stmt;
-		rs = stmt.executeQuery("SELECT * FROM users");
+		rs = stmt.executeQuery("SELECT * FROM Users");
 	}
 	
 	
@@ -22,7 +22,7 @@ public class AccountManager {
 	 */
 	public boolean accountExist(String id) {
 		try {
-			rs = stmt.executeQuery("SELECT * FROM users WHERE id = " + "\"" + id + "\";");
+			rs = stmt.executeQuery("SELECT * FROM Users WHERE UserID = " + "\"" + id + "\";");
 			if (rs.next()) {
 				return true;
 			}
@@ -41,7 +41,7 @@ public class AccountManager {
 	public void createAccount(String id, String password) {
 		password = hashSHAPassword(password);
 		try {
-			stmt.executeUpdate("INSERT INTO users(id, password) VALUES(\"" + id + "\",\"" + password + "\");");
+			stmt.executeUpdate("INSERT INTO Users(UserID, Password) VALUES(\"" + id + "\",\"" + password + "\");");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -55,8 +55,8 @@ public class AccountManager {
 	public boolean idPasswordMatch(String id, String password) {
 		password = hashSHAPassword(password);
 		try {
-			rs = stmt.executeQuery("SELECT * FROM users WHERE id = \"" + id + "\";");
-			String right_password = rs.getString("password");
+			rs = stmt.executeQuery("SELECT * FROM Users WHERE UserID = \"" + id + "\";");
+			String right_password = rs.getString("Password");
 			if (right_password == password) {
 				return true;
 			}
@@ -74,8 +74,8 @@ public class AccountManager {
 	public void changePassword(String id, String ps_new) {
 		String password = hashSHAPassword(ps_new);
 		try {
-			stmt.executeUpdate("UPDATE users SET password = \"" + password 
-					+ "\" WHERE id = \"" + id + "\";");
+			stmt.executeUpdate("UPDATE Users SET Password = \"" + password 
+					+ "\" WHERE UserID = \"" + id + "\";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -87,7 +87,7 @@ public class AccountManager {
 	 */
 	public void removeAccount(String id) {
 		try {
-			stmt.executeUpdate("DELETE FROM user WHERE id = \"" + id + "\";");
+			stmt.executeUpdate("DELETE FROM Users WHERE UserID = \"" + id + "\";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

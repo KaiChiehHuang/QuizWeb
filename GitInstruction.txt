@@ -1,0 +1,35 @@
+# Blind-Source-Separation
+CS 229 - Machine Learning
+
+Authors: 
+Wisam Reid 
+Doron Roberts-Kedes
+Kai-Chieh Huang
+
+
+Git flow for creating a new branch and merging that branch into master:
+
+* git checkout master  
+* git pull origin master  
+* git checkout -b your-initials-[something-descriptive]  
+* git push origin your-intiials-[something-descriptive]  
+* // [make some changes to your new branch]  
+* git add --a  
+* git commit -m "Descriptive message"  
+* git checkout master  
+* git pull origin master  
+* git merge your-initials-[something-descriptive]  
+* // [fix any conflicts]  
+* git push origin master  
+* // then you can delete your local version of the branch   
+* git branch -d your-initials-[something-descriptive]  
+* // then, if you're absolutely sure that the work you did in your branch was merged  
+* // delete the remote branch  
+* git push origin --delete your-initials-[something-descriptive] 
+
+
+Git flow for keeping your own branch up to date with master
+* git pull origin master
+* git checkout your-branch
+* git merge origin/master 
+* // fix merge conflicts if necessary and continue working

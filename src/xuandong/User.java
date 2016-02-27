@@ -17,7 +17,7 @@ public class User {
 		database = new DBConnection();
 		Statement stmt = database.getStmt();
 		try {
-			String sql = "SELECT Name, Age, Gender, Achievement FROM Users WHERE UserID = " + userID + ";";
+			String sql = "SELECT Name, Age, Gender, Achievement FROM Users WHERE UserID = \"" + userID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
 				res.absolute(1);
@@ -54,7 +54,7 @@ public class User {
 	private void updateSQL(String key, String value) {
 		try {
 			Statement stmt = database.getStmt();
-			String sql = "UPDATE Users SET " + key + " = " + value + " WHERE UserID = " + userID + ";";
+			String sql = "UPDATE Users SET " + key + " = " + value + " WHERE UserID = \"" + userID + "\";";
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -65,7 +65,7 @@ public class User {
 		this.age = age;
 		try {
 			Statement stmt = database.getStmt();
-			String sql = "UPDATE Users SET Age = " + age + " WHERE UserID = " + userID + ";";
+			String sql = "UPDATE Users SET Age = " + age + " WHERE UserID = \"" + userID + "\";";
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();

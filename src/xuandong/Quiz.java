@@ -38,8 +38,8 @@ public class Quiz {
 		database = new DBConnection();
 		Statement stmt = database.getStmt();
 		try {
-			String sql = "SELECT Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode FROM Quiz WHERE QuizID = "
-					+ quizID + ";";
+			String sql = "SELECT Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode FROM Quiz WHERE QuizID = \""
+					+ quizID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
 				res.absolute(1);
@@ -106,7 +106,7 @@ public class Quiz {
 	private void updateString(String key, String value) {
 		try {
 			Statement stmt = database.getStmt();
-			String sql = "UPDATE Users SET " + key + " = " + value + " WHERE QuizID = " + quizID + ";";
+			String sql = "UPDATE Users SET " + key + " = " + value + " WHERE QuizID = \"" + quizID + "\";";
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -116,7 +116,7 @@ public class Quiz {
 	private void updateBoolean(String key, boolean value) {
 		try {
 			Statement stmt = database.getStmt();
-			String sql = "UPDATE Users SET " + key + " = " + value + " WHERE QuizID = " + quizID + ";";
+			String sql = "UPDATE Users SET " + key + " = " + value + " WHERE QuizID = \"" + quizID + "\";";
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();

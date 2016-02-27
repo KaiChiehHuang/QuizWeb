@@ -11,7 +11,7 @@ public class MultiResponse extends Problem {
 		super(id);
 		try {
 			Statement stmt = database.getStmt();
-			String sql = "SELECT Count FROM " + Problem.problemType.get(questionID.substring(0,2)) + " WHERE QuestionID = " + questionID + ";";
+			String sql = "SELECT Count FROM " + Problem.problemType.get(questionID.substring(0,2)) + " WHERE QuestionID = \"" + questionID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
 				res.absolute(1);

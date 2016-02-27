@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login Unsuccessful</title>
+<title>Login Failed</title>
 </head>
 <body>
-	<h1>Please Try Again</h1>
+		<h1>Please Try Again</h1>
 		<p> Either your user name or password is incorrect. Please try again. </p>
 		<form action="UserLogin" method="post">
 		<p>User Name: <input type="text" name="userName" />

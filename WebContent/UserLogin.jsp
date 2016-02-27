@@ -26,7 +26,7 @@
 	  			<input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="password">
 			</div>	
 			<div style="text-align:right">
-				<button type="submit" class="btn btn-info" >Login</button><a href="CreateAccount.jsp"> Create New Account </a>
+				<input type="submit" class="btn btn-info" value="Login"></input><a href="CreateAccount.jsp"> Create New Account </a>
 			</div>
 			</form>
 		</div>

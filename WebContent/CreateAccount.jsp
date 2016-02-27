@@ -9,14 +9,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<title>Online Quizbook</title>
+<title>Create New Account</title>
 </head>
 <body>
-		<h1 style="text-align:center;">Playing and creating quizzes</h1>
+		<h1 style="text-align:center;">Create Your Account</h1>
 		
 		<div style="text-align:left;left:50%;width:400px;margin-left:-200px;top:200px;position:absolute;">
-		<p> Please log in... </p>
-			<form action="UserLogin" method="post"> 
+		<p> Please enter your ID and password... </p>
+			<form action="CreateNewAccount" method="post"> 
 			<div class="input-group">
 	  			<span class="input-group-addon" id="basic-addon1">ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
 	  			<input type="text" class="form-control" placeholder="UserID" aria-describedby="basic-addon1" name="userID">
@@ -26,7 +26,7 @@
 	  			<input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="password">
 			</div>	
 			<div style="text-align:right">
-				<input type="submit" class="btn btn-info" value="Login"></input><a href="CreateAccount.jsp"> Create New Account </a>
+				<input type="submit" class="btn btn-danger" value="Create"></input>
 			</div>
 			</form>
 		</div>

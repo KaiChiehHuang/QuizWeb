@@ -18,35 +18,77 @@ public class XMLParser {
 			Document doc = dBuilder.parse(xmlFile);
 			doc.getDocumentElement().normalize();
 			NodeList nList = doc.getElementsByTagName("question");
+			String questions = "";
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 				Node nNode = nList.item(temp);
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					String type = eElement.getAttribute("type");
 					switch (type) {
-					case "question-response": addQR(eElement);
+					case "question-response": questions += addQR(eElement) + "|";
 							break;
-					case "fill-in-blank": addFB(eElement);
+					case "fill-in-blank": questions += addFB(eElement) + "|";
 							break;
-					case "multiple-choice": addMC(eElement);
+					case "multiple-choice": questions += addMC(eElement) + "|";
 							break;
-					case "picture-response": addPR(eElement);
+					case "picture-response": questions += addPR(eElement) + "|";
 							break;
 					}
 				}
 			}
+			questions = questions.substring(0, questions.length() - 1);
+			addQuiz(doc, questions);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static void addQR(Element ele) {
+	public static String addQuiz(Document doc, String questions) throws SQLException {
+		DBConnection database = new DBConnection();
+		Statement stmt = database.getStmt();
+		
+		String sql = "SELECT QuizID FROM Quiz ORDER BY QuizID DESC LIMIT 1;";
+		ResultSet res = stmt.executeQuery(sql);
+		String quizID = "";
+		if (res.next()) {
+			int quizCount = Integer.parseInt(res.getString(1)) + 1;
+			quizID = String.format("%064d", quizCount);
+		} else {
+			int questionCount = 0;
+			quizID = String.format("%064d", questionCount);
+		}
+		String name = doc.getElementsByTagName("title").item(0).getTextContent();
+		String description = doc.getElementsByTagName("description").item(0).getTextContent();
+		Element quiz = (Element) doc.getElementsByTagName("quiz").item(0);
+		boolean random = false;
+		if (quiz.getAttribute("random") != null) {
+			random = Boolean.parseBoolean(quiz.getAttribute("random"));
+		}
+		boolean onePage = false;
+		if (quiz.getAttribute("one-page") != null) {
+			onePage = Boolean.parseBoolean(quiz.getAttribute("one-page"));
+		}
+		boolean immediateCorrection = false;
+		if (quiz.getAttribute("immediate-correction") != null) {
+			immediateCorrection = Boolean.parseBoolean(quiz.getAttribute("immediate-correction"));
+		}
+		boolean practiceMode = false;
+		if (quiz.getAttribute("practice-mode") != null) {
+			practiceMode = Boolean.parseBoolean(quiz.getAttribute("practice-mode"));
+		}
+		String authorID = "Administration";
+		String insert = "INSERT INTO Quiz VALUES(\"" + quizID + "\",\"" + name + "\",\"" + description + "\",\"" + authorID + "\",\"" + questions + "\"," + random + "," + onePage + "," + immediateCorrection + "," + practiceMode + ");";
+		stmt.executeUpdate(insert);
+		return quizID;
+	}
+	
+	public static String addQR(Element ele) {
+		String id = "";
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT QuestionID FROM QuestionResponse ORDER BY QuestionID DESC LIMIT 1;";
 			ResultSet res = stmt.executeQuery(sql);
-			String id;
 			if (res.next()) {
 				int questionCount = Integer.parseInt(res.getString(1).substring(2));
 				questionCount++;
@@ -71,15 +113,16 @@ public class XMLParser {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return id;
 	}
 	
-	public static void addFB(Element ele) {
+	public static String addFB(Element ele) {
+		String id = "";
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT QuestionID FROM FillBlank ORDER BY QuestionID DESC LIMIT 1;";
 			ResultSet res = stmt.executeQuery(sql);
-			String id;
 			if (res.next()) {
 				int questionCount = Integer.parseInt(res.getString(1).substring(2));
 				questionCount++;
@@ -106,15 +149,16 @@ public class XMLParser {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return id;
 	}
 	
-	public static void addMC(Element ele) {
+	public static String addMC(Element ele) {
+		String id = "";
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT QuestionID FROM MultiChoice ORDER BY QuestionID DESC LIMIT 1;";
 			ResultSet res = stmt.executeQuery(sql);
-			String id;
 			if (res.next()) {
 				int questionCount = Integer.parseInt(res.getString(1).substring(2));
 				questionCount++;
@@ -146,15 +190,16 @@ public class XMLParser {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return id;
 	}
 	
-	public static void addPR(Element ele) {
+	public static String addPR(Element ele) {
+		String id = "";
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT QuestionID FROM PictureResponse ORDER BY QuestionID DESC LIMIT 1;";
 			ResultSet res = stmt.executeQuery(sql);
-			String id;
 			if (res.next()) {
 				int questionCount = Integer.parseInt(res.getString(1).substring(2));
 				questionCount++;
@@ -180,5 +225,7 @@ public class XMLParser {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return id;
 	}
+
 }

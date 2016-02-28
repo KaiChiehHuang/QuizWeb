@@ -15,6 +15,8 @@ CREATE TABLE Users (
 	PRIMARY KEY (UserID)
 );
 
+INSERT INTO User(UserID,Password,Name) VALUES("Administration","b8be3d1264310c3b8c848d4b90d5206179a40cc4","Admin");
+
 DROP TABLE IF EXISTS Friendship;
 
 CREATE TABLE Friendship (

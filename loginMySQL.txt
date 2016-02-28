@@ -1,0 +1,4 @@
+mysql -h mysql-user.stanford.edu -u ccs108yuan125 -p
+89rjwMmqZ9rt9pCq
+USE c_cs108_yuan125;
+SOURCE CreateTable.sql;

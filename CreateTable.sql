@@ -48,9 +48,9 @@ DROP TABLE IF EXISTS SingleChoice;
 
 CREATE TABLE SingleChoice (
 	QuestionID VARCHAR(255),
-	Question TEXT,
-	Choices TEXT,
-	Answer TEXT,
+	Question   TEXT,
+	Choices    TEXT,
+	Answer     TEXT,
 	PRIMARY KEY (QuestionID)
 );
 
@@ -58,8 +58,8 @@ DROP TABLE IF EXISTS FillBlank;
 
 CREATE TABLE FillBlank (
 	QuestionID VARCHAR(255),
-	Question TEXT,
-	Answer TEXT,
+	Question   TEXT,
+	Answer     TEXT,
 	PRIMARY KEY (QuestionID)
 );
 
@@ -67,9 +67,9 @@ DROP TABLE IF EXISTS PictureResponse;
 
 CREATE TABLE PictureResponse (
 	QuestionID VARCHAR(255),
-	Question TEXT,
-	URL TEXT,
-	Answer TEXT,
+	Question   TEXT,
+	URL        TEXT,
+	Answer     TEXT,
 	PRIMARY KEY (QuestionID)
 );
 
@@ -77,8 +77,8 @@ DROP TABLE IF EXISTS QuestionResponse;
 
 CREATE TABLE QuestionResponse (
 	QuestionID VARCHAR(255),
-	Question TEXT,
-	Answer TEXT,
+	Question   TEXT,
+	Answer     TEXT,
 	PRIMARY KEY (QuestionID)
 );
 
@@ -86,10 +86,10 @@ DROP TABLE IF EXISTS MultiChoice;
 
 CREATE TABLE MultiChoice (
 	QuestionID VARCHAR(255),
-	Question TEXT,
-	Choices TEXT,
-	Answer TEXT,
-	Count INT,
+	Question   TEXT,
+	Choices    TEXT,
+	Answer     TEXT,
+	Count      INT,
 	PRIMARY KEY (QuestionID)
 );
 
@@ -97,21 +97,21 @@ DROP TABLE IF EXISTS MultiResponse;
 
 CREATE TABLE MultiResponse (
 	QuestionID VARCHAR(255),
-	Question TEXT,
-	Answer TEXT,
-	Count INT,
+	Question   TEXT,
+	Answer     TEXT,
+	Count      INT,
 	PRIMARY KEY (QuestionID)
 );
 
 DROP TABLE IF EXISTS QuizRecord;
 
 CREATE TABLE QuizRecord (
-	QuizID VARCHAR(255),
-	UserID VARCHAR(255),
+	QuizID    VARCHAR(255),
+	UserID    VARCHAR(255),
 	StartTime DATETIME,
-	EndTime DATETIME,
-	Duration TIME,
-	Score DECIMAL(5,2),
+	EndTime   DATETIME,
+	Duration  TIME,
+	Score     DECIMAL(5,2),
 	PRIMARY KEY (QuizID, UserID, StartTime),
 	FOREIGN KEY (QuizID)
 		REFERENCES Quiz(QuizID),

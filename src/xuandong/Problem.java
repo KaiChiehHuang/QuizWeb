@@ -43,6 +43,10 @@ public class Problem {
 			problemType.put("PR", "PictureResponse");
 			problemType.put("MC", "MultiChoice");
 			problemType.put("MR", "MultiResponse");
+			problemType.put("question-response", "QR");
+			problemType.put("fill-in-blank", "FB");
+			problemType.put("multiple-choice", "MC");
+			problemType.put("picture-response", "PR");
 		}
 	};
 	

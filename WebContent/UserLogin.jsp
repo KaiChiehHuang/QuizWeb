@@ -11,22 +11,42 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <title>Online Quizbook</title>
 </head>
-<body>
+<body style="background-color:#FFFAFA;">
 		<h1 style="text-align:center;">Playing and creating quizzes</h1>
 		
-		<div style="text-align:left;left:50%;width:400px;margin-left:-200px;top:200px;position:absolute;">
+		<div style="border-radius: 20px;
+    				border: 2px solid #73AD21;
+    				padding: 15px; 
+				    height: 300px;
+     				text-align:left;
+     				left:50%;width:400px;
+     				margin-left:-200px;
+     				top:200px;
+     				position:absolute;
+     				">
 		<p> Please log in... </p>
 			<form action="UserLogin" method="post"> 
 			<div class="input-group">
 	  			<span class="input-group-addon" id="basic-addon1">ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
 	  			<input type="text" class="form-control" placeholder="UserID" aria-describedby="basic-addon1" name="userID">
 			</div>
+			<br>
 			<div class="input-group">
 	  			<span class="input-group-addon" id="basic-addon1">Password</span>
 	  			<input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="password">
 			</div>	
+			<br>
 			<div style="text-align:right">
-				<input type="submit" class="btn btn-info" value="Login"></input><a href="CreateAccount.jsp"> Create New Account </a>
+				<input type="submit" class="btn btn-info" value="Login"></input>
+			</div>
+			<hr style="
+				border:none;	
+				border-top:1px #CCCCCC solid;
+				height: 1px;
+				">	
+			<div style="text-align:center">
+				<p> Don't have an account? </p>
+				<a href="CreateAccount.jsp"> Create New Account </a>
 			</div>
 			</form>
 		</div>

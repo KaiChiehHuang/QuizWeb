@@ -13,7 +13,7 @@
 </question>
 
 <question type="fill-in-blank">
-  <blank-query><blank /><post>is the special rice dumpling that is particularly popular during the Dragon Boat Festival in China?</post></blank-query>
+  <blank-query><pre /><blank /><post>is the special rice dumpling that is particularly popular during the Dragon Boat Festival in China?</post></blank-query>
   <answer>Zongzi</answer>
 </question>
 

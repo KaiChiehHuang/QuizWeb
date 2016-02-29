@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<quiz random="true" one-page="true" practice-mode="true">
+<title>Chinese Cuisine Quiz</title>
+<category>Food</category>
+<description>See how well you know about Chinese food.</description>
+
+<question type="multiple-choice">
+  <query>Which of the following dishes is a popular Chinese dish?</query>
+  <option>Pasta</option>
+  <option>Butter Chicken</option>
+  <option answer="answer">Kung Pao Chicken</option>
+  <option>Bibimbap</option>
+</question>
+
+<question type="fill-in-blank">
+  <blank-query><blank /><post>is the special rice dumpling that is particularly popular during the Dragon Boat Festival in China?</post></blank-query>
+  <answer>Zongzi</answer>
+</question>
+
+<question type="multiple-choice">
+  <query>Which of the following statements are true?</query>
+  <option answer="answer">Rice and noodels are most common staple foods in China.</option>
+  <option>Kimchi is the beloved spicy sidekick in China.</option>
+  <option answer="answer">The history of Chinese cuisine in China stretches back for thousands of years and has changed from period to period.</option>
+</question>
+
+<question type="picture-response">
+  <query>What is the name of this delicious dish?</query>
+  <image-location>http://3.bp.blogspot.com/-ARO3UBlgvvQ/VSn-XXiiy0I/AAAAAAAAOaI/7S_xhDyq-Uo/s1600/IMG_7835-a.JPG</image-location>
+  <answer-list>
+    <answer preferred="preferred">Shumai</answer>
+	<answer>Shu Mai</answer>
+  </answer-list>
+</question>
+
+<question type="question-response">
+  <query>What is the name of the Chinese food that is made of soybeans and full of protein? </query>
+  <answer>Tofu</answer>
+</question>
+
+<!-- <question type="multiple-response">
+  <query>List three of the "Eight Culinary Cuisines" of China.</query>
+  <answer>Anhui, Cantonese, Fujian, Hunan, Jiangsu, Shandong, Sichuan, Zhejiang</answer>
+</question> -->
+
+</quiz>

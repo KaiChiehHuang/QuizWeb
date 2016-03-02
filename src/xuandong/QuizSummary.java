@@ -15,6 +15,7 @@ public class QuizSummary {
 	private Performance[] highestPerformersLastDay;
 	private Performance[] goodPerformers;
 	private Performance[] badPerformers;
+	private Performance[] userPerformance;
 	private int takeNum;
 	private double meanScore;
 	private double maxScore;
@@ -23,6 +24,11 @@ public class QuizSummary {
 	private DBConnection database;
 	private Statement stmt;
 	
+	/**
+	 * Simple constructor, get the statistics about this quiz
+	 * @param quizID
+	 * @param userID
+	 */
 	public QuizSummary(String quizID, String userID) {
 		this.quizID = quizID;
 		this.userID = userID;
@@ -30,11 +36,12 @@ public class QuizSummary {
 		highestPerformersLastDay = new Performance[TOP_NUM];
 		goodPerformers = new Performance[TOP_NUM];
 		badPerformers = new Performance[TOP_NUM];
+		userPerformance = new Performance[TOP_NUM];
 		database = new DBConnection();
 		stmt = database.getStmt();
 		
 		try {
-			String sql = "SELECT COUNT(UserID), AVG(Score), MAX(Score), MIN(Score) FROM QuizRecord WHERE QuizID = \"" + quizID + "\" GROUP BY QuizID;";
+			String sql = "SELECT COUNT(UserID), AVG(Score), MAX(Score), MIN(Score) FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" GROUP BY QuizID;";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
 				res.absolute(1);
@@ -49,9 +56,41 @@ public class QuizSummary {
 		
 	}
 	
+	
+	/**
+	 * Get the performance of this user
+	 * @return a Performance Object, it's easy to read
+	 */
+	public Performance[] getUserPerformance() {
+		try {
+			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND UserID = \"" + this.userID + "\";";
+			ResultSet res = stmt.executeQuery(sql);
+			int index = 0;
+			if (res != null) {
+				res.absolute(1);
+				String curQuizID = res.getString(1);
+				String curUserID = res.getString(2);
+				String curStartTime = res.getString(3);
+				String curDuration = res.getString(4);
+				double curScore = Double.parseDouble(res.getString(5));
+				Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
+				userPerformance[index] = perf;
+				index++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return userPerformance;
+	}
+	
+	
+	/**
+	 * Get the top 10 performance of this quiz 
+	 * @return a Performance Object, it's easy to read
+	 */
 	public Performance[] getHighestPerformers() {
 		try {
-			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord ORDER BY Score DESC, Duration ASC, StartTime ASC LIMIT " + TOP_NUM + " ;";
+			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" ORDER BY Score DESC, Duration ASC, StartTime ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
 			int index = 0;
 			if (res != null) {
@@ -71,10 +110,15 @@ public class QuizSummary {
 		return highestPerformers;
 	}
 	
+	
+	/**
+	 * Get the top 10 performance of this quiz during the last 24 hours
+	 * @return a Performance Object, it's easy to read
+	 */
 	public Performance[] getHighestPerformersLastDay() {
 		try {
 			String curTime = Quiz.df.format((new Date()).getTime());
-			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE TIMESTAMPDIFF(SECOND, " + curTime +", EndTime) <= 86400 ORDER BY Score DESC, Duration ASC, StartTime ASC LIMIT " + TOP_NUM + " ;";
+			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND TIMESTAMPDIFF(SECOND, " + curTime +", EndTime) <= 86400 ORDER BY Score DESC, Duration ASC, StartTime ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
 			int index = 0;
 			if (res != null) {
@@ -94,9 +138,14 @@ public class QuizSummary {
 		return highestPerformersLastDay;
 	}
 	
+	
+	/**
+	 * Get the top 10 good performers who scored over 80% of this quiz
+	 * @return a Performance Object, it's easy to read
+	 */
 	public Performance[] getGoodPerformers() {
 		try {
-			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE Score >= 80 ORDER BY EndTime DESC, Score DESC LIMIT " + TOP_NUM + " ;";
+			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND Score >= 80 ORDER BY EndTime DESC, Score DESC LIMIT " + TOP_NUM + ";";
 			ResultSet res = stmt.executeQuery(sql);
 			int index = 0;
 			if (res != null) {
@@ -116,9 +165,14 @@ public class QuizSummary {
 		return goodPerformers;
 	}
 	
+	
+	/**
+	 * Get the top 10 bad performers who scored bellow 40% of this quiz
+	 * @return Performance Object, it's easy to read
+	 */
 	public Performance[] getBadPerformers() {
 		try {
-			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE Score <= 40 ORDER BY EndTime DESC, Score ASC LIMIT " + TOP_NUM + " ;";
+			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND Score <= 40 ORDER BY EndTime DESC, Score ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
 			int index = 0;
 			if (res != null) {
@@ -138,18 +192,34 @@ public class QuizSummary {
 		return badPerformers;
 	}
 	
+	
+	/**
+	 * @return the number of the quiz been taken
+	 */
 	public int getTakeNum() {
 		return takeNum;
 	}
 	
+	
+	/**
+	 * @return the average score of all users
+	 */
 	public double getMeanScore() {
 		return meanScore;
 	}
 	
+	
+	/**
+	 * @return the maximum score of all users
+	 */
 	public double getMaxScore() {
 		return maxScore;
 	}
 	
+	
+	/**
+	 * @return the minimum score of all users
+	 */
 	public double getMinScore() {
 		return minScore;
 	}

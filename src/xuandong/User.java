@@ -1,3 +1,7 @@
+/**
+ * This class will never be used, please refer to bian.User.java if you
+ * are creating an User
+ */
 package xuandong;
 
 import java.sql.ResultSet;

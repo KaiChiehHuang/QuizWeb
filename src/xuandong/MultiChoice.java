@@ -8,6 +8,11 @@ public class MultiChoice extends Problem {
 	String[] choices;
 	int count;
 	
+	/**
+	 * Override the constructor of Problem.class
+	 * This will fetch the additional values from database
+	 * @param id questionID
+	 */
 	public MultiChoice(String id) {
 		super(id);
 		try {
@@ -24,40 +29,63 @@ public class MultiChoice extends Problem {
 		}
 	}
 	
+	/**
+	 * Override the getScore() method
+	 * returns how many sub-problems are answered right
+	 * the result is up to count
+	 */
 	@Override
 	public int getScore() {
-		int count = 0;
+		int total = 0;
 		String[] userAnswers = userAnswer.split("|");
 		for (int i = 0; i < answers.length; i++) {
 			String[] temp = answers[i].split("#");
 			for (int k = 0; k < temp.length; k++) {
 				for (int j = 0; j < userAnswers.length; j++) {
 					if (temp[k].toLowerCase().equals(userAnswers[j].toLowerCase())) {
-						count++;
+						total++;
 						break;
 					}
 				}
 			}
 		}
-		return count;	
+		return total;	
 	}
 	
+	/**
+	 * @return a array of String containing all the possible choices
+	 */
 	public String[] getChoices() {
 		return choices;
 	}
 	
+	/**
+	 * set the choices of this problem to be the input String
+	 * @param choice each choice is separated by "|" and then be concatenated
+	 */
 	public void setChoices(String choice) {
 		this.choices = choice.split("|");
 	}
 	
+	/**
+	 * @return the number of right answers
+	 */
 	public int getCount() {
 		return count;
 	}
 	
+	/**
+	 * set the number of right answers
+	 * @param count the number of right answers
+	 */
 	public void setCount(int count) {
 		this.count = count;
 	}
 	
+	/**
+	 * return the insert statement to insert this problem into database
+	 * used for creating a problem
+	 */
 	@Override
 	public String getInsertSQL() {
 		String answer = getArrayToString(answers);
@@ -66,6 +94,10 @@ public class MultiChoice extends Problem {
 		return sql;
 	}
 	
+	/**
+	 * return the update statement to update this problem in the database
+	 * used for modifying a problem
+	 */
 	@Override
 	public String getUpdateSQL() {
 		String answer = getArrayToString(answers);

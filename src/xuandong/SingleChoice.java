@@ -1,3 +1,7 @@
+/**
+ * This class will never be used, please refer to MultiChoice.java if you
+ * are creating an SingleChoice problem and set the count to 1
+ */
 package xuandong;
 
 import java.sql.ResultSet;
@@ -5,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SingleChoice extends Problem {
+	
 	String[] choices;
 	
 	public SingleChoice(String id) {

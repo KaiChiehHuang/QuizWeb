@@ -7,6 +7,11 @@ import java.sql.Statement;
 public class PictureResponse extends Problem {
 	String url;
 	
+	/**
+	 * Override the constructor of Problem.class
+	 * This will fetch the additional values from database
+	 * @param id questionID
+	 */
 	public PictureResponse(String questionID) {
 		super(questionID);
 		try {
@@ -22,14 +27,24 @@ public class PictureResponse extends Problem {
 		}
 	}
 	
+	/**
+	 * @return the url of the image
+	 */
 	public String getURL() {
 		return url;
 	}
 	
+	/**
+	 * set the url of this image
+	 */
 	public void setURL(String url) {
 		this.url = url;
 	}
 	
+	/**
+	 * return the insert statement to insert this problem into database
+	 * used for creating a problem
+	 */
 	@Override
 	public String getInsertSQL() {
 		String answer = getArrayToString(answers);
@@ -37,6 +52,10 @@ public class PictureResponse extends Problem {
 		return sql;
 	}
 	
+	/**
+	 * return the update statement to update this problem in the database
+	 * used for modifying a problem
+	 */
 	@Override
 	public String getUpdateSQL() {
 		String answer = getArrayToString(answers);

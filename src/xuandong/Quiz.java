@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Quiz {
+	// used to count the real number of problems, e.g. a MultiChoice problem
+	// can be treated as several problems
 	private int pbCount = 0;
 
 	private String name;
@@ -29,17 +31,28 @@ public class Quiz {
 	private String endDate;
 
 	boolean creating = false;
+	
+	private QuizSummary quizSummary;
 
 	static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	static final SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 
 	DBConnection database;
 
+	/**
+	 * Simple constructor
+	 * If you are creating a new quiz which is not in database, please don't use this one
+	 */
 	public Quiz() {
 		database = new DBConnection();
 		problems = new ArrayList<Problem>();
 	}
 
+	/**
+	 * Used to get all the information of a quiz from database
+	 * Please just call this method after you use the above constructor
+	 * @param quizID
+	 */
 	public void setQuizID(String quizID) {
 		this.quizID = quizID;
 		Statement stmt = database.getStmt();
@@ -87,94 +100,178 @@ public class Quiz {
 		}
 	}
 
+	/**
+	 * set the mode to creating mode
+	 */
 	public void setCreating() {
 		this.creating = true;
 	}
 
+	/**
+	 * set the mode to editing mode
+	 */
 	public void setEditing() {
 		this.creating = false;
 	}
 	
+	/**
+	 * @return quizID
+	 */
 	public String getQuizID() {
 		return quizID;
 	}
 	
+	/**
+	 * @return userID
+	 */
 	public String getUserID() {
 		return userID;
 	}
 	
+	/**
+	 * @return the ArrayList containing the problems
+	 * note that the ArrayList contains Object Problem, not Strings
+	 */
 	public ArrayList<Problem> getProblems() {
 		return problems;
 	}
 
+	/**
+	 * @return quiz name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @return quiz description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * @return authorID
+	 */
 	public String getAuthor() {
 		return authorID;
 	}
 
+	/**
+	 * @return whether or not a random quiz
+	 */
 	public boolean isRandomQuiz() {
 		return this.isRandomQuiz;
 	}
 
+	/**
+	 * @return whether or not a one page quiz
+	 */
 	public boolean isOnePage() {
 		return this.isOnePage;
 	}
 
+	/**
+	 * @return whether or not an immediate correction quiz
+	 */
 	public boolean isImmediateCorrection() {
 		return this.isImmediateCorrection;
 	}
 
+	/**
+	 * @return whether or not a practice quiz
+	 */
 	public boolean isPracticeMode() {
 		return this.isPracticeMode;
 	}
 
+	/**
+	 * Set the quiz name
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Set the quiz description
+	 * @param description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * Set the authorID
+	 * @param authorID
+	 */
 	public void setAuthor(String authorID) {
 		this.authorID = authorID;
 	}
-
-	public void setProblem(String[] problems) {
-		String value = null;
-		for (int i = 0; i < problems.length; i++) {
-			value += problems[i] + "|";
+	
+	/**
+	 * Delete a problem from the quiz
+	 * @param problemID
+	 */
+	public void deleteProblem(String problemID) {
+		for (int i = 0; i <= problems.size(); i++) {
+			if (problems.get(i).getQuestionID().equals(problemID)) {
+				problems.remove(i);
+				break;
+			}
 		}
-		value = value.substring(0, value.length() - 1);
 	}
 
+	/**
+	 * Set whether or not this quiz is a random quiz
+	 */
 	public void setRandomQuiz(boolean value) {
 		this.isRandomQuiz = value;
 	}
 
+	/**
+	 * Set whether or not this quiz is a one page quiz
+	 */
 	public void setOnePage(boolean value) {
 		this.isOnePage = value;
 	}
 
+	/**
+	 * Set whether or not this quiz is a immediate correction quiz
+	 */
 	public void setImmediateCorrection(boolean value) {
 		this.isImmediateCorrection = value;
 	}
 
+	/**
+	 * Set whether or not this quiz is a practice quiz
+	 */
 	public void setPracticeMode(boolean value) {
 		this.isPracticeMode = value;
 	}
 
+	/**
+	 * Set the user
+	 * Please specify this right before you fetch QuizSummary
+	 * @param userID
+	 */
 	public void setUser(String userID) {
 		this.userID = userID;
 	}
+	
+	/**
+	 * Fetch the quiz summary from database
+	 */
+	public QuizSummary getQuizSummary() {
+		this.quizSummary = new QuizSummary(this.quizID, this.userID);
+		return this.quizSummary;
+	}
 
+	/**
+	 * Update or insert the information about this quiz in database
+	 * Please call this method as long as you modify the variables of this quiz
+	 * @throws SQLException
+	 */
 	public void updateDatabase() throws SQLException {
 		Statement stmt = database.getStmt();
 		if (this.creating) {
@@ -193,6 +290,10 @@ public class Quiz {
 		}
 	}
 
+	/**
+	 * return the insert statement to insert this problem into database
+	 * used for creating a problem
+	 */
 	public String getInsertSQL() {
 		String pbs = getListToString();
 		String sql = "INSERT INTO Quiz" + " VALUES(\"" + this.quizID + "\",\"" + this.name + "\",\"" + this.description
@@ -201,6 +302,10 @@ public class Quiz {
 		return sql;
 	}
 
+	/**
+	 * return the update statement to update this problem in the database
+	 * used for modifying a problem
+	 */
 	public String getUpdateSQL() {
 		String pbs = getListToString();
 		String sql = "UPDATE Quiz SET Name = \"" + this.name + "\" , Description = \"" + this.description
@@ -211,6 +316,10 @@ public class Quiz {
 		return sql;
 	}
 
+	/**
+	 * transfer the ArrayList of problems into a String containing the problemID of each problem
+	 * @return
+	 */
 	public String getListToString() {
 		String str = "";
 		for (Problem pb : problems) {
@@ -220,12 +329,20 @@ public class Quiz {
 		return str;
 	}
 
+	/**
+	 * Start the quiz
+	 * @return start time
+	 */
 	public Long quizStart() {
 		this.startTime = (new Date()).getTime();
 		startDate = df.format(startTime);
 		return this.startTime;
 	}
 
+	/**
+	 * End the quiz and update information in the database
+	 * @return end time
+	 */
 	public String quizEnd() {
 		this.endTime = (new Date()).getTime();
 		endDate = df.format(endTime);
@@ -245,6 +362,10 @@ public class Quiz {
 		return duration;
 	}
 
+	/**
+	 * get the score of the whole quiz
+	 * @return score, represented by double, e.g. 9/11
+	 */
 	public double getScore() {
 		int score = 0;
 		for (Problem pr : problems) {

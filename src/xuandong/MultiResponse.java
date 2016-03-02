@@ -7,6 +7,11 @@ import java.sql.Statement;
 public class MultiResponse extends Problem {
 	int count;
 	
+	/**
+	 * Override the constructor of Problem.class
+	 * This will fetch the additional values from database
+	 * @param id questionID
+	 */
 	public MultiResponse(String id) {
 		super(id);
 		try {
@@ -22,14 +27,26 @@ public class MultiResponse extends Problem {
 		}
 	}
 	
+	/**
+	 * @return the number of right answers
+	 */
 	public int getCount() {
 		return count;
 	}
 	
+	/**
+	 * set the number of right answers
+	 * @param count the number of right answers
+	 */
 	public void setCount(int count) {
 		this.count = count;
 	}
 	
+	/**
+	 * Override the getScore() method
+	 * returns how many sub-problems are answered right
+	 * the result is up to count
+	 */
 	@Override
 	public int getScore() {
 		int sum = 0;
@@ -48,6 +65,10 @@ public class MultiResponse extends Problem {
 		return sum;	
 	}
 	
+	/**
+	 * return the insert statement to insert this problem into database
+	 * used for creating a problem
+	 */
 	@Override
 	public String getInsertSQL() {
 		String answer = getArrayToString(answers);
@@ -55,6 +76,10 @@ public class MultiResponse extends Problem {
 		return sql;
 	}
 	
+	/**
+	 * return the update statement to update this problem in the database
+	 * used for modifying a problem
+	 */
 	@Override
 	public String getUpdateSQL() {
 		String answer = getArrayToString(answers);

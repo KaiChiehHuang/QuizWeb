@@ -10,6 +10,11 @@ import java.sql.Statement;
 
 public class XMLParser {
 	
+	/**
+	 * Main method in XMLParser
+	 * @param args the relative path of the file you want to parse
+	 * e.g. src/quiz-xml/chinese_food.xml
+	 */
 	public static void main(String[] args) {
 		try {
 			File xmlFile = new File("src/quiz-xml/chinese_food.xml");
@@ -43,6 +48,14 @@ public class XMLParser {
 		}
 	}
 	
+	
+	/**
+	 * Add the quiz to database
+	 * @param doc
+	 * @param questions
+	 * @return quizID
+	 * @throws SQLException
+	 */
 	public static String addQuiz(Document doc, String questions) throws SQLException {
 		DBConnection database = new DBConnection();
 		Statement stmt = database.getStmt();
@@ -82,6 +95,12 @@ public class XMLParser {
 		return quizID;
 	}
 	
+	
+	/**
+	 * add a QuestionResponse problem into database
+	 * @param ele
+	 * @return problemID
+	 */
 	public static String addQR(Element ele) {
 		String id = "";
 		try {
@@ -116,6 +135,12 @@ public class XMLParser {
 		return id;
 	}
 	
+	
+	/**
+	 * add an FillBlank problem into database
+	 * @param ele
+	 * @return problemID
+	 */
 	public static String addFB(Element ele) {
 		String id = "";
 		try {
@@ -152,6 +177,12 @@ public class XMLParser {
 		return id;
 	}
 	
+	
+	/**
+	 * add a MultiChoice problem into database
+	 * @param ele
+	 * @return problemID
+	 */
 	public static String addMC(Element ele) {
 		String id = "";
 		try {
@@ -193,6 +224,12 @@ public class XMLParser {
 		return id;
 	}
 	
+	
+	/**
+	 * add a PictureResponse problem into database
+	 * @param ele
+	 * @return problemID
+	 */
 	public static String addPR(Element ele) {
 		String id = "";
 		try {

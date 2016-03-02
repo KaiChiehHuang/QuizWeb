@@ -94,6 +94,18 @@ public class Quiz {
 	public void setEditing() {
 		this.creating = false;
 	}
+	
+	public String getQuizID() {
+		return quizID;
+	}
+	
+	public String getUserID() {
+		return userID;
+	}
+	
+	public ArrayList<Problem> getProblems() {
+		return problems;
+	}
 
 	public String getName() {
 		return name;

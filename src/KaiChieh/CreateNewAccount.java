@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import bian.*;
 
+import com.mysql.jdbc.Statement;
+
+import bian.*;
 /**
  * Servlet implementation class CreateNewAccount
  */
@@ -41,6 +43,8 @@ public class CreateNewAccount extends HttpServlet {
 		// TODO Auto-generated method stub
 		String userID = request.getParameter("userID");
 		String password = request.getParameter("password");
+		String userName = request.getParameter("name");
+		String userAge = request.getParameter("age");
 		ServletContext context = getServletContext();
 		AccountManager manager = (AccountManager) context.getAttribute("AccountManager");
 		response.setContentType("text/html; charset=UTF-8");
@@ -49,6 +53,8 @@ public class CreateNewAccount extends HttpServlet {
 //			dispatcher.forward(request, response);
 		}else{
 			manager.createAccount(userID, password);
+			Statement statement = (Statement) context.getAttribute("statement");
+			// TODO need to add user name and age to database
 			RequestDispatcher dispatcher = request.getRequestDispatcher("HomePage.jsp");
 			dispatcher.forward(request, response);
 		}

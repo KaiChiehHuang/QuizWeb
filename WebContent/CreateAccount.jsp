@@ -9,24 +9,84 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>
+
 <title>Create New Account</title>
 </head>
-<body>
+<body style="height:800px;">
 		<h1 style="text-align:center;">Create Your Account</h1>
 		
-		<div style="text-align:left;left:50%;width:400px;margin-left:-200px;top:200px;position:absolute;">
-		<p> Please enter your ID and password... </p>
-			<form action="CreateNewAccount" method="post"> 
+		<div style="border-radius: 20px;
+    				border: 2px solid #73AD21;
+    				padding: 40px; 
+				    height: 550px;
+     				text-align:left;
+     				left:50%;width:500px;
+     				margin-left:-250px;
+     				top:180px;
+     				position:absolute;
+     				">
+		<p> Please enter your ID, Password, and Info... </p>
+			<hr style="
+				border:none;	
+				border-top:1px #CCCCCC solid;
+				height: 1px;
+				">	
+			<form action="UserLogin" method="post"> 
 			<div class="input-group">
 	  			<span class="input-group-addon" id="basic-addon1">ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
 	  			<input type="text" class="form-control" placeholder="UserID" aria-describedby="basic-addon1" name="userID">
 			</div>
+			<hr style="
+				border:none;	
+				border-top:1px #CCCCCC solid;
+				height: 1px;
+				">	
 			<div class="input-group">
 	  			<span class="input-group-addon" id="basic-addon1">Password</span>
 	  			<input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="password">
 			</div>	
-			<div style="text-align:right">
+			<hr style="
+				border:none;	
+				border-top:1px #CCCCCC solid;
+				height: 1px;
+				">	
+			<div class="input-group">
+	  			<span class="input-group-addon" id="basic-addon1">Name&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+	  			<input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1" name="name">
+			</div>	
+			<hr style="
+				border:none;	
+				border-top:1px #CCCCCC solid;
+				height: 1px;
+				">	
+			<div class="input-group">
+	  			<span class="input-group-addon" id="basic-addon1">Age&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+	  			<input type="text" class="form-control" placeholder="Age" aria-describedby="basic-addon1" name="age">
+			</div>
+			<select class="selectpicker" multiple data-max-options="2">
+  				<option>Mustard</option>
+  				<option>Ketchup</option>
+  				<option>Relish</option>
+			</select>	
+			<div style="text-align:center">
+				<br>
 				<input type="submit" class="btn btn-danger" value="Create"></input>
+			</div>
+			<hr style="
+				border:none;	
+				border-top:1px #CCCCCC solid;
+				height: 1px;
+				">	
+			<div style="text-align:center">
+				<p> Don't want to create an account? </p>
+				<!-- Need to inform HomePage it's guest -->
+				<a href="UserLogin.jsp"> Back to login</a> / <a href="HomePage.jsp"> Log in as guest</a>
 			</div>
 			</form>
 		</div>

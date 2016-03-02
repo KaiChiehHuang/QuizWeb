@@ -17,14 +17,14 @@
 		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
     				padding: 15px; 
-				    height: 300px;
+				    height: 310px;
      				text-align:left;
      				left:50%;width:400px;
      				margin-left:-200px;
      				top:200px;
      				position:absolute;
      				">
-		<p> Please log in... </p>
+		<p> Please log in or<!-- Need to inform HomePage it's guest --><a href="HomePage.jsp"> log in as Guest </a> </p>
 			<form action="UserLogin" method="post"> 
 			<div class="input-group">
 	  			<span class="input-group-addon" id="basic-addon1">ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>

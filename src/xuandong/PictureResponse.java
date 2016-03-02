@@ -29,4 +29,18 @@ public class PictureResponse extends Problem {
 	public void setURL(String url) {
 		this.url = url;
 	}
+	
+	@Override
+	public String getInsertSQL() {
+		String answer = getArrayToString(answers);
+		String sql = "INSERT INTO " + Problem.problemType.get(type) + " VALUES(\"" + this.questionID + "\",\"" + this.question + "\",\"" + this.url + "\",\"" + answer + "\");";
+		return sql;
+	}
+	
+	@Override
+	public String getUpdateSQL() {
+		String answer = getArrayToString(answers);
+		String sql = "UPDATE " + Problem.problemType.get(type) + " SET Question = \"" + this.question + "\" , Answer = \"" + answer + "\", URL = " + this.url + " WHERE QuestionID = \"" + this.questionID + "\";";
+		return sql;
+	}
 }

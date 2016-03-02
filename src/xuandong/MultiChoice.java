@@ -45,4 +45,32 @@ public class MultiChoice extends Problem {
 	public String[] getChoices() {
 		return choices;
 	}
+	
+	public void setChoices(String choice) {
+		this.choices = choice.split("|");
+	}
+	
+	public int getCount() {
+		return count;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
+	@Override
+	public String getInsertSQL() {
+		String answer = getArrayToString(answers);
+		String choice = getArrayToString(choices);
+		String sql = "INSERT INTO " + Problem.problemType.get(type) + " VALUES(\"" + this.questionID + "\",\"" + this.question + "\",\"" + choice + "\",\"" + answer + "\"," + count + "\");";
+		return sql;
+	}
+	
+	@Override
+	public String getUpdateSQL() {
+		String answer = getArrayToString(answers);
+		String choice = getArrayToString(choices);
+		String sql = "UPDATE " + Problem.problemType.get(type) + " SET Question = \"" + this.question + "\" , Answer = \"" + answer + "\" , Choices = \"" + choice + "\", Count = " + count + " WHERE QuestionID = \"" + this.questionID + "\";";
+		return sql;
+	}
 }

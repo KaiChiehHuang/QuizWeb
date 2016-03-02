@@ -22,6 +22,14 @@ public class MultiResponse extends Problem {
 		}
 	}
 	
+	public int getCount() {
+		return count;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
 	@Override
 	public int getScore() {
 		int sum = 0;
@@ -38,5 +46,19 @@ public class MultiResponse extends Problem {
 			}
 		}
 		return sum;	
+	}
+	
+	@Override
+	public String getInsertSQL() {
+		String answer = getArrayToString(answers);
+		String sql = "INSERT INTO " + Problem.problemType.get(type) + " VALUES(\"" + this.questionID + "\",\"" + this.question + "\",\"" + answer + "\"," + count + "\");";
+		return sql;
+	}
+	
+	@Override
+	public String getUpdateSQL() {
+		String answer = getArrayToString(answers);
+		String sql = "UPDATE " + Problem.problemType.get(type) + " SET Question = \"" + this.question + "\" , Answer = \"" + answer + "\", Count = " + count + " WHERE QuestionID = \"" + this.questionID + "\";";
+		return sql;
 	}
 }

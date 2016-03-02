@@ -46,9 +46,15 @@ public class UserLogin extends HttpServlet {
 		ServletContext context = getServletContext();
 		AccountManager manager = (AccountManager) context.getAttribute("AccountManager");
 		response.setContentType("text/html; charset=UTF-8");
-		if(manager.idPasswordMatch(userID, password)) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("HomePage.jsp");
-			dispatcher.forward(request, response);
+		if(manager.accountExist(userID)) {
+			if(manager.idPasswordMatch(userID, password)) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("HomePage.jsp");
+				dispatcher.forward(request, response);
+			}
+			else{
+				RequestDispatcher dispatcher = request.getRequestDispatcher("LoginFailed.jsp");
+				dispatcher.forward(request, response);
+			}
 		}else{
 			RequestDispatcher dispatcher = request.getRequestDispatcher("LoginFailed.jsp");
 			dispatcher.forward(request, response);

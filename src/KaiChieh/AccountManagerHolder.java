@@ -45,6 +45,7 @@ public class AccountManagerHolder implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent arg0)  { 
          // TODO Auto-generated method stub
+    	ServletContext context = arg0.getServletContext();
     	try {
 			/// Set up database connection ///
 			Class.forName("com.mysql.jdbc.Driver");
@@ -56,6 +57,7 @@ public class AccountManagerHolder implements ServletContextListener {
 			con = (Connection) DriverManager.getConnection("jdbc:mysql://"+server,account,password);
 			statement = (Statement) con.createStatement();
 			statement.executeQuery("USE "+database);
+			context.setAttribute("statement",statement);
 		} catch(SQLException e) {
 			
 		} catch (ClassNotFoundException e) {
@@ -68,7 +70,6 @@ public class AccountManagerHolder implements ServletContextListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        ServletContext context = arg0.getServletContext();
         context.setAttribute("AccountManager", manager);
     }
 	

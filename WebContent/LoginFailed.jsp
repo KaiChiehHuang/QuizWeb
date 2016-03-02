@@ -36,8 +36,9 @@
 	  			<input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="password">
 			</div>	
 			<br>
-			<div style="text-align:right">
-				<input type="submit" class="btn btn-info" value="Login"></input>
+			<div style="text-align:left">
+				<!-- Need to inform HomePage it's guest -->
+				<a href="HomePage.jsp"> log in as Guest </a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="submit" class="btn btn-info" value="Login"></input>
 			</div>
 			<hr style="
 				border:none;	

@@ -68,14 +68,16 @@ public class QuizSummary {
 			int index = 0;
 			if (res != null) {
 				res.absolute(1);
-				String curQuizID = res.getString(1);
-				String curUserID = res.getString(2);
-				String curStartTime = res.getString(3);
-				String curDuration = res.getString(4);
-				double curScore = Double.parseDouble(res.getString(5));
-				Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
-				userPerformance[index] = perf;
-				index++;
+				while (res.next()) {
+					String curQuizID = res.getString(1);
+					String curUserID = res.getString(2);
+					String curStartTime = res.getString(3);
+					String curDuration = res.getString(4);
+					double curScore = Double.parseDouble(res.getString(5));
+					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
+					userPerformance[index] = perf;
+					index++;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -95,14 +97,16 @@ public class QuizSummary {
 			int index = 0;
 			if (res != null) {
 				res.absolute(1);
-				String curQuizID = res.getString(1);
-				String curUserID = res.getString(2);
-				String curStartTime = res.getString(3);
-				String curDuration = res.getString(4);
-				double curScore = Double.parseDouble(res.getString(5));
-				Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
-				highestPerformers[index] = perf;
-				index++;
+				while (res.next()) {
+					String curQuizID = res.getString(1);
+					String curUserID = res.getString(2);
+					String curStartTime = res.getString(3);
+					String curDuration = res.getString(4);
+					double curScore = Double.parseDouble(res.getString(5));
+					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
+					highestPerformers[index] = perf;
+					index++;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -123,14 +127,16 @@ public class QuizSummary {
 			int index = 0;
 			if (res != null) {
 				res.absolute(1);
-				String curQuizID = res.getString(1);
-				String curUserID = res.getString(2);
-				String curStartTime = res.getString(3);
-				String curDuration = res.getString(4);
-				double curScore = Double.parseDouble(res.getString(5));
-				Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
-				highestPerformersLastDay[index] = perf;
-				index++;
+				while (res.next()) {
+					String curQuizID = res.getString(1);
+					String curUserID = res.getString(2);
+					String curStartTime = res.getString(3);
+					String curDuration = res.getString(4);
+					double curScore = Double.parseDouble(res.getString(5));
+					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
+					highestPerformersLastDay[index] = perf;
+					index++;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -150,14 +156,16 @@ public class QuizSummary {
 			int index = 0;
 			if (res != null) {
 				res.absolute(1);
-				String curQuizID = res.getString(1);
-				String curUserID = res.getString(2);
-				String curStartTime = res.getString(3);
-				String curDuration = res.getString(4);
-				double curScore = Double.parseDouble(res.getString(5));
-				Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
-				goodPerformers[index] = perf;
-				index++;
+				while (res.next()) {
+					String curQuizID = res.getString(1);
+					String curUserID = res.getString(2);
+					String curStartTime = res.getString(3);
+					String curDuration = res.getString(4);
+					double curScore = Double.parseDouble(res.getString(5));
+					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
+					goodPerformers[index] = perf;
+					index++;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -177,14 +185,16 @@ public class QuizSummary {
 			int index = 0;
 			if (res != null) {
 				res.absolute(1);
-				String curQuizID = res.getString(1);
-				String curUserID = res.getString(2);
-				String curStartTime = res.getString(3);
-				String curDuration = res.getString(4);
-				double curScore = Double.parseDouble(res.getString(5));
-				Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
-				badPerformers[index] = perf;
-				index++;
+				while (res.next()) {
+					String curQuizID = res.getString(1);
+					String curUserID = res.getString(2);
+					String curStartTime = res.getString(3);
+					String curDuration = res.getString(4);
+					double curScore = Double.parseDouble(res.getString(5));
+					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
+					badPerformers[index] = perf;
+					index++;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

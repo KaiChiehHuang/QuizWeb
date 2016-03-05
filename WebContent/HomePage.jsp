@@ -102,16 +102,16 @@
 </style>
 <title>Home Page</title>
 </head>
-<body style="height:2000px;">
+<body style="height: 2200px;">
 	<div
-		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color:#00BFFF; color: #FAF0E6; opacity: 1.0;">
-	   
-		<div style="position:absolute;left:0px;width:300px;height:100%;background-color:black;">
-			LOGO
-     	</div>
-     	
-		<div class="col-lg-6" style="position:absolute;top:8px;left:50%;width:450px;
-     								 margin-left:-225px;">
+		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: #00BFFF; color: #FAF0E6; opacity: 1.0;">
+
+		<div
+			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color: black;">
+			LOGO</div>
+
+		<div class="col-lg-6"
+			style="position: absolute; top: 8px; left: 50%; width: 450px; margin-left: -225px;">
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="Search for...">
 				<span class="input-group-btn">
@@ -120,34 +120,78 @@
 			</div>
 			<!-- /input-group -->
 		</div>
-		<div style="position:absolute;right:0px;width:300px;height:100%;background-color:black;">
+		<div
+			style="position: absolute; right: 0px; width: 300px; height: 100%; background-color: black;">
 			<nav class="menu">
-				<ul class="clearfix">
-						<li><a href="#">Menu<span class="arrow">&#9660;</span></a>
-						<ul class="sub-menu">
-							<li><a href="#">Profile</a></li>
-							<li><a href="#">Coming Soon</a></li>
-							<li><a href="#">Quiz Record</a></li>
-							<li><a href="#">Logout</a></li>
-						</ul>
-						</li>
-				</ul>
+			<ul class="clearfix">
+				<li><a href="#">Menu<span class="arrow">&#9660;</span></a>
+					<ul class="sub-menu">
+						<li><a href="#">Profile</a></li>
+						<li><a href="#">Coming Soon</a></li>
+						<li><a href="#">Quiz Record</a></li>
+						<li><a href="#">Logout</a></li>
+					</ul></li>
+			</ul>
 			</nav>
 		</div>
 		<!-- /.col-lg-6 -->
 	</div>
 	<!-- /.row -->
 	</div>
-<!-- 	<div style="position:relative;top:55px;left:50%;width:800px;height:300px;
+	<!-- 	<div style="position:relative;top:55px;left:50%;width:800px;height:300px;
      								 margin-left:-400px;background-color:red;"> -->
-    <div style="position:relative;top:55px;left:50%;width:800px;height:300px;
-     								 margin-left:-400px;background-image:url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG');">
-		Announcement 
+	<div
+		style="position: relative; top: 65px; left: 50%; width: 800px; height: 300px; margin-left: -400px; background-image: url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG');">
+		Announcement</div>
+	<div
+		style="position: relative; top: 85px; left: 50%; width: 900px; height: 800px; margin-left: -450px;">
+		<div class="panel panel-default">
+			<div class="panel-body" style="font-family:'Ek Mukta';color:#C71585;font-size:18px;font-weight: bold;">
+			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp&nbspPOPULAR QUIZZES</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 col-md-3">
+				<a href="#" class="thumbnail">
+					<div style="width: 100px; height: 100px; background-color: white;">
+						<div class="caption">
+							<h3>Thumbnail label</h3>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<a href="#" class="thumbnail">
+					<div style="width: 100px; height: 100px; background-color: white;">
+						<div class="caption">
+							<h3>Thumbnail label</h3>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<a href="#" class="thumbnail">
+					<div style="width: 100px; height: 100px; background-color: white;">
+						<div class="caption">
+							<h3>Thumbnail label</h3>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<a href="#" class="thumbnail">
+					<div style="width: 100px; height: 100px; background-color: white;">
+						<div class="caption">
+							<h3>Thumbnail label</h3>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body" style="font-family:'Ek Mukta';color:#C71585;font-size:18px;font-weight: bold;">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp&nbspRECENT CREATED QUIZZES</div>
+		</div>
 	</div>
-	<div style="position:relative;top:60px;left:50%;width:900px;height:800px;
-     								 margin-left:-450px;background-color:blue;">
-		Quizzes
-	</div>
-	
+
 </body>
 </html>

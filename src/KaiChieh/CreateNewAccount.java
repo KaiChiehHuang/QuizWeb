@@ -49,8 +49,8 @@ public class CreateNewAccount extends HttpServlet {
 		AccountManager manager = (AccountManager) context.getAttribute("AccountManager");
 		response.setContentType("text/html; charset=UTF-8");
 		if(manager.accountExist(userID)) {
-//			RequestDispatcher dispatcher = request.getRequestDispatcher("userExist.jsp");
-//			dispatcher.forward(request, response);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("CreateAccountFailed.jsp");
+			dispatcher.forward(request, response);
 		}else{
 			manager.createAccount(userID, password);
 			Statement statement = (Statement) context.getAttribute("statement");

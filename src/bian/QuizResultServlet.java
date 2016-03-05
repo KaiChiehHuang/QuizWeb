@@ -2,6 +2,7 @@ package bian;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,16 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import xuandong.Quiz;
 
 /**
- * Servlet implementation class TakeQuizServlet
+ * Servlet implementation class QuizResultServlet
  */
-@WebServlet("/TakeQuizServlet")
-public class TakeQuizServlet extends HttpServlet {
+@WebServlet("/QuizResultServlet")
+public class QuizResultServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TakeQuizServlet() {
+    public QuizResultServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,15 +39,15 @@ public class TakeQuizServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Quiz quiz = new Quiz();
+//		Quiz quiz = new Quiz();
 		ServletContext context = getServletContext();
-		quiz = (Quiz) context.getAttribute("quiz");
+		Quiz quiz = (Quiz) context.getAttribute("quiz");
 		
-		String quizID = request.getParameter("quizID");
-		String userID = request.getParameter("userID");
+		// Check answer and set answer.
+		quiz.quizEnd();
 		
-		quiz.setUser(userID);
-		quiz.setQuizID(quizID);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizResult.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

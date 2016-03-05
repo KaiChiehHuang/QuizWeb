@@ -13,16 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import xuandong.Quiz;
 
 /**
- * Servlet implementation class QuizSummaryServlet
+ * Servlet implementation class QuizServlet
  */
-@WebServlet("/QuizSummaryServlet")
-public class QuizSummaryServlet extends HttpServlet {
+@WebServlet("/QuizServlet")
+public class QuizServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuizSummaryServlet() {
+    public QuizServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,14 +39,17 @@ public class QuizSummaryServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String quizID = request.getParameter("quizID");
-		String userID = request.getParameter("userID");
 		Quiz quiz = new Quiz();
 		ServletContext context = getServletContext();
 		quiz = (Quiz) context.getAttribute("quiz");
+		String quizID = request.getParameter("quizID");
+		String userID = request.getParameter("userID");
 		quiz.setUser(userID);
 		quiz.setQuizID(quizID);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("quiz-summary.jsp");
+		
+		// quiz start!
+		quiz.quizStart();
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizSummary.jsp");
 		dispatcher.forward(request, response);
 	}
 

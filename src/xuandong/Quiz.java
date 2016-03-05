@@ -24,11 +24,13 @@ public class Quiz {
 	private boolean isPracticeMode;
 	private boolean isImmediateCorrection;
 
+	private int popularity;
 	private Long startTime;
 	private Long endTime;
 	private String duration;
 	private String startDate;
 	private String endDate;
+	private String createdDate;
 
 	boolean creating = false;
 	
@@ -235,6 +237,29 @@ public class Quiz {
 	public void setOnePage(boolean value) {
 		this.isOnePage = value;
 	}
+	
+	/**
+	 * Set the popularity
+	 * @param count the number the quiz has been taken
+	 */
+	public void setPopularity(int count) {
+		this.popularity = count;
+	}
+	
+	public void setCreatedDate(String date) {
+		this.createdDate = date;
+	}
+	
+	public String getCreatedDate(String date) {
+		return this.createdDate;
+	}
+	
+	/**
+	 * @return the number the quiz has been taken
+	 */
+	public int getPopularity() {
+		return this.popularity;
+	}
 
 	/**
 	 * Set whether or not this quiz is a immediate correction quiz
@@ -298,7 +323,7 @@ public class Quiz {
 		String pbs = getListToString();
 		String sql = "INSERT INTO Quiz" + " VALUES(\"" + this.quizID + "\",\"" + this.name + "\",\"" + this.description
 				+ "\",\"" + this.authorID + "\",\"" + pbs + "\"," + this.isRandomQuiz + "," + this.isOnePage + ","
-				+ this.isImmediateCorrection + "," + this.isPracticeMode + ");";
+				+ this.isImmediateCorrection + "," + this.isPracticeMode + "," + this.createdDate + ";";
 		return sql;
 	}
 
@@ -363,6 +388,13 @@ public class Quiz {
 	}
 
 	/**
+	 * @return The duration time
+	 */
+	public String getDuration() {
+		return duration;
+	}
+	
+	/**
 	 * get the score of the whole quiz
 	 * @return score, represented by double, e.g. 9/11
 	 */
@@ -372,5 +404,45 @@ public class Quiz {
 			score += pr.getScore();
 		}
 		return score / pbCount;
+	}
+	
+	/**
+	 * Get the most 16 popularity quizzes, ordered by the number the quiz has been taken
+	 * @return a list contains those quizzes
+	 * @throws SQLException 
+	 */
+	static public ArrayList<Quiz> getPopularQuizzes() throws SQLException {
+		ArrayList<Quiz> popularQuizs = new ArrayList<Quiz>();
+		DBConnection database = new DBConnection();
+		String sql = "SELECT QuizID, COUNT(*) FROM QuizRecord GROUP BY QuizID ORDER BY COUNT(*) LIMIT 16";
+		ResultSet res = database.getStmt().executeQuery(sql);
+		while (res.next()) {
+			Quiz temp = new Quiz();
+			temp.setQuizID(res.getString("QuizID"));
+			temp.setPopularity(res.getInt(2));
+			popularQuizs.add(temp);
+		}
+		database.con.close();
+		return popularQuizs;
+	}
+	
+	/**
+	 * Get the most 16 popularity quizzes, ordered by the number the quiz has been taken
+	 * @return a list contains those quizzes
+	 * @throws SQLException 
+	 */
+	static public ArrayList<Quiz> getRecentQuizzes() throws SQLException {
+		ArrayList<Quiz> recentQuizs = new ArrayList<Quiz>();
+		DBConnection database = new DBConnection();
+		String sql = "SELECT QuizID, Time FROM QuizRecord Order BY Time LIMIT 12";
+		ResultSet res = database.getStmt().executeQuery(sql);
+		while (res.next()) {
+			Quiz temp = new Quiz();
+			temp.setQuizID(res.getString("QuizID"));
+			temp.setCreatedDate(res.getString("Time"));
+			recentQuizs.add(temp);
+		}
+		database.con.close();
+		return recentQuizs;
 	}
 }

@@ -7,6 +7,7 @@ import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 public class XMLParser {
 	
@@ -17,7 +18,7 @@ public class XMLParser {
 	 */
 	public static void main(String[] args) {
 		try {
-			File xmlFile = new File("src/quiz-xml/chinese_food.xml");
+			File xmlFile = new File("src/quiz-xml/bunny.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(xmlFile);
@@ -90,7 +91,8 @@ public class XMLParser {
 			practiceMode = Boolean.parseBoolean(quiz.getAttribute("practice-mode"));
 		}
 		String authorID = "Administration";
-		String insert = "INSERT INTO Quiz VALUES(\"" + quizID + "\",\"" + name + "\",\"" + description + "\",\"" + authorID + "\",\"" + questions + "\"," + random + "," + onePage + "," + immediateCorrection + "," + practiceMode + ");";
+		String time = Quiz.df.format(new Date().getTime());
+		String insert = "INSERT INTO Quiz VALUES(\"" + quizID + "\",\"" + name + "\",\"" + description + "\",\"" + authorID + "\",\"" + questions + "\"," + random + "," + onePage + "," + immediateCorrection + "," + practiceMode + ",\"" + time + "\");";
 		stmt.executeUpdate(insert);
 		return quizID;
 	}

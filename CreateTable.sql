@@ -11,9 +11,13 @@ DROP TABLE IF EXISTS MultiChoice;
 DROP TABLE IF EXISTS QuestionResponse;
 DROP TABLE IF EXISTS PictureResponse;
 DROP TABLE IF EXISTS FillBlank;
+DROP TABLE IF EXISTS SingleChoice;
 DROP TABLE IF EXISTS Quiz;
 DROP TABLE IF EXISTS Friendship;
 DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Achievement;
+DROP TABLE IF EXISTS Administrator;
+DROP TABLE IF EXISTS Announcement;
 
 CREATE TABLE Users (
 	UserID      VARCHAR(255),
@@ -48,6 +52,7 @@ CREATE TABLE Quiz (
 	IsOnePage             BOOLEAN,
 	IsImmediateCorrection BOOLEAN,
 	IsPracticeMode        BOOLEAN,
+	Time                  DATETIME,
 	PRIMARY KEY (QuizID),
 	FOREIGN KEY (AuthorID)
 		REFERENCES Users(UserID)
@@ -124,10 +129,26 @@ CREATE TABLE Emails (
 	Content         TEXT,
 	Link            TEXT,
 	IsRead          BOOLEAN,
-	PRIMARY KEY (SenderIID, ReceiverID, Time)
-); 
+	PRIMARY KEY (SenderID, ReceiverID, Time)
+);
 
+CREATE TABLE Achievement (
+	UserID           VARCHAR(255),
+	QuizID           VARCHAR(255),
+	Time             DATETIME,
+	AchievementName  VARCHAR(255),
+	PRIMARY KEY (UserID, Time)
+);
 
+CREATE TABLE Administrator (
+	AdminID     VARCHAR(255),
+	PRIMARY KEY (AdminID)
+);
 
-
-
+CREATE TABLE Announcement (
+	Content   TEXT,
+	AdminID   VARCHAR(255),
+	Time      DATETIME,
+	Subject   Text,
+	PRIMARY KEY (AdminID, Time)
+);

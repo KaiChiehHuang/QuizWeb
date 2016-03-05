@@ -147,9 +147,6 @@ public class Problem {
 	 * Save all the problem types for future use
 	 */
 	public static final HashMap<String, String> problemType = new HashMap<String, String>() {
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 
 		{
@@ -200,6 +197,13 @@ public class Problem {
 		return question;
 	}
 	
+	/** 
+	 * @return problem type
+	 */
+	public String getType() {
+		return type;
+	}
+
 	/**
 	 * @return array of right answers
 	 */

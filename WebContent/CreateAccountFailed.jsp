@@ -15,7 +15,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>
-
 <title>Create New Account</title>
 </head>
 <body style="height:800px;">
@@ -24,14 +23,15 @@
 		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
     				padding: 40px; 
-				    height: 550px;
+				    height: 580px;
      				text-align:left;
      				left:50%;width:500px;
      				margin-left:-250px;
      				top:180px;
      				position:absolute;
      				">
-			<p> Please enter your ID, Password, and Info... </p>
+        <p style="color:#FF1493"> User ID already exist! Please try other ID </p>
+		<p> Please enter your ID, Password, and Info... </p>
 			<hr style="
 				border:none;	
 				border-top:1px #CCCCCC solid;

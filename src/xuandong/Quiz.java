@@ -304,10 +304,10 @@ public class Quiz {
 			ResultSet res = stmt.executeQuery(sql);
 			if (res.next()) {
 				int quizCount = Integer.parseInt(res.getString(1)) + 1;
-				quizID = String.format("%064d", quizCount);
+				quizID = String.format("%010d", quizCount);
 			} else {
 				int questionCount = 0;
-				quizID = String.format("%064d", questionCount);
+				quizID = String.format("%010d", questionCount);
 			}
 			stmt.executeUpdate(getInsertSQL());
 		} else {

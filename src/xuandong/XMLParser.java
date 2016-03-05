@@ -66,10 +66,10 @@ public class XMLParser {
 		String quizID = "";
 		if (res.next()) {
 			int quizCount = Integer.parseInt(res.getString(1)) + 1;
-			quizID = String.format("%064d", quizCount);
+			quizID = String.format("%010d", quizCount);
 		} else {
 			int questionCount = 0;
-			quizID = String.format("%064d", questionCount);
+			quizID = String.format("%010d", questionCount);
 		}
 		String name = doc.getElementsByTagName("title").item(0).getTextContent();
 		String description = doc.getElementsByTagName("description").item(0).getTextContent();
@@ -113,10 +113,10 @@ public class XMLParser {
 			if (res.next()) {
 				int questionCount = Integer.parseInt(res.getString(1).substring(2));
 				questionCount++;
-				id = "QR" + String.format("%064d", questionCount);
+				id = "QR" + String.format("%010d", questionCount);
 			} else {
 				int questionCount = 0;
-				id = "QR" + String.format("%064d", questionCount);
+				id = "QR" + String.format("%010d", questionCount);
 			}
 			String question = ele.getElementsByTagName("query").item(0).getTextContent();
 			NodeList nList = ele.getElementsByTagName("answer");
@@ -153,10 +153,10 @@ public class XMLParser {
 			if (res.next()) {
 				int questionCount = Integer.parseInt(res.getString(1).substring(2));
 				questionCount++;
-				id = "FB" + String.format("%064d", questionCount);
+				id = "FB" + String.format("%010d", questionCount);
 			} else {
 				int questionCount = 0;
-				id = "FB" + String.format("%064d", questionCount);
+				id = "FB" + String.format("%010d", questionCount);
 			}
 			String question = ele.getElementsByTagName("pre").item(0).getTextContent();
 			question += " |||||| ";
@@ -195,10 +195,10 @@ public class XMLParser {
 			if (res.next()) {
 				int questionCount = Integer.parseInt(res.getString(1).substring(2));
 				questionCount++;
-				id = "FB" + String.format("%064d", questionCount);
+				id = "MC" + String.format("%010d", questionCount);
 			} else {
 				int questionCount = 0;
-				id = "FB" + String.format("%064d", questionCount);
+				id = "MC" + String.format("%010d", questionCount);
 			}
 			String question = ele.getElementsByTagName("query").item(0).getTextContent();
 			NodeList nList = ele.getElementsByTagName("option");
@@ -242,10 +242,10 @@ public class XMLParser {
 			if (res.next()) {
 				int questionCount = Integer.parseInt(res.getString(1).substring(2));
 				questionCount++;
-				id = "PR" + String.format("%064d", questionCount);
+				id = "PR" + String.format("%010d", questionCount);
 			} else {
 				int questionCount = 0;
-				id = "PR" + String.format("%064d", questionCount);
+				id = "PR" + String.format("%010d", questionCount);
 			}
 			String url = ele.getElementsByTagName("image-location").item(0).getTextContent();
 			NodeList nList = ele.getElementsByTagName("answer");

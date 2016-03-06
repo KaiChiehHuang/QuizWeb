@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,xuandong.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -149,7 +149,36 @@
 			<div class="panel-body" style="font-family:'Ek Mukta';color:#C71585;font-size:18px;font-weight: bold;">
 			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp&nbspPOPULAR QUIZZES</div>
 		</div>
-		<div class="row">
+<%-- 		<% 
+		    int numRecentQuizzes = 1; 
+			int numQuizzesInRow = 4;
+			for(Quiz quiz : Quiz.getRecentQuizzes()) {
+				if (numRecentQuizzes % numQuizzesInRow == 0) {
+					out.println("<div class=\"row\">");
+				}
+				out.println("<div class=\"col-xs-6 col-md-3\">");
+				// Make Quiz ID url to link to summary page
+				String quizIDUrl = "#";
+				String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + " " + "class=\"thumbnail\">";
+				out.println(showQuizUrl);
+				out.println("<div style=\"height: 100px; background-color: white;\">");
+					out.println("<div class=\"caption\">");
+							String quizName = quiz.getName();
+							String popularity = String.valueOf(quiz.getPopularity());
+							String showQuizName = "<h3>"+quizName+"</h3>";
+							out.println(showQuizName);
+						out.println("</div>");
+						// Add popularity
+				out.println("</div>");
+				out.println("</a>");
+				out.println("</div>");
+				if (numRecentQuizzes % numQuizzesInRow == 0) {
+					out.println("</div>");
+				}
+				numRecentQuizzes += 1;
+			}
+		 %> --%>
+		 <div class="row">
 			<div class="col-xs-6 col-md-3">
 				<a href="#" class="thumbnail">
 					<div style="width: 100px; height: 100px; background-color: white;">
@@ -187,6 +216,7 @@
 				</a>
 			</div>
 		</div>
+		
 		<div class="panel panel-default">
 			<div class="panel-body" style="font-family:'Ek Mukta';color:#C71585;font-size:18px;font-weight: bold;">
 			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp&nbspRECENT CREATED QUIZZES</div>

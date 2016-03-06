@@ -19,9 +19,6 @@
 <body>
 
 <h1>Quiz Problem</h1>
-<%
-	Quiz quiz = (Quiz)request.getAttribute("quiz");
-%>
 
 <%!
 	/* getParameter(answer1) get the answer of user. */
@@ -121,6 +118,9 @@
 
 <form action="QuizResultServlet" method="post">
 
+<%
+	Quiz quiz = (Quiz)request.getAttribute("quiz");
+%>
 <% takeSingleChoice(out, mc, 3); %>
 
 

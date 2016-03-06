@@ -259,7 +259,7 @@ public class Quiz {
 		this.createdDate = date;
 	}
 
-	public String getCreatedDate(String date) {
+	public String getCreatedDate() {
 		return this.createdDate;
 	}
 
@@ -452,7 +452,7 @@ public class Quiz {
 	static public ArrayList<Quiz> getPopularQuizzes() throws SQLException {
 		ArrayList<Quiz> popularQuizs = new ArrayList<Quiz>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT QuizID, COUNT(*) FROM QuizRecord GROUP BY QuizID ORDER BY COUNT(*) LIMIT 16";
+		String sql = "SELECT QuizID, COUNT(*) FROM QuizRecord GROUP BY QuizID ORDER BY COUNT(*) DESC LIMIT 16";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			Quiz temp = new Quiz();

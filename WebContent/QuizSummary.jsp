@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="xuandong.*" %>
-    <%@ page import="java.util.ArrayList" %>
+    <%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -129,14 +129,17 @@
 </div> -->
 
 <%
-  	String quizID = (String) request.getAttribute("quizID"); 
-	String userID = (String) request.getAttribute("userID"); 
-  	Quiz quiz = (Quiz) session.getAttribute("quiz");
- 	if(quiz==null){
+  	String quizID = (String) request.getParameter("quizID"); 
+	String userID = (String) request.getParameter("userID"); 
+	System.out.print(quizID);
+	System.out.println("test");
+  	Quiz quizTest = (Quiz) session.getAttribute("quiz");
+ 	if(quizTest==null){
   		Quiz newQuiz = new Quiz();
   		session.setAttribute("quiz",newQuiz);
   	}
-  	quiz.setQuizID(quizID);
+ 	Quiz quiz = (Quiz) session.getAttribute("quiz");
+ 	quiz.setQuizID(quizID);
   	quiz.setUser(userID);
   	
 	String name = quiz.getName();

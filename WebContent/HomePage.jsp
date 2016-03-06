@@ -9,7 +9,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
+
 <style>
 .clearfix:after {
     display:block;
@@ -142,12 +144,22 @@
      								 margin-left:-400px;background-color:red;"> -->
 	<div
 		style="border-radius:20px;position: relative; top: 65px; left: 50%; width: 800px; height: 300px; margin-left: -400px; background-image: url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG');">
-		Announcement</div>
+		
+	</div>
+	
 	<div
 		style="position: relative; top: 85px; left: 50%; width: 900px; height: 800px; margin-left: -450px;">
 		<div class="panel panel-default">
 			<div class="panel-body" style="font-family:'Ek Mukta';color:#C71585;font-size:18px;font-weight: bold;">
-			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp&nbspPOPULAR QUIZZES</div>
+			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp&nbspUSER INFO</div> 
+			<button class="btn btn-primary" type="button"> Messages <span class="badge">4</span></button>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body" style="font-family:'Ek Mukta';color:#C71585;font-size:18px;font-weight: bold;">
+			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp&nbspPOPULAR QUIZZES
+			
+			</div>
+			
 		</div>
 <%-- 		<% 
 		    int numRecentQuizzes = 1; 

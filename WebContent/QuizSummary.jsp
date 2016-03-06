@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="xuandong.*" %>
+    <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -202,25 +203,23 @@
    		 </thead>
    		 <tbody>
     	<%
-    		Performance[] perfU = quizSummary.getUserPerformance();
-    		for (int i = 0; i < perfU.length; i++) {
-    			if (perfU[i] != null) {
-    				String[] per = new String[3];
-            		per[0] = perfU[i].getStartTime();
-            		per[1] = String.valueOf(perfU[i].getScore());
-            		per[2] = perfU[i].getDuration();
-            		if (i % 2 == 0) {
-            			out.println("<tr class=\"success\">");
-            		} else {
-            			out.println("<tr class=\"warning\">");
-            		}
-            		for (int j = 0; j < 3; j++) {
-            			out.println("<td>");
-            			out.println(per[j]);
-            			out.println("</td>");
-            		}
-            		out.println("</tr>");
-    			}	
+    	    ArrayList<Performance> perfU = quizSummary.getUserPerformance();
+    		for (int i = 0; i < perfU.size(); i++) {
+    			String[] per = new String[3];
+        		per[0] = perfU.get(i).getStartTime();
+        		per[1] = String.valueOf(perfU.get(i).getScore());
+        		per[2] = perfU.get(i).getDuration();
+        		if (i % 2 == 0) {
+        			out.println("<tr class=\"success\">");
+        		} else {
+        			out.println("<tr class=\"warning\">");
+        		}
+        		for (int j = 0; j < 3; j++) {
+        			out.println("<td>");
+        			out.println(per[j]);
+        			out.println("</td>");
+        		}
+        		out.println("</tr>");
     		}
     		
 /*     		for (int i = 0; i < 10; i++) {
@@ -254,12 +253,12 @@
    		 </thead>
    		 <tbody>
     	<%
-/*     		Performance[] perfH = quizSummary.getHighestPerformers();
-    		for (int i = 0; i < perfH.length; i++) {
+    	    ArrayList<Performance> perfH = quizSummary.getHighestPerformers();
+    		for (int i = 0; i < perfH.size(); i++) {
     			String[] per = new String[3];
-        		per[0] = perfH[i].getUserID();
-        		per[1] = String.valueOf(perfH[i].getScore());
-        		per[2] = perfH[i].getDuration();
+        		per[0] = perfH.get(i).getUserID();
+        		per[1] = String.valueOf(perfH.get(i).getScore());
+        		per[2] = perfH.get(i).getDuration();
         		if (i % 2 == 0) {
         			out.println("<tr class=\"success\">");
         		} else {
@@ -271,21 +270,8 @@
         			out.println("</td>");
         		}
         		out.println("</tr>");	
-    		} */
-    		
-    		for (int i = 0; i < 10; i++) {
-    			if (i % 2 == 0) {
-        			out.println("<tr class=\"success\">");
-        		} else {
-        			out.println("<tr class=\"warning\">");
-        		}
-    			for (int j = 0; j < 3; j++) {
-        			out.println("<td>");
-        			out.println(j);
-        			out.println("</td>");
-        		}
-        		out.println("</tr>");
     		}
+    		
     	%>
           </tbody>
           </table>
@@ -304,12 +290,12 @@
    		 </thead>
    		 <tbody>
     	<%
-    		/* Performance[] perf = quizSummary.getHighestPerformersLastDay();
-    		for (int i = 0; i < perf.length; i++) {
+    		ArrayList<Performance> perfHLD = quizSummary.getHighestPerformersLastDay();
+    		for (int i = 0; i < perfHLD.size(); i++) {
     			String[] per = new String[3];
-        		per[0] = perf[i].getStartTime();
-        		per[1] = String.valueOf(perf[i].getScore());
-        		per[2] = perf[i].getDuration();
+        		per[0] = perfHLD.get(i).getUserID();
+        		per[1] = String.valueOf(perfHLD.get(i).getScore());
+        		per[2] = perfHLD.get(i).getDuration();
         		if (i % 2 == 0) {
         			out.println("<tr class=\"success\">");
         		} else {
@@ -321,21 +307,7 @@
         			out.println("</td>");
         		}
         		out.println("</tr>");	
-    		}   */	
-    		
-    		for (int i = 0; i < 10; i++) {
-    			if (i % 2 == 0) {
-        			out.println("<tr class=\"success\">");
-        		} else {
-        			out.println("<tr class=\"warning\">");
-        		}
-    			for (int j = 0; j < 3; j++) {
-        			out.println("<td>");
-        			out.println(j);
-        			out.println("</td>");
-        		}
-        		out.println("</tr>");
-    		}
+    		}	
     	%>
           </tbody>
           </table>
@@ -354,12 +326,12 @@
    		 </thead>
    		 <tbody>
     	<%
-    		/* Performance[] perf = quizSummary.getGoodPerformers();
-    		for (int i = 0; i < perf.length; i++) {
+    	    ArrayList<Performance> perfG = quizSummary.getGoodPerformers();
+    		for (int i = 0; i < perfG.size(); i++) {
     			String[] per = new String[3];
-        		per[0] = perf[i].getStartTime();
-        		per[1] = String.valueOf(perf[i].getScore());
-        		per[2] = perf[i].getDuration();
+        		per[0] = perfG.get(i).getUserID();
+        		per[1] = String.valueOf(perfG.get(i).getScore());
+        		per[2] = perfG.get(i).getDuration();
         		if (i % 2 == 0) {
         			out.println("<tr class=\"success\">");
         		} else {
@@ -371,20 +343,6 @@
         			out.println("</td>");
         		}
         		out.println("</tr>");	
-    		}   */	
-    		
-    		for (int i = 0; i < 10; i++) {
-    			if (i % 2 == 0) {
-        			out.println("<tr class=\"success\">");
-        		} else {
-        			out.println("<tr class=\"warning\">");
-        		}
-    			for (int j = 0; j < 3; j++) {
-        			out.println("<td>");
-        			out.println(j);
-        			out.println("</td>");
-        		}
-        		out.println("</tr>");
     		}
     	%>
           </tbody>
@@ -404,12 +362,12 @@
    		 </thead>
    		 <tbody>
     	<%
-    		/* Performance[] perf = quizSummary.getBadPerformers();
-    		for (int i = 0; i < perf.length; i++) {
+    	    ArrayList<Performance> perfB = quizSummary.getBadPerformers();
+    		for (int i = 0; i < perfB.size(); i++) {
     			String[] per = new String[3];
-        		per[0] = perf[i].getStartTime();
-        		per[1] = String.valueOf(perf[i].getScore());
-        		per[2] = perf[i].getDuration();
+        		per[0] = perfB.get(i).getStartTime();
+        		per[1] = String.valueOf(perfB.get(i).getScore());
+        		per[2] = perfB.get(i).getDuration();
         		if (i % 2 == 0) {
         			out.println("<tr class=\"success\">");
         		} else {
@@ -421,20 +379,6 @@
         			out.println("</td>");
         		}
         		out.println("</tr>");	
-    		}   */	
-    		
-    		for (int i = 0; i < 10; i++) {
-    			if (i % 2 == 0) {
-        			out.println("<tr class=\"success\">");
-        		} else {
-        			out.println("<tr class=\"warning\">");
-        		}
-    			for (int j = 0; j < 3; j++) {
-        			out.println("<td>");
-        			out.println(j);
-        			out.println("</td>");
-        		}
-        		out.println("</tr>");
     		}
     	%>
           </tbody>

@@ -52,5 +52,18 @@
 	<img class="img-thumbnail" alt="Cinque Terre" src = "http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG" >
 </div>
 
+<!-- Question Response -->
+<div class = "container">
+	<p><h5>Problem 4:</h5> who is the energetic boy? <input type="text" placeholder="Answer" size="8" name="answer"/></p>
+</div>
+
+<!-- MultiResponse -->
+<div class = "container">
+	<p><h5>Problem 5:</h5> List three of the most energetic boys?</p>
+	<p><input type="text" placeholder="Answer" size="8" name="answer"/></p>
+	<p><input type="text" placeholder="Answer" size="8" name="answer"/></p>
+	<p><input type="text" placeholder="Answer" size="8" name="answer"/></p>
+</div>
+
 </body>
 </html>

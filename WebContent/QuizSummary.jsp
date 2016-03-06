@@ -450,7 +450,8 @@
 </div>
 
 <div class="text-center"
-style="position: fixed;  width: 100%; height: 20%; top: 85%; left: 0;">
+style="position: fixed;  width: 100%; height: 20%; top: 80%; left: 0; background-color: rgba(225, 196, 193, 0.6)">
+<h2>     </h2>
 <a href="QuizTaking.jsp" class="btn btn-info" role="button">Start Quiz</a>
 <a href="QuizTaking.jsp" class="btn btn-info" role="button">Practice</a>
 <a href="QuizTaking.jsp" class="btn btn-info"  role="button">Edit Quiz</a>

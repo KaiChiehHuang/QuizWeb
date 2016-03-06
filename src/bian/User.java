@@ -3,7 +3,10 @@ package bian;
 import java.sql.*;
 import java.util.*;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import xuandong.Achievement;
+import xuandong.DBConnection;
+import xuandong.Performance;
+import xuandong.Quiz;
 
 public class User {
 	private Statement stmt;
@@ -18,8 +21,11 @@ public class User {
 	/**
 	 * Simple constructor Will fetch the name, age, gender, achievement, friend
 	 * information from the database
-	 * @param id UserID
-	 * @param stmt Database statement
+	 * 
+	 * @param id
+	 *            UserID
+	 * @param stmt
+	 *            Database statement
 	 */
 	User(String id, Statement stmt) {
 		this.id = id;
@@ -52,6 +58,7 @@ public class User {
 
 	/**
 	 * Get user's gender
+	 * 
 	 * @return gender
 	 */
 	public String getGender() {
@@ -71,9 +78,10 @@ public class User {
 	public int getAge() {
 		return age;
 	}
-	
+
 	/**
 	 * Set User's age
+	 * 
 	 * @param age
 	 */
 	public void setAge(int age) {
@@ -82,6 +90,7 @@ public class User {
 
 	/**
 	 * Get user's achievements
+	 * 
 	 * @return String[] achievements
 	 */
 	public String[] getAchievements() {
@@ -90,6 +99,7 @@ public class User {
 
 	/**
 	 * Get user's friends
+	 * 
 	 * @return LinkedList friends。
 	 */
 	public ArrayList<String> getFriends() {
@@ -109,6 +119,7 @@ public class User {
 
 	/**
 	 * Set user's name
+	 * 
 	 * @param name
 	 */
 	public void setName(String name) {
@@ -121,7 +132,9 @@ public class User {
 
 	/**
 	 * Add user's achievement
-	 * @param new achievement
+	 * 
+	 * @param new
+	 *            achievement
 	 */
 	public void addAchievement(String achievement) {
 		try {
@@ -141,6 +154,7 @@ public class User {
 
 	/**
 	 * Add friend to friends table.
+	 * 
 	 * @param friendID
 	 */
 	public void addFriend(String friendID) {
@@ -154,35 +168,191 @@ public class User {
 
 	/**
 	 * Remove friend in friends table.
+	 * 
 	 * @param friendID
 	 */
 	public void removeFriend(String friendID) {
 		try {
-			stmt.executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + id + "\" AND User2ID = \"" + friendID + "\";");
-			stmt.executeUpdate("DELETE FROM Friendship WHERE User2ID = \"" + id + "\" AND User1ID = \"" + friendID + "\";");
+			stmt.executeUpdate(
+					"DELETE FROM Friendship WHERE User1ID = \"" + id + "\" AND User2ID = \"" + friendID + "\";");
+			stmt.executeUpdate(
+					"DELETE FROM Friendship WHERE User2ID = \"" + id + "\" AND User1ID = \"" + friendID + "\";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Send a friend request to a user
+	 * 
 	 * @param User2ID
 	 */
 	public void sendFriendRequest(String User2ID) {
 		try {
-			stmt.executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id + "\",\"" + User2ID + "\"," + true + ");");
+			stmt.executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id + "\",\"" + User2ID
+					+ "\"," + true + ");");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Accept a friend request and update the database
+	 * 
+	 * @param pendingUserID
+	 */
 	public void acceptFriendRequest(String pendingUserID) {
 		try {
-			stmt.executeUpdate("UPDATE Friendship SET Pending = " + false + " WHERE User1ID = \"" + pendingUserID + "\" AND User2ID = \"" + id + "\";");
-			stmt.executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id + "\",\"" + pendingUserID + "\"," + false + ");");
+			stmt.executeUpdate("UPDATE Friendship SET Pending = " + false + " WHERE User1ID = \"" + pendingUserID
+					+ "\" AND User2ID = \"" + id + "\";");
+			stmt.executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id + "\",\""
+					+ pendingUserID + "\"," + false + ");");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Get all the achievements of this user
+	 * @return A list of achievements
+	 */
+	public ArrayList<Achievement> getAchievement() {
+		ArrayList<Achievement> achis = new ArrayList<Achievement>();
+		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
+			String sql = "SELECT UserID, QuizID, Time, AchievementName FROM Achievement WHERE UserID = \"" + id + "\";";
+			ResultSet res = stmt.executeQuery(sql);
+			while (res.next()) {
+				Achievement temp = new Achievement();
+				temp.setUserID(id);
+				temp.setQuizID(res.getString("QuizID"));
+				temp.setAchievementName(res.getString("AchievementName"));
+				temp.setTime(res.getString("Time"));
+				temp.setDescription();
+				achis.add(temp);
+			}
+			database.getCon().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return achis;
+	}
+
+	/**
+	 * Get 6 most recently attained achievements of this user's friends
+	 * @return A list of achievements
+	 */
+	public ArrayList<Achievement> getFriendAchievement() {
+		ArrayList<Achievement> achis = new ArrayList<Achievement>();
+		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
+			String sql = "SELECT F.User2ID AS UserID, A.QuizID AS QuizID, A.Time AS Time, A.AchievementName FROM Achievement AS A, Friendship AS F WHERE F.User1ID = \""
+					+ id + "\" AND A.UserID = F.User2ID ORDER BY A.Time LIMIT 6;";
+			ResultSet res = stmt.executeQuery(sql);
+			while (res.next()) {
+				Achievement temp = new Achievement();
+				temp.setUserID(res.getString("UserID"));
+				temp.setQuizID(res.getString("QuizID"));
+				temp.setAchievementName(res.getString("AchievementName"));
+				temp.setTime(res.getString("Time"));
+				temp.setDescription();
+				achis.add(temp);
+			}
+			database.getCon().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return achis;
+	}
+
+	/**
+	 * get 6 quizzes that the user recently took if you want to get the quiz
+	 * name, please call Quiz.getName(quizID)
+	 * @return a list of performance
+	 * @throws SQLException
+	 */
+	public ArrayList<Performance> getRecentTakenQuiz() throws SQLException {
+		ArrayList<Performance> recentQuizs = new ArrayList<Performance>();
+		DBConnection database = new DBConnection();
+		String sql = "SELECT QuizID, Score, StartTime, Duration FROM QuizRecord WHERE UserID = \"" + id
+				+ "\" ORDER BY StartTime LIMIT 6";
+		ResultSet res = database.getStmt().executeQuery(sql);
+		while (res.next()) {
+			String quizID = res.getString("QuizID");
+			double score = res.getDouble("Score");
+			String startTime = res.getString("StartTime");
+			String duration = res.getString("Duration");
+			Performance temp = new Performance(quizID, this.id, startTime, duration, score);
+			recentQuizs.add(temp);
+		}
+		database.getCon().close();
+		return recentQuizs;
+	}
+	
+	/**
+	 * get 6 quizzes that the user's friends recently took
+	 * if you want to get the quiz name, please call Quiz.getName(quizID)
+	 * @return a list of performance
+	 * @throws SQLException
+	 */
+	public ArrayList<Performance> getFriendRecentTakenQuiz() throws SQLException {
+		ArrayList<Performance> recentQuizs = new ArrayList<Performance>();
+		DBConnection database = new DBConnection();
+		String sql = "SELECT R.UserID AS UserID, R.QuizID AS QuizID, R.Score AS Score, R.StartTime AS StartTime, R.Duration AS Duration FROM QuizRecord AS R, Friendship AS F WHERE F.User1ID = \"" + id
+				+ "\" AND F.User2ID = R.UserID ORDER BY R.StartTime LIMIT 6;";
+		ResultSet res = database.getStmt().executeQuery(sql);
+		while (res.next()) {
+			String userID = res.getString("UserID");
+			String quizID = res.getString("QuizID");
+			double score = res.getDouble("Score");
+			String startTime = res.getString("StartTime");
+			String duration = res.getString("Duration");
+			Performance temp = new Performance(quizID, userID, startTime, duration, score);
+			recentQuizs.add(temp);
+		}
+		database.getCon().close();
+		return recentQuizs;
+	}
+
+	/**
+	 * get 6 quizzes that the user recently created
+	 * @return a list of quizzes
+	 * @throws SQLException
+	 */
+	public ArrayList<Quiz> getRecentCreatedQuiz() throws SQLException {
+		ArrayList<Quiz> recentQuizs = new ArrayList<Quiz>();
+		DBConnection database = new DBConnection();
+		String sql = "SELECT QuizID FROM Quiz WHERE AuthorID = \"" + id + "\" ORDER BY Time LIMIT 6";
+		ResultSet res = database.getStmt().executeQuery(sql);
+		while (res.next()) {
+			String quizID = res.getString("QuizID");
+			Quiz temp = new Quiz();
+			temp.setQuizID(quizID);
+			recentQuizs.add(temp);
+		}
+		database.getCon().close();
+		return recentQuizs;
+	}
+	
+	/**
+	 * get 6 quizzes that the user's friends recently created
+	 * @return a list of quizzes
+	 * @throws SQLException
+	 */
+	public ArrayList<Quiz> getFriendRecentCreatedQuiz() throws SQLException {
+		ArrayList<Quiz> recentQuizs = new ArrayList<Quiz>();
+		DBConnection database = new DBConnection();
+		String sql = "SELECT Q.QuizID AS QuizID FROM Quiz AS Q, Friendship AS F WHERE Q.AuthorID = F.User2ID AND F.User1ID = \"" + id + "\" ORDER BY Q.Time LIMIT 6";
+		ResultSet res = database.getStmt().executeQuery(sql);
+		while (res.next()) {
+			String quizID = res.getString("QuizID");
+			Quiz temp = new Quiz();
+			temp.setQuizID(quizID);
+			recentQuizs.add(temp);
+		}
+		database.getCon().close();
+		return recentQuizs;
 	}
 }

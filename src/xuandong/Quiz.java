@@ -147,6 +147,19 @@ public class Quiz {
 	public String getName() {
 		return name;
 	}
+	
+	/**
+	 * Given a quizID, return the name of this quiz
+	 * @param quizID
+	 * @return quiz name
+	 * @throws SQLException
+	 */
+	public static String getName(String quizID) throws SQLException {
+		DBConnection database = new DBConnection();
+		ResultSet res = database.getStmt().executeQuery("SELECT Name FROM Quiz WHERE QuizID = \"" + quizID + "\";");
+		res.next();
+		return res.getString("Name");
+	}
 
 	/**
 	 * @return quiz description

@@ -25,7 +25,7 @@
 
 <%!
 	/* getParameter(answer1) get the answer of user. */
-	public void takeSingleChoice(JspWriter myOut, SingleChoice mc, int index) throws IOException {
+	public void takeSingleChoice(JspWriter myOut, MultiChoice mc, int index) throws IOException {
 		String[] choices = mc.getChoices();
 		String question = mc.getQuestion();
 		
@@ -65,8 +65,7 @@
 		String url = pr.getURL();
 		
 		myOut.println("<div class = \"container\"><p>" + "<h5>Problem"+ index + ": </h5>" + question);
-		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer\" "+ index + " />");
-		myOut.println("</p></div>");
+		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer\" "+ index + " /> + </p></div>");
 		myOut.println("<div class = \"container\" style = \"position: relative; left: 50%; width: 400px; margin-left:-200px\">");
 		myOut.println("<img class=\"img-thumbnail\"src =" + url + "></div>");
 
@@ -81,6 +80,7 @@
 </div>
 
 <%!
+<<<<<<< HEAD
 	/* getParameter(answer3) get the answer of user. */
 	public void takeQuestionResponse(JspWriter myOut, QuestionResponse pr, int index) throws IOException {
 		String question = pr.getQuestion();
@@ -119,6 +119,34 @@
 
 
 
+=======
+	/* getParameter(answer4) get the answer of user. */
+	public void takeMultiChoice(JspWriter myOut, MultiChoice mc, int index) throws IOException {
+	
+		String question = mc.getQuestion();
+		int num = mc.getCount();
+		String[] choices = mc.getChoices();
+		
+		myOut.println("<div class = \"container\"><p>" + "<h5>Problem"+ index + ": </h5>" + question + "</p>");
+		for (int i = 0; i < num; i++) {
+			myOut.println("<label class=\"checkbox-inline\"> <input type=\"checkbox\" name=\"answer" + index + "\" value=\"" + choices[i] + "\">");
+			myOut.println(choices[i] +" </label><br>");
+		}
+		
+		myOut.println("</div>");
+	}
+%>
+
+<!-- MultiChoice -->
+<div class = "container">
+	<p><h5>Problem4:</h5> Which are character in HIMYM?"</p>
+	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Monica">  Monica </label><br>
+	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Lily">  Lily  </label><br>
+	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Ted">  Ted  </label><br>
+	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Enegitic Boy">  Enegitic Boy</label> <br>
+</div>
+
+>>>>>>> bian
 <form action="QuizResultServlet" method="post">
 
 <% takeSingleChoice(out, mc, 3); %>

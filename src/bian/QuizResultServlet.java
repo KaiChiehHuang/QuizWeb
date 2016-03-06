@@ -57,11 +57,11 @@ public class QuizResultServlet extends HttpServlet {
 			for (int j = 0; j < answers.length; j++) {
 				answer = answer + answers[j] + "|";
 			}
-			answer.substring(0, answer.length() - 1);
+			answer = answer.substring(0, answer.length() - 1);
 			problems.get(i-1).setUserAnswer(answer);
 		}
 		
-		System.out.println(quiz.quizEnd());
+		quiz.quizEnd();
 		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizResult.jsp");
 		dispatcher.forward(request, response);
 	}

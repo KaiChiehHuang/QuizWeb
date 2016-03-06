@@ -46,7 +46,6 @@ public class MultiChoice extends Problem {
 				for (int j = 0; j < userAnswers.length; j++) {
 					if (temp[k].toLowerCase().equals(userAnswers[j].toLowerCase())) {
 						total++;
-						break;
 					}
 				}
 			}

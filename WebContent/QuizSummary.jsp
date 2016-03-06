@@ -131,8 +131,6 @@
 <%
   	String quizID = (String) request.getParameter("quizID"); 
 	String userID = (String) request.getParameter("userID"); 
-	System.out.print(quizID);
-	System.out.println("test");
   	Quiz quizTest = (Quiz) session.getAttribute("quiz");
  	if(quizTest==null){
   		Quiz newQuiz = new Quiz();

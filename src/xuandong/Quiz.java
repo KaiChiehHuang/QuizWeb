@@ -3,9 +3,11 @@ package xuandong;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Quiz {
 	// used to count the real number of problems, e.g. a MultiChoice problem
@@ -32,12 +34,14 @@ public class Quiz {
 	private String endDate;
 	private String createdDate;
 	private String image;
+	private double score;
 
 	boolean creating = false;
 
 	private QuizSummary quizSummary;
 
 	public static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static final TimeZone TIME_ZONE = TimeZone.getTimeZone("UTC");
 	public static final SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 
 	/**
@@ -72,25 +76,31 @@ public class Quiz {
 					String type = prs[i].substring(0, 2);
 					switch (type) {
 					case "FB":
-						this.problems.add(new FillBlank(prs[i]));
+						FillBlank newFB = new FillBlank(prs[i]);
+						pbCount += 1;
+						this.problems.add(newFB);
 						break;
 					case "MC":
-						this.problems.add(new MultiChoice(prs[i]));
+						MultiChoice newMC = new MultiChoice(prs[i]);
+						pbCount += newMC.getCount();
+						this.problems.add(newMC);
 						break;
 					case "MR":
-						this.problems.add(new MultiResponse(prs[i]));
+						MultiResponse newMR = new MultiResponse(prs[i]);
+						pbCount += newMR.getCount();
+						this.problems.add(newMR);
 						break;
 					case "PR":
-						this.problems.add(new PictureResponse(prs[i]));
+						PictureResponse newPR = new PictureResponse(prs[i]);
+						pbCount += 1;
+						this.problems.add(newPR);
 						break;
 					case "QR":
-						this.problems.add(new QuestionResponse(prs[i]));
-						break;
-					case "SC":
-						this.problems.add(new SingleChoice(prs[i]));
+						QuestionResponse newQR = new QuestionResponse(prs[i]);
+						pbCount += 1;
+						this.problems.add(newQR);
 						break;
 					}
-					pbCount += problems.get(problems.size() - 1).getAnswer().length;
 				}
 				this.isRandomQuiz = res.getBoolean("IsRandomQuiz");
 				this.isOnePage = res.getBoolean("IsOnePage");
@@ -419,8 +429,9 @@ public class Quiz {
 		Long dura = this.endTime - this.startTime;
 		Date tempDate = new Date();
 		tempDate.setTime(dura);
+		format.setTimeZone(TIME_ZONE);
 		duration = format.format(tempDate);
-		double score = this.getScore();
+		score = this.calculateScore();
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
@@ -446,12 +457,19 @@ public class Quiz {
 	 * 
 	 * @return score, represented by double, e.g. 9/11
 	 */
-	public double getScore() {
-		int score = 0;
+	public double calculateScore() {
+		double score = 0.0;
 		for (Problem pr : problems) {
 			score += pr.getScore();
 		}
-		return score / pbCount;
+		return score / pbCount * 100;
+	}
+	
+	/**
+	 * @return user score with two decimal digits
+	 */
+	public String getScore() {
+		return String.format("%.2f", this.score);
 	}
 
 	/**

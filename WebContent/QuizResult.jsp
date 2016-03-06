@@ -21,10 +21,10 @@
 <body>
 
 <%
- 	Quiz quiz = (Quiz)session.getAttribute("quiz");
+ 	Quiz quiz = (Quiz) session.getAttribute("quiz");
 
 //Display score and time;
-	double score = quiz.getScore();
+	String score = quiz.getScore();
 	String duration = quiz.getDuration();
 	
 // Performance

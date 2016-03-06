@@ -23,8 +23,8 @@
 
 <%
 	Quiz quiz = (Quiz)session.getAttribute("quiz");
-	System.out.println(quiz.quizStart());
 	ArrayList<Problem> problems = new ArrayList<Problem>();
+	quiz.quizStart();
 	problems = quiz.getProblems();
 %>
 
@@ -69,7 +69,8 @@
 		myOut.println("<p>"+ "<h5>Problem " + index + ": </h5>"+question +"</p>");
 		for (int i = 0; i < choices.length; i++) {
 			myOut.println("<div class=\"radio\">");
-			myOut.println("<label><input type=\"radio\" name=\"answer"+ index +"\">"+ choices[i] +"</label>");
+			myOut.println("<label><input type=\"radio\" name=\"answer"+ index + "\" value=\"" + choices[i]+ "\" />" + choices[i] + "</label>");
+/* 			myOut.println("<label><input type=\"radio\" name=\"answer"+ index + "\" />" + choices[i] + "</label>"); */
 			myOut.println("</div>");
 		}
 		myOut.println("</div>");

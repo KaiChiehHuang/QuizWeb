@@ -123,7 +123,7 @@ public class QuizSummary {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String curTime = Quiz.df.format((new Date()).getTime());
-			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND TIMESTAMPDIFF(SECOND, " + curTime +", EndTime) <= 86400 ORDER BY Score DESC, Duration ASC, StartTime ASC LIMIT " + TOP_NUM + " ;";
+			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND TIMESTAMPDIFF(SECOND, EndTime, \"" + curTime + "\") <= 86400 ORDER BY Score DESC, Duration ASC, StartTime ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
 				while (res.next()) {

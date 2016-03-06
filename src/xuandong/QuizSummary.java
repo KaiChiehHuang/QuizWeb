@@ -3,6 +3,7 @@ package xuandong;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class QuizSummary {
@@ -11,11 +12,11 @@ public class QuizSummary {
 	
 	private String quizID;
 	private String userID;
-	private Performance[] highestPerformers;
-	private Performance[] highestPerformersLastDay;
-	private Performance[] goodPerformers;
-	private Performance[] badPerformers;
-	private Performance[] userPerformance;
+	private ArrayList<Performance> highestPerformers;
+	private ArrayList<Performance> highestPerformersLastDay;
+	private ArrayList<Performance> goodPerformers;
+	private ArrayList<Performance> badPerformers;
+	private ArrayList<Performance> userPerformance;
 	private int takeNum;
 	private double meanScore;
 	private double maxScore;
@@ -29,11 +30,11 @@ public class QuizSummary {
 	public QuizSummary(String quizID, String userID) {
 		this.quizID = quizID;
 		this.userID = userID;
-		highestPerformers = new Performance[TOP_NUM];
-		highestPerformersLastDay = new Performance[TOP_NUM];
-		goodPerformers = new Performance[TOP_NUM];
-		badPerformers = new Performance[TOP_NUM];
-		userPerformance = new Performance[TOP_NUM];
+		highestPerformers = new ArrayList<Performance>();
+		highestPerformersLastDay = new ArrayList<Performance>();
+		goodPerformers = new ArrayList<Performance>();
+		badPerformers = new ArrayList<Performance>();
+		userPerformance = new ArrayList<Performance>();
 		
 		try {
 			DBConnection database = new DBConnection();
@@ -59,13 +60,12 @@ public class QuizSummary {
 	 * Get the performance of this user
 	 * @return a Performance Object, it's easy to read
 	 */
-	public Performance[] getUserPerformance() {
+	public ArrayList<Performance> getUserPerformance() {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND UserID = \"" + this.userID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
-			int index = 0;
 			if (res != null) {
 				res.absolute(1);
 				while (res.next()) {
@@ -75,8 +75,7 @@ public class QuizSummary {
 					String curDuration = res.getString(4);
 					double curScore = Double.parseDouble(res.getString(5));
 					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
-					userPerformance[index] = perf;
-					index++;
+					userPerformance.add(perf);
 				}
 			}
 			database.getCon().close();
@@ -91,13 +90,12 @@ public class QuizSummary {
 	 * Get the top 10 performance of this quiz 
 	 * @return a Performance Object, it's easy to read
 	 */
-	public Performance[] getHighestPerformers() {
+	public ArrayList<Performance> getHighestPerformers() {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" ORDER BY Score DESC, Duration ASC, StartTime ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
-			int index = 0;
 			if (res != null) {
 				res.absolute(1);
 				while (res.next()) {
@@ -107,8 +105,7 @@ public class QuizSummary {
 					String curDuration = res.getString(4);
 					double curScore = Double.parseDouble(res.getString(5));
 					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
-					highestPerformers[index] = perf;
-					index++;
+					highestPerformers.add(perf);
 				}
 			}
 			database.getCon().close();
@@ -123,14 +120,13 @@ public class QuizSummary {
 	 * Get the top 10 performance of this quiz during the last 24 hours
 	 * @return a Performance Object, it's easy to read
 	 */
-	public Performance[] getHighestPerformersLastDay() {
+	public ArrayList<Performance> getHighestPerformersLastDay() {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String curTime = Quiz.df.format((new Date()).getTime());
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND TIMESTAMPDIFF(SECOND, " + curTime +", EndTime) <= 86400 ORDER BY Score DESC, Duration ASC, StartTime ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
-			int index = 0;
 			if (res != null) {
 				res.absolute(1);
 				while (res.next()) {
@@ -140,8 +136,7 @@ public class QuizSummary {
 					String curDuration = res.getString(4);
 					double curScore = Double.parseDouble(res.getString(5));
 					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
-					highestPerformersLastDay[index] = perf;
-					index++;
+					highestPerformersLastDay.add(perf);
 				}
 			}
 			database.getCon().close();
@@ -156,13 +151,12 @@ public class QuizSummary {
 	 * Get the top 10 good performers who scored over 80% of this quiz
 	 * @return a Performance Object, it's easy to read
 	 */
-	public Performance[] getGoodPerformers() {
+	public ArrayList<Performance> getGoodPerformers() {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND Score >= 80 ORDER BY EndTime DESC, Score DESC LIMIT " + TOP_NUM + ";";
 			ResultSet res = stmt.executeQuery(sql);
-			int index = 0;
 			if (res != null) {
 				res.absolute(1);
 				while (res.next()) {
@@ -172,8 +166,7 @@ public class QuizSummary {
 					String curDuration = res.getString(4);
 					double curScore = Double.parseDouble(res.getString(5));
 					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
-					goodPerformers[index] = perf;
-					index++;
+					goodPerformers.add(perf);
 				}
 			}
 			database.getCon().close();
@@ -188,13 +181,12 @@ public class QuizSummary {
 	 * Get the top 10 bad performers who scored bellow 40% of this quiz
 	 * @return Performance Object, it's easy to read
 	 */
-	public Performance[] getBadPerformers() {
+	public ArrayList<Performance> getBadPerformers() {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND Score <= 40 ORDER BY EndTime DESC, Score ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
-			int index = 0;
 			if (res != null) {
 				res.absolute(1);
 				while (res.next()) {
@@ -204,8 +196,7 @@ public class QuizSummary {
 					String curDuration = res.getString(4);
 					double curScore = Double.parseDouble(res.getString(5));
 					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
-					badPerformers[index] = perf;
-					index++;
+					badPerformers.add(perf);
 				}
 			}
 			database.getCon().close();

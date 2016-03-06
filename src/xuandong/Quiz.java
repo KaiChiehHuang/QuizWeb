@@ -315,7 +315,6 @@ public class Quiz {
 
 	/**
 	 * Set the user Please specify this right before you fetch QuizSummary
-	 * 
 	 * @param userID
 	 */
 	public void setUser(String userID) {

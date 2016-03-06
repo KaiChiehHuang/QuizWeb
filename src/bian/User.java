@@ -1,8 +1,9 @@
 package bian;
 
-import xuandong.*;
 import java.sql.*;
 import java.util.*;
+
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 public class User {
 	private Statement stmt;
@@ -17,11 +18,8 @@ public class User {
 	/**
 	 * Simple constructor Will fetch the name, age, gender, achievement, friend
 	 * information from the database
-	 * 
-	 * @param id
-	 *            UserID
-	 * @param stmt
-	 *            Database statement
+	 * @param id UserID
+	 * @param stmt Database statement
 	 */
 	User(String id, Statement stmt) {
 		this.id = id;
@@ -54,7 +52,6 @@ public class User {
 
 	/**
 	 * Get user's gender
-	 * 
 	 * @return gender
 	 */
 	public String getGender() {
@@ -71,13 +68,20 @@ public class User {
 	/**
 	 * Get user's age
 	 */
-	public String getAge() {
-		return name;
+	public int getAge() {
+		return age;
+	}
+	
+	/**
+	 * Set User's age
+	 * @param age
+	 */
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	/**
 	 * Get user's achievements
-	 * 
 	 * @return String[] achievements
 	 */
 	public String[] getAchievements() {
@@ -86,7 +90,6 @@ public class User {
 
 	/**
 	 * Get user's friends
-	 * 
 	 * @return LinkedList friends。
 	 */
 	public ArrayList<String> getFriends() {
@@ -106,7 +109,6 @@ public class User {
 
 	/**
 	 * Set user's name
-	 * 
 	 * @param name
 	 */
 	public void setName(String name) {
@@ -119,9 +121,7 @@ public class User {
 
 	/**
 	 * Add user's achievement
-	 * 
-	 * @param a
-	 *            new achievement
+	 * @param new achievement
 	 */
 	public void addAchievement(String achievement) {
 		try {
@@ -141,7 +141,6 @@ public class User {
 
 	/**
 	 * Add friend to friends table.
-	 * 
 	 * @param friendID
 	 */
 	public void addFriend(String friendID) {
@@ -155,13 +154,33 @@ public class User {
 
 	/**
 	 * Remove friend in friends table.
-	 * 
 	 * @param friendID
 	 */
 	public void removeFriend(String friendID) {
 		try {
-			stmt.executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + id + "\";");
-			stmt.executeUpdate("DELETE FROM Friendship WHERE User2ID = \"" + id + "\";");
+			stmt.executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + id + "\" AND User2ID = \"" + friendID + "\";");
+			stmt.executeUpdate("DELETE FROM Friendship WHERE User2ID = \"" + id + "\" AND User1ID = \"" + friendID + "\";");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Send a friend request to a user
+	 * @param User2ID
+	 */
+	public void sendFriendRequest(String User2ID) {
+		try {
+			stmt.executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id + "\",\"" + User2ID + "\"," + true + ");");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void acceptFriendRequest(String pendingUserID) {
+		try {
+			stmt.executeUpdate("UPDATE Friendship SET Pending = " + false + " WHERE User1ID = \"" + pendingUserID + "\" AND User2ID = \"" + id + "\";");
+			stmt.executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id + "\",\"" + pendingUserID + "\"," + false + ");");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -37,8 +37,8 @@ public class Quiz {
 
 	private QuizSummary quizSummary;
 
-	static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	static final SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+	public static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static final SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 
 	/**
 	 * Simple constructor If you are creating a new quiz which is not in
@@ -260,11 +260,7 @@ public class Quiz {
 	}
 
 	public String getCreatedDate() {
-<<<<<<< HEAD
 		return this.createdDate.substring(0, this.createdDate.length() - 2);
-=======
-		return this.createdDate;
->>>>>>> KCH-HomePage
 	}
 
 	/**

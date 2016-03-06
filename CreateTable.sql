@@ -36,6 +36,7 @@ INSERT INTO Users VALUES("guest","35675e68f4b5af7b995d9205ad0fc43842f16450","Gue
 CREATE TABLE Friendship (
 	User1ID     VARCHAR(255),
 	User2ID     VARCHAR(255),
+	Pending     BOOLEAN,
 	PRIMARY KEY (User1ID, User2ID),
 	FOREIGN KEY (User1ID)
 		REFERENCES Users(UserID),

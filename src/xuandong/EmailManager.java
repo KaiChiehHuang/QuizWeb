@@ -26,6 +26,25 @@ public class EmailManager {
 	public void setUser(String userID) {
 		this.userID = userID;
 	}
+	
+	/**
+	 * @return the number of emails sent to the user that are unread
+	 */
+	public int getUnreadEmails() {
+		int count = 0;
+		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
+			String sql = "SELECT COUNT(*) FROM Emails WHERE ReceiverID = \""
+					+ userID + "\" AND IsRead = " + false + ";";
+			ResultSet res = stmt.executeQuery(sql);
+			res.next();
+			count = res.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
 
 	/**
 	 * Get all the emails that are sent to this user

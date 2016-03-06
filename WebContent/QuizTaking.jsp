@@ -80,7 +80,7 @@
 </div>
 
 <%!
-<<<<<<< HEAD
+
 	/* getParameter(answer3) get the answer of user. */
 	public void takeQuestionResponse(JspWriter myOut, QuestionResponse pr, int index) throws IOException {
 		String question = pr.getQuestion();
@@ -118,8 +118,6 @@
 </div>
 
 
-
-=======
 	/* getParameter(answer4) get the answer of user. */
 	public void takeMultiChoice(JspWriter myOut, MultiChoice mc, int index) throws IOException {
 	
@@ -146,7 +144,6 @@
 	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Enegitic Boy">  Enegitic Boy</label> <br>
 </div>
 
->>>>>>> bian
 <form action="QuizResultServlet" method="post">
 
 <% takeSingleChoice(out, mc, 3); %>

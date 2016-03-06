@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mysql.jdbc.Statement;
 
@@ -52,6 +53,8 @@ public class CreateNewAccount extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("CreateAccountFailed.jsp");
 			dispatcher.forward(request, response);
 		}else{
+			HttpSession session = request.getSession(); 
+			session.setAttribute("userID", userID);
 			manager.createAccount(userID, password);
 			Statement statement = (Statement) context.getAttribute("statement");
 			// TODO need to add user name and age to database

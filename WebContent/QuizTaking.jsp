@@ -20,15 +20,12 @@
 <body>
 
 <h1>Quiz Problem</h1>
-<<<<<<< HEAD
-=======
+
 <%
 	Quiz quiz = (Quiz)request.getAttribute("quiz");
 	ArrayList<Problem> problems = new ArrayList<Problem>();
 	problems = quiz.getProblems();
 %>
->>>>>>> bian
-
 
 <form action="QuizResultServlet" method="post">
 
@@ -149,28 +146,6 @@
 	}
 %>
 
-<<<<<<< HEAD
-<!-- MultiChoice -->
-<div class = "container">
-	<p><h5>Problem4:</h5> Which are character in HIMYM?"</p>
-	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Monica">  Monica </label><br>
-	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Lily">  Lily  </label><br>
-	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Ted">  Ted  </label><br>
-	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Enegitic Boy">  Enegitic Boy</label> <br>
-</div>
 
-<form action="QuizResultServlet" method="post">
-
-<%
-	Quiz quiz = (Quiz)request.getAttribute("quiz");
-%>
-<% takeSingleChoice(out, mc, 3); %>
-
-
-<input type="submit" value = "Submit Answer"/>
-</form>
-
-=======
->>>>>>> bian
 </body>
 </html>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*,xuandong.*" %>
+    pageEncoding="UTF-8" import="java.util.*,xuandong.*,javax.servlet.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,6 +11,22 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
+<script>
+function pageScrollUp(position) {
+    var yPos = window.pageYOffset;
+    yPos -= 95;
+    if(yPos<position)
+    {
+        yPos = position;
+    }
+    window.scroll(0,yPos); // horizontal and vertical scroll increments
+    scrolldelay = setTimeout('pageScrollUp(\''+position+'\')',45); // scrolls every 100 milliseconds
+    if(yPos==position)
+    {
+        clearTimeout(scrolldelay);
+    }
+}
+</script>
 
 <style>
 .clearfix:after {
@@ -22,11 +38,11 @@
 .menu-wrap {
     width:100%;
     box-shadow:0px 1px 3px rgba(0,0,0,0.2);
-    background:#3e3436;
+    background:black;
 }
  
 .menu {
-    width:250px;
+    width:300px;
     margin:0px auto;
 }
  
@@ -106,14 +122,14 @@
 </head>
 <body style="height: 2200px;">
 	<div
-		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: #00BFFF; color: #FAF0E6; opacity: 1.0;">
+		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
 
 		<div
 			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color: black;">
 			LOGO</div>
 
 		<div class="col-lg-6"
-			style="position: absolute; top: 8px; left: 50%; width: 450px; margin-left: -225px;">
+			style="position: absolute; top: 8px; left: 30%; width: 40%;">
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="Search for...">
 				<span class="input-group-btn">
@@ -123,23 +139,34 @@
 			<!-- /input-group -->
 		</div>
 		<div
-			style="position: absolute; right: 0px; width: 300px; height: 100%; background-color: black;">
-			<nav class="menu">
-			<ul class="clearfix">
-				<li><a href="#">Menu<span class="arrow">&#9660;</span></a>
-					<ul class="sub-menu">
-						<li><a href="#">Profile</a></li>
-						<li><a href="#">Coming Soon</a></li>
-						<li><a href="#">Quiz Record</a></li>
-						<li><a href="#">Logout</a></li>
-					</ul></li>
-			</ul>
-			</nav>
+			style="position: absolute; right: 5px; width: 300px; height: 100%; background-color: black;">
+
+			<div class="menu-wrap">
+				<nav class="menu">
+					<ul class="clearfix">
+						<li><a href="javascript:pageScrollUp(0)" style="color:yellow;">
+							<%
+								String userID = (String) session.getAttribute("userID");
+								String welcome = "Hi "+userID+"!";
+								out.println(welcome);
+							%>
+							</a>
+						</li>
+						<li><a href="#">Menu<span class="arrow">&#9660;</span></a>
+							<ul class="sub-menu">
+								<li><a href="#">Profile</a></li>
+								<li><a href="#">Coming Soon</a></li>
+								<li><a href="#">Quiz Record</a></li>
+								<li><a href="#">Logout</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
 		</div>
 		<!-- /.col-lg-6 -->
 	</div>
 	<!-- /.row -->
-	</div>
 	<!-- 	<div style="position:relative;top:55px;left:50%;width:800px;height:300px;
      								 margin-left:-400px;background-color:red;"> -->
 	<div
@@ -147,17 +174,17 @@
 
 	</div>
 
-	<div
-		style="position: relative; top: 85px; left: 50%; width: 900px; height: 800px; margin-left: -450px;">
-		<div class="panel panel-default">
+	<div style="position: relative; top: 85px; left: 50%; width: 900px; height: 1000px; margin-left: -450px;">
+		
+		<div class="panel panel-default" style="height:60px;">
 			<div class="panel-body"
 				style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
-				<div class="col-xs-6 col-md-6 text-left" style="left: 0px;">
+				<div class="col-xs-6 col-md-6 text-left" >
 					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp&nbspUSER
 					INFO
 				</div>
 				<div class="col-xs-6 col-md-6 text-right">
-					<button class="btn btn-primary" type="button">
+					<button class="btn btn-info" type="button">
 						Messages <span class="badge">4</span>
 					</button>
 				</div>
@@ -167,20 +194,21 @@
 		<div class="panel panel-default">
 			<div class="panel-body"
 				style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
-				<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp&nbspPOPULAR
-				QUIZZES
-
+				<div class="col-xs-6 col-md-6 text-left" style="left: 0px;">
+					<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp&nbspPOPULAR
+					QUIZZES
+				</div>
+				<div class="col-xs-6 col-md-6 text-right">
+					<a href="#">More...</a>
+				</div>
 			</div>
-
 		</div>
-		<% 
+	    <% 
 	 	 {
-		    int numPopularQuizzes = 1; 
+		    int numPopularQuizzes = 0; 
 			int numQuizzesInRow = 4;
+			out.println("<div class=\"row\">");
 			for(Quiz quiz : Quiz.getPopularQuizzes()) {
-				if (numPopularQuizzes % numQuizzesInRow == 0) {
-					out.println("<div class=\"row\">");
-				}
 				out.println("<div class=\"col-xs-6 col-md-3\">");
 				// Make Quiz ID url to link to summary page
 				String quizIDUrl = "#";
@@ -198,29 +226,31 @@
 				out.println("</div>");
 				out.println("</a>");
 				out.println("</div>");
-				if (numPopularQuizzes % numQuizzesInRow == 0) {
-					out.println("</div>");
-				}
 				numPopularQuizzes += 1;
 			}
+			out.println("</div>");
 	 	 }
-		 %>
-		
+		 %>   
+
 		<div class="panel panel-default">
 			<div class="panel-body"
 				style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp&nbspRECENT
-				CREATED QUIZZES
+				<div class="col-xs-6 col-md-6 text-left" style="left: 0px;">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp&nbspRECENT
+						REATED QUIZZES
+				</div>
+				<div class="col-xs-6 col-md-6 text-right">
+					<a href="#">More...</a>
+				</div>
 			</div>
 		</div>
+		
 		<%
 			{
-				int numRecentQuizzes = 1;
+				int numRecentQuizzes = 0;
 				int numQuizzesInRow = 4;
+				out.println("<div class=\"row\">");
 				for (Quiz quiz : Quiz.getRecentQuizzes()) {
-					if (numRecentQuizzes % numQuizzesInRow == 0) {
-						out.println("<div class=\"row\">");
-					}
 					out.println("<div class=\"col-xs-6 col-md-3\">");
 					// Make Quiz ID url to link to summary page
 					String quizIDUrl = "#";
@@ -239,13 +269,11 @@
 					out.println("</div>");
 					out.println("</a>");
 					out.println("</div>");
-					if (numRecentQuizzes % numQuizzesInRow == 0) {
-						out.println("</div>");
-					}
 					numRecentQuizzes += 1;
 				}
+				out.println("</div>");
 			}
-		%>
+		%>  
 	</div>
 
 </body>

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bian.AccountManager;
 import xuandong.Quiz;
@@ -50,6 +51,8 @@ public class UserLogin extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		if(manager.accountExist(userID)) {
 			if(manager.idPasswordMatch(userID, password)) {
+				HttpSession session = request.getSession(); 
+				session.setAttribute("userID", userID);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("HomePage.jsp");
 				dispatcher.forward(request, response);
 			}

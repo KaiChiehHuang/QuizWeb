@@ -31,7 +31,7 @@ public class User {
 			name = rs.getString("Name");
 			age = rs.getInt("Age");
 			gender = rs.getString("Gender");
-			achievements = rs.getString("Achievement").split("|");
+			achievements = rs.getString("Achievement").split("\\|");
 
 			// Select from friends table.
 			friends = new ArrayList<String>();

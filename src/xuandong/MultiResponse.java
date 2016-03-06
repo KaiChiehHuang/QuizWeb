@@ -50,7 +50,7 @@ public class MultiResponse extends Problem {
 	@Override
 	public int getScore() {
 		int sum = 0;
-		String[] userAnswers = userAnswer.split("|");
+		String[] userAnswers = userAnswer.split("\\|");
 		for (int i = 0; i < answers.length; i++) {
 			String[] temp = answers[i].split("#");
 			for (int k = 0; k < temp.length; k++) {

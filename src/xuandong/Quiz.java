@@ -69,7 +69,7 @@ public class Quiz {
 				this.name = res.getString("Name");
 				this.description = res.getString("Description");
 				this.authorID = res.getString("AuthorID");
-				String[] prs = res.getString("ProblemID").split("|");
+				String[] prs = res.getString("ProblemID").split("\\|");
 				for (int i = 0; i < prs.length; i++) {
 					String type = prs[i].substring(0, 2);
 					switch (type) {

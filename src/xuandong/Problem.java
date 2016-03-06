@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
-import sun.nio.cs.ext.TIS_620;
 
 public class Problem {
 	String question;
@@ -34,7 +33,7 @@ public class Problem {
 			if (res != null) {
 				res.absolute(1);
 				this.question = res.getString(1);
-				this.answers = res.getString(2).split("|");
+				this.answers = res.getString(2).split("\\|");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,7 +80,7 @@ public class Problem {
 	 * @param answer please separate different answers by "|" and then concatenate them
 	 */
 	public void setAnswers(String answer) {
-		this.answers = answer.split("|");
+		this.answers = answer.split("\\|");
 	}
 	
 	/**
@@ -146,10 +145,9 @@ public class Problem {
 	/**
 	 * Save all the problem types for future use
 	 */
-	public static final HashMap<String, String> problemType = new HashMap<String, String>() {
-		private static final long serialVersionUID = 1L;
-
-		{
+	public static final HashMap<String, String> problemType = new HashMap<String, String>();
+	static
+	{
 			problemType.put("QR", "QuestionResponse");
 			problemType.put("SC", "SingleChoice");
 			problemType.put("FB", "FillBlank");
@@ -160,7 +158,6 @@ public class Problem {
 			problemType.put("fill-in-blank", "FB");
 			problemType.put("multiple-choice", "MC");
 			problemType.put("picture-response", "PR");
-		}
 	};
 	
 	/**

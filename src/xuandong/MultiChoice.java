@@ -21,7 +21,7 @@ public class MultiChoice extends Problem {
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
 				res.absolute(1);
-				this.choices = res.getString(1).split("|");
+				this.choices = res.getString(1).split("\\|");
 				this.count = res.getInt(2);
 			}
 		} catch (SQLException e) {
@@ -37,7 +37,7 @@ public class MultiChoice extends Problem {
 	@Override
 	public int getScore() {
 		int total = 0;
-		String[] userAnswers = userAnswer.split("|");
+		String[] userAnswers = userAnswer.split("\\|");
 		for (int i = 0; i < answers.length; i++) {
 			String[] temp = answers[i].split("#");
 			for (int k = 0; k < temp.length; k++) {
@@ -64,7 +64,7 @@ public class MultiChoice extends Problem {
 	 * @param choice each choice is separated by "|" and then be concatenated
 	 */
 	public void setChoices(String choice) {
-		this.choices = choice.split("|");
+		this.choices = choice.split("\\|");
 	}
 	
 	/**

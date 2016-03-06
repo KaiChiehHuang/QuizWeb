@@ -32,6 +32,7 @@ CREATE TABLE Users (
 INSERT INTO Users VALUES("Administration","b8be3d1264310c3b8c848d4b90d5206179a40cc4","Admin","unknown","unknown","unknown");
 INSERT INTO Users VALUES("guest","35675e68f4b5af7b995d9205ad0fc43842f16450","Guest","unknown","unknown","unknown");
 
+
 CREATE TABLE Friendship (
 	User1ID     VARCHAR(255),
 	User2ID     VARCHAR(255),
@@ -53,6 +54,7 @@ CREATE TABLE Quiz (
 	IsImmediateCorrection BOOLEAN,
 	IsPracticeMode        BOOLEAN,
 	Time                  DATETIME,
+	Image                 TEXT,
 	PRIMARY KEY (QuizID),
 	FOREIGN KEY (AuthorID)
 		REFERENCES Users(UserID)
@@ -106,6 +108,8 @@ CREATE TABLE MultiResponse (
 	Count      INT,
 	PRIMARY KEY (QuestionID)
 );
+
+-- INSERT INTO QuizRecord VALUES("0000000000","Administration","2016-03-05 15:30:57","2016-03-05 15:31:57","00:01:00",97);
 
 CREATE TABLE QuizRecord (
 	QuizID    VARCHAR(255),

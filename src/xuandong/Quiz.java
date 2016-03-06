@@ -31,9 +31,10 @@ public class Quiz {
 	private String startDate;
 	private String endDate;
 	private String createdDate;
+	private String image;
 
 	boolean creating = false;
-	
+
 	private QuizSummary quizSummary;
 
 	static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -42,8 +43,8 @@ public class Quiz {
 	DBConnection database;
 
 	/**
-	 * Simple constructor
-	 * If you are creating a new quiz which is not in database, please don't use this one
+	 * Simple constructor If you are creating a new quiz which is not in
+	 * database, please don't use this one
 	 */
 	public Quiz() {
 		database = new DBConnection();
@@ -51,23 +52,24 @@ public class Quiz {
 	}
 
 	/**
-	 * Used to get all the information of a quiz from database
-	 * Please just call this method after you use the above constructor
+	 * Used to get all the information of a quiz from database Please just call
+	 * this method after you use the above constructor
+	 * 
 	 * @param quizID
 	 */
 	public void setQuizID(String quizID) {
 		this.quizID = quizID;
 		Statement stmt = database.getStmt();
 		try {
-			String sql = "SELECT Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode FROM Quiz WHERE QuizID = \""
+			String sql = "SELECT Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image FROM Quiz WHERE QuizID = \""
 					+ quizID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
 				res.absolute(1);
-				this.name = res.getString(1);
-				this.description = res.getString(2);
-				this.authorID = res.getString(3);
-				String[] prs = res.getString(4).split("|");
+				this.name = res.getString("Name");
+				this.description = res.getString("Description");
+				this.authorID = res.getString("AuthorID");
+				String[] prs = res.getString("ProblemID").split("|");
 				for (int i = 0; i < prs.length; i++) {
 					String type = prs[i].substring(0, 2);
 					switch (type) {
@@ -92,10 +94,12 @@ public class Quiz {
 					}
 					pbCount += problems.get(problems.size() - 1).getAnswer().length;
 				}
-				this.isRandomQuiz = res.getBoolean(5);
-				this.isOnePage = res.getBoolean(6);
-				this.isImmediateCorrection = res.getBoolean(7);
-				this.isPracticeMode = res.getBoolean(8);
+				this.isRandomQuiz = res.getBoolean("IsRandomQuiz");
+				this.isOnePage = res.getBoolean("IsOnePage");
+				this.isImmediateCorrection = res.getBoolean("IsImmediateCorrection");
+				this.isPracticeMode = res.getBoolean("IsPracticeMode");
+				this.createdDate = res.getString("Time");
+				this.image = res.getString("Image");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -115,24 +119,24 @@ public class Quiz {
 	public void setEditing() {
 		this.creating = false;
 	}
-	
+
 	/**
 	 * @return quizID
 	 */
 	public String getQuizID() {
 		return quizID;
 	}
-	
+
 	/**
 	 * @return userID
 	 */
 	public String getUserID() {
 		return userID;
 	}
-	
+
 	/**
-	 * @return the ArrayList containing the problems
-	 * note that the ArrayList contains Object Problem, not Strings
+	 * @return the ArrayList containing the problems note that the ArrayList
+	 *         contains Object Problem, not Strings
 	 */
 	public ArrayList<Problem> getProblems() {
 		return problems;
@@ -189,6 +193,7 @@ public class Quiz {
 
 	/**
 	 * Set the quiz name
+	 * 
 	 * @param name
 	 */
 	public void setName(String name) {
@@ -197,6 +202,7 @@ public class Quiz {
 
 	/**
 	 * Set the quiz description
+	 * 
 	 * @param description
 	 */
 	public void setDescription(String description) {
@@ -205,14 +211,16 @@ public class Quiz {
 
 	/**
 	 * Set the authorID
+	 * 
 	 * @param authorID
 	 */
 	public void setAuthor(String authorID) {
 		this.authorID = authorID;
 	}
-	
+
 	/**
 	 * Delete a problem from the quiz
+	 * 
 	 * @param problemID
 	 */
 	public void deleteProblem(String problemID) {
@@ -237,23 +245,25 @@ public class Quiz {
 	public void setOnePage(boolean value) {
 		this.isOnePage = value;
 	}
-	
+
 	/**
 	 * Set the popularity
-	 * @param count the number the quiz has been taken
+	 * 
+	 * @param count
+	 *            the number the quiz has been taken
 	 */
 	public void setPopularity(int count) {
 		this.popularity = count;
 	}
-	
+
 	public void setCreatedDate(String date) {
 		this.createdDate = date;
 	}
-	
+
 	public String getCreatedDate(String date) {
 		return this.createdDate;
 	}
-	
+
 	/**
 	 * @return the number the quiz has been taken
 	 */
@@ -276,14 +286,30 @@ public class Quiz {
 	}
 
 	/**
-	 * Set the user
-	 * Please specify this right before you fetch QuizSummary
+	 * @return image URL
+	 */
+	public String getImage() {
+		return image;
+	}
+
+	/**
+	 * Set the image of this quiz to this url
+	 * 
+	 * @param url
+	 */
+	public void setImage(String url) {
+		this.image = url;
+	}
+
+	/**
+	 * Set the user Please specify this right before you fetch QuizSummary
+	 * 
 	 * @param userID
 	 */
 	public void setUser(String userID) {
 		this.userID = userID;
 	}
-	
+
 	/**
 	 * Fetch the quiz summary from database
 	 */
@@ -293,8 +319,9 @@ public class Quiz {
 	}
 
 	/**
-	 * Update or insert the information about this quiz in database
-	 * Please call this method as long as you modify the variables of this quiz
+	 * Update or insert the information about this quiz in database Please call
+	 * this method as long as you modify the variables of this quiz
+	 * 
 	 * @throws SQLException
 	 */
 	public void updateDatabase() throws SQLException {
@@ -316,33 +343,36 @@ public class Quiz {
 	}
 
 	/**
-	 * return the insert statement to insert this problem into database
-	 * used for creating a problem
+	 * return the insert statement to insert this problem into database used for
+	 * creating a problem
 	 */
 	public String getInsertSQL() {
 		String pbs = getListToString();
-		String sql = "INSERT INTO Quiz" + " VALUES(\"" + this.quizID + "\",\"" + this.name + "\",\"" + this.description
-				+ "\",\"" + this.authorID + "\",\"" + pbs + "\"," + this.isRandomQuiz + "," + this.isOnePage + ","
-				+ this.isImmediateCorrection + "," + this.isPracticeMode + "," + this.createdDate + ";";
+		String sql = "INSERT INTO Quiz (QuizID, Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image) VALUES(\""
+				+ this.quizID + "\",\"" + this.name + "\",\"" + this.description + "\",\"" + this.authorID + "\",\""
+				+ pbs + "\"," + this.isRandomQuiz + "," + this.isOnePage + "," + this.isImmediateCorrection + ","
+				+ this.isPracticeMode + ",\"" + this.createdDate + "\",\"" + this.image + "\";";
 		return sql;
 	}
 
 	/**
-	 * return the update statement to update this problem in the database
-	 * used for modifying a problem
+	 * return the update statement to update this problem in the database used
+	 * for modifying a problem
 	 */
 	public String getUpdateSQL() {
 		String pbs = getListToString();
-		String sql = "UPDATE Quiz SET Name = \"" + this.name + "\" , Description = \"" + this.description
-				+ "\" , AuthorID = \"" + this.authorID + "\" , ProblemID = \"" + pbs + "\" , isRandomQuiz = "
-				+ this.isRandomQuiz + " , isOnePage = " + this.isOnePage + " , IsImmediateCorrection = "
-				+ this.isImmediateCorrection + " , IsPracticeMode = " + this.isPracticeMode + " WHERE QuizID = \""
-				+ this.quizID + "\";";
+		String sql = "UPDATE Quiz SET Name = \"" + this.name + "\", Description = \"" + this.description
+				+ "\", AuthorID = \"" + this.authorID + "\", ProblemID = \"" + pbs + "\" , isRandomQuiz = "
+				+ this.isRandomQuiz + ", isOnePage = " + this.isOnePage + ", IsImmediateCorrection = "
+				+ this.isImmediateCorrection + ", IsPracticeMode = " + this.isPracticeMode + ", Time = \""
+				+ this.createdDate + "\", Image = \"" + this.image + "\" WHERE QuizID = \"" + this.quizID + "\";";
 		return sql;
 	}
 
 	/**
-	 * transfer the ArrayList of problems into a String containing the problemID of each problem
+	 * transfer the ArrayList of problems into a String containing the problemID
+	 * of each problem
+	 * 
 	 * @return
 	 */
 	public String getListToString() {
@@ -356,6 +386,7 @@ public class Quiz {
 
 	/**
 	 * Start the quiz
+	 * 
 	 * @return start time
 	 */
 	public Long quizStart() {
@@ -366,6 +397,7 @@ public class Quiz {
 
 	/**
 	 * End the quiz and update information in the database
+	 * 
 	 * @return end time
 	 */
 	public String quizEnd() {
@@ -393,9 +425,10 @@ public class Quiz {
 	public String getDuration() {
 		return duration;
 	}
-	
+
 	/**
 	 * get the score of the whole quiz
+	 * 
 	 * @return score, represented by double, e.g. 9/11
 	 */
 	public double getScore() {
@@ -405,11 +438,13 @@ public class Quiz {
 		}
 		return score / pbCount;
 	}
-	
+
 	/**
-	 * Get the most 16 popularity quizzes, ordered by the number the quiz has been taken
+	 * Get the most 16 popularity quizzes, ordered by the number the quiz has
+	 * been taken
+	 * 
 	 * @return a list contains those quizzes
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	static public ArrayList<Quiz> getPopularQuizzes() throws SQLException {
 		ArrayList<Quiz> popularQuizs = new ArrayList<Quiz>();
@@ -425,16 +460,18 @@ public class Quiz {
 		database.con.close();
 		return popularQuizs;
 	}
-	
+
 	/**
-	 * Get the most 16 popularity quizzes, ordered by the number the quiz has been taken
+	 * Get the most 16 popularity quizzes, ordered by the number the quiz has
+	 * been taken
+	 * 
 	 * @return a list contains those quizzes
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	static public ArrayList<Quiz> getRecentQuizzes() throws SQLException {
 		ArrayList<Quiz> recentQuizs = new ArrayList<Quiz>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT QuizID, Time FROM QuizRecord Order BY Time LIMIT 12";
+		String sql = "SELECT QuizID, Time FROM Quiz Order BY Time LIMIT 12";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			Quiz temp = new Quiz();

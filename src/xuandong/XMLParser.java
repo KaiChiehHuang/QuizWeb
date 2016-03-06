@@ -2,6 +2,8 @@ package xuandong;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+
+
 import org.w3c.dom.*;
 import java.io.File;
 import java.sql.ResultSet;
@@ -18,7 +20,7 @@ public class XMLParser {
 	 */
 	public static void main(String[] args) {
 		try {
-			File xmlFile = new File("src/quiz-xml/bunny.xml");
+			File xmlFile = new File("src/quiz-xml/cities.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(xmlFile);
@@ -92,7 +94,8 @@ public class XMLParser {
 		}
 		String authorID = "Administration";
 		String time = Quiz.df.format(new Date().getTime());
-		String insert = "INSERT INTO Quiz VALUES(\"" + quizID + "\",\"" + name + "\",\"" + description + "\",\"" + authorID + "\",\"" + questions + "\"," + random + "," + onePage + "," + immediateCorrection + "," + practiceMode + ",\"" + time + "\");";
+		String image = "";
+		String insert = "INSERT INTO Quiz (QuizID, Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image) VALUES(\"" + quizID + "\",\"" + name + "\",\"" + description + "\",\"" + authorID + "\",\"" + questions + "\"," + random + "," + onePage + "," + immediateCorrection + "," + practiceMode + ",\"" + time + "\",\"" + image + "\");";
 		stmt.executeUpdate(insert);
 		return quizID;
 	}

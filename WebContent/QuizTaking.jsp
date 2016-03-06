@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="xuandong.*" %>
@@ -21,7 +22,41 @@
 <h1>Quiz Problem</h1>
 <%
 	Quiz quiz = (Quiz)request.getAttribute("quiz");
+	ArrayList<Problem> problems = new ArrayList<Problem>();
+	problems = quiz.getProblems();
 %>
+
+
+<form action="QuizResultServlet" method="post">
+
+<%
+	for (int i = 0; i < problems.size(); i++) {
+		Problem pro = problems.get(i);
+		String type = pro.getType();
+		if (type == "QuestionResponse") {
+			QuestionResponse qr = (QuestionResponse)pro;
+			takeQuestionResponse(out, qr, i);
+		} else if (type == "FillBlank") {
+			FillBlank fb = (FillBlank)pro;
+			takeFillBlank(out, fb, i);
+		} else if (type == "PictureResponse") {
+			PictureResponse pr = (PictureResponse)pro;
+			takePictureResponse(out, pr, i);
+		} else if (type == "MultipleChoice") {
+			MultiChoice mc = (MultiChoice)pro;
+			if (mc.getCount() == 1) {
+				takeSingleChoice(out, mc, i);
+			} else {
+				takeMultiChoice(out, mc, i);
+			}
+		} else if (type == "MultiResponse") {
+			MultiResponse mr = (MultiResponse) pro;
+			takeMultiResponse(out, mr, i);
+		}
+	}
+%>
+<input type="submit" value = "Submit Answer"/>
+</form>
 
 <%!
 	/* getParameter(answer1) get the answer of user. */
@@ -30,7 +65,7 @@
 		String question = mc.getQuestion();
 		
 		myOut.println("<div class=\"container\">");
-		myOut.println("<p>"+ "<h5>Problem" + index + ": </h5>"+question +"</p>");
+		myOut.println("<p>"+ "<h5>Problem " + index + ": </h5>"+question +"</p>");
 		for (int i = 0; i < choices.length; i++) {
 			myOut.println("<div class=\"radio\">");
 			myOut.println("<label><input type=\"radio\" name=\"answer"+ index +"\">"+ choices[i] +"</label>");
@@ -47,16 +82,12 @@
 		String[] question = new String[2];
 		question = que.split("\\|\\|\\|\\|\\|\\|");
 		
-		myOut.println("<div class = \"container\"><p>" + "<h5>Problem"+ index + ": </h5>" + question[0]);
+		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question[0]);
 		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer\" "+ index + " />");
 		myOut.println(question[1] + "</p></div>");
 
 	}
 %>
-<!-- Fill Blank -->
-<div class = \"container\">
-	<p><h5>Problem2: </h5>The bigest city in <input type="text" placeHolder="Answer" size="8" name="answer2" > is Beijing.</p>
-</div>
 
 <%!
 	/* getParameter(answer3) get the answer of user. */
@@ -64,24 +95,17 @@
 		String question = pr.getQuestion();
 		String url = pr.getURL();
 		
-		myOut.println("<div class = \"container\"><p>" + "<h5>Problem"+ index + ": </h5>" + question);
+		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question);
 		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer\" "+ index + " /> + </p></div>");
 		myOut.println("<div class = \"container\" style = \"position: relative; left: 50%; width: 400px; margin-left:-200px\">");
 		myOut.println("<img class=\"img-thumbnail\"src =" + url + "></div>");
 
 	}
 %>
-<!-- Picture Response -->
-<div class = "container">
-	<p><h5>Problem3:</h5> what is the main color of the picture? <input type="text" placeholder="Answer" size="8" name="answer" /></p>
-</div>
-<div class = "container" style = "position: relative; left: 50%; width: 400px; margin-left:-200px">
-	<img class="img-thumbnail" alt="Cinque Terre" src = "http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG" >
-</div>
 
 <%!
 
-	/* getParameter(answer3) get the answer of user. */
+	/* getParameter(answer4) get the answer of user. */
 	public void takeQuestionResponse(JspWriter myOut, QuestionResponse pr, int index) throws IOException {
 		String question = pr.getQuestion();
 		
@@ -90,14 +114,9 @@
 		myOut.println("</p></div>");
 	}
 %>
-<!-- Question Response -->
-<div class = "container">
-	<p><h5>Problem 4:</h5> who is the energetic boy? <input type="text" placeholder="Answer" size="8" name="answer" /></p>
-</div>
-
 
 <%!
-	/* getParameter(answer3) get the answer of user. */
+	/* getParameter(answer5) get the answer of user. */
 	public void takeMultiResponse(JspWriter myOut, MultiResponse pr, int index) throws IOException {
 		String question = pr.getQuestion();
 		int count = pr.getCount();
@@ -109,23 +128,15 @@
 		myOut.println("</p></div>");
 	}
 %>
-<!-- MultiResponse -->
-<div class = "container">
-	<p><h5>Problem 5:</h5> List three of the energetic boys?</p>
-	<p><input type="text" placeholder="Answer" size="8" name="answer"/></p>
-	<p><input type="text" placeholder="Answer" size="8" name="answer"/></p>
-	<p><input type="text" placeholder="Answer" size="8" name="answer"/></p>
-</div>
 
-
-	/* getParameter(answer4) get the answer of user. */
+<%!
+	/* getParameter(answer6) get the answer of user. */
 	public void takeMultiChoice(JspWriter myOut, MultiChoice mc, int index) throws IOException {
-	
 		String question = mc.getQuestion();
 		int num = mc.getCount();
 		String[] choices = mc.getChoices();
 		
-		myOut.println("<div class = \"container\"><p>" + "<h5>Problem"+ index + ": </h5>" + question + "</p>");
+		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question + "</p>");
 		for (int i = 0; i < num; i++) {
 			myOut.println("<label class=\"checkbox-inline\"> <input type=\"checkbox\" name=\"answer" + index + "\" value=\"" + choices[i] + "\">");
 			myOut.println(choices[i] +" </label><br>");
@@ -134,23 +145,6 @@
 		myOut.println("</div>");
 	}
 %>
-
-<!-- MultiChoice -->
-<div class = "container">
-	<p><h5>Problem4:</h5> Which are character in HIMYM?"</p>
-	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Monica">  Monica </label><br>
-	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Lily">  Lily  </label><br>
-	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Ted">  Ted  </label><br>
-	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Enegitic Boy">  Enegitic Boy</label> <br>
-</div>
-
-<form action="QuizResultServlet" method="post">
-
-<% takeSingleChoice(out, mc, 3); %>
-
-
-<input type="submit" value = "Submit Answer"/>
-</form>
 
 </body>
 </html>

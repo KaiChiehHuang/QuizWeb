@@ -46,23 +46,22 @@ public class QuizResultServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Quiz quiz = (Quiz)session.getAttribute("quiz");
-		quiz.quizEnd();
 		
 		ArrayList<Problem> problems = new ArrayList<Problem>();
 		problems = quiz.getProblems();
 		
 		// Set answer.		
-		for (int i = 0; i < problems.size(); i++) {
+		for (int i = 1; i < problems.size() + 1; i++) {
 			String[] answers = request.getParameterValues("answer" + i);
 			String answer = "";
-			for (int j = 0; j < answers.length; i++) {
+			for (int j = 0; j < answers.length; j++) {
 				answer = answer + answers[j] + "|";
 			}
 			answer.substring(0, answer.length() - 1);
-			problems.get(i).setAnswers(answer);
+			problems.get(i-1).setUserAnswer(answer);
 		}
 		
-		
+		System.out.println(quiz.quizEnd());
 		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizResult.jsp");
 		dispatcher.forward(request, response);
 	}

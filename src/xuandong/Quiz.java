@@ -416,7 +416,7 @@ public class Quiz {
 	public String quizEnd() {
 		this.endTime = (new Date()).getTime();
 		endDate = df.format(endTime);
-		Long dura = this.startTime - this.endTime;
+		Long dura = this.endTime - this.startTime;
 		Date tempDate = new Date();
 		tempDate.setTime(dura);
 		duration = format.format(tempDate);
@@ -425,7 +425,7 @@ public class Quiz {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "INSERT INTO QuizRecord VALUES ('" + quizID + "','" + userID + "','" + startDate + "','"
-					+ endDate + "','" + duration + "," + score + "');";
+					+ endDate + "','" + duration + "'," + score + ");";
 			stmt.executeUpdate(sql);
 			database.getCon().close();
 		} catch (SQLException e) {

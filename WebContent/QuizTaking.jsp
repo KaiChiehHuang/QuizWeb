@@ -23,6 +23,7 @@
 
 <%
 	Quiz quiz = (Quiz)session.getAttribute("quiz");
+	System.out.println(quiz.quizStart());
 	ArrayList<Problem> problems = new ArrayList<Problem>();
 	problems = quiz.getProblems();
 %>
@@ -30,8 +31,8 @@
 <form action="QuizResultServlet" method="post">
 
 <%
-	for (int i = 0; i < problems.size(); i++) {
-		Problem pro = problems.get(i);
+	for (int i = 1; i < problems.size() + 1; i++) {
+		Problem pro = problems.get(i-1);
 		String type = pro.getType();
 		if (type == "QuestionResponse") {
 			QuestionResponse qr = (QuestionResponse)pro;
@@ -42,7 +43,7 @@
 		} else if (type == "PictureResponse") {
 			PictureResponse pr = (PictureResponse)pro;
 			takePictureResponse(out, pr, i);
-		} else if (type == "MultipleChoice") {
+		} else if (type == "MultiChoice") {
 			MultiChoice mc = (MultiChoice)pro;
 			if (mc.getCount() == 1) {
 				takeSingleChoice(out, mc, i);
@@ -83,7 +84,7 @@
 		question = que.split("\\|\\|\\|\\|\\|\\|");
 		
 		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question[0]);
-		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer\" "+ index + " />");
+		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" />");
 		myOut.println(question[1] + "</p></div>");
 
 	}
@@ -96,7 +97,7 @@
 		String url = pr.getURL();
 		
 		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question);
-		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer\" "+ index + " /> + </p></div>");
+		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" /> </p></div>");
 		myOut.println("<div class = \"container\" style = \"position: relative; left: 50%; width: 400px; margin-left:-200px\">");
 		myOut.println("<img class=\"img-thumbnail\"src =" + url + "></div>");
 
@@ -110,7 +111,7 @@
 		String question = pr.getQuestion();
 		
 		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question);
-		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer\" "+ index + " />");
+		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" />");
 		myOut.println("</p></div>");
 	}
 %>
@@ -123,7 +124,7 @@
 		
 		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question);
 		for (int i = 0; i < count; i++) {
-			myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer\" "+ index + " />");
+			myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" />");
 		}
 		myOut.println("</p></div>");
 	}
@@ -133,11 +134,10 @@
 	/* getParameter(answer6) get the answer of user. */
 	public void takeMultiChoice(JspWriter myOut, MultiChoice mc, int index) throws IOException {
 		String question = mc.getQuestion();
-		int num = mc.getCount();
 		String[] choices = mc.getChoices();
 		
 		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question + "</p>");
-		for (int i = 0; i < num; i++) {
+		for (int i = 0; i < choices.length; i++) {
 			myOut.println("<label class=\"checkbox-inline\"> <input type=\"checkbox\" name=\"answer" + index + "\" value=\"" + choices[i] + "\">");
 			myOut.println(choices[i] +" </label><br>");
 		}
@@ -145,14 +145,6 @@
 		myOut.println("</div>");
 	}
 %>
-
-<div class = "container">
-	<p><h5>Problem4:</h5> Which are character in HIMYM?"</p>
-	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Monica">  Monica </label><br>
-	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Lily">  Lily  </label><br>
-	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Ted">  Ted  </label><br>
-	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Enegitic Boy">  Enegitic Boy</label> <br>
-</div>
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="xuandong.*" %>
+    <%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -20,7 +21,7 @@
 <body>
 
 <%
- 	Quiz quiz = (Quiz)request.getAttribute("quiz");
+ 	Quiz quiz = (Quiz)session.getAttribute("quiz");
 
 //Display score and time;
 	double score = quiz.getScore();
@@ -28,8 +29,7 @@
 	
 // Performance
 	QuizSummary summary = new QuizSummary(quiz.getQuizID(), quiz.getUserID());
-	Performance[] userPerformance = summary.getUserPerformance();
-	
+	ArrayList<Performance> userPerformance = summary.getUserPerformance();
 %>
 
 <div class="container">
@@ -51,11 +51,11 @@
     <tbody>
     
     <%
-    	for (int i = 0; i < userPerformance.length; i++) {
+    	for (int i = 0; i < userPerformance.size(); i++) {
      		String[] per = new String[3];
-    		per[0] = userPerformance[i].getStartTime();
-    		per[1] = String.valueOf(userPerformance[i].getScore());
-    		per[2] = userPerformance[i].getDuration();
+    		per[0] = userPerformance.get(i).getStartTime();
+    		per[1] = String.valueOf(userPerformance.get(i).getScore());
+    		per[2] = userPerformance.get(i).getDuration();
     		if (i % 2 == 0) {
     			out.println("<tr class=\"warning\">");
     		} else {

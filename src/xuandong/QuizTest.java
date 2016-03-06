@@ -13,8 +13,11 @@ public class QuizTest {
 		System.out.println("Welcome||||||fact||||||fa".split("\\|\\|\\|\\|\\|\\|")[0]);
 		Quiz temp = new Quiz();
 		temp.setQuizID("0000000000");
+		temp.setUser("guest");
 		System.out.println(temp.getCreatedDate());
-		assertEquals(Quiz.getRecentQuizzes().size(), 3);
+		System.out.println(temp.getProblems().get(0).getQuestion());
+		System.out.println(temp.getQuizSummary().getUserPerformance().size());
+		assertEquals(temp.getProblems().size(), 5);
 	}
 
 }

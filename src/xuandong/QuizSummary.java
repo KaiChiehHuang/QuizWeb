@@ -67,7 +67,6 @@ public class QuizSummary {
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND UserID = \"" + this.userID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
-				res.absolute(1);
 				while (res.next()) {
 					String curQuizID = res.getString(1);
 					String curUserID = res.getString(2);
@@ -97,7 +96,6 @@ public class QuizSummary {
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" ORDER BY Score DESC, Duration ASC, StartTime ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
-				res.absolute(1);
 				while (res.next()) {
 					String curQuizID = res.getString(1);
 					String curUserID = res.getString(2);
@@ -128,7 +126,6 @@ public class QuizSummary {
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND TIMESTAMPDIFF(SECOND, " + curTime +", EndTime) <= 86400 ORDER BY Score DESC, Duration ASC, StartTime ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
-				res.absolute(1);
 				while (res.next()) {
 					String curQuizID = res.getString(1);
 					String curUserID = res.getString(2);
@@ -158,7 +155,6 @@ public class QuizSummary {
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND Score >= 80 ORDER BY EndTime DESC, Score DESC LIMIT " + TOP_NUM + ";";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
-				res.absolute(1);
 				while (res.next()) {
 					String curQuizID = res.getString(1);
 					String curUserID = res.getString(2);
@@ -188,7 +184,6 @@ public class QuizSummary {
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND Score <= 40 ORDER BY EndTime DESC, Score ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
-				res.absolute(1);
 				while (res.next()) {
 					String curQuizID = res.getString(1);
 					String curUserID = res.getString(2);

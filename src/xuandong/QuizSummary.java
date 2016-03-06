@@ -70,7 +70,7 @@ public class QuizSummary {
 				while (res.next()) {
 					String curQuizID = res.getString(1);
 					String curUserID = res.getString(2);
-					String curStartTime = res.getString(3);
+					String curStartTime = res.getString(3).substring(0, res.getString(3).length() - 2);
 					String curDuration = res.getString(4);
 					double curScore = Double.parseDouble(res.getString(5));
 					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
@@ -99,7 +99,7 @@ public class QuizSummary {
 				while (res.next()) {
 					String curQuizID = res.getString(1);
 					String curUserID = res.getString(2);
-					String curStartTime = res.getString(3);
+					String curStartTime = res.getString(3).substring(0, res.getString(3).length() - 2);
 					String curDuration = res.getString(4);
 					double curScore = Double.parseDouble(res.getString(5));
 					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
@@ -129,7 +129,7 @@ public class QuizSummary {
 				while (res.next()) {
 					String curQuizID = res.getString(1);
 					String curUserID = res.getString(2);
-					String curStartTime = res.getString(3);
+					String curStartTime = res.getString(3).substring(0, res.getString(3).length() - 2);
 					String curDuration = res.getString(4);
 					double curScore = Double.parseDouble(res.getString(5));
 					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
@@ -158,7 +158,7 @@ public class QuizSummary {
 				while (res.next()) {
 					String curQuizID = res.getString(1);
 					String curUserID = res.getString(2);
-					String curStartTime = res.getString(3);
+					String curStartTime = res.getString(3).substring(0, res.getString(3).length() - 2);
 					String curDuration = res.getString(4);
 					double curScore = Double.parseDouble(res.getString(5));
 					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
@@ -187,7 +187,7 @@ public class QuizSummary {
 				while (res.next()) {
 					String curQuizID = res.getString(1);
 					String curUserID = res.getString(2);
-					String curStartTime = res.getString(3);
+					String curStartTime = res.getString(3).substring(0, res.getString(3).length() - 2);
 					String curDuration = res.getString(4);
 					double curScore = Double.parseDouble(res.getString(5));
 					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);

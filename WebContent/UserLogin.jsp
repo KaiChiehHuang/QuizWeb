@@ -11,7 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <title>Online Quizbook</title>
 </head>
-<body style="background-color:#FFFAFA;">
+<body style="background-color:#FFFAFA; background-image:url(loginBackground.jpg);background-size: 100%;">
 		<h1 style="text-align:center;">Playing and creating quizzes</h1>
 		
 		<div style="border-radius: 20px;
@@ -23,15 +23,18 @@
      				margin-left:-200px;
      				top:200px;
      				position:absolute;
+     				opacity: 0.9;
+     				background-color:white;
      				">
+     	<% session.setAttribute("userID","Guest"); %>
 		<p> Please log in or<!-- Need to inform HomePage it's guest --><a href="HomePage.jsp"> log in as Guest </a> </p>
 			<form action="UserLogin" method="post"> 
-			<div class="input-group">
+			<div class="input-group" style="opacity: 0.95;">
 	  			<span class="input-group-addon" id="basic-addon1">ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
 	  			<input type="text" class="form-control" placeholder="UserID" aria-describedby="basic-addon1" name="userID">
 			</div>
 			<br>
-			<div class="input-group">
+			<div class="input-group" style="opacity: 0.95;">
 	  			<span class="input-group-addon" id="basic-addon1">Password</span>
 	  			<input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="password">
 			</div>	

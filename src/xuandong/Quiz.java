@@ -260,11 +260,8 @@ public class Quiz {
 	}
 
 	public String getCreatedDate() {
-<<<<<<< HEAD
+
 		return this.createdDate.substring(0, this.createdDate.length() - 2);
-=======
-		return this.createdDate;
->>>>>>> KCH-HomePage
 	}
 
 	/**

@@ -22,7 +22,7 @@
 <h1>Quiz Problem</h1>
 
 <%
-	Quiz quiz = (Quiz)request.getAttribute("quiz");
+	Quiz quiz = (Quiz)session.getAttribute("quiz");
 	ArrayList<Problem> problems = new ArrayList<Problem>();
 	problems = quiz.getProblems();
 %>
@@ -146,6 +146,13 @@
 	}
 %>
 
+<div class = "container">
+	<p><h5>Problem4:</h5> Which are character in HIMYM?"</p>
+	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Monica">  Monica </label><br>
+	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Lily">  Lily  </label><br>
+	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Ted">  Ted  </label><br>
+	<label class="checkbox-inline"> <input type = "checkbox" name = "answer4" value = "Enegitic Boy">  Enegitic Boy</label> <br>
+</div>
 
 </body>
 </html>

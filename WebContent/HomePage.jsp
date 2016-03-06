@@ -211,7 +211,8 @@ function pageScrollUp(position) {
 			for(Quiz quiz : Quiz.getPopularQuizzes()) {
 				out.println("<div class=\"col-xs-6 col-md-3\">");
 				// Make Quiz ID url to link to summary page
-				String quizIDUrl = "#";
+				String quizID = quiz.getQuizID();
+				String quizIDUrl = "QuizSummary.jsp?quizID="+quizID+"&userID="+userID;
 				String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + " " + "class=\"thumbnail\">";
 				out.println(showQuizUrl);
 				out.println("<div style=\"width: 180px; height: 180px; background-color: white;\">");
@@ -253,7 +254,8 @@ function pageScrollUp(position) {
 				for (Quiz quiz : Quiz.getRecentQuizzes()) {
 					out.println("<div class=\"col-xs-6 col-md-3\">");
 					// Make Quiz ID url to link to summary page
-					String quizIDUrl = "#";
+					String quizID = quiz.getQuizID();
+					String quizIDUrl = "QuizSummary.jsp?quizID="+quizID+"&userID="+userID;
 					String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + " " + "class=\"thumbnail\">";
 					out.println(showQuizUrl);
 					out.println("<div style=\"width: 180px; height: 180px; background-color: white;\">");

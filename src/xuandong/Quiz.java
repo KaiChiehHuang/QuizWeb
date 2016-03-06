@@ -259,8 +259,8 @@ public class Quiz {
 		this.createdDate = date;
 	}
 
-	public String getCreatedDate(String date) {
-		return this.createdDate;
+	public String getCreatedDate() {
+		return this.createdDate.substring(0, this.createdDate.length() - 2);
 	}
 
 	/**

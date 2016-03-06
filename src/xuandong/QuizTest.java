@@ -10,7 +10,11 @@ public class QuizTest {
 
 	@Test
 	public void test() throws SQLException {
-		assertEquals(Quiz.getRecentQuizzes().size(), 2);
+		System.out.println("Welcome||||||fact||||||fa".split("\\|\\|\\|\\|\\|\\|")[0]);
+		Quiz temp = new Quiz();
+		temp.setQuizID("0000000000");
+		System.out.println(temp.getCreatedDate());
+		assertEquals(Quiz.getRecentQuizzes().size(), 3);
 	}
 
 }

@@ -129,10 +129,16 @@
 </div> -->
 
 <%
-  	/* Quiz quiz = (Quiz)request.getAttribute("quiz");  */
-  	Quiz quiz = new Quiz();
-  	quiz.setQuizID("0000000000");
-  	quiz.setUser("guest");
+  	String quizID = (String) request.getAttribute("quizID"); 
+	String userID = (String) request.getAttribute("userID"); 
+  	Quiz quiz = (Quiz) session.getAttribute("quiz");
+ 	if(quiz==null){
+  		Quiz newQuiz = new Quiz();
+  		session.setAttribute("quiz",newQuiz);
+  	}
+  	quiz.setQuizID(quizID);
+  	quiz.setUser(userID);
+  	
 	String name = quiz.getName();
 	String author = quiz.getAuthor();
 	String description = quiz.getDescription();
@@ -272,6 +278,19 @@
         		out.println("</tr>");	
     		}
     		
+/*     		for (int i = 0; i < 10; i++) {
+    			if (i % 2 == 0) {
+        			out.println("<tr class=\"success\">");
+        		} else {
+        			out.println("<tr class=\"warning\">");
+        		}
+    			for (int j = 0; j < 3; j++) {
+        			out.println("<td>");
+        			out.println(j);
+        			out.println("</td>");
+        		}
+        		out.println("</tr>");
+    		} */
     	%>
           </tbody>
           </table>

@@ -21,9 +21,6 @@ public class QuizSummary {
 	private double maxScore;
 	private double minScore;
 	
-	private DBConnection database;
-	private Statement stmt;
-	
 	/**
 	 * Simple constructor, get the statistics about this quiz
 	 * @param quizID
@@ -37,10 +34,10 @@ public class QuizSummary {
 		goodPerformers = new Performance[TOP_NUM];
 		badPerformers = new Performance[TOP_NUM];
 		userPerformance = new Performance[TOP_NUM];
-		database = new DBConnection();
-		stmt = database.getStmt();
 		
 		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
 			String sql = "SELECT COUNT(UserID), AVG(Score), MAX(Score), MIN(Score) FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" GROUP BY QuizID;";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
@@ -50,6 +47,7 @@ public class QuizSummary {
 				maxScore = Double.parseDouble(res.getString(3));
 				minScore = Double.parseDouble(res.getString(4));
 			}
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -63,6 +61,8 @@ public class QuizSummary {
 	 */
 	public Performance[] getUserPerformance() {
 		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND UserID = \"" + this.userID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
 			int index = 0;
@@ -79,6 +79,7 @@ public class QuizSummary {
 					index++;
 				}
 			}
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -92,6 +93,8 @@ public class QuizSummary {
 	 */
 	public Performance[] getHighestPerformers() {
 		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" ORDER BY Score DESC, Duration ASC, StartTime ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
 			int index = 0;
@@ -108,6 +111,7 @@ public class QuizSummary {
 					index++;
 				}
 			}
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -121,6 +125,8 @@ public class QuizSummary {
 	 */
 	public Performance[] getHighestPerformersLastDay() {
 		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
 			String curTime = Quiz.df.format((new Date()).getTime());
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND TIMESTAMPDIFF(SECOND, " + curTime +", EndTime) <= 86400 ORDER BY Score DESC, Duration ASC, StartTime ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
@@ -138,6 +144,7 @@ public class QuizSummary {
 					index++;
 				}
 			}
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -151,6 +158,8 @@ public class QuizSummary {
 	 */
 	public Performance[] getGoodPerformers() {
 		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND Score >= 80 ORDER BY EndTime DESC, Score DESC LIMIT " + TOP_NUM + ";";
 			ResultSet res = stmt.executeQuery(sql);
 			int index = 0;
@@ -167,6 +176,7 @@ public class QuizSummary {
 					index++;
 				}
 			}
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -180,6 +190,8 @@ public class QuizSummary {
 	 */
 	public Performance[] getBadPerformers() {
 		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
 			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND Score <= 40 ORDER BY EndTime DESC, Score ASC LIMIT " + TOP_NUM + " ;";
 			ResultSet res = stmt.executeQuery(sql);
 			int index = 0;
@@ -196,6 +208,7 @@ public class QuizSummary {
 					index++;
 				}
 			}
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

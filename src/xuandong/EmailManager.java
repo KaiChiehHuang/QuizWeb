@@ -31,9 +31,9 @@ public class EmailManager {
 	 * Get all the emails that are sent to this user
 	 */
 	public void getToUserEmail() {
-		DBConnection database = new DBConnection();
-		Statement stmt = database.getStmt();
 		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
 			String sql = "SELECT SenderID, Time, Subject, Content, Link, IsRead FROM Emails WHERE ReceiverID = \""
 					+ userID + "\";";
 			ResultSet res = stmt.executeQuery(sql);

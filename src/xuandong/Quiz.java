@@ -40,14 +40,11 @@ public class Quiz {
 	static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	static final SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 
-	DBConnection database;
-
 	/**
 	 * Simple constructor If you are creating a new quiz which is not in
 	 * database, please don't use this one
 	 */
 	public Quiz() {
-		database = new DBConnection();
 		problems = new ArrayList<Problem>();
 	}
 
@@ -59,8 +56,9 @@ public class Quiz {
 	 */
 	public void setQuizID(String quizID) {
 		this.quizID = quizID;
-		Statement stmt = database.getStmt();
 		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
 			String sql = "SELECT Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image FROM Quiz WHERE QuizID = \""
 					+ quizID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
@@ -101,6 +99,7 @@ public class Quiz {
 				this.createdDate = res.getString("Time");
 				this.image = res.getString("Image");
 			}
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -325,6 +324,7 @@ public class Quiz {
 	 * @throws SQLException
 	 */
 	public void updateDatabase() throws SQLException {
+		DBConnection database = new DBConnection();
 		Statement stmt = database.getStmt();
 		if (this.creating) {
 			String sql = "SELECT QuizID FROM Quiz ORDER BY QuizID DESC LIMIT 1;";
@@ -340,6 +340,7 @@ public class Quiz {
 		} else {
 			stmt.executeUpdate(getUpdateSQL());
 		}
+		database.getCon().close();
 	}
 
 	/**
@@ -408,11 +409,13 @@ public class Quiz {
 		tempDate.setTime(dura);
 		duration = format.format(tempDate);
 		double score = this.getScore();
-		Statement stmt = database.getStmt();
 		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
 			String sql = "INSERT INTO QuizRecord VALUES ('" + quizID + "','" + userID + "','" + startDate + "','"
 					+ endDate + "','" + duration + "," + score + "');";
 			stmt.executeUpdate(sql);
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

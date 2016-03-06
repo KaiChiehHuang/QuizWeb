@@ -15,6 +15,7 @@ public class SingleChoice extends Problem {
 	public SingleChoice(String id) {
 		super(id);
 		try {
+			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT Choices FROM " + Problem.problemType.get(questionID.substring(0,2)) + " WHERE QuestionID = \"" + questionID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
@@ -22,6 +23,7 @@ public class SingleChoice extends Problem {
 				res.absolute(1);
 				this.choices = res.getString(1).split("|");
 			}
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

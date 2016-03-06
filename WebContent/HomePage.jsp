@@ -161,7 +161,7 @@
 			</div>
 			
 		</div>
-<%-- 		<% 
+		<% 
 		    int numRecentQuizzes = 1; 
 			int numQuizzesInRow = 4;
 			for(Quiz quiz : Quiz.getRecentQuizzes()) {
@@ -189,7 +189,7 @@
 				}
 				numRecentQuizzes += 1;
 			}
-		 %> --%>
+		 %>
 		 <div class="row">
 			<div class="col-xs-6 col-md-3">
 				<a href="#" class="thumbnail">

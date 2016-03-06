@@ -19,25 +19,12 @@
 
 <body>
 
-<%
- 	Quiz quiz = (Quiz)request.getAttribute("quiz");
-
-//Display score and time;
-	double score = quiz.getScore();
-	String duration = quiz.getDuration();
-	
-// Performance
-	QuizSummary summary = new QuizSummary(quiz.getQuizID(), quiz.getUserID());
-	Performance[] userPerformance = summary.getUserPerformance();
-	
-%>
-
 <div class="container">
   <h2>Your Performance</h2>
   <h3>Score:</h3>
-  <p><% out.println(score); %></p>
+  <p>23/50</p>
   <h3>Duration:</h3>
-  <p><% out.println(duration); %></p>  
+  <p>1004ms</p> 
   <h2>Past Performance</h2>
   <p>Your Past Performance on this quiz</p>            
   <table class="table">
@@ -51,11 +38,9 @@
     <tbody>
     
     <%
-    	for (int i = 0; i < userPerformance.length; i++) {
-     		String[] per = new String[3];
-    		per[0] = userPerformance[i].getStartTime();
-    		per[1] = String.valueOf(userPerformance[i].getScore());
-    		per[2] = userPerformance[i].getDuration();
+
+      String[] per = {"aaa", "bbb", "ccc"};
+    	for (int i = 0; i < 3; i++) {
     		if (i % 2 == 0) {
     			out.println("<tr class=\"warning\">");
     		} else {
@@ -69,6 +54,18 @@
     		out.println("</tr>");	
     	}
     %>
+<!--       <tr class="warning">
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+ -->
     </tbody>
   </table>
 </div>

@@ -16,6 +16,7 @@ public class MultiChoice extends Problem {
 	public MultiChoice(String id) {
 		super(id);
 		try {
+			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT Choices, Count FROM " + Problem.problemType.get(questionID.substring(0,2)) + " WHERE QuestionID = \"" + questionID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
@@ -24,6 +25,7 @@ public class MultiChoice extends Problem {
 				this.choices = res.getString(1).split("\\|");
 				this.count = res.getInt(2);
 			}
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

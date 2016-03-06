@@ -134,6 +134,7 @@ public class XMLParser {
 			answer = answer.substring(0, answer.length() - 1);
 			String insert = "INSERT INTO QuestionResponse VALUES(\"" + id + "\",\"" + question + "\",\"" + answer + "\");";
 			stmt.executeUpdate(insert);
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -176,6 +177,7 @@ public class XMLParser {
 			answer = answer.substring(0, answer.length() - 1);
 			String insert = "INSERT INTO FillBlank VALUES(\"" + id + "\",\"" + question + "\",\"" + answer + "\");";
 			stmt.executeUpdate(insert);
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -223,6 +225,7 @@ public class XMLParser {
 			choices = choices.substring(0, choices.length() - 1);
 			String insert = "INSERT INTO MultiChoice VALUES(\"" + id + "\",\"" + question + "\",\"" + choices + "\",\"" + answer + "\"," + count + ");";
 			stmt.executeUpdate(insert);
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -264,6 +267,7 @@ public class XMLParser {
 			answer = answer.substring(0, answer.length() - 1);
 			String insert = "INSERT INTO PictureResponse VALUES(\"" + id + "\",\"" + question + "\",\"" + url + "\",\"" + answer + "\");";
 			stmt.executeUpdate(insert);
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

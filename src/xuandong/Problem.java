@@ -15,8 +15,6 @@ public class Problem {
 	
 	boolean creating = false;
 	
-	DBConnection database;
-	
 	/**
 	 * This constructor is used to fetch the information of a problem
 	 * that is already in the database
@@ -24,9 +22,9 @@ public class Problem {
 	 */
 	public Problem(String questionID) {
 		this.type = Problem.problemType.get(questionID.substring(0, 2));
-		database = new DBConnection();
 		this.questionID = questionID;
 		try {
+			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT Question, Answer FROM " + Problem.problemType.get(questionID.substring(0,2)) + " WHERE QuestionID = \"" + questionID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
@@ -35,6 +33,7 @@ public class Problem {
 				this.question = res.getString(1);
 				this.answers = res.getString(2).split("\\|");
 			}
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -106,6 +105,7 @@ public class Problem {
 		} else {
 			stmt.executeUpdate(getUpdateSQL());
 		}
+		database.getCon().close();
 	}
 	
 	/**

@@ -15,6 +15,7 @@ public class PictureResponse extends Problem {
 	public PictureResponse(String questionID) {
 		super(questionID);
 		try {
+			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT URL FROM " + Problem.problemType.get(questionID.substring(0,2)) + " WHERE QuestionID = \"" + questionID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
@@ -22,6 +23,7 @@ public class PictureResponse extends Problem {
 				res.absolute(1);
 				this.url = res.getString(1);
 			}
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

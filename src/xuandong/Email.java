@@ -79,9 +79,9 @@ public class Email {
 	 * Delete an email from the databse
 	 */
 	public void deleteEmail() {
-		DBConnection database = new DBConnection();
-		Statement stmt = database.getStmt();
 		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
 			String sql = "DELETE FROM Emails WHERE SenderID = \"" + this.senderID + "\" AND ReceiverID = \"" + this.receiverID + "\" AND Time = \"" + this.time + "\";";
 			stmt.executeUpdate(sql);
 			database.getCon().close();
@@ -95,9 +95,9 @@ public class Email {
 	 * Notice that we only insert an new email into database when it is being sent by someone
 	 */
 	public void insertToDatabse() {
-		DBConnection database = new DBConnection();
-		Statement stmt = database.getStmt();
 		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
 			String sql = "INSERT INTO Emails(SenderID, ReceiverID, Time, Subject, Content, Link, IsRead)" + " VALUES(\"" + this.senderID + "\",\"" + this.receiverID + "\",\"" + this.time
 				+ "\",\"" + this.subject + "\",\"" + this.content + "\",\"" + this.link + "\"," + this.read + ");";
 			stmt.executeUpdate(sql);
@@ -111,9 +111,9 @@ public class Email {
 	 * Update the isRead Attribute in the database for this email
 	 */
 	public void updateDatabase() {
-		DBConnection database = new DBConnection();
-		Statement stmt = database.getStmt();
 		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
 			String sql = "UPDATE Emails SET IsRead = " + this.read + ";";
 			stmt.executeUpdate(sql);
 			database.getCon().close();

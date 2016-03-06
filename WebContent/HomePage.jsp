@@ -143,25 +143,41 @@
 	<!-- 	<div style="position:relative;top:55px;left:50%;width:800px;height:300px;
      								 margin-left:-400px;background-color:red;"> -->
 	<div
-		style="border-radius:20px;position: relative; top: 65px; left: 50%; width: 800px; height: 300px; margin-left: -400px; background-image: url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG');">
-		
+		style="border-radius: 20px; position: relative; top: 65px; left: 50%; width: 800px; height: 300px; margin-left: -400px; background-image: url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG');">
+
 	</div>
-	
+
 	<div
 		style="position: relative; top: 85px; left: 50%; width: 900px; height: 800px; margin-left: -450px;">
 		<div class="panel panel-default">
-			<div class="panel-body" style="font-family:'Ek Mukta';color:#C71585;font-size:18px;font-weight: bold;">
-			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp&nbspUSER INFO</div> 
-			<button class="btn btn-primary" type="button"> Messages <span class="badge">4</span></button>
+			<div class="panel-body"
+				style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
+				
+					<div class="col-xs-6 col-md-6 text-left">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp&nbspUSER INFO
+					</div>
+					<div class="col-xs-6 col-md-6 text-right">
+						<button class="btn btn-primary" type="button">
+  							Messages <span class="badge">4</span>
+						</button>
+					</div>
+			
+			</div> 
 		</div>
+
+
+
+
 		<div class="panel panel-default">
-			<div class="panel-body" style="font-family:'Ek Mukta';color:#C71585;font-size:18px;font-weight: bold;">
-			<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp&nbspPOPULAR QUIZZES
-			
+			<div class="panel-body"
+				style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
+				<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp&nbspPOPULAR
+				QUIZZES
+
 			</div>
-			
+
 		</div>
-<%-- 		<% 
+		<%-- 	<% 
 		    int numRecentQuizzes = 1; 
 			int numQuizzesInRow = 4;
 			for(Quiz quiz : Quiz.getRecentQuizzes()) {
@@ -173,11 +189,12 @@
 				String quizIDUrl = "#";
 				String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + " " + "class=\"thumbnail\">";
 				out.println(showQuizUrl);
-				out.println("<div style=\"height: 100px; background-color: white;\">");
+				out.println("<div style=\"width: 180px; height: 180px; background-color: white;\">");
 					out.println("<div class=\"caption\">");
 							String quizName = quiz.getName();
 							String popularity = String.valueOf(quiz.getPopularity());
-							String showQuizName = "<h3>"+quizName+"</h3>";
+							String heartIcon = "<span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>  ";
+							String showQuizName = "<h3 style=\"font-size:28px;\">"+quizName+"<small>"+heartIcon+popularity+"</small>"+"</h3>";
 							out.println(showQuizName);
 						out.println("</div>");
 						// Add popularity
@@ -189,11 +206,24 @@
 				}
 				numRecentQuizzes += 1;
 			}
-		 %> --%>
-		 <div class="row">
+		 %>  --%>
+		<div class="row">
 			<div class="col-xs-6 col-md-3">
 				<a href="#" class="thumbnail">
-					<div style="width: 100px; height: 100px; background-color: white;">
+					<div style="width: 180px; height: 180px; background-color: white;">
+						<div class="caption">
+							<h3 style="font-size: 22px;">
+								Thumbnail label <small style="font-size: 18px;"> testing
+								</small>
+							</h3>
+						</div>
+
+					</div>
+				</a>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<a href="#" class="thumbnail">
+					<div style="width: 100px; height: 180px; background-color: white;">
 						<div class="caption">
 							<h3>Thumbnail label</h3>
 						</div>
@@ -202,7 +232,7 @@
 			</div>
 			<div class="col-xs-6 col-md-3">
 				<a href="#" class="thumbnail">
-					<div style="width: 100px; height: 100px; background-color: white;">
+					<div style="width: 100px; height: 180px; background-color: white;">
 						<div class="caption">
 							<h3>Thumbnail label</h3>
 						</div>
@@ -211,16 +241,7 @@
 			</div>
 			<div class="col-xs-6 col-md-3">
 				<a href="#" class="thumbnail">
-					<div style="width: 100px; height: 100px; background-color: white;">
-						<div class="caption">
-							<h3>Thumbnail label</h3>
-						</div>
-					</div>
-				</a>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<a href="#" class="thumbnail">
-					<div style="width: 100px; height: 100px; background-color: white;">
+					<div style="width: 100px; height: 180px; background-color: white;">
 						<div class="caption">
 							<h3>Thumbnail label</h3>
 						</div>
@@ -228,10 +249,13 @@
 				</a>
 			</div>
 		</div>
-		
+
 		<div class="panel panel-default">
-			<div class="panel-body" style="font-family:'Ek Mukta';color:#C71585;font-size:18px;font-weight: bold;">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp&nbspRECENT CREATED QUIZZES</div>
+			<div class="panel-body"
+				style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp&nbspRECENT
+				CREATED QUIZZES
+			</div>
 		</div>
 	</div>
 

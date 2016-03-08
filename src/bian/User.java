@@ -15,6 +15,29 @@ public class User {
 	private ArrayList<String> friends;
 	private ArrayList<Achievement> achievements;
 
+	public User(String id) {
+		this.id = id;
+		try {
+			DBConnection database = new DBConnection();
+			rs = database.getStmt().executeQuery(
+					"SELECT Name, Age, Gender FROM Users WHERE UserID = " + "\"" + id + "\";");
+			name = rs.getString("Name");
+			age = rs.getInt("Age");
+			gender = rs.getString("Gender");
+//			achievements = rs.getString("Achievement").split("\\|");
+			fetchAchievement();
+			// Select from friends table.
+			friends = new ArrayList<String>();
+			rs = database.getStmt().executeQuery("SELECT User2ID FROM Friendship WHERE User1ID = \"" + id + "\";");
+			while (rs.next()) {
+				String friend = rs.getString("User2ID");
+				friends.add(friend);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Simple constructor Will fetch the name, age, gender, achievement, friend
 	 * information from the database
@@ -212,6 +235,24 @@ public class User {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<User> getFriendRequests() {
+		ArrayList<User> pendingFriends = new ArrayList<User>();
+		try {
+			DBConnection database = new DBConnection();
+			String sql = "SELECT User2ID FROM Friendship WHERE User1ID = \"" + this.id + "\";";
+			ResultSet res = database.getStmt().executeQuery(sql);
+			while (res.next()) {
+				User temp = new User(res.getString("User2ID"));
+				pendingFriends.add(temp);
+			}
+			database.getCon().close();
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return pendingFriends;
 	}
 
 	/**

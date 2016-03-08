@@ -21,6 +21,7 @@ public class User {
 			DBConnection database = new DBConnection();
 			rs = database.getStmt().executeQuery(
 					"SELECT Name, Age, Gender FROM Users WHERE UserID = " + "\"" + id + "\";");
+			rs.next();
 			name = rs.getString("Name");
 			age = rs.getInt("Age");
 			gender = rs.getString("Gender");

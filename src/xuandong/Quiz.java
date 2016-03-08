@@ -297,6 +297,7 @@ public class Quiz {
 		DBConnection database = new DBConnection();
 		String sql = "SELECT COUNT(*) AS Count FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\";";
 		ResultSet res = database.getStmt().executeQuery(sql);
+		res.next();
 		this.popularity = res.getInt("Count");
 		database.con.close();
 	}

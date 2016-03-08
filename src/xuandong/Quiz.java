@@ -427,6 +427,13 @@ public class Quiz {
 	}
 	
 	/**
+	 * Set the quiz is taking on quiz mode
+	 */
+	public void setOnQuizMode() {
+		onPracticeMode = false;
+	}
+	
+	/**
 	 * End the quiz and update information in the database
 	 * 
 	 * @return end time
@@ -440,7 +447,7 @@ public class Quiz {
 		format.setTimeZone(TIME_ZONE);
 		duration = format.format(tempDate);
 		score = this.calculateScore();
-		if (onPracticeMode) {
+		if (!onPracticeMode) {
 			try {
 				DBConnection database = new DBConnection();
 				Statement stmt = database.getStmt();

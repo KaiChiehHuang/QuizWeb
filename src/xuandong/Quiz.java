@@ -128,6 +128,7 @@ public class Quiz {
 				this.isPracticeMode = res.getBoolean("IsPracticeMode");
 				this.createdDate = res.getString("Time");
 				this.image = res.getString("Image");
+				this.setPopularity();
 			}
 			database.getCon().close();
 		} catch (SQLException e) {
@@ -288,6 +289,18 @@ public class Quiz {
 		this.isOnePage = value;
 	}
 
+	/**
+	 * Fetch the popularity from the database for a quiz
+	 * @throws SQLException
+	 */
+	public void setPopularity() throws SQLException {
+		DBConnection database = new DBConnection();
+		String sql = "SELECT COUNT(*) AS Count FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\";";
+		ResultSet res = database.getStmt().executeQuery(sql);
+		this.popularity = res.getInt("Count");
+		database.con.close();
+	}
+	
 	/**
 	 * Set the popularity
 	 * 
@@ -594,5 +607,22 @@ public class Quiz {
 		}
 		database.con.close();
 		return recentQuizs;
+	}
+	
+	/**
+	 * Get the highest score of this quiz
+	 * @throws SQLException 
+	 */
+	public String getHighestScore() throws SQLException {
+		String highest;
+		DBConnection database = new DBConnection();
+		ResultSet res = database.getStmt().executeQuery("SELECT Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" ORDER BY Score DESC LIMIT 1;");
+		if (res.next()) {
+			highest = Double.toString(res.getDouble("Score"));
+		} else {
+			highest = "Untaken";
+		}
+		database.getCon().close();
+		return highest;
 	}
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <quiz random="true" one-page="false" practice-mode="false">
 <title>Bunny Quiz</title>
+<quiz-image>http://hdwallpaperia.com/wp-content/uploads/2013/11/Cute-Bunny.jpg</quiz-image>
 <category>Animals</category>
 <description>An homage to the departed, legendary Bunny World project.</description>
 

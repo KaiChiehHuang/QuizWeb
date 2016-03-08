@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <quiz random="true" one-page="true" practice-mode="true">
 <title>Chinese Cuisine Quiz</title>
+<quiz-image>https://upload.wikimedia.org/wikipedia/zh/c/c8/A.Bite.of.China.II.Intro.png</quiz-image>
 <category>Food</category>
 <description>See how well you know about Chinese food.</description>
 

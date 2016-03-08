@@ -38,6 +38,8 @@ INSERT INTO Users VALUES("Administration","b8be3d1264310c3b8c848d4b90d5206179a40
 INSERT INTO Users VALUES("guest","35675e68f4b5af7b995d9205ad0fc43842f16450","Guest",0,"unknown","");
 INSERT INTO Users VALUES("jay","f1bfbf317598ea9c3b0fd25a90f4bbd0b434bbc7","Kaijie Huang",25,"Male","");
 INSERT INTO Users VALUES("xuandong","e26c25174fc72c4e3f9073342eec938ec27b1887","Xuandong Lei",23,"Male","");
+INSERT INTO Users VALUES("bian","fd9959b8097a0363d19da68eea7b97f8a6ae6f6d","Lu Bian",23,"Female","");
+INSERT INTO Users VALUES("yuan","35015dd23b25a435592d3418396d595f5ef2cbb1","Yuan Yuan",24,"Female","");
 
 
 CREATE TABLE Friendship (
@@ -53,8 +55,18 @@ CREATE TABLE Friendship (
 		ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+INSERT INTO Friendship VALUES("xuandong","bian",false);
 INSERT INTO Friendship VALUES("xuandong","jay",false);
+INSERT INTO Friendship VALUES("xuandong","yuan",false);
 INSERT INTO Friendship VALUES("jay","xuandong",false);
+INSERT INTO Friendship VALUES("jay","yuan",false);
+INSERT INTO Friendship VALUES("jay","bian",false);
+INSERT INTO Friendship VALUES("bian","jay",false);
+INSERT INTO Friendship VALUES("bian","xuandong",false);
+INSERT INTO Friendship VALUES("bian","yuan",false);
+INSERT INTO Friendship VALUES("yuan","xuandong",false);
+INSERT INTO Friendship VALUES("yuan","jay",false);
+INSERT INTO Friendship VALUES("yuan","bian",false);
 
 CREATE TABLE Quiz (
 	QuizID                VARCHAR(255),

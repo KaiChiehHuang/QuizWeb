@@ -97,6 +97,11 @@ public class XMLParser {
 		String image = "";
 		String insert = "INSERT INTO Quiz (QuizID, Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image) VALUES(\"" + quizID + "\",\"" + name + "\",\"" + description + "\",\"" + authorID + "\",\"" + questions + "\"," + random + "," + onePage + "," + immediateCorrection + "," + practiceMode + ",\"" + time + "\",\"" + image + "\");";
 		stmt.executeUpdate(insert);
+		if (doc.getElementsByTagName("category") != null) {
+			String category = doc.getElementsByTagName("category").item(0).getTextContent();
+			stmt.executeUpdate("INSERT INTO Category(QuizID, Category) VALUES(\"" + quizID + "\",\"" + category + "\");");
+		}
+		database.getCon().close();
 		return quizID;
 	}
 	

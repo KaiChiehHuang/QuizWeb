@@ -241,7 +241,7 @@ public class User {
 		ArrayList<User> pendingFriends = new ArrayList<User>();
 		try {
 			DBConnection database = new DBConnection();
-			String sql = "SELECT User2ID FROM Friendship WHERE User1ID = \"" + this.id + "\";";
+			String sql = "SELECT User2ID FROM Friendship WHERE User1ID = \"" + this.id + "\" AND Pending = " + true + ";";
 			ResultSet res = database.getStmt().executeQuery(sql);
 			while (res.next()) {
 				User temp = new User(res.getString("User2ID"));

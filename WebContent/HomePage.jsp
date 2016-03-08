@@ -214,10 +214,14 @@ function pageScrollUp(position) {
 							}else{
 								out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
 							}
-							Quiz quizTook = new Quiz();
-							quizTook.setQuizID(performance.getQuizID());
+						Quiz quizTook = new Quiz();
+						quizTook.setQuizID(performance.getQuizID());
 						out.print("<h3>Your Recent Performance</h3><br>");
-						out.print("<h4>Quiz: " + quizTook.getName() + "</h4>");
+ 						String quizID = quizTook.getQuizID();
+						String quizIDUrl = "QuizSummary.jsp?quizID="+quizID+"&userID="+userID;
+						String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">"; 
+						out.print(showQuizUrl+"<h4>Quiz: " + quizTook.getName() + "</h4>");
+						out.print("</a>");
 						out.print("<h4>Score: " + performance.getScore() + "</h4>");
 						out.print("<h4>Start Time: " + performance.getStartTime() + "</h4>");
 						out.print("<h4>Duration: " + performance.getDuration() + "</h4>");
@@ -234,11 +238,14 @@ function pageScrollUp(position) {
 							out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
 						}
 						out.print("<h3>Your Recent Created Quiz</h3><br>");
-						out.print("<h4>Name: " + quiz.getName() + "</h4>");
+						String quizIDUrl = "QuizSummary.jsp?quizID="+quiz.getQuizID()+"&userID="+userID;
+						String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">"; 
+						out.print(showQuizUrl+"<h4>Name: " + quiz.getName() + "</h4>");
+						out.print("</a>");
 						out.print("<h4>Popularity: " + quiz.getPopularity() + "</h4>");
+						out.print("<h4>Highest Score: " + quiz.getHighestScore() + "</h4>");
 						out.print("<h4>Created Time: " + quiz.getCreatedDate() + "</h4>");
 						String isPracticeMode = quiz.isPracticeMode() ? "Yes" : "No";
-						out.print("<h4>Practice Mode: " + isPracticeMode + "</h4>");
 						out.print("</div>");
 						pageIndex++;
 					}

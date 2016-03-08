@@ -237,6 +237,10 @@ public class User {
 		}
 	}
 	
+	/**
+	 * return a list of users who has requested friendship to current user
+	 * @return
+	 */
 	public ArrayList<User> getFriendRequests() {
 		ArrayList<User> pendingFriends = new ArrayList<User>();
 		try {

@@ -15,22 +15,8 @@ public class QuizTest {
 
 	@Test
 	public void test() throws SQLException, InterruptedException {
-		Quiz temp = new Quiz();
-		temp.setQuizID("0000000000");
-		temp.setUser("guest");
-		System.out.println(temp.getCreatedDate());
-		System.out.println(temp.getProblems().get(0).getQuestion());
-		Thread.sleep(1000);
-//		System.out.println(Quiz.format.format((temp.quizStart()-(new Date()).getTime())));
-		Long a = temp.quizStart();
-		System.out.println(a);
-		Thread.sleep(1000);
-		System.out.println((new Date()).getTime());
-		System.out.println((new Date()).getTime()-a);
-		TimeZone tz = TimeZone.getTimeZone("UTC");
-		Quiz.format.setTimeZone(tz);
-		System.out.println(Quiz.format.format((86401000)));
-		assertEquals(temp.getProblems().size(), 5);
+//		System.out.println(Category.searchByCategory("Food").size());
+		assertEquals(2, Category.searchByCategory("Food").size());
 	}
 
 }

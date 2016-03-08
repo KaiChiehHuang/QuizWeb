@@ -454,12 +454,56 @@ public class Quiz {
 				String sql = "INSERT INTO QuizRecord VALUES ('" + quizID + "','" + userID + "','" + startDate + "','"
 						+ endDate + "','" + duration + "'," + score + ");";
 				stmt.executeUpdate(sql);
+				updateQuizAchievement();
 				database.getCon().close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				updatePracticeAchievement();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		return duration;
+	}
+
+	/**
+	 * Add the practice achievement to the database
+	 * @throws SQLException
+	 */
+	private void updatePracticeAchievement() throws SQLException {
+		DBConnection database = new DBConnection();
+		ResultSet res = database.getStmt().executeQuery("SELECT COUNT(*) AS Count FROM Achievement WHERE UserID = \"" + this.userID + "\" AND AchievementName = \"Practice Makes Perfect\";");
+		res.next();
+		int practice = res.getInt("Count");
+		if (practice == 0) {
+			String time = Quiz.df.format((new Date()).getTime());
+			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID + "\",\"" + this.quizID + "\",\"" + time + "\",\"Practice Makes Perfect\");");
+		}
+		database.getCon().close();
+	}
+
+	/**
+	 * Add the quiz achievement to the database
+	 * @throws SQLException
+	 */
+	private void updateQuizAchievement() throws SQLException {
+		DBConnection database = new DBConnection();
+		ResultSet res = database.getStmt().executeQuery("SELECT COUNT(DISTINCT QuizID) AS Count FROM QuizRecord WHERE UserID = \"" + this.userID + "\";");
+		res.next();
+		int quizTaken = res.getInt("Count");
+		String time = Quiz.df.format((new Date()).getTime());
+		if (quizTaken == 10) {
+			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, Achievement) VALUES(\"" + this.userID + "\",\"" + this.quizID + "\",\"" + time + "\",\"Quiz Machine\");");
+		}
+		ResultSet highest = database.getStmt().executeQuery("SELECT UserID FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" ORDER BY Score DESC, Duration ASC, EndTime ASC LIMIT 1;");
+		highest.next();
+		if (this.userID.equals(highest.getString("UserID"))) {
+			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, Achievement) VALUES(\"" + this.userID + "\",\"" + this.quizID + "\",\"" + time + "\",\"I am the Greatest\");");
+		}
+		database.getCon().close();
 	}
 
 	/**

@@ -199,6 +199,10 @@ function pageScrollUp(position) {
 
 		<div class="collapse" id="collapseExample">
 			<div class="well" style="width: 900px; height: 300px; background-color: black;">
+				<%
+					EmailManager eManager = new EmailManager();
+				
+				%>
 				<div class="media">
 					<div class="media-left media-middle">
 						<a href="#"> User Name </a>

@@ -11,7 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <title>Login Failed</title>
 </head>
-<body>
+<body style="background-image:url(loginBackground.jpg);background-size: 100%;">
 		<h1 style="text-align:center;">Playing and creating quizzes</h1>
 		
 		<div style="border-radius: 20px;
@@ -23,7 +23,10 @@
      				margin-left:-200px;
      				top:200px;
      				position:absolute;
+     				opacity: 0.9;
+     				background-color:white;
      				">
+     	<% session.setAttribute("userID","Guest"); %>
 		<p style="color:#FF1493"> Invalid UserID or Password, please try again... </p>
 			<form action="UserLogin" method="post"> 
 			<div class="input-group">

@@ -2,7 +2,6 @@ package KaiChieh;
 
 import java.io.IOException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,6 +39,7 @@ public class SentEmail extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("strtstsaseras");
 		HttpSession session = request.getSession();
 		String userID =  (String) session.getAttribute("userID");
 		String receiverID = request.getParameter("receiverID");
@@ -53,7 +53,6 @@ public class SentEmail extends HttpServlet {
 		newEmail.setSubject(emailSubject);
 		newEmail.setTime();
 		newEmail.insertToDatabse();
-		//doGet(request, response);
 	}
 
 }

@@ -3,7 +3,6 @@ package xuandong;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +24,8 @@ public class Quiz {
 	private boolean isRandomQuiz;
 	private boolean isPracticeMode;
 	private boolean isImmediateCorrection;
+	
+	private boolean onPracticeMode = false;
 
 	private int popularity;
 	private Long startTime;
@@ -419,6 +420,13 @@ public class Quiz {
 	}
 
 	/**
+	 * Set the quiz is taking on practice mode
+	 */
+	public void setOnPracticeMode() {
+		onPracticeMode = true;
+	}
+	
+	/**
 	 * End the quiz and update information in the database
 	 * 
 	 * @return end time
@@ -432,15 +440,17 @@ public class Quiz {
 		format.setTimeZone(TIME_ZONE);
 		duration = format.format(tempDate);
 		score = this.calculateScore();
-		try {
-			DBConnection database = new DBConnection();
-			Statement stmt = database.getStmt();
-			String sql = "INSERT INTO QuizRecord VALUES ('" + quizID + "','" + userID + "','" + startDate + "','"
-					+ endDate + "','" + duration + "'," + score + ");";
-			stmt.executeUpdate(sql);
-			database.getCon().close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if (onPracticeMode) {
+			try {
+				DBConnection database = new DBConnection();
+				Statement stmt = database.getStmt();
+				String sql = "INSERT INTO QuizRecord VALUES ('" + quizID + "','" + userID + "','" + startDate + "','"
+						+ endDate + "','" + duration + "'," + score + ");";
+				stmt.executeUpdate(sql);
+				database.getCon().close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return duration;
 	}

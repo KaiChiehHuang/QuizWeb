@@ -22,7 +22,7 @@
 </question>
 
 <question type="picture-response">
-  <image-location>https://upload.wikimedia.org/wikipedia/en/2/26/Classic_bugsbunny.png</image-location>
+  <image-location>http://upload.wikimedia.org/wikipedia/en/b/b9/Bugs_Bunny_Pose.PNG</image-location>
   <answer-list>
     <answer preferred="preferred">Bugs Bunny</answer>
 	<answer>Bugs</answer>

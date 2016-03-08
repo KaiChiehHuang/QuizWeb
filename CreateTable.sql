@@ -13,6 +13,8 @@ DROP TABLE IF EXISTS PictureResponse;
 DROP TABLE IF EXISTS FillBlank;
 DROP TABLE IF EXISTS SingleChoice;
 DROP TABLE IF EXISTS Achievement;
+DROP TABLE IF EXISTS Category;
+DROP TABLE IF EXISTS Tag;
 DROP TABLE IF EXISTS Quiz;
 DROP TABLE IF EXISTS Friendship;
 DROP TABLE IF EXISTS Announcement;
@@ -193,6 +195,34 @@ CREATE TABLE Announcement (
 
 INSERT INTO Announcement(Content, AdminID, Time, Subject) VALUES ("Welcome to QuizWeb! :)","Administration","2016-03-04 15:30:57","Welcome");
 
+CREATE TABLE Category (
+	QuizID       VARCHAR(255),
+	Category     VARCHAR(255),
+	PRIMARY KEY  (QuizID, Category),
+	FOREIGN KEY  (QuizID)
+		REFERENCES Quiz(QuizID)
+		ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+
+CREATE TABLE Tag (
+	QuizID		VARCHAR(255),
+	Tag         VARCHAR(255),
+	PRIMARY KEY  (QuizID, Tag),
+	FOREIGN KEY  (QuizID)
+		REFERENCES Quiz(QuizID)
+		ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+
+CREATE TABLE Reviews (
+	QuizID		VARCHAR(255),
+	UserID      VARCHAR(255),
+	Review      TEXT,
+	Time        DATETIME,
+	Anonymous   BOOLEAN,
+	PRIMARY KEY (QuizID, Time)
+)
 
 
 

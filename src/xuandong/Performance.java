@@ -41,7 +41,7 @@ public class Performance {
 	 * @return startTime
 	 */
 	public String getStartTime() {
-		return startTime;
+		return startTime.substring(0, startTime.length() - 2);
 	}
 	
 	/**

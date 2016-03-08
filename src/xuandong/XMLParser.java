@@ -3,15 +3,29 @@ package xuandong;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
-
 import org.w3c.dom.*;
+
+
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class XMLParser {
+	
+//	public static final String DEFAULTIMAGE = "http://blog.beeliked.com/wp-content/uploads/2015/08/1-Dollarphotoclub_54825547.jpg";
+	
+	public static final ArrayList<String> DEFAULTIMAGES = new ArrayList<String>();
+	static
+	{
+			DEFAULTIMAGES.add("http://blog.beeliked.com/wp-content/uploads/2015/08/1-Dollarphotoclub_54825547.jpg");
+			DEFAULTIMAGES.add("https://www.drupal.org/files/project-images/quiz-image_0.jpg");
+			DEFAULTIMAGES.add("http://www.yadavdilse.com/wp-content/uploads/2015/08/Optimized-quiz.jpg");
+			DEFAULTIMAGES.add("http://gonitsora.com/wp-content/uploads/2015/03/quiz.jpg");
+	};
 	
 	/**
 	 * Main method in XMLParser
@@ -20,7 +34,7 @@ public class XMLParser {
 	 */
 	public static void main(String[] args) {
 		try {
-			File xmlFile = new File("src/quiz-xml/chinese_food.xml");
+			File xmlFile = new File("src/quiz-xml/cities.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(xmlFile);
@@ -92,9 +106,13 @@ public class XMLParser {
 		if (quiz.getAttribute("practice-mode") != null) {
 			practiceMode = Boolean.parseBoolean(quiz.getAttribute("practice-mode"));
 		}
-		String authorID = "Administration";
+		String authorID = "jay";
 		String time = Quiz.df.format(new Date().getTime());
-		String image = "";
+		Random rm = new Random();
+		String image = DEFAULTIMAGES.get(rm.nextInt(DEFAULTIMAGES.size()));
+		if (doc.getElementsByTagName("quiz-image").item(0) != null) {
+			image = doc.getElementsByTagName("quiz-image").item(0).getTextContent();
+		}
 		String insert = "INSERT INTO Quiz (QuizID, Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image) VALUES(\"" + quizID + "\",\"" + name + "\",\"" + description + "\",\"" + authorID + "\",\"" + questions + "\"," + random + "," + onePage + "," + immediateCorrection + "," + practiceMode + ",\"" + time + "\",\"" + image + "\");";
 		stmt.executeUpdate(insert);
 		if (doc.getElementsByTagName("category").item(0) != null) {

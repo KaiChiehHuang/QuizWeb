@@ -34,6 +34,7 @@ public class User {
 				String friend = rs.getString("User2ID");
 				friends.add(friend);
 			}
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

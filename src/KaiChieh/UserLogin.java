@@ -44,7 +44,6 @@ public class UserLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("tetstsets");
 		String userID = request.getParameter("userID");
 		String password = request.getParameter("password");
 		ServletContext context = getServletContext();

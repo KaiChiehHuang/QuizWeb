@@ -1,3 +1,4 @@
+<%@page import="com.sun.xml.internal.bind.CycleRecoverable.Context"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,xuandong.*,javax.servlet.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -201,26 +202,25 @@ function pageScrollUp(position) {
 			<div class="well" style="width: 900px; height: 300px; background-color: black;">
 				<%
 					EmailManager eManager = new EmailManager();
-				
+					userID = (String) session.getAttribute("userID");
+					eManager.setUser(userID);
+					ArrayList<Email> emails = eManager.getToUserEmail();
+					for (Email mail: emails) {
+						out.println("<div class=\"media\">");
+						out.println("<div class=\"media-left media-middle\">");
+						sentEmailUserID = mail.getSenderID();
+						sentEmailUserIDUrl = "<a href=\"#\">" + sentEmailUserID + "</a>";
+						out.println("</div>");
+						out.println("<div class=\"media-body\">");
+						emailSubject = mail.getSubject();
+						emailSubjectTitle = "<h4 class=\"media-heading\">" + emailSubject + "</h4>";
+						out.println(emailSubjectTitle);
+						content = mail.getContent();
+						out.println(content);
+						out.println("</div>");
+						out.println("</div>");
+					}
 				%>
-				<div class="media">
-					<div class="media-left media-middle">
-						<a href="#"> User Name </a>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">Message Title</h4>
-						hello there handsome!
-					</div>
-				</div>
-				<div class="media">
-					<div class="media-left media-middle">
-						<a href="#"> User Name </a>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">Message Title</h4>
-						hello there handsome!
-					</div>
-				</div>
 			</div>
 		</div>
 		<div class="collapse" id="collapseUserInfo">

@@ -37,6 +37,7 @@ CREATE TABLE Users (
 INSERT INTO Users VALUES("Administration","b8be3d1264310c3b8c848d4b90d5206179a40cc4","Admin",0,"unknown","");
 INSERT INTO Users VALUES("guest","35675e68f4b5af7b995d9205ad0fc43842f16450","Guest",0,"unknown","");
 INSERT INTO Users VALUES("jay","f1bfbf317598ea9c3b0fd25a90f4bbd0b434bbc7","Kaijie Huang",25,"Male","");
+INSERT INTO Users VALUES("xuandong","e26c25174fc72c4e3f9073342eec938ec27b1887","Xuandong Lei",23,"Male","");
 
 
 CREATE TABLE Friendship (
@@ -51,6 +52,9 @@ CREATE TABLE Friendship (
 		REFERENCES Users(UserID)
 		ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+INSERT INTO Friendship VALUES("xuandong","jay",false);
+INSERT INTO Friendship VALUES("jay","xuandong",false);
 
 CREATE TABLE Quiz (
 	QuizID                VARCHAR(255),

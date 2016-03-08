@@ -40,7 +40,7 @@ public class AccountManager {
 	 */
 	public void createAccount(String id, String password) {
 		password = hashSHAPassword(password);
-		System.out.println(password);
+//		System.out.println(password);
 		try {
 			stmt.executeUpdate("INSERT INTO Users(UserID, Password) VALUES(\"" + id + "\",\"" + password + "\");");
 		} catch (SQLException e) {

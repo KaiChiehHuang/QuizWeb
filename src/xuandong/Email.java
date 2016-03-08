@@ -4,8 +4,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
-import bian.User;
-
 public class Email {
 	String senderID;
 	String receiverID;

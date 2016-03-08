@@ -40,6 +40,7 @@ public class SentEmail extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("fadsff");
 		HttpSession session = request.getSession();
 		String userID =  (String) session.getAttribute("userID");
 		String receiverID = request.getParameter("receiverID");
@@ -53,7 +54,7 @@ public class SentEmail extends HttpServlet {
 		newEmail.setSubject(emailSubject);
 		newEmail.setTime();
 		newEmail.insertToDatabse();
-		//doGet(request, response);
+//		doGet(request, response);
 	}
 
 }

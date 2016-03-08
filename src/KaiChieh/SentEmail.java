@@ -54,7 +54,7 @@ public class SentEmail extends HttpServlet {
 		newEmail.setSubject(emailSubject);
 		// new email set time
 		newEmail.insertToDatabse();
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }

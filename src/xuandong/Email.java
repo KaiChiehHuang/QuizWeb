@@ -119,6 +119,14 @@ public class Email {
 	}
 	
 	/**
+	 * Set the time of this email to a given time
+	 * used for fetch emails from database
+	 */
+	public void setTime(String time) {
+		this.time = time;
+	}
+	
+	/**
 	 * Set whether or not this email has been read
 	 * @param value TRUE for already read, FALSE if not
 	 */

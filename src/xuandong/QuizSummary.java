@@ -57,14 +57,14 @@ public class QuizSummary {
 	
 	
 	/**
-	 * Get the performance of this user
+	 * Get the performance of this user ordered by date
 	 * @return a Performance Object, it's easy to read
 	 */
-	public ArrayList<Performance> getUserPerformance() {
+	public ArrayList<Performance> getUserPerformanceByDate() {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
-			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND UserID = \"" + this.userID + "\" ORDER BY StartTime DESC LIMIT " + TOP_NUM + ";";
+			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND UserID = \"" + this.userID + "\" ORDER BY StartTime DESC;";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
 				while (res.next()) {
@@ -82,6 +82,65 @@ public class QuizSummary {
 			e.printStackTrace();
 		}
 		return userPerformance;
+	}
+	
+	/**
+	 * Get the performance of this user ordered by score
+	 * @return a Performance Object, it's easy to read
+	 */
+	public ArrayList<Performance> getUserPerformanceByScore() {
+		ArrayList<Performance> perfByScore = new ArrayList<Performance>();
+		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
+			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND UserID = \"" + this.userID + "\" ORDER BY Score DESC;";
+			ResultSet res = stmt.executeQuery(sql);
+			if (res != null) {
+				while (res.next()) {
+					String curQuizID = res.getString(1);
+					String curUserID = res.getString(2);
+					String curStartTime = res.getString(3).substring(0, res.getString(3).length() - 2);
+					String curDuration = res.getString(4);
+					double curScore = Double.parseDouble(res.getString(5));
+					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
+					perfByScore.add(perf);
+				}
+			}
+			database.getCon().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return perfByScore;
+	}
+	
+	
+	/**
+	 * Get the performance of this user ordered by duration
+	 * @return a Performance Object, it's easy to read
+	 */
+	public ArrayList<Performance> getUserPerformanceByDuration() {
+		ArrayList<Performance> perfByScore = new ArrayList<Performance>();
+		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
+			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND UserID = \"" + this.userID + "\" ORDER BY Duration ASC;";
+			ResultSet res = stmt.executeQuery(sql);
+			if (res != null) {
+				while (res.next()) {
+					String curQuizID = res.getString(1);
+					String curUserID = res.getString(2);
+					String curStartTime = res.getString(3).substring(0, res.getString(3).length() - 2);
+					String curDuration = res.getString(4);
+					double curScore = Double.parseDouble(res.getString(5));
+					Performance perf = new Performance(curQuizID, curUserID, curStartTime, curDuration, curScore);
+					perfByScore.add(perf);
+				}
+			}
+			database.getCon().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return perfByScore;
 	}
 	
 	

@@ -8,6 +8,7 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
@@ -175,20 +176,53 @@ function pageScrollUp(position) {
 	</div>
 
 	<div style="position: relative; top: 85px; left: 50%; width: 900px; height: 1000px; margin-left: -450px;">
-		
-		<div class="panel panel-default" style="height:60px;">
+
+		<div class="panel panel-default" style="height: 60px;">
 			<div class="panel-body"
 				style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
-				<div class="col-xs-6 col-md-6 text-left" >
-					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp&nbspUSER
-					INFO
+				<div class="col-xs-6 col-md-6 text-left">
+					<a style="color: #C71585;" role="button" data-toggle="collapse"
+						data-parent="#accordion" href="#collapseUserInfo"
+						aria-expanded="false" aria-controls="collapseUserInfo"><span
+						class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp&nbspUSER
+						INFO </a>
 				</div>
 				<div class="col-xs-6 col-md-6 text-right">
-					<button class="btn btn-info" type="button">
+					<button class="btn btn-info" type="button" data-toggle="collapse"
+						data-target="#collapseExample" aria-expanded="false"
+						aria-controls="collapseExample">
 						Messages <span class="badge">4</span>
 					</button>
 				</div>
 			</div>
+		</div>
+
+		<div class="collapse" id="collapseExample">
+			<div class="well" style="width: 900px; height: 300px; background-color: black;">
+				<div class="media">
+					<div class="media-left media-middle">
+						<a href="#"> User Name </a>
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading">Message Title</h4>
+						hello there handsome!
+					</div>
+				</div>
+				<div class="media">
+					<div class="media-left media-middle">
+						<a href="#"> User Name </a>
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading">Message Title</h4>
+						hello there handsome!
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="collapse" id="collapseUserInfo">
+			<div class="well" style= "width:900px;height:300px;background-color:black;">
+   				User Info
+  			</div>
 		</div>
 
 		<div class="panel panel-default">

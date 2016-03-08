@@ -15,11 +15,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
-<title>Create a quiz</title>
+<title>Create Questions</title>
 </head>
 <body>
 
-<h1>Create a quiz</h1>
+<h1>Create Questions</h1>
 
 <%
 /* 	String authorID = (String) request.getParameter("userID"); 
@@ -32,76 +32,108 @@
 	
 %>
 
-<form action="QuizCreateServlet" method="post">
-
-<!-- Quiz Properties -->
-<!-- name description image -->
-<div class = "container">
-	<p><h5>Name: </h5> </p>
-	<input type="text" class="form-control" name = "name" placeholder="Quiz Name">
-	<p><h5>Quiz Description: </h5> </p>
-  	<textarea class="form-control" rows="3" name = "description" placeholder="Quiz Description"></textarea>
-  	<p><h5>Quiz Picture: </h5> </p>
-	<input type="text" class="form-control" name = "picture" placeholder="URL">
-</div>
-
-<!-- Random -->
-<div class="container">
-	<p><h5>Random: Will the problems in quiz display in randomly ordered? </h5> </p>
-	<div class="radio">
-		  <label><input type="radio" name="Random" value="Yes">Yes</label>
-	</div>
-		<div class="radio">
-		  <label><input type="radio" name="Random" value="No">No</label>
-	</div>
-</div>
-
-<!-- OnePage -->
-<div class="container">
-	<p><h5>Page: Will the problems in quiz display in one page or multiple pages? </h5> </p>
-	<div class="radio">
-		  <label><input type="radio" name="OnePage" value="Yes">One Page</label>
-	</div>
-		<div class="radio">
-		  <label><input type="radio" name="OnePage" value="No">Multiple Pages</label>
-	</div>
-</div>
-
-<!-- PracticeMode -->
-<div class="container">
-	<p><h5>Practice Mode: Will this quiz have practice mode? </h5> </p>
-	<div class="radio">
-		  <label><input type="radio" name="Practice" value="Yes">Yes</label>
-	</div>
-		<div class="radio">
-		  <label><input type="radio" name="Practice" value="No">No</label>
-	</div>
-</div>
-		  
-<!-- ImmediateCorrection -->
-<div class="container">
-	<p><h5>Immediate Correction: Will problems in this quiz be immediately corrected when being taken? </h5> </p>
-	<div class="radio">
-		  <label><input type="radio" name="ImmCorr" value="Yes">Yes</label>
-	</div>
-		<div class="radio">
-		  <label><input type="radio" name="ImmCorr" value="No">No</label>
-	</div>
-</div>		
-
 <!-- Multiple Choice Problem -->
 <div class="container">
-	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control" name = "problem" placeholder="Quiz Name">
-	<div class="radio">
-		  <label><input type="radio" name="ImmCorr" value="Yes">Yes</label>
+	<div class="panel panel-default" style="height: 60px;">
+		<div class="panel-body"
+			style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
+			<div class="row">
+			   <div class="col-sm-2">Questions</div>
+			
+				<div class = "btn-group btn-group-me col-sm-10" style="text-align: right">
+					<button class="btn btn-info" type="button" data-toggle="collapse"
+						data-target="#collapseChoices" aria-expanded="false"
+						aria-controls="collapseChoices">
+						Choices
+					</button>
+					<button class="btn btn-info" type="button" data-toggle="collapse"
+						data-target="#collapseFillBlank" aria-expanded="false"
+						aria-controls="collapseFillBlank">
+						Fill Blank
+					</button>
+					<button class="btn btn-info" type="button" data-toggle="collapse"
+						data-target="#collapsePictureResponse" aria-expanded="false"
+						aria-controls="collapsePictureResponse">
+						Picture Response
+					</button>
+					<button class="btn btn-info" type="button" data-toggle="collapse"
+						data-target="#collapseQuestionResponse" aria-expanded="false"
+						aria-controls="collapseQuestionResponse">
+						Question Response
+					</button>
+					<button class="btn btn-info" type="button" data-toggle="collapse"
+						data-target="#collapseMultiResponse" aria-expanded="false"
+						aria-controls="collapseMultiResponse">
+						Multiple Response
+					</button>
+				</div>	
+		    </div>			
+		</div>
 	</div>
-		<div class="radio">
-		  <label><input type="radio" name="ImmCorr" value="No">No</label>
+	
+	<div class="collapse" id="collapseChoices">
+			<div class="well"
+				style="height: 300px; background-color: black;">
+				<form action="QuizCreateServlet" method="post">	
+				Choices
+				<div class="text-right">
+				<input type="submit" class="btn btn-info" value = "Add Question"></input>
+				</div>
+                </form>
+			</div>
 	</div>
-</div>	
+	
+	<div class="collapse" id="collapseFillBlank">
+			<div class="well"
+				style="height: 300px; background-color: black;">
+				<form action="QuizCreateServlet" method="post">	
+				FillBlank
+				<div class="text-right">
+				<input type="submit" class="btn btn-info" value = "Add Question"></input>
+				</div>
+                </form>
+			</div>
+	</div>
+	
+	<div class="collapse" id="collapsePictureResponse">
+			<div class="well"
+				style="height: 300px; background-color: black;">
+				<form action="QuizCreateServlet" method="post">	
+				PictureResponse
+				<div class="text-right">
+				<input type="submit" class="btn btn-info" value = "Add Question"></input>
+				</div>
+                </form>
+			</div>
+	</div>
+	
+	<div class="collapse" id="collapseQuestionResponse">
+			<div class="well"
+				style="height: 300px; background-color: black;">
+				<form action="QuizCreateServlet" method="post">	
+				QuestionResponse
+				<div class="text-right">
+				<input type="submit" class="btn btn-info" value = "Add Question"></input>
+				</div>
+                </form>
+			</div>
+	</div>
+	
+	<div class="collapse" id="collapseMultiResponse">
+			<div class="well"
+				style="height: 300px; background-color: black;">
+				<form action="QuizCreateServlet" method="post">	
+				MultiResponse
+				<div class="text-right">
+				<input type="submit" class="btn btn-info" value = "Add Question"></input>
+				</div>
+                </form>
+			</div>
+	</div>
+	
+</div> 
 
-<%-- <%
+<%--  <%
 	for (int i = 1; i < problems.size() + 1; i++) {
 		Problem pro = problems.get(i-1);
 		String type = pro.getType();
@@ -127,9 +159,9 @@
 		}
 	}
 %> --%>
-<input type="submit" value = "Create Quiz">
-</form>
-
+<div class="text-center">
+<a href="QuizCreatedSuccess.jsp" class="btn btn-info"  role="button">Submit</a>
+</div>
 <%-- <%!
 	/* getParameter(answer1) get the answer of user. */
 	public void setProperty(JspWriter myOut) throws IOException {

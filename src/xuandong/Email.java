@@ -114,7 +114,7 @@ public class Email {
 	 * Set the time of this email
 	 * @param time
 	 */
-	public void setTime(String time) {
+	public void setTime() {
 		this.time = Quiz.df.format(new Date().getTime());
 	}
 	

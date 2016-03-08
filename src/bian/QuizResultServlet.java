@@ -54,10 +54,14 @@ public class QuizResultServlet extends HttpServlet {
 		for (int i = 1; i < problems.size() + 1; i++) {
 			String[] answers = request.getParameterValues("answer" + i);
 			String answer = "";
-			for (int j = 0; j < answers.length; j++) {
-				answer = answer + answers[j] + "|";
+			if (answers == null) {
+				answer = "";
+			} else {
+				for (int j = 0; j < answers.length; j++) {
+					answer = answer + answers[j] + "|";
+				}
+				answer = answer.substring(0, answer.length() - 1);
 			}
-			answer = answer.substring(0, answer.length() - 1);
 			problems.get(i-1).setUserAnswer(answer);
 		}
 		

@@ -215,7 +215,14 @@ CREATE TABLE Tag (
 )
 
 
-
+CREATE TABLE Reviews (
+	QuizID		VARCHAR(255),
+	UserID      VARCHAR(255),
+	Review      TEXT,
+	Time        DATETIME,
+	Anonymous   BOOLEAN,
+	PRIMARY KEY (QuizID, Time)
+)
 
 
 

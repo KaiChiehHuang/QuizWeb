@@ -1,6 +1,6 @@
 <%@page import="com.sun.xml.internal.bind.CycleRecoverable.Context"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*,xuandong.*,javax.servlet.*,KaiChieh.*" %>
+    pageEncoding="UTF-8" import="java.util.*,xuandong.*,javax.servlet.*,KaiChieh.*,bian.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -184,25 +184,66 @@ function pageScrollUp(position) {
 			style="border-radius: 20px; position: relative; left: 0%; width: 100%; height: 100%;">
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
-				<li data-target="#carousel-example-generic" data-slide-to="0"
-					class="active" style="background-color: #73AD21;"></li>
-				<li data-target="#carousel-example-generic" data-slide-to="1"
-					style="background-color: #73AD21;"></li>
-				<li data-target="#carousel-example-generic" data-slide-to="2"
-					style="background-color: #73AD21;"></li>
+				<% 
+					User user = new User(userID);
+					ArrayList<Performance> recentQuizPerformances = user.getRecentTakenQuiz();
+					ArrayList<Quiz>   recentCreatedQuizzes = user.getRecentCreatedQuiz();
+					int numPages = recentQuizPerformances.size() + recentCreatedQuizzes.size();
+					for(int pageIndex = 0; pageIndex<numPages; pageIndex++) {
+						String state = "";
+						if(pageIndex == 0) {
+							state = "class=\"active\" ";
+						}
+						String pager = "<li data-target=\"#carousel-example-generic\" data-slide-to=" + "\"" + pageIndex + "\" " + state + "style=\"background-color: #73AD21;\"></li>";
+						out.print(pager);
+					}
+					
+				%>
 			</ol>
 
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner" role="listbox">
-				<div class="item active" style="height:280px;">
-					<img src="..." alt="...">
-					<div class="carousel-caption"><h3>Page1</h3></div>
-				</div>
-				<div class="item" style="height:280px;">
-					<img src="..." alt="...">
-					<div class="carousel-caption"><h3>Page2</h3></div>
-				</div>
-				...
+				<%
+					int pageIndex = 0;
+						for(Performance performance:recentQuizPerformances) {
+				/* 					if(pageIndex==3) {
+								break;
+							} */
+							if(pageIndex==0) {
+								out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
+							}else{
+								out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+							}
+							Quiz quizTook = new Quiz();
+							quizTook.setQuizID(performance.getQuizID());
+						out.print("<h3>Your Recent Performance</h3><br>");
+						out.print("<h4>Quiz: " + quizTook.getName() + "</h4>");
+						out.print("<h4>Score: " + performance.getScore() + "</h4>");
+						out.print("<h4>Start Time: " + performance.getStartTime() + "</h4>");
+						out.print("<h4>Duration: " + performance.getDuration() + "</h4>");
+						out.print("</div>");
+						pageIndex++;
+					}
+					for (Quiz quiz : recentCreatedQuizzes) {
+						/* 					if(pageIndex==3) {
+												break;
+											} */
+						if (pageIndex == 0) {
+							out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
+						} else {
+							out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+						}
+						out.print("<h3>Your Recent Created Quiz</h3><br>");
+						out.print("<h4>Name: " + quiz.getName() + "</h4>");
+						out.print("<h4>Popularity: " + quiz.getPopularity() + "</h4>");
+						out.print("<h4>Created Time: " + quiz.getCreatedDate() + "</h4>");
+						String isPracticeMode = quiz.isPracticeMode() ? "Yes" : "No";
+						out.print("<h4>Practice Mode: " + isPracticeMode + "</h4>");
+						out.print("</div>");
+						pageIndex++;
+					}
+				%>
+
 			</div>
 
 			<!-- Controls -->
@@ -307,9 +348,6 @@ function pageScrollUp(position) {
 						<textarea class="form-control" rows="6" id="note"
 							placeholder="Write a note to your friend..." name="emailContent"></textarea>
 
-						<br>
-						<input type="submit" class="btn btn-info" value="Send"></input>
-
 						<br> <input type="submit" class="btn btn-info" value="Send"
 							data-toggle="collapse" data-target="#collapseSentEmail"
 							aria-expanded="false" aria-controls="collapseSentEmail"></input>
@@ -379,7 +417,8 @@ function pageScrollUp(position) {
 				String quizIDUrl = "QuizSummary.jsp?quizID="+quizID+"&userID="+userID;
 				String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + " " + "class=\"thumbnail\">";
 				out.println(showQuizUrl);
-				out.println("<div style=\"width: 180px; height: 180px; background-color: white;\">");
+				out.println("<div style=\"position:relative;left:50%; margin-left:-90px; width: 180px; height: 180px; background-color: white;\">");
+				out.println("<img src=\"" + quiz.getImage() +"\" style=\"position:relative;top:8px;left:5%;width:90%;height:60%;\">");
 				out.println("<div class=\"caption\">");
 				String quizName = quiz.getName();
 				String popularity = String.valueOf(quiz.getPopularity());
@@ -422,7 +461,8 @@ function pageScrollUp(position) {
 					String quizIDUrl = "QuizSummary.jsp?quizID="+quizID+"&userID="+userID;
 					String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + " " + "class=\"thumbnail\">";
 					out.println(showQuizUrl);
-					out.println("<div style=\"width: 180px; height: 180px; background-color: white;\">");
+					out.println("<div style=\"position:relative;left:50%; margin-left:-90px; width: 180px; height: 180px; background-color: white;\">");
+					out.println("<img src=\"" + quiz.getImage() +"\" style=\"position:relative;top:8px;left:5%;width:90%;height:60%;\">");
 					out.println("<div class=\"caption\">");
 					String quizName = quiz.getName();
 					String createTime = String.valueOf(quiz.getCreatedDate());

@@ -2,8 +2,7 @@ package KaiChieh;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bian.AccountManager;
 import xuandong.Email;
 
 /**
@@ -44,19 +42,16 @@ public class SentEmail extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String userID =  (String) session.getAttribute("userID");
-		System.out.println(userID);
 		String receiverID = request.getParameter("receiverID");
 		String emailSubject = request.getParameter("emailSubject");
-		System.out.println(emailSubject);
 		String emailContent = request.getParameter("emailContent");
-		System.out.println(emailContent);
 		Email newEmail = new Email();
 		newEmail.setReceiver(receiverID);
 		newEmail.setSender(userID);
 		newEmail.setRead(false);
 		newEmail.setContent(emailContent);
 		newEmail.setSubject(emailSubject);
-		// new email set time
+		newEmail.setTime();
 		newEmail.insertToDatabse();
 		//doGet(request, response);
 	}

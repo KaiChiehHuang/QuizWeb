@@ -148,6 +148,11 @@
 	double mean = quizSummary.getMeanScore();
 	double max = quizSummary.getMaxScore();
 	double min = quizSummary.getMinScore();
+	boolean isOnePage = quiz.isOnePage();
+	String link = "QuizTakingOnePage.jsp";
+	if (!isOnePage) {
+		link = "QuizTakingMultiPage.jsp";
+	}
 /*  	String name = "Name";
 	String author = "Author";
 	String description = "Description";
@@ -421,9 +426,9 @@
 <div class="text-center"
 style="position: fixed;  width: 100%; height: 20%; top: 80%; left: 0; background-color: rgba(225, 196, 193, 0.6)">
 <h2>     </h2>
-<a href="QuizTaking.jsp" class="btn btn-info" role="button">Start Quiz</a>
-<a href="QuizTaking.jsp" class="btn btn-info" role="button">Practice</a>
-<a href="QuizTaking.jsp" class="btn btn-info"  role="button">Edit Quiz</a>
+<a href=<%=link%> class="btn btn-info" role="button">Start Quiz</a>
+<a href="QuizTakingOnePage.jsp" class="btn btn-info" role="button">Practice</a>
+<a href="QuizTakingOnePage.jsp" class="btn btn-info"  role="button">Edit Quiz</a>
 </div>
 </body>
 </html>

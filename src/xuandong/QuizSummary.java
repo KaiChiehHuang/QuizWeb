@@ -64,7 +64,7 @@ public class QuizSummary {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
-			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND UserID = \"" + this.userID + "\" ORDER BY StartTime DESC;";
+			String sql = "SELECT QuizID, UserID, StartTime, Duration, Score FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" AND UserID = \"" + this.userID + "\" ORDER BY StartTime DESC LIMIT " + TOP_NUM + ";";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
 				while (res.next()) {

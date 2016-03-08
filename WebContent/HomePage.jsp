@@ -216,7 +216,7 @@ function pageScrollUp(position) {
 							}
 						Quiz quizTook = new Quiz();
 						quizTook.setQuizID(performance.getQuizID());
-						out.print("<h3>Your Recent Performance</h3><br>");
+						out.print("<h3 style=\"color:#bf00ff;\">Your Recent Performance</h3><br>");
  						String quizID = quizTook.getQuizID();
 						String quizIDUrl = "QuizSummary.jsp?quizID="+quizID+"&userID="+userID;
 						String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">"; 

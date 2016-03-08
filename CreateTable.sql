@@ -1,4 +1,4 @@
-USE c_cs108_yuan125;
+USE c_cs108_xuandong;
 
 # BOOLEAN: 0, 1
 # DATETIME: 1973-12-30 15:30:00
@@ -20,8 +20,8 @@ DROP TABLE IF EXISTS Administrator;
 DROP TABLE IF EXISTS Announcement;
 
 CREATE TABLE Users (
-	UserID      VARCHAR(255),
-	Password    VARCHAR(255),
+	UserID      VARCHAR(255) NOT NULL,
+	Password    VARCHAR(255) NOT NULL,
 	Name        VARCHAR(255),
 	Age         INT,
 	Gender      CHAR(5),
@@ -29,8 +29,9 @@ CREATE TABLE Users (
 	PRIMARY KEY (UserID)
 );
 
-INSERT INTO Users VALUES("Administration","b8be3d1264310c3b8c848d4b90d5206179a40cc4","Admin","unknown","unknown","unknown");
-INSERT INTO Users VALUES("guest","35675e68f4b5af7b995d9205ad0fc43842f16450","Guest","unknown","unknown","unknown");
+INSERT INTO Users VALUES("Administration","b8be3d1264310c3b8c848d4b90d5206179a40cc4","Admin",,"unknown","");
+INSERT INTO Users VALUES("guest","35675e68f4b5af7b995d9205ad0fc43842f16450","Guest",,"unknown","");
+INSERT INTO Users VALUES("jay","f1bfbf317598ea9c3b0fd25a90f4bbd0b434bbc7","Kaijie Huang",25,"Male","");
 
 
 CREATE TABLE Friendship (
@@ -39,9 +40,11 @@ CREATE TABLE Friendship (
 	Pending     BOOLEAN,
 	PRIMARY KEY (User1ID, User2ID),
 	FOREIGN KEY (User1ID)
-		REFERENCES Users(UserID),
+		REFERENCES Users(UserID)
+		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (User2ID)
 		REFERENCES Users(UserID)
+		ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Quiz (
@@ -59,6 +62,7 @@ CREATE TABLE Quiz (
 	PRIMARY KEY (QuizID),
 	FOREIGN KEY (AuthorID)
 		REFERENCES Users(UserID)
+		ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- DROP TABLE IF EXISTS SingleChoice;
@@ -121,9 +125,11 @@ CREATE TABLE QuizRecord (
 	Score     DECIMAL(5,2),
 	PRIMARY KEY (QuizID, UserID, StartTime),
 	FOREIGN KEY (QuizID)
-		REFERENCES Quiz(QuizID),
+		REFERENCES Quiz(QuizID)
+		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (UserID)
 		REFERENCES Users(UserID)
+		ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Emails (
@@ -136,6 +142,8 @@ CREATE TABLE Emails (
 	IsRead          BOOLEAN,
 	PRIMARY KEY (SenderID, ReceiverID, Time)
 );
+
+INSERT INTO Emails(SenderID, ReceiverID, Time, Subject, Content, Link, IsRead) VALUES("Administration","jay","2016-03-05 15:30:57","Testing","If you can see this email, it means our system works! :)","",false);
 
 CREATE TABLE Achievement (
 	UserID           VARCHAR(255),

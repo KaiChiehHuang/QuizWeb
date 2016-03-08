@@ -355,4 +355,12 @@ public class User {
 		database.getCon().close();
 		return recentQuizs;
 	}
+	
+	public void addAdmin(String id) throws SQLException {
+		DBConnection database = new DBConnection();
+		String sql = "INSERT INTO Administrator(AdminID) VALUES(\"" + id + "\");";
+		database.getStmt().executeUpdate(sql);
+		database.getCon().close();
+	}
+	
 }

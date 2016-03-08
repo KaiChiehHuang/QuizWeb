@@ -27,6 +27,7 @@
 	quiz.quizStart();
 	problems = quiz.getProblems();
 	quiz.setOnPracticeMode();
+	System.out.println("Practice");
 %>
 
 <form action="QuizResultServlet" method="post">

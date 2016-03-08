@@ -29,6 +29,7 @@
 	ArrayList<Problem> problems = new ArrayList<Problem>();
 	quiz.quizStart();
 	problems = quiz.getProblems();
+	quiz.setOnQuizMode();
 %>
 <form action="QuizResultServlet" method="post">
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false"

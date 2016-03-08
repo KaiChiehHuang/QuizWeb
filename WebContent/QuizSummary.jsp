@@ -331,7 +331,6 @@ style="position: fixed;  width: 100%; height: 20%; top: 80%; left: 0; background
 <a href=<%=link%> class="btn btn-info" role="button">Start Quiz</a>
 <!-- <a href="QuizTakingMultiPage.jsp" class="btn btn-info" role="button">Start Quiz</a> -->
 <%
-System.out.println(isPracticeMode);
 if (isPracticeMode) {
 	out.println("<a href=\"" + linkPractice+ "\" class=\"btn btn-info\" role=\"button\">Practice</a>");
 } else {

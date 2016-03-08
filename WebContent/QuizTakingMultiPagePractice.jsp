@@ -29,6 +29,8 @@
 	ArrayList<Problem> problems = new ArrayList<Problem>();
 	quiz.quizStart();
 	problems = quiz.getProblems();
+	quiz.setOnPracticeMode();
+	System.out.println("Practice");
 %>
 <form action="QuizResultServlet" method="post">
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false"

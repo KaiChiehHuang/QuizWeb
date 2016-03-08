@@ -334,7 +334,7 @@ style="position: fixed;  width: 100%; height: 20%; top: 80%; left: 0; background
 if (isPracticeMode) {
 	out.println("<a href=\"" + linkPractice+ "\" class=\"btn btn-info\" role=\"button\">Practice</a>");
 } else {
-	out.println("<a href=\"" + linkPractice+ "\" class=\"btn btn-info\" disabled=\"disabled\" role=\"button\">Practice</a>");
+	out.println("<a class=\"btn btn-info\" disabled=\"disabled\" role=\"button\">Practice</a>");
 }
 %>
 <%-- <a href=<%=link%> class="btn btn-info" role="button">Practice</a> --%>

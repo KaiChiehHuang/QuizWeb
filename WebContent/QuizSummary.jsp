@@ -14,94 +14,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
 <style>
-.clearfix:after {
-    display:block;
-    clear:both;
-}
- 
-/*----- Menu Outline -----*/
-.menu-wrap {
-    width:100%;
-    box-shadow:0px 1px 3px rgba(0,0,0,0.2);
-    background:#3e3436;
-}
- 
-.menu {
-    width:250px;
-    margin:0px auto;
-}
- 
-.menu li {
-    margin:0px;
-    list-style:none;
-    font-family:'Ek Mukta';
-}
- 
-.menu a {
-    transition:all linear 0.15s;
-    color:#919191;
-}
- 
-.menu li:hover > a, .menu .current-item > a {
-    text-decoration:none;
-    color:#be5b70;
-}
- 
-.menu .arrow {
-    font-size:11px;
-    line-height:0%;
-}
- 
-/*----- Top Level -----*/
-.menu > ul > li {
-    float:left;
-    display:inline-block;
-    position:relative;
-    font-size:19px;
-}
- 
-.menu > ul > li > a {
-    padding:10px 30px;
-    display:inline-block;
-    text-shadow:0px 1px 0px rgba(0,0,0,0.4);
-}
- 
-.menu > ul > li:hover > a, .menu > ul > .current-item > a {
-    background:#2e2728;
-}
- 
-/*----- Bottom Level -----*/
-.menu li:hover .sub-menu {
-    z-index:1;
-    opacity:1;
-}
- 
-.sub-menu {
-    width:140%;
-    padding:5px 0px;
-    position:absolute;
-    top:100%;
-    left:0px;
-    z-index:-1;
-    opacity:0;
-    transition:opacity linear 0.15s;
-    box-shadow:0px 2px 3px rgba(0,0,0,0.2);
-    background:#2e2728;
-}
- 
-.sub-menu li {
-    display:block;
-    font-size:16px;
-}
- 
-.sub-menu li a {
-    padding:10px 30px;
-    display:block;
-}
- 
-.sub-menu li a:hover, .sub-menu .current-item a {
-    background:#3e3436;
-}
 
 .carousel-control{
   top: 50%
@@ -149,10 +61,14 @@
 	double max = quizSummary.getMaxScore();
 	double min = quizSummary.getMinScore();
 	boolean isOnePage = quiz.isOnePage();
+	boolean isPracticeMode = quiz.isPracticeMode();
 	String link = "QuizTakingOnePage.jsp";
+	String linkPractice = "QuizTakingOnePagePractice.jsp";
 	if (!isOnePage) {
 		link = "QuizTakingMultiPage.jsp";
+		linkPractice = "QuizTakingMultiPagePractice.jsp";
 	}
+	
 /*  	String name = "Name";
 	String author = "Author";
 	String description = "Description";
@@ -283,20 +199,6 @@
         		}
         		out.println("</tr>");	
     		}
-    		
-/*     		for (int i = 0; i < 10; i++) {
-    			if (i % 2 == 0) {
-        			out.println("<tr class=\"success\">");
-        		} else {
-        			out.println("<tr class=\"warning\">");
-        		}
-    			for (int j = 0; j < 3; j++) {
-        			out.println("<td>");
-        			out.println(j);
-        			out.println("</td>");
-        		}
-        		out.println("</tr>");
-    		} */
     	%>
           </tbody>
           </table>
@@ -427,7 +329,16 @@
 style="position: fixed;  width: 100%; height: 20%; top: 80%; left: 0; background-color: rgba(225, 196, 193, 0.6)">
 <h2>     </h2>
 <a href=<%=link%> class="btn btn-info" role="button">Start Quiz</a>
-<a href="QuizTakingOnePage.jsp" class="btn btn-info" role="button">Practice</a>
+<!-- <a href="QuizTakingMultiPage.jsp" class="btn btn-info" role="button">Start Quiz</a> -->
+<%
+System.out.println(isPracticeMode);
+if (isPracticeMode) {
+	out.println("<a href=\"" + linkPractice+ "\" class=\"btn btn-info\" role=\"button\">Practice</a>");
+} else {
+	out.println("<a href=\"" + linkPractice+ "\" class=\"btn btn-info\" disabled=\"disabled\" role=\"button\">Practice</a>");
+}
+%>
+<%-- <a href=<%=link%> class="btn btn-info" role="button">Practice</a> --%>
 <a href="QuizTakingOnePage.jsp" class="btn btn-info"  role="button">Edit Quiz</a>
 </div>
 </body>

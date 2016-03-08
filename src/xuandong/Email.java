@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
+import bian.User;
+
 public class Email {
 	String senderID;
 	String receiverID;
@@ -17,6 +19,34 @@ public class Email {
 	 * Simple Constructor
 	 */
 	public Email() {
+	}
+	
+	public String getSenderID() {
+		return this.senderID;
+	}
+	
+	public String getReceiverID() {
+		return this.receiverID;
+	}
+	
+	public String getContent() {
+		return this.content;
+	}
+	
+	public String getLink() {
+		return this.link;
+	}
+	
+	public String getSubject() {
+		return this.subject;
+	}
+	
+	public String getTime() {
+		return this.time;
+	}
+	
+	public boolean getRead() {
+		return this.read;
 	}
 	
 	/**
@@ -73,6 +103,7 @@ public class Email {
 	 */
 	public void setRead(boolean value) {
 		this.read = value;
+		updateDatabase();
 	}
 	
 	/**
@@ -114,7 +145,7 @@ public class Email {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
-			String sql = "UPDATE Emails SET IsRead = " + this.read + ";";
+			String sql = "UPDATE Emails SET IsRead = " + this.read + " WHERE SendID = \"" + this.senderID + "\" AND ReceiverID = \"" + this.receiverID + "\" AND Time = \"" + this.time + "\";";
 			stmt.executeUpdate(sql);
 			database.getCon().close();
 		} catch (SQLException e) {

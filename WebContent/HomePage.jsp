@@ -189,17 +189,36 @@ function pageScrollUp(position) {
 						INFO </a>
 				</div>
 				<div class="col-xs-6 col-md-6 text-right">
+				
+					<button class="btn btn-info" type="button" data-toggle="collapse"
+						data-target="#collapseSentEmail" aria-expanded="false"
+						aria-controls="collapseSentEmail">
+						<span class="glyphicon glyphicon-comment" style="width:30px;font-size:18px;"></span>
+					</button>
 					<button class="btn btn-info" type="button" data-toggle="collapse"
 						data-target="#collapseExample" aria-expanded="false"
 						aria-controls="collapseExample">
-						<span class="glyphicon glyphicon-envelope"  style="font-size:16px;"></span>
+						<span class="glyphicon glyphicon-user" style="width:30px;font-size:18px;"></span>
 						<% 
 							EmailManager eManager = new EmailManager();
 							userID = (String) session.getAttribute("userID");
 							eManager.setUser(userID);
 							int unreadEmailCount = eManager.getUnreadEmailsCount();
 							if (unreadEmailCount > 0) {
-								out.println(" <span class=\"badge\">"+ String.valueOf(unreadEmailCount) +"</span>");
+								out.println(" <span class=\"badge\" style=\"font-size:11px;top:-5px\">"+ String.valueOf(unreadEmailCount) +"</span>");
+							}
+						%>
+					</button>
+					<button class="btn btn-info" type="button" data-toggle="collapse"
+						data-target="#collapseExample" aria-expanded="false"
+						aria-controls="collapseExample">
+						<span class="glyphicon glyphicon-envelope" style="width:30px;font-size:18px;"></span>
+						<% 
+							userID = (String) session.getAttribute("userID");
+							eManager.setUser(userID);
+							unreadEmailCount = eManager.getUnreadEmailsCount();
+							if (unreadEmailCount > 0) {
+								out.println(" <span class=\"badge\" style=\"font-size:11px;top:-5px\">"+ String.valueOf(unreadEmailCount) +"</span>");
 							}
 						%>
 						<script>
@@ -214,6 +233,34 @@ function pageScrollUp(position) {
 						</script>
 					</button>
 				</div>
+			</div>
+		</div>
+
+		<div class="collapse" id="collapseSentEmail">
+			<div class="well"
+				style="width: 900px; height: 330px; background-color: black;">
+				<form action="SentEmail" method="post">
+					<div class="form-group" style="text-align: right;">
+						<div class="input-group">
+							<span class="input-group-addon" id="sizing-addon2"><span
+								class="glyphicon glyphicon-user"></span></span> <input type="text"
+								class="form-control" placeholder="Sent to which user ID?"
+								aria-describedby="sizing-addon2" name="receiverID">
+						</div>
+						<br>
+						<div class="input-group">
+							<span class="input-group-addon" id="sizing-addon2"><span
+								class="glyphicon glyphicon-pencil"></span></span> <input type="text"
+								class="form-control"
+								placeholder="Write a subject for this email..."
+								aria-describedby="sizing-addon2" name="emailSubject">
+						</div>
+						</br>
+						<textarea class="form-control" rows="6" id="note"
+							placeholder="Write a note to your friend..." name="emailContent"></textarea>
+						</br> <input type="submit" class="btn btn-info" value="Send"></input>
+					</div>
+				</form>
 			</div>
 		</div>
 

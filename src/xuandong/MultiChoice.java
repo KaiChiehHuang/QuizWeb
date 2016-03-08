@@ -32,6 +32,18 @@ public class MultiChoice extends Problem {
 	}
 	
 	/**
+	 * This constructor is used to create a new problem that is not in the database
+	 * @param type Please pass me the abbreviation of the problem type
+	 * e.g. for "QuestionResponse", pass in "QR"; for "MultiChoice", pass in "MC"
+	 * each type contains exactly 2 characters, you can refer to Problem.problemType
+	 * @param creating TRUE for creating a new problem, FALSE if not
+	 * Please always pass true if you are creating a new problem instead of modifying one
+	 */
+	public MultiChoice(String type, boolean creating) {
+		super(type, creating);
+	}
+	
+	/**
 	 * Override the getScore() method
 	 * returns how many sub-problems are answered right
 	 * the result is up to count

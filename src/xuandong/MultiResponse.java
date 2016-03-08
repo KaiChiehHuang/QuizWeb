@@ -31,6 +31,10 @@ public class MultiResponse extends Problem {
 		}
 	}
 	
+	public MultiResponse(String type, boolean creating) {
+		super(type, creating);
+	}
+	
 	/**
 	 * @return the number of right answers
 	 */

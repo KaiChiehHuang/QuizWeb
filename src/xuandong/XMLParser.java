@@ -25,6 +25,7 @@ public class XMLParser {
 			DEFAULTIMAGES.add("https://www.drupal.org/files/project-images/quiz-image_0.jpg");
 			DEFAULTIMAGES.add("http://www.yadavdilse.com/wp-content/uploads/2015/08/Optimized-quiz.jpg");
 			DEFAULTIMAGES.add("http://gonitsora.com/wp-content/uploads/2015/03/quiz.jpg");
+			DEFAULTIMAGES.add("http://www.satollo.net/wp-content/uploads/2015/03/quiz.jpg");
 	};
 	
 	/**

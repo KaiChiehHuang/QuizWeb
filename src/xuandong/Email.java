@@ -21,30 +21,51 @@ public class Email {
 	public Email() {
 	}
 	
+	/**
+	 * @return senderID
+	 */
 	public String getSenderID() {
 		return this.senderID;
 	}
 	
+	/**
+	 * @return receiverID
+	 */
 	public String getReceiverID() {
 		return this.receiverID;
 	}
 	
+	/**
+	 * @return email content
+	 */
 	public String getContent() {
 		return this.content;
 	}
 	
+	/**
+	 * @return the quiz link
+	 */
 	public String getLink() {
 		return this.link;
 	}
 	
+	/**
+	 * @return email subject
+	 */
 	public String getSubject() {
 		return this.subject;
 	}
 	
+	/**
+	 * @return email time
+	 */
 	public String getTime() {
 		return this.time;
 	}
 	
+	/**
+	 * @return TRUE for already read, FALSE if not
+	 */
 	public boolean getRead() {
 		return this.read;
 	}
@@ -145,7 +166,7 @@ public class Email {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
-			String sql = "UPDATE Emails SET IsRead = " + this.read + " WHERE SendID = \"" + this.senderID + "\" AND ReceiverID = \"" + this.receiverID + "\" AND Time = \"" + this.time + "\";";
+			String sql = "UPDATE Emails SET IsRead = " + this.read + " WHERE SenderID = \"" + this.senderID + "\" AND ReceiverID = \"" + this.receiverID + "\" AND Time = \"" + this.time + "\";";
 			stmt.executeUpdate(sql);
 			database.getCon().close();
 		} catch (SQLException e) {

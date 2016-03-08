@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="xuandong.*" %>
@@ -24,10 +24,12 @@
 <%
 	Quiz quiz = (Quiz)session.getAttribute("quiz");
 	ArrayList<Problem> problems = new ArrayList<Problem>();
-	quiz.quizStart();
 	problems = quiz.getProblems();
 	quiz.setOnPracticeMode();
-	System.out.println("Practice");
+	if (quiz.isRandomQuiz()) {
+		Collections.shuffle(problems);
+	}
+	quiz.quizStart();
 %>
 
 <form action="QuizResultServlet" method="post">

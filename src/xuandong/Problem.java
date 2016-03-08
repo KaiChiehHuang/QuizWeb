@@ -96,10 +96,10 @@ public class Problem {
 			if (res.next()) {
 				int questionCount = Integer.parseInt(res.getString(1).substring(2));
 				questionCount++;
-				this.questionID = this.type + String.format("%064d", questionCount);
+				this.questionID = this.type + String.format("%010d", questionCount);
 			} else {
 				int questionCount = 0;
-				this.questionID = this.type + String.format("%064d", questionCount);
+				this.questionID = this.type + String.format("%010d", questionCount);
 			}
 			stmt.executeUpdate(getInsertSQL());
 		} else {

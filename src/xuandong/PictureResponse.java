@@ -29,6 +29,10 @@ public class PictureResponse extends Problem {
 		}
 	}
 	
+	public PictureResponse(String type, boolean creating) {
+		super(type, creating);
+	}
+	
 	/**
 	 * @return the url of the image
 	 */

@@ -3,10 +3,7 @@ package bian;
 import java.sql.*;
 import java.util.*;
 
-import xuandong.Achievement;
-import xuandong.DBConnection;
-import xuandong.Performance;
-import xuandong.Quiz;
+import xuandong.*;
 
 public class User {
 	private Statement stmt;
@@ -16,7 +13,7 @@ public class User {
 	private String gender;
 	private int age;
 	private ArrayList<String> friends;
-	private String[] achievements;
+	private ArrayList<Achievement> achievements;
 
 	/**
 	 * Simple constructor Will fetch the name, age, gender, achievement, friend
@@ -31,12 +28,12 @@ public class User {
 		this.id = id;
 		try {
 			rs = stmt.executeQuery(
-					"SELECT Name, Age, Gender, Achievement FROM Users WHERE UserID = " + "\"" + id + "\";");
+					"SELECT Name, Age, Gender FROM Users WHERE UserID = " + "\"" + id + "\";");
 			name = rs.getString("Name");
 			age = rs.getInt("Age");
 			gender = rs.getString("Gender");
-			achievements = rs.getString("Achievement").split("\\|");
-
+//			achievements = rs.getString("Achievement").split("\\|");
+			fetchAchievement();
 			// Select from friends table.
 			friends = new ArrayList<String>();
 			rs = stmt.executeQuery("SELECT User2ID FROM Friendship WHERE User1ID = \"" + id + "\";");
@@ -87,13 +84,20 @@ public class User {
 	public void setAge(int age) {
 		this.age = age;
 	}
+	
+	/**
+	 * @return a list of this user's achievements
+	 */
+	public ArrayList<Achievement> getAchievement() {
+		return this.achievements;
+	}
 
 	/**
 	 * Get user's achievements
 	 * 
 	 * @return String[] achievements
 	 */
-	public String[] getAchievements() {
+	public ArrayList<Achievement> getAchievements() {
 		return achievements;
 	}
 
@@ -132,9 +136,7 @@ public class User {
 
 	/**
 	 * Add user's achievement
-	 * 
-	 * @param new
-	 *            achievement
+	 * @param achievement
 	 */
 	public void addAchievement(String achievement) {
 		try {
@@ -216,8 +218,8 @@ public class User {
 	 * Get all the achievements of this user
 	 * @return A list of achievements
 	 */
-	public ArrayList<Achievement> getAchievement() {
-		ArrayList<Achievement> achis = new ArrayList<Achievement>();
+	private void fetchAchievement() {
+		achievements = new ArrayList<Achievement>();
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
@@ -230,13 +232,12 @@ public class User {
 				temp.setAchievementName(res.getString("AchievementName"));
 				temp.setTime(res.getString("Time"));
 				temp.setDescription();
-				achis.add(temp);
+				achievements.add(temp);
 			}
 			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return achis;
 	}
 
 	/**
@@ -355,12 +356,4 @@ public class User {
 		database.getCon().close();
 		return recentQuizs;
 	}
-	
-	public void addAdmin(String id) throws SQLException {
-		DBConnection database = new DBConnection();
-		String sql = "INSERT INTO Administrator(AdminID) VALUES(\"" + id + "\");";
-		database.getStmt().executeUpdate(sql);
-		database.getCon().close();
-	}
-	
 }

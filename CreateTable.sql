@@ -12,25 +12,26 @@ DROP TABLE IF EXISTS QuestionResponse;
 DROP TABLE IF EXISTS PictureResponse;
 DROP TABLE IF EXISTS FillBlank;
 DROP TABLE IF EXISTS SingleChoice;
+DROP TABLE IF EXISTS Achievement;
 DROP TABLE IF EXISTS Quiz;
 DROP TABLE IF EXISTS Friendship;
-DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS Achievement;
-DROP TABLE IF EXISTS Administrator;
 DROP TABLE IF EXISTS Announcement;
+DROP TABLE IF EXISTS Administrator;
+DROP TABLE IF EXISTS Users;
+
 
 CREATE TABLE Users (
 	UserID      VARCHAR(255) NOT NULL,
 	Password    VARCHAR(255) NOT NULL,
 	Name        VARCHAR(255),
 	Age         INT,
-	Gender      CHAR(5),
+	Gender      CHAR(7),
 	Achievement VARCHAR(255),
 	PRIMARY KEY (UserID)
 );
 
-INSERT INTO Users VALUES("Administration","b8be3d1264310c3b8c848d4b90d5206179a40cc4","Admin",,"unknown","");
-INSERT INTO Users VALUES("guest","35675e68f4b5af7b995d9205ad0fc43842f16450","Guest",,"unknown","");
+INSERT INTO Users VALUES("Administration","b8be3d1264310c3b8c848d4b90d5206179a40cc4","Admin",0,"unknown","");
+INSERT INTO Users VALUES("guest","35675e68f4b5af7b995d9205ad0fc43842f16450","Guest",0,"unknown","");
 INSERT INTO Users VALUES("jay","f1bfbf317598ea9c3b0fd25a90f4bbd0b434bbc7","Kaijie Huang",25,"Male","");
 
 
@@ -114,8 +115,6 @@ CREATE TABLE MultiResponse (
 	PRIMARY KEY (QuestionID)
 );
 
--- INSERT INTO QuizRecord VALUES("0000000000","Administration","2016-03-05 15:30:57","2016-03-05 15:31:57","00:01:00",97);
-
 CREATE TABLE QuizRecord (
 	QuizID    VARCHAR(255),
 	UserID    VARCHAR(255),
@@ -132,6 +131,8 @@ CREATE TABLE QuizRecord (
 		ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- INSERT INTO QuizRecord VALUES("0000000003","jay","2016-03-05 15:30:57","2016-03-05 15:31:57","00:01:00",97.1);
+
 CREATE TABLE Emails (
 	SenderID        VARCHAR(255),
 	ReceiverID      VARCHAR(255),
@@ -140,28 +141,58 @@ CREATE TABLE Emails (
 	Content         TEXT,
 	Link            TEXT,
 	IsRead          BOOLEAN,
-	PRIMARY KEY (SenderID, ReceiverID, Time)
+	PRIMARY KEY (SenderID, ReceiverID, Time),
+	FOREIGN KEY (SenderID)
+		REFERENCES Users(UserID)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (ReceiverID)
+		REFERENCES Users(UserID)
+		ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO Emails(SenderID, ReceiverID, Time, Subject, Content, Link, IsRead) VALUES("Administration","jay","2016-03-05 15:30:57","Testing","If you can see this email, it means our system works! :)","",false);
+INSERT INTO Emails(SenderID, ReceiverID, Time, Subject, Content, Link, IsRead) VALUES("Administration","jay","2016-03-04 15:30:57","Testing1","If you can see this email, it means our system works! :)","",false);
+INSERT INTO Emails(SenderID, ReceiverID, Time, Subject, Content, Link, IsRead) VALUES("Administration","jay","2016-03-05 15:30:57","Testing2","If you can see this email, it means our system works! :)","",false);
+INSERT INTO Emails(SenderID, ReceiverID, Time, Subject, Content, Link, IsRead) VALUES("Administration","jay","2016-03-06 15:30:57","Testing3","If you can see this email, it means our system works! :)","",false);
+INSERT INTO Emails(SenderID, ReceiverID, Time, Subject, Content, Link, IsRead) VALUES("Administration","jay","2016-03-07 15:30:57","Testing4","If you can see this email, it means our system works! :)","",false);
+
 
 CREATE TABLE Achievement (
 	UserID           VARCHAR(255),
 	QuizID           VARCHAR(255),
 	Time             DATETIME,
 	AchievementName  VARCHAR(255),
-	PRIMARY KEY (UserID, Time)
+	PRIMARY KEY (UserID, Time, QuizID),
+	FOREIGN KEY (UserID)
+		REFERENCES Users(UserID)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (QuizID)
+		REFERENCES Quiz(QuizID)
+		ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Administrator (
 	AdminID     VARCHAR(255),
-	PRIMARY KEY (AdminID)
+	PRIMARY KEY (AdminID),
+	FOREIGN KEY (AdminID)
+		REFERENCES Users(UserID)
+		ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+INSERT INTO Administrator(AdminID) VALUES ("Administration");
 
 CREATE TABLE Announcement (
 	Content   TEXT,
 	AdminID   VARCHAR(255),
 	Time      DATETIME,
 	Subject   Text,
-	PRIMARY KEY (AdminID, Time)
+	PRIMARY KEY (AdminID, Time),
+	FOREIGN KEY (AdminID)
+		REFERENCES Administrator(AdminID)
+		ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+INSERT INTO Announcement(Content, AdminID, Time, Subject) VALUES ("Welcome to QuizWeb! :)","Administration","2016-03-04 15:30:57","Welcome");
+
+
+
+

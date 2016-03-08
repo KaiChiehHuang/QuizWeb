@@ -120,6 +120,7 @@ CREATE TABLE MultiResponse (
 	Question   TEXT,
 	Answer     TEXT,
 	Count      INT,
+	Ordered    BOOLEAN,
 	PRIMARY KEY (QuestionID)
 );
 
@@ -249,6 +250,5 @@ CREATE TABLE Ratings(
 		REFERENCES Users(UserID)
 		ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 
 

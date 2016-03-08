@@ -30,7 +30,7 @@ public class EmailManager {
 	/**
 	 * @return the number of emails sent to the user that are unread
 	 */
-	public int getUnreadEmails() {
+	public int getUnreadEmailsCount() {
 		int count = 0;
 		try {
 			DBConnection database = new DBConnection();
@@ -49,7 +49,7 @@ public class EmailManager {
 	/**
 	 * Get all the emails that are sent to this user
 	 */
-	public void getToUserEmail() {
+	public ArrayList<Email> getToUserEmail() {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
@@ -71,12 +71,13 @@ public class EmailManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return this.toEmails;
 	}
 	
 	/**
 	 * Get all the emails that are sent from this user
 	 */
-	public void getFromUserEmail() {
+	public ArrayList<Email> getFromUserEmail() {
 		DBConnection database = new DBConnection();
 		Statement stmt = database.getStmt();
 		try {
@@ -98,20 +99,7 @@ public class EmailManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * @return an ArrayList of emails that are sent to this user
-	 */
-	public ArrayList<Email> getToEmailList() {
-		return toEmails;
-	}
-	
-	/**
-	 * @return an ArrayList of emails that are sent from this user
-	 */
-	public ArrayList<Email> getFromEmailList() {
-		return fromEmails;
+		return this.fromEmails;
 	}
 	
 	/**

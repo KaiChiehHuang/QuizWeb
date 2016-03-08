@@ -192,7 +192,26 @@ function pageScrollUp(position) {
 					<button class="btn btn-info" type="button" data-toggle="collapse"
 						data-target="#collapseExample" aria-expanded="false"
 						aria-controls="collapseExample">
-						Messages <span class="badge">4</span>
+						<span class="glyphicon glyphicon-envelope"  style="font-size:16px;"></span>
+						<% 
+							EmailManager eManager = new EmailManager();
+							userID = (String) session.getAttribute("userID");
+							eManager.setUser(userID);
+							int unreadEmailCount = eManager.getUnreadEmailsCount();
+							if (unreadEmailCount > 0) {
+								out.println(" <span class=\"badge\">"+ String.valueOf(unreadEmailCount) +"</span>");
+							}
+						%>
+						<script>
+							$(document).on("click", ".btn-info", function(e) {
+							    e.preventDefault();
+							    var $badge = $(this).find('.badge'),
+							        count = Number($badge.text()),
+							        active = $(this).hasClass('active');
+							    $badge.text("");
+							    $(this).toggleClass('active');
+							});
+						</script>
 					</button>
 				</div>
 			</div>
@@ -201,21 +220,24 @@ function pageScrollUp(position) {
 		<div class="collapse" id="collapseExample">
 			<div class="well" style="width: 900px; height: 300px; background-color: black;">
 				<%
-					EmailManager eManager = new EmailManager();
 					userID = (String) session.getAttribute("userID");
 					eManager.setUser(userID);
 					ArrayList<Email> emails = eManager.getToUserEmail();
 					for (Email mail: emails) {
 						out.println("<div class=\"media\">");
-						out.println("<div class=\"media-left media-middle\">");
-						sentEmailUserID = mail.getSenderID();
-						sentEmailUserIDUrl = "<a href=\"#\">" + sentEmailUserID + "</a>";
+						out.println("<div class=\"media-left media-middle\" style=\"text-align:left !important;\">");
+						String sentEmailUserID = mail.getSenderID();
+						String sentEmailUserIDUrl = "<a href=\"#\">" +sentEmailUserID+ "</a>";
+						out.println(sentEmailUserIDUrl);
+						out.println("<br>");
+						String sentEmailTime = mail.getTime();
+						out.println("<small>"+sentEmailTime+"</small>");
 						out.println("</div>");
 						out.println("<div class=\"media-body\">");
-						emailSubject = mail.getSubject();
-						emailSubjectTitle = "<h4 class=\"media-heading\">" + emailSubject + "</h4>";
+						String emailSubject = mail.getSubject();
+						String emailSubjectTitle = "<h4 class=\"media-heading\">" + emailSubject + "</h4>";
 						out.println(emailSubjectTitle);
-						content = mail.getContent();
+						String content = mail.getContent();
 						out.println(content);
 						out.println("</div>");
 						out.println("</div>");
@@ -241,7 +263,7 @@ function pageScrollUp(position) {
 				</div>
 			</div>
 		</div>
-	    <% 
+		<% 
 	 	 {
 		    int numPopularQuizzes = 0; 
 			int numQuizzesInRow = 4;
@@ -254,14 +276,14 @@ function pageScrollUp(position) {
 				String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + " " + "class=\"thumbnail\">";
 				out.println(showQuizUrl);
 				out.println("<div style=\"width: 180px; height: 180px; background-color: white;\">");
-					out.println("<div class=\"caption\">");
-							String quizName = quiz.getName();
-							String popularity = String.valueOf(quiz.getPopularity());
-							String heartIcon = "<br><span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>  ";
-							String showQuizName = "<h3 style=\"font-size:20px;\">"+quizName+"<small>"+heartIcon+popularity+"</small>"+"</h3>";
-							out.println(showQuizName);
-						out.println("</div>");
-						// Add popularity
+				out.println("<div class=\"caption\">");
+				String quizName = quiz.getName();
+				String popularity = String.valueOf(quiz.getPopularity());
+				String heartIcon = "<br><span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>  ";
+				String showQuizName = "<h3 style=\"font-size:20px;\">"+quizName+"<small>"+heartIcon+popularity+"</small>"+"</h3>";
+				out.println(showQuizName);
+				out.println("</div>");
+				// Add popularity
 				out.println("</div>");
 				out.println("</a>");
 				out.println("</div>");
@@ -269,7 +291,7 @@ function pageScrollUp(position) {
 			}
 			out.println("</div>");
 	 	 }
-		 %>   
+		 %>
 
 		<div class="panel panel-default">
 			<div class="panel-body"

@@ -77,6 +77,10 @@ public class Achievement {
 		return this.description;
 	}
 	
+	public static String getDescription(String achi) {
+		return Achievement.ACHIEVEMENTDESCRIPTION.get(achi);
+	}
+	
 	public static Set<String> getAllAchievement() {
 		return Achievement.ACHIEVEMENTDESCRIPTION.keySet();
 	}

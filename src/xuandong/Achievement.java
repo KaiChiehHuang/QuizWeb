@@ -80,7 +80,11 @@ public class Achievement {
 		return Achievement.ACHIEVEMENTDESCRIPTION.keySet();
 	}
 	
-	public String getImage(String achi) {
+	public static String getImage(String achi) {
 		return Achievement.ACHIEVEMENTIMAGE.get(achi);
+	}
+	
+	public String getImage() {
+		return Achievement.ACHIEVEMENTIMAGE.get(this.getAchievementName());
 	}
 }

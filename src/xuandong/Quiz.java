@@ -281,6 +281,12 @@ public class Quiz {
 				break;
 			}
 		}
+		DBConnection database = new DBConnection();
+		String sql = "DELETE FROM " + Problem.problemType.get(problemID.substring(0, 2)) + " Count FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\";";
+		ResultSet res = database.getStmt().executeQuery(sql);
+		res.next();
+		this.popularity = res.getInt("Count");
+		database.con.close();
 	}
 
 	/**

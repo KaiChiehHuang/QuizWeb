@@ -21,9 +21,10 @@
 <body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers4.jpeg')">
 <%
 	String userID = (String)session.getAttribute("userID");
-	User user = new User(userID);
-
-
+	/* User user = new User(userID); */
+	User user = new User("jay");
+	ArrayList<Performance> userPerformance = new ArrayList<Performance>();
+	userPerformance = user.getQuizHistory();
 %>
 
 <div class="container">
@@ -31,7 +32,7 @@
   <table class="table">
     <thead>
       <tr>
-      	<th>QuizID</th>
+      	<th>Quiz Name</th>
         <th>Start Time</th>
         <th>Score</th>
         <th>Duration</th>
@@ -42,7 +43,7 @@
     <%
     	for (int i = userPerformance.size() - 1; i >= 0 ; i--) {
      		String[] per = new String[4];
-     		per[0] = userPerformance.get(i).getQuiID();
+     		per[0] = userPerformance.get(i).getQuizName();
     		per[1] = userPerformance.get(i).getStartTime();
     		per[2] = String.valueOf(userPerformance.get(i).getScore());
     		per[3] = userPerformance.get(i).getDuration();

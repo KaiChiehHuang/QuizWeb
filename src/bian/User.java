@@ -297,7 +297,7 @@ public class User {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT F.User2ID AS UserID, A.QuizID AS QuizID, A.Time AS Time, A.AchievementName FROM Achievement AS A, Friendship AS F WHERE F.User1ID = \""
-					+ id + "\" AND A.UserID = F.User2ID ORDER BY A.Time LIMIT 6;";
+					+ id + "\" AND A.UserID = F.User2ID ORDER BY A.Time DESC LIMIT 6;";
 			ResultSet res = stmt.executeQuery(sql);
 			while (res.next()) {
 				Achievement temp = new Achievement();
@@ -349,7 +349,7 @@ public class User {
 		ArrayList<Performance> recentQuizs = new ArrayList<Performance>();
 		DBConnection database = new DBConnection();
 		String sql = "SELECT R.UserID AS UserID, R.QuizID AS QuizID, R.Score AS Score, R.StartTime AS StartTime, R.Duration AS Duration FROM QuizRecord AS R, Friendship AS F WHERE F.User1ID = \"" + id
-				+ "\" AND F.User2ID = R.UserID ORDER BY R.StartTime LIMIT 6;";
+				+ "\" AND F.User2ID = R.UserID ORDER BY R.StartTime DESC LIMIT 6;";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			String userID = res.getString("UserID");
@@ -392,7 +392,7 @@ public class User {
 	public ArrayList<Quiz> getFriendRecentCreatedQuiz() throws SQLException {
 		ArrayList<Quiz> recentQuizs = new ArrayList<Quiz>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT Q.QuizID AS QuizID FROM Quiz AS Q, Friendship AS F WHERE Q.AuthorID = F.User2ID AND F.User1ID = \"" + id + "\" ORDER BY Q.Time LIMIT 6";
+		String sql = "SELECT Q.QuizID AS QuizID FROM Quiz AS Q, Friendship AS F WHERE Q.AuthorID = F.User2ID AND F.User1ID = \"" + id + "\" ORDER BY Q.Time DESC LIMIT 6";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			String quizID = res.getString("QuizID");

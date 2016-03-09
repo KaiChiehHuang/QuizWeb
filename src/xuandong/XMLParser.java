@@ -5,7 +5,6 @@ import javax.xml.parsers.DocumentBuilder;
 
 import org.w3c.dom.*;
 
-
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +34,7 @@ public class XMLParser {
 	 */
 	public static void main(String[] args) {
 		try {
-			File xmlFile = new File("src/quiz-xml/chinese_food.xml");
+			File xmlFile = new File("src/quiz-xml/WWIIgenerals.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(xmlFile);
@@ -56,6 +55,8 @@ public class XMLParser {
 							break;
 					case "picture-response": questions += addPR(eElement) + "|";
 							break;
+					case "multiple-response": questions += addMR(eElement) + "|";
+							break;
 					}
 				}
 			}
@@ -65,8 +66,8 @@ public class XMLParser {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
 	/**
 	 * Add the quiz to database
 	 * @param doc
@@ -107,7 +108,7 @@ public class XMLParser {
 		if (quiz.getAttribute("practice-mode") != null) {
 			practiceMode = Boolean.parseBoolean(quiz.getAttribute("practice-mode"));
 		}
-		String authorID = "jay";
+		String authorID = "xuandong";
 		String time = Quiz.df.format(new Date().getTime());
 		Random rm = new Random();
 		String image = DEFAULTIMAGES.get(rm.nextInt(DEFAULTIMAGES.size()));
@@ -122,6 +123,65 @@ public class XMLParser {
 		}
 		database.getCon().close();
 		return quizID;
+	}
+	
+	
+	private static String addMR(Element ele) {
+		String id = "";
+		try {
+			DBConnection database = new DBConnection();
+			Statement stmt = database.getStmt();
+			String sql = "SELECT QuestionID FROM MultiResponse ORDER BY QuestionID DESC LIMIT 1;";
+			ResultSet res = stmt.executeQuery(sql);
+			if (res.next()) {
+				int questionCount = Integer.parseInt(res.getString(1).substring(2));
+				questionCount++;
+				id = "MR" + String.format("%010d", questionCount);
+			} else {
+				int questionCount = 0;
+				id = "MR" + String.format("%010d", questionCount);
+			}
+			String question = ele.getElementsByTagName("query").item(0).getTextContent();
+			String answer = "";
+			int count = 0;
+			NodeList nList = ele.getElementsByTagName("answer-list");
+			for (int i = 0; i < nList.getLength(); i++) {
+				Node nNode = nList.item(i);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eEle = (Element) nNode;
+					NodeList nList2 = eEle.getElementsByTagName("answer");
+					for (int j = 0; j < nList2.getLength(); j++) {
+						Node nNode2 = nList2.item(j);
+						if (nNode2.getNodeType() == Node.ELEMENT_NODE) {
+							Element
+						}
+					}
+					answer += eEle.getTextContent() + "|";
+				}
+			}
+			
+			
+			for (int i = 0; i < nList.getLength(); i++) {
+				Node nNode = nList.item(i);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eEle = (Element) nNode;
+					if (eEle.getAttribute("answer").equals("answer")) {
+						answer += eEle.getTextContent() + "|";
+						count++;
+					}
+					choices += eEle.getTextContent() + "|";
+				}
+			}
+			
+			
+			answer = answer.substring(0, answer.length() - 1);
+			String insert = "INSERT INTO QuestionResponse VALUES(\"" + id + "\",\"" + question + "\",\"" + answer + "\");";
+			stmt.executeUpdate(insert);
+			database.getCon().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
 	}
 	
 	

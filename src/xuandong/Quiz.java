@@ -420,7 +420,7 @@ public class Quiz {
 		String sql = "INSERT INTO Quiz (QuizID, Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image) VALUES(\""
 				+ this.quizID + "\",\"" + this.name + "\",\"" + this.description + "\",\"" + this.authorID + "\",\""
 				+ pbs + "\"," + this.isRandomQuiz + "," + this.isOnePage + "," + this.isImmediateCorrection + ","
-				+ this.isPracticeMode + ",\"" + this.createdDate + "\",\"" + this.image + "\";";
+				+ this.isPracticeMode + ",\"" + this.createdDate + "\",\"" + this.image + "\");";
 		return sql;
 	}
 

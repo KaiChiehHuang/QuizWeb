@@ -166,7 +166,9 @@ function pageScrollUp(position) {
 						<li><a href="#">Menu<span class="arrow">&#9660;</span></a>
 							<ul class="sub-menu">
 								<li><a href="#">Profile</a></li>
-								<li><a href="QuizCreat.jsp">Create Quiz</a></li>
+								<% String userIDUrl = "QuizCreat.jsp?userID="+userID; 
+								   out.print("<li><a href=\""+ userIDUrl+"\">Create Quiz</a></li>");
+								%>
 								<li><a href="#">Quiz Record</a></li>
 								<li><a href="UserLogin.jsp">Logout</a></li>
 							</ul>
@@ -276,7 +278,7 @@ function pageScrollUp(position) {
 			<div class="panel-body"
 				style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
 				<div class="col-xs-6 col-md-6 text-left">
-					<a style="color: #C71585;" role="button" data-toggle="collapse"
+					<a style="color: #C71585;" role="tab" data-toggle="collapse"
 						data-parent="#accordion" href="#collapseUserInfo"
 						aria-expanded="true" aria-controls="collapseUserInfo"><span
 						class="glyphicon glyphicon-user" aria-hidden="false"></span>&nbsp&nbspUSER
@@ -397,7 +399,7 @@ function pageScrollUp(position) {
 				%>
 			</div>
 		</div>
-		<div class="collapse" id="collapseUserInfo" >
+		<div class="collapse " id="collapseUserInfo" >
 			<div class="well"
 				style="width: 900px; height: 300px; background-color: black;">
 				User Info</div>
@@ -451,7 +453,7 @@ function pageScrollUp(position) {
 				style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
 				<div class="col-xs-6 col-md-6 text-left" style="left: 0px;">
 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp&nbspRECENT
-					REATED QUIZZES
+					CREATED QUIZZES
 				</div>
 				<div class="col-xs-6 col-md-6 text-right">
 					<a href="#">More...</a>
@@ -518,7 +520,7 @@ function pageScrollUp(position) {
 			int numOfActivity = 0;
 			for(Performance performance: friendRecentPerformance) {
 				out.print("<tr  class=\"success\">");
-				out.print("<td>"+String.valueOf(numOfActivity)+"</td>");
+				out.print("<td>"+String.valueOf(numOfActivity+1)+"</td>");
 				out.print("<td>"+"<a href=\"#\">"+performance.getUserID()+"</a>"+"</td>");
 				out.print("<td>"+performance.getStartTime()+"</td>");
 				String quizUrl = "QuizSummary.jsp?quizID="+performance.getQuizID()+"&userID="+userID;
@@ -531,7 +533,7 @@ function pageScrollUp(position) {
 			ArrayList<Quiz> friendRecentCreatedQuiz =  user.getFriendRecentCreatedQuiz();
 			for(Quiz quiz: friendRecentCreatedQuiz) {
 				out.print("<tr  class=\"warning\">");
-				out.print("<td>"+String.valueOf(numOfActivity)+"</td>");
+				out.print("<td>"+String.valueOf(numOfActivity+1)+"</td>");
 				out.print("<td>"+"<a href=\"#\">"+quiz.getAuthor()+"</a>"+"</td>");
 				out.print("<td>"+quiz.getCreatedDate()+"</td>");
 				String quizUrl = "QuizSummary.jsp?quizID="+quiz.getQuizID()+"&userID="+userID;
@@ -544,7 +546,7 @@ function pageScrollUp(position) {
 			ArrayList<Achievement> friendRecentAchievement =  user.getFriendAchievement();
 			for(Achievement Achi: friendRecentAchievement) {
 				out.print("<tr  class=\"danger\">");
-				out.print("<td>"+String.valueOf(numOfActivity)+"</td>");
+				out.print("<td>"+String.valueOf(numOfActivity+1)+"</td>");
 				out.print("<td>"+"<a href=\"#\">"+Achi.getUserID()+"</a>"+"</td>");
 				out.print("<td>"+Achi.getTime()+"</td>");
 				String activity = Achi.getUserID() +" " + Achi.getDescription() + " And achieved " + Achi.getAchievementName()+"!";

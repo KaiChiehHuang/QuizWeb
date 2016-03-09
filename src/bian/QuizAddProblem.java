@@ -50,6 +50,7 @@ public class QuizAddProblem extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Quiz quiz = (Quiz)session.getAttribute("newQuiz");
+
 		
 		String type = request.getParameter("type");
 		String question = request.getParameter("question");
@@ -95,7 +96,7 @@ public class QuizAddProblem extends HttpServlet {
 			qr.setQuestion(question);
 			quiz.addProblem(qr);
 		}
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizCreateQuestions.jsp");
 		dispatcher.forward(request, response);
 	}

@@ -73,8 +73,7 @@ public class Achievement {
 	}
 	
 	public String getDescription() {
-		this.setDescription();
-		return this.description;
+		return Achievement.ACHIEVEMENTDESCRIPTION.get(this.achievementName);
 	}
 	
 	public static String getDescription(String achi) {

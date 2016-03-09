@@ -282,10 +282,10 @@ public class Quiz {
 				break;
 			}
 		}
-		DBConnection database = new DBConnection();
-		String sql = "DELETE FROM " + Problem.problemType.get(problemID.substring(0, 2)) + " WHERE QuestionID = \"" + problemID + "\";";
-		database.getStmt().executeUpdate(sql);
-		database.con.close();
+//		DBConnection database = new DBConnection();
+//		String sql = "DELETE FROM " + Problem.problemType.get(problemID.substring(0, 2)) + " WHERE QuestionID = \"" + problemID + "\";";
+//		database.getStmt().executeUpdate(sql);
+//		database.con.close();
 	}
 
 	/**

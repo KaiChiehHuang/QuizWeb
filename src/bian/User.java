@@ -403,4 +403,12 @@ public class User {
 		database.getCon().close();
 		return recentQuizs;
 	}
+	
+//	public static ArrayList<User> serachUser(String str) {
+//		ArrayList<User> users = new ArrayList<User>();
+//		DBConnection database = new DBConnection();
+//		ResultSet res = database.getStmt().executeQuery("SELECT UserID FROM Users WHERE UserID LIKE")
+//		database.getCon().close();
+//		return users;
+//	}
 }

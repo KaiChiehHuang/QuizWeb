@@ -19,13 +19,25 @@
 </head>
 <body>
 
+<%
+	ArrayList users = new ArrayList();
+	users = Administration.getAllUsers();
+	ArrayList quizs = new ArrayList();
+	quizs = Administration.getAllQuizzes();
+%>
+
 <div style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers3.jpg')">
 <div class = "container">
+<h4>Web Statistics:</h4> 
+<p>Total users number: <%=users.size()%></p>
+<p>Total quiz number: <%=quizs.size()%></p>
+<p>Total taken quiz number: <%Administration.getQuizTakenNumber();%></p>
 <a href="AdminCreateAnnoun.jsp"> Create Announcement </a>
-</div>
 
+</div>
 <form action="DeleteUserServlet" method="post">
 <div class = "container">
+
 <h4>Manage Users</h4>
   <table class="table">
     <thead>
@@ -37,9 +49,6 @@
     </thead>
     <tbody>
     <%
-    	ArrayList users = new ArrayList();
-    	users = Administration.getAllUsers();
-    	
     	for (int i = 0; i < users.size(); i++) {
      		String userID = (String)users.get(i);
     		if (i % 2 == 0) {
@@ -79,9 +88,6 @@
     </thead>
     <tbody>
     <%
-    	ArrayList quizs = new ArrayList();
-    	quizs = Administration.getAllQuizzes();
-    	
     	for (int i = 0; i < quizs.size(); i++) {
      		String quizID = (String)quizs.get(i);
     		if (i % 2 == 0) {

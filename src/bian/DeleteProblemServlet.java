@@ -46,13 +46,15 @@ public class DeleteProblemServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Quiz quiz = (Quiz)session.getAttribute("newQuiz");
+		Quiz quiz = (Quiz)session.getAttribute("quiz");
 		
 		String problemID = request.getParameter("deletedquestion");
-		System.out.println(problemID);
-		
+//		System.out.println(problemID);
+//		System.out.println(quiz.getProblems().size());
 		try {
+			System.out.println(quiz.getProblems().size());
 			quiz.deleteProblem(problemID);
+			System.out.println(quiz.getProblems().size());
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

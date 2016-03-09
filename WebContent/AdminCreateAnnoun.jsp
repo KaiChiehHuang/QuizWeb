@@ -19,10 +19,19 @@
 </head>
 <body>
 <form action="CreateAnnounce" method="post">
+<div style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers4.jpeg')">
 <div class = "container">
 	<p><h5>Create Announcement: </h5> </p>
-  	<textarea class="form-control" rows="3" name = "announce" placeholder="Announcement"></textarea>
-  	<button type="submit" class="btn btn-success">Create</button>
+	<div>
+		<p><h5>Subject: </h5> </p>
+		<input type="text" class="form-control form-control-inline" name = "announsubject" placeholder="Subject">
+	</div>
+	<div>
+		<p><h5>Content: </h5> </p>
+  		<textarea class="form-control" rows="3" name = "announce" placeholder="Announcement Content"></textarea>
+  	</div>
+  	<button type="submit" class="btn btn-success" style="position: relative; left:50%; width:80px; margin-left:-40px">Create</button>
+</div>
 </div>
 </form>
 </body>

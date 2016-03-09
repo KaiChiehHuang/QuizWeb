@@ -19,7 +19,7 @@
 </head>
 <body>
 
-
+<div style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers3.jpg')">
 <div class = "container">
 <a href="AdminCreateAnnoun.jsp"> Create Announcement </a>
 </div>
@@ -45,7 +45,7 @@
     		if (i % 2 == 0) {
     			out.println("<tr class=\"warning\">");
     		} else {
-    			out.println("<tr>");
+    			out.println("<tr class=\"active\">");
     		}
     		out.println("<td>");
     		out.println(userID);
@@ -87,7 +87,7 @@
     		if (i % 2 == 0) {
     			out.println("<tr class=\"warning\">");
     		} else {
-    			out.println("<tr>");
+    			out.println("<tr class=\"active\">");
     		}
     		out.println("<td>");
     		out.println(quizID);
@@ -109,6 +109,6 @@
 </div>
 
 </form>
-
+</div>
 </body>
 </html>

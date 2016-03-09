@@ -273,8 +273,9 @@ public class Quiz {
 	 * Delete a problem from the quiz
 	 * 
 	 * @param problemID
+	 * @throws SQLException 
 	 */
-	public void deleteProblem(String problemID) {
+	public void deleteProblem(String problemID) throws SQLException {
 		for (int i = 0; i <= problems.size(); i++) {
 			if (problems.get(i).getQuestionID().equals(problemID)) {
 				problems.remove(i);
@@ -282,10 +283,8 @@ public class Quiz {
 			}
 		}
 		DBConnection database = new DBConnection();
-		String sql = "DELETE FROM " + Problem.problemType.get(problemID.substring(0, 2)) + " Count FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\";";
-		ResultSet res = database.getStmt().executeQuery(sql);
-		res.next();
-		this.popularity = res.getInt("Count");
+		String sql = "DELETE FROM " + Problem.problemType.get(problemID.substring(0, 2)) + " WHERE QuestionID = \"" + problemID + "\";";
+		database.getStmt().executeUpdate(sql);
 		database.con.close();
 	}
 

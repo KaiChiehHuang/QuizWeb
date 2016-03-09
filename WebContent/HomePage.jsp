@@ -128,20 +128,23 @@ function pageScrollUp(position) {
 </style>
 <title>Home Page</title>
 </head>
-<body style="height: 2200px;">
+<body style="height: 1900px;">
 	<div
 		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
 
 		<div
 			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color: black;">
-			LOGO</div>
+			<div style="position: absolute; left: 0px; top: 5px; width: 250px; height: 45; background-color: black;">
+				<a href="HomePage.jsp"><h4 style="color:#ffe6e6;">QuizThatShit</h4></a>
+			</div>
+		</div>
 
 		<div class="col-lg-6"
 			style="position: absolute; top: 8px; left: 30%; width: 40%;">
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="Search for...">
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">Go!</button>
+					<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" style="font-size:20px;"></span></button>
 				</span>
 			</div>
 			<!-- /input-group -->
@@ -194,7 +197,7 @@ function pageScrollUp(position) {
 						if(pageIndex == 0) {
 							state = "class=\"active\" ";
 						}
-						String pager = "<li data-target=\"#carousel-example-generic\" data-slide-to=" + "\"" + pageIndex + "\" " + state + "style=\"background-color: #73AD21;\"></li>";
+						String pager = "<li data-target=\"#carousel-example-generic\" data-slide-to=" + "\"" + pageIndex + "\" " + state + "style=\"z-index:1;background-color: #73AD21;\"></li>";
 						out.print(pager);
 					}
 					
@@ -216,7 +219,7 @@ function pageScrollUp(position) {
 							}
 						Quiz quizTook = new Quiz();
 						quizTook.setQuizID(performance.getQuizID());
-						out.print("<h3 style=\"color:#bf00ff;\">Your Recent Performance</h3><br>");
+						out.print("<h3 style=\"color:#C71585;\">Your Recent Performance</h3><br>");
  						String quizID = quizTook.getQuizID();
 						String quizIDUrl = "QuizSummary.jsp?quizID="+quizID+"&userID="+userID;
 						String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">"; 
@@ -237,7 +240,7 @@ function pageScrollUp(position) {
 						} else {
 							out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
 						}
-						out.print("<h3>Your Recent Created Quiz</h3><br>");
+						out.print("<h3 style=\"color:#C71585;\">Your Recent Created Quiz</h3><br>");
 						String quizIDUrl = "QuizSummary.jsp?quizID="+quiz.getQuizID()+"&userID="+userID;
 						String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">"; 
 						out.print(showQuizUrl+"<h4>Name: " + quiz.getName() + "</h4>");
@@ -267,7 +270,7 @@ function pageScrollUp(position) {
 	</div>
 
 	<div
-		style="position: relative; top: 85px; left: 50%; width: 900px; height: 1000px; margin-left: -450px;">
+		style="position: relative; top: 85px; left: 50%; width: 900px; height: 1300px; margin-left: -450px;">
 
 		<div class="panel panel-default" style="height: 60px;">
 			<div class="panel-body"
@@ -275,8 +278,8 @@ function pageScrollUp(position) {
 				<div class="col-xs-6 col-md-6 text-left">
 					<a style="color: #C71585;" role="button" data-toggle="collapse"
 						data-parent="#accordion" href="#collapseUserInfo"
-						aria-expanded="false" aria-controls="collapseUserInfo"><span
-						class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp&nbspUSER
+						aria-expanded="true" aria-controls="collapseUserInfo"><span
+						class="glyphicon glyphicon-user" aria-hidden="false"></span>&nbsp&nbspUSER
 						INFO </a>
 				</div>
 				<div class="col-xs-6 col-md-6 text-right">
@@ -394,7 +397,7 @@ function pageScrollUp(position) {
 				%>
 			</div>
 		</div>
-		<div class="collapse" id="collapseUserInfo">
+		<div class="collapse" id="collapseUserInfo" >
 			<div class="well"
 				style="width: 900px; height: 300px; background-color: black;">
 				User Info</div>
@@ -472,9 +475,13 @@ function pageScrollUp(position) {
 					out.println("<img src=\"" + quiz.getImage() +"\" style=\"position:relative;top:8px;left:5%;width:90%;height:60%;\">");
 					out.println("<div class=\"caption\">");
 					String quizName = quiz.getName();
+					/* if(quizName.length()>11) {
+						quizName = quizName.substring(0, 11);
+						quizName = quizName + "...";
+					} */
 					String createTime = String.valueOf(quiz.getCreatedDate());
 					String heartIcon = "<br><span class=\"glyphicon glyphicon-time\" aria-hidden=\"true\"></span>  ";
-					String showQuizName = "<h3 style=\"font-size:20px;\">" + quizName + "<small>" + heartIcon
+					String showQuizName = "<h3 style=\"font-size:20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; \">" + quizName + "<small>" + heartIcon
 							+ createTime + "</small>" + "</h3>";
 					out.println(showQuizName);
 					out.println("</div>");
@@ -487,8 +494,58 @@ function pageScrollUp(position) {
 				out.println("</div>");
 			}
 		%>
-
-	</div>
-
+		<div class="panel panel-default">
+			<div class="panel-body"
+				style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
+				<div class="col-xs-6 col-md-6 text-left" style="left: 0px;">
+					<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp&nbspFRIEND ACTIVITIES
+				</div>
+				<div class="col-xs-6 col-md-6 text-right">
+					<a href="#">More...</a>
+				</div>
+			</div>
+		</div>
+		
+		<table class="table table-striped">
+			<tr>
+				<th>#</th>
+				<th>User ID</th>
+				<th>Time</th>
+				<th>Activity</th>
+			</tr>
+		<%
+			ArrayList<Performance> friendRecentPerformance =  user.getFriendRecentTakenQuiz();
+			int numOfActivity = 0;
+			for(Performance performance: friendRecentPerformance) {
+				out.print("<tr  class=\"success\">");
+				out.print("<td>"+String.valueOf(numOfActivity)+"</td>");
+				out.print("<td>"+"<a href=\"#\">"+performance.getUserID()+"</a>"+"</td>");
+				out.print("<td>"+performance.getStartTime()+"</td>");
+				String quizUrl = "QuizSummary.jsp?quizID="+performance.getQuizID()+"&userID="+userID;
+				String quizString = "<a href=\""+quizUrl+"\">" + Quiz.getName(performance.getQuizID()) +"</a>";
+				String activity = "Took quiz: "+quizString+" and received "+performance.getScore()+"!";
+				out.print("<td>"+activity+"</td>");
+				out.print("</tr>");
+				numOfActivity++;
+			}
+			ArrayList<Quiz> friendRecentCreatedQuiz =  user.getFriendRecentCreatedQuiz();
+			for(Quiz quiz: friendRecentCreatedQuiz) {
+				out.print("<tr  class=\"success\">");
+				out.print("<a>");
+				out.print("<td>"+String.valueOf(numOfActivity)+"</td>");
+				out.print("</a>");
+				out.print("<td>"+quiz.getCreatedDate()+"</td>");
+				out.print("<td>"+quiz.getName()+"</td>");
+				out.print("</tr>");
+				numOfActivity++;
+			}
+		%>
+		</table>
+			
+		
+		
+		<!-- <div style="bottom:0px;background-color:#ffb3b3;width:100%;height:20%;">
+	
+	</div> -->
 </body>
 </html>

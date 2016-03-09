@@ -393,7 +393,7 @@ h5 {
 									placeholder="Write a note to your friend..."
 									name="emailContent"></textarea>
 								<br>
-								<input type="submit" class="btn btn-info" value="submit"></input>
+								<input type="submit" value="submit"></input>
 							</form>
 						</div>
 					</div>
@@ -559,10 +559,6 @@ h5 {
 					out.println("<img src=\"" + quiz.getImage() +"\" style=\"position:relative;top:8px;left:5%;width:90%;height:60%;\">");
 					out.println("<div class=\"caption\">");
 					String quizName = quiz.getName();
-					/* if(quizName.length()>11) {
-						quizName = quizName.substring(0, 11);
-						quizName = quizName + "...";
-					} */
 					String createTime = String.valueOf(quiz.getCreatedDate());
 					String heartIcon = "<br><span class=\"glyphicon glyphicon-time\" aria-hidden=\"true\"></span>  ";
 					String showQuizName = "<h3 style=\"font-size:17px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; \">" + quizName + "<small>" + heartIcon

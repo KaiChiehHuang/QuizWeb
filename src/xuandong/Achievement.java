@@ -25,12 +25,12 @@ public class Achievement {
 	public static final HashMap<String, String> ACHIEVEMENTIMAGE = new HashMap<String, String>();
 	static
 	{
-		ACHIEVEMENTIMAGE.put("Amateur Author", "http://vignette4.wikia.nocookie.net/leagueoflegends/images/b/b4/BronzeBadgeSeason2.png/revision/latest?cb=20130928162132");
-		ACHIEVEMENTIMAGE.put("Prolific Author", "http://vignette2.wikia.nocookie.net/leagueoflegends/images/3/3f/SilverBadgeSeason2.png/revision/latest?cb=20130928162033");
-		ACHIEVEMENTIMAGE.put("Prodigious Author", "http://vignette1.wikia.nocookie.net/leagueoflegends/images/7/77/GoldBadgeSeason2.png/revision/latest?cb=20130928162204");
-		ACHIEVEMENTIMAGE.put("Quiz Machine", "http://vignette2.wikia.nocookie.net/leagueoflegends/images/0/03/DiamondBadge.png/revision/latest?cb=20130928162320");
-		ACHIEVEMENTIMAGE.put("I am the Greatest", "http://vignette4.wikia.nocookie.net/leagueoflegends/images/d/d2/MasterBadge.png/revision/latest?cb=20150418014845");
-		ACHIEVEMENTIMAGE.put("Practice Makes Perfect", "http://vignette2.wikia.nocookie.net/leagueoflegends/images/5/5f/PlatinumBadgeSeason2.png/revision/latest?cb=20130928162240");
+		ACHIEVEMENTIMAGE.put("Amateur Author", "badges/Amateur Author.jpg");
+		ACHIEVEMENTIMAGE.put("Prolific Author", "badges/Prolific Author.jpg");
+		ACHIEVEMENTIMAGE.put("Prodigious Author", "badges/Prodigious Author.jpg");
+		ACHIEVEMENTIMAGE.put("Quiz Machine", "badges/Quiz Machine.jpg");
+		ACHIEVEMENTIMAGE.put("I am the Greatest", "badges/I am the Greatest.jpg");
+		ACHIEVEMENTIMAGE.put("Practice Makes Perfect", "badges/Practice Makes Perfect.jpg");
 	};
 	
 	public Achievement() {

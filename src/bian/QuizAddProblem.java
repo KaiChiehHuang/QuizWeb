@@ -1,7 +1,6 @@
 package bian;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,20 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import xuandong.MultiChoice;
+import xuandong.PictureResponse;
 import xuandong.Problem;
 import xuandong.Quiz;
 
 /**
- * Servlet implementation class QuizCreatServlet
+ * Servlet implementation class QuizAddProblem
  */
-@WebServlet("/QuizCreatServlet")
-public class QuizCreatServlet extends HttpServlet {
+@WebServlet("/QuizAddProblem")
+public class QuizAddProblem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuizCreatServlet() {
+    public QuizAddProblem() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,37 +45,19 @@ public class QuizCreatServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Quiz quiz = (Quiz)session.getAttribute("newQuiz");
 		
-		String name = request.getParameter("name");
-		String description = request.getParameter("description");
-		String url = request.getParameter("picture");
-		quiz.setName(name);
-		quiz.setDescription(description);
-		quiz.setImage(url);
+		String type = request.getParameter("type");
+		Problem problem = new Problem(type, true);
+		String question = request.getParameter("question");
+		problem.setQuestion(question);
+		if (type.equals("MC") || type.equals("SC")) {
+			String[] choices = request.getParameterValues("choices");
+			problem = (MultiChoice) problem;
+		}
+		if (type.equals("PR")) {
+			problem = (PictureResponse) problem;
+		}
 		
-		String random = request.getParameter("Random");
-		String onepage = request.getParameter("OnePage");
-		String practice = request.getParameter("Practice");
-		String immcorr = request.getParameter("ImmCorr");
-		if (random.equals("Yes")) {
-			quiz.setRandomQuiz(true);
-		}else {
-			quiz.setRandomQuiz(false);
-		}
-		if (onepage.equals("Yes")) {
-			quiz.setOnePage(true);
-		}else {
-			quiz.setOnePage(false);
-		}
-		if (practice.equals("Yes")) {
-			quiz.setPracticeMode(true);
-		}else {
-			quiz.setPracticeMode(false);
-		}
-		if (immcorr.equals("Yes")) {
-			quiz.setImmediateCorrection(true);
-		}else {
-			quiz.setImmediateCorrection(false);
-		}
+		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizCreateYY.jsp");
 		dispatcher.forward(request, response);

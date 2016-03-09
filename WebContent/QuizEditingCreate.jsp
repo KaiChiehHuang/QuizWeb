@@ -81,7 +81,7 @@
 	<div class="collapse" id="collapseChoices">
 			<div class="well"
 				style="height: 400px; background-color: black;">
-				<form action="QuizCreateServlet" method="post">	
+				<form action="QuizEditingAddProblem" method="post">	
 					<div class="container">
 						<p><h3>Creating Single/Multi Choice Problem: </h5> </p>
 						<input type="hidden" name = "type" value = "MC">
@@ -109,7 +109,7 @@
 	<div class="collapse" id="collapseFillBlank">
 			<div class="well"
 				style="height: 400px; background-color: black;">
-				<form action="QuizCreateServlet" method="post">	
+				<form action="QuizEditingAddProblem" method="post">	
 				
 <div class="container">
 	<p><h3>Creating Fill Blank Problem: </h5> </p>
@@ -134,7 +134,7 @@
 	<div class="collapse" id="collapsePictureResponse">
 			<div class="well"
 				style="height: 400px; background-color: black;">
-				<form action="QuizCreateServlet" method="post">	
+				<form action="QuizEditingAddProblem" method="post">	
 
 <div class="container">
 	<p><h3>Creating Picture Respond Problem: </h5> </p>
@@ -161,7 +161,7 @@
 	<div class="collapse" id="collapseQuestionResponse">
 			<div class="well"
 				style="height: 400px; background-color: black;">
-				<form action="QuizCreateServlet" method="post">	
+				<form action="QuizEditingAddProblem" method="post">	
 
 <div class="container">
 	<p><h3>Creating Question Respond Problem: </h5> </p>
@@ -184,7 +184,7 @@
 	<div class="collapse" id="collapseMultiResponse">
 			<div class="well"
 				style="height: 400px; background-color: black;">
-				<form action="QuizCreateServlet" method="post">	
+				<form action="QuizEditingAddProblem" method="post">	
 				
 <div class="container">
 	<p><h3>Creating Multiple Respond Problem: </h5> </p>

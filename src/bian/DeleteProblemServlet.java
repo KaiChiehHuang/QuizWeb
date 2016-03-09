@@ -52,11 +52,12 @@ public class DeleteProblemServlet extends HttpServlet {
 //		System.out.println(problemID);
 //		System.out.println(quiz.getProblems().size());
 		try {
-			System.out.println(quiz.getProblems().size());
+			System.out.println(quiz.getProblems());
 			quiz.deleteProblem(problemID);
-			System.out.println(quiz.getProblems().size());
+			quiz.setEditing();
+			System.out.println(quiz.getProblems());
 			quiz.updateDatabase();
-			System.out.println(quiz.getProblems().size());
+//			System.out.println(quiz.getProblems().size());
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}

@@ -168,7 +168,7 @@ function pageScrollUp(position) {
 								<li><a href="#">Profile</a></li>
 								<li><a href="#">Coming Soon</a></li>
 								<li><a href="#">Quiz Record</a></li>
-								<li><a href="#">Logout</a></li>
+								<li><a href="UserLogin.jsp">Logout</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -433,7 +433,7 @@ function pageScrollUp(position) {
 				String quizName = quiz.getName();
 				String popularity = String.valueOf(quiz.getPopularity());
 				String heartIcon = "<br><span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>  ";
-				String showQuizName = "<h3 style=\"font-size:20px;\">"+quizName+"<small>"+heartIcon+popularity+"</small>"+"</h3>";
+				String showQuizName = "<h3 style=\"font-size:17px;\">"+quizName+"<small>"+heartIcon+popularity+"</small>"+"</h3>";
 				out.println(showQuizName);
 				out.println("</div>");
 				// Add popularity
@@ -481,7 +481,7 @@ function pageScrollUp(position) {
 					} */
 					String createTime = String.valueOf(quiz.getCreatedDate());
 					String heartIcon = "<br><span class=\"glyphicon glyphicon-time\" aria-hidden=\"true\"></span>  ";
-					String showQuizName = "<h3 style=\"font-size:20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; \">" + quizName + "<small>" + heartIcon
+					String showQuizName = "<h3 style=\"font-size:17px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; \">" + quizName + "<small>" + heartIcon
 							+ createTime + "</small>" + "</h3>";
 					out.println(showQuizName);
 					out.println("</div>");
@@ -530,12 +530,25 @@ function pageScrollUp(position) {
 			}
 			ArrayList<Quiz> friendRecentCreatedQuiz =  user.getFriendRecentCreatedQuiz();
 			for(Quiz quiz: friendRecentCreatedQuiz) {
-				out.print("<tr  class=\"success\">");
-				out.print("<a>");
+				out.print("<tr  class=\"warning\">");
 				out.print("<td>"+String.valueOf(numOfActivity)+"</td>");
-				out.print("</a>");
+				out.print("<td>"+"<a href=\"#\">"+quiz.getAuthor()+"</a>"+"</td>");
 				out.print("<td>"+quiz.getCreatedDate()+"</td>");
-				out.print("<td>"+quiz.getName()+"</td>");
+				String quizUrl = "QuizSummary.jsp?quizID="+quiz.getQuizID()+"&userID="+userID;
+				String quizString = "<a href=\""+quizUrl+"\">" + quiz.getName() +"</a>";
+				String activity = "Created quiz: "+quizString+" and has popularity: "+quiz.getPopularity()+"!";
+				out.print("<td>"+activity+"</td>");
+				out.print("</tr>");
+				numOfActivity++;
+			}
+			ArrayList<Achievement> friendRecentAchievement =  user.getFriendAchievement();
+			for(Achievement Achi: friendRecentAchievement) {
+				out.print("<tr  class=\"danger\">");
+				out.print("<td>"+String.valueOf(numOfActivity)+"</td>");
+				out.print("<td>"+"<a href=\"#\">"+Achi.getUserID()+"</a>"+"</td>");
+				out.print("<td>"+Achi.getTime()+"</td>");
+				String activity = Achi.getUserID() +" " + Achi.getDescription() + " And achieved " + Achi.getAchievementName()+"!";
+				out.print("<td>"+activity+"</td>");
 				out.print("</tr>");
 				numOfActivity++;
 			}

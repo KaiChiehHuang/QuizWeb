@@ -325,7 +325,7 @@ public class User {
 		ArrayList<Performance> recentQuizs = new ArrayList<Performance>();
 		DBConnection database = new DBConnection();
 		String sql = "SELECT QuizID, Score, StartTime, Duration FROM QuizRecord WHERE UserID = \"" + id
-				+ "\" ORDER BY StartTime LIMIT 6";
+				+ "\" ORDER BY StartTime DESC LIMIT 6";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			String quizID = res.getString("QuizID");
@@ -372,7 +372,7 @@ public class User {
 	public ArrayList<Quiz> getRecentCreatedQuiz() throws SQLException {
 		ArrayList<Quiz> recentQuizs = new ArrayList<Quiz>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT QuizID FROM Quiz WHERE AuthorID = \"" + id + "\" ORDER BY Time LIMIT 6";
+		String sql = "SELECT QuizID FROM Quiz WHERE AuthorID = \"" + id + "\" ORDER BY Time DESC LIMIT 6";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			String quizID = res.getString("QuizID");

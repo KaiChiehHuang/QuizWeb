@@ -465,7 +465,7 @@ if (isPracticeMode) {
 }
 %>
 <%-- <a href=<%=link%> class="btn btn-info" role="button">Practice</a> --%>
-<a href="QuizTakingOnePage.jsp" class="btn btn-info"  role="button">Edit Quiz</a>
+<a href="QuizEditing.jsp" class="btn btn-info"  role="button">Edit Quiz</a>
 </div>
 </body>
 </html>

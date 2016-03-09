@@ -45,13 +45,13 @@ table-layout: fixed;
 }
 
 table{
- height: 400px;              
+ height: 300px;              
  display: -moz-groupbox;    
 }
 
 tbody{
   overflow-y: scroll;      
-  height: 400px; 
+  height: 300px; 
   width: 100%;          
   position: absolute;
 }
@@ -147,8 +147,35 @@ tbody{
     	style="position: fixed;  width: 500px; margin-left: -250px; left: 50%;">
     	<h2>Performances History</h2>
     	
-    	<table class="table" >
-<!--     	<table class="table table-striped table-hover table-condensed" > -->
+    	<div class="panel panel-default" style="height: 60px; background: rgba(122, 130, 136, 0.2)">
+		<div class="panel-body"
+			style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
+			<div class="row">
+			   <div class="col-xs-6 col-md-3 text-left">Questions</div>
+			
+				<div class = "btn-group btn-group-me col-xs-6 col-md-9 pull-right">
+					<button class="btn btn-info" type="button" data-toggle="collapse"
+						data-target="#collapseDate" aria-expanded="false"
+						aria-controls="collapseDate">
+						Sort By Date
+					</button>
+					<button class="btn btn-info" type="button" data-toggle="collapse"
+						data-target="#collapseScore" aria-expanded="false"
+						aria-controls="collapseScore">
+						Sort By Score
+					</button>
+					<button class="btn btn-info" type="button" data-toggle="collapse"
+						data-target="#collapseDuration" aria-expanded="false"
+						aria-controls="collapseDuration">
+						Sort By Duration
+					</button>
+				</div>	
+		    </div>			
+		</div>
+	</div>
+	
+	<div class="collapse" id="collapseDate">
+		<table class="table" >
     	<thead>
      		 <tr>
         		<th class="text-center">Time</th>
@@ -156,18 +183,14 @@ tbody{
         		<th class="text-center">Duration</th>
       		 </tr>
     	</thead>
-<!--    		 </table> -->
-   		 
-<!--    		 <div class="bodycontainer scrollable">
-         <table class="table table-hover table-striped table-condensed table-scrollable"> -->
    		 <tbody>
     	<%
-/*     	    ArrayList<Performance> perfU = quizSummary.getUserPerformance();
-    		for (int i = 0; i < perfU.size(); i++) {
+     	    ArrayList<Performance> perfUD = quizSummary.getUserPerformanceByDate();
+    		for (int i = 0; i < perfUD.size(); i++) {
     			String[] per = new String[3];
-        		per[0] = perfU.get(i).getStartTime();
-        		per[1] = String.valueOf(perfU.get(i).getScore());
-        		per[2] = perfU.get(i).getDuration();
+        		per[0] = perfUD.get(i).getStartTime();
+        		per[1] = String.valueOf(perfUD.get(i).getScore());
+        		per[2] = perfUD.get(i).getDuration();
         		if (i % 2 == 0) {
         			out.println("<tr class=\"success\">");
         		} else {
@@ -179,8 +202,8 @@ tbody{
         			out.println("</td>");
         		}
         		out.println("</tr>");
-    		} */
-    		for (int i = 0; i < 100; i++) {
+    		}
+/*     		for (int i = 0; i < 100; i++) {
     			String[] per = new String[3];
         		per[0] = "1";
         		per[1] = "2";
@@ -196,11 +219,80 @@ tbody{
         			out.println("</td>");
         		}
         		out.println("</tr>");	
+    		} */
+    	%>
+          		</tbody>
+      		</table>
+	</div>
+	
+	<div class="collapse" id="collapseScore">
+		<table class="table" >
+    	<thead>
+     		 <tr>
+        		<th class="text-center">Time</th>
+        		<th class="text-center">Score</th>
+        		<th class="text-center">Duration</th>
+      		 </tr>
+    	</thead>
+   		 <tbody>
+    	<%
+    	    ArrayList<Performance> perfUS = quizSummary.getUserPerformanceByScore();
+    		for (int i = 0; i < perfUS.size(); i++) {
+    			String[] per = new String[3];
+        		per[0] = perfUS.get(i).getStartTime();
+        		per[1] = String.valueOf(perfUS.get(i).getScore());
+        		per[2] = perfUS.get(i).getDuration();
+        		if (i % 2 == 0) {
+        			out.println("<tr class=\"success\">");
+        		} else {
+        			out.println("<tr class=\"warning\">");
+        		}
+        		for (int j = 0; j < 3; j++) {
+        			out.println("<td>");
+        			out.println(per[j]);
+        			out.println("</td>");
+        		}
+        		out.println("</tr>");
     		}
     	%>
-          </tbody>
-      </table>
-       <!--    </div> -->
+          		</tbody>
+      		</table>
+	</div>
+	
+	<div class="collapse" id="collapseDuration">
+		<table class="table" >
+    	<thead>
+     		 <tr>
+        		<th class="text-center">Time</th>
+        		<th class="text-center">Score</th>
+        		<th class="text-center">Duration</th>
+      		 </tr>
+    	</thead>
+   		 <tbody>
+    	<%
+     	    ArrayList<Performance> perfUDU = quizSummary.getUserPerformanceByDuration();
+    		for (int i = 0; i < perfUDU.size(); i++) {
+    			String[] per = new String[3];
+        		per[0] = perfUDU.get(i).getStartTime();
+        		per[1] = String.valueOf(perfUDU.get(i).getScore());
+        		per[2] = perfUDU.get(i).getDuration();
+        		if (i % 2 == 0) {
+        			out.println("<tr class=\"success\">");
+        		} else {
+        			out.println("<tr class=\"warning\">");
+        		}
+        		for (int j = 0; j < 3; j++) {
+        			out.println("<td>");
+        			out.println(per[j]);
+        			out.println("</td>");
+        		}
+        		out.println("</tr>");
+    		}
+    	%>
+          		</tbody>
+      		</table>
+	</div>
+    	
     </div>
 
     <div class="item"

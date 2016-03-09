@@ -412,8 +412,13 @@ function pageScrollUp(position) {
 				<div class="col-xs-6 col-md-6 text-center" style="background-color:black;height:100%;">
 					<% 
 						ArrayList<Achievement> allAchievements = user.getAchievements();
+						
 						for(Achievement ach: allAchievements) {
-							
+							if (Achievement.getAllAchievement().contains(ach.getAchievementName())){
+								out.print("<img src=\"" + ach.getImage(ach.getAchievementName()) + "\" style=\"position:relative;top:8px;left:5%;width:90%;height:60%;\" >");
+							}else{
+								
+							}
 						}
 					%>
 				</div>

@@ -33,6 +33,8 @@ function pageScrollUp(position) {
 
 <style>
 
+.grayscale {-webkit-filter: grayscale(100%); filter: grayscale(100%);}
+
 .carousel-control.left, .carousel-control.right {
     background-image: none
 }
@@ -272,15 +274,16 @@ function pageScrollUp(position) {
 	</div>
 
 	<div
-		style="position: relative; top: 85px; left: 50%; width: 900px; height: 1500px; margin-left: -450px;">
-
+		style="position: relative; top: 85px; left: 50%; width: 900px; height: 1800px; margin-left: -450px;">
+		
 		<div class="panel panel-default" style="height: 60px;">
+			
 			<div class="panel-body"
 				style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
 				<div class="col-xs-6 col-md-6 text-left">
 					<a style="color: #C71585;" role="tab" data-toggle="collapse"
 						data-parent="#accordion" href="#collapseUserInfo"
-						aria-expanded="true" aria-controls="collapseUserInfo"><span
+						aria-expanded="true" aria-controls="collapseUserInfo" ><span
 						class="glyphicon glyphicon-user" aria-hidden="false"></span>&nbsp&nbspUSER
 						INFO </a>
 				</div>
@@ -294,7 +297,7 @@ function pageScrollUp(position) {
 					</button>
 					<button class="btn btn-info" type="button" data-toggle="collapse"
 						data-target="#collapseExample" aria-expanded="false"
-						aria-controls="collapseExample">
+						aria-controls="collapseExample" >
 						<span class="glyphicon glyphicon-user"
 							style="width: 30px; font-size: 18px;"></span>
 						<%
@@ -399,10 +402,17 @@ function pageScrollUp(position) {
 				%>
 			</div>
 		</div>
-		<div class="collapse " id="collapseUserInfo" >
+		<div class="collapse in" id="collapseUserInfo" >
 			<div class="well"
 				style="width: 900px; height: 300px; background-color: black;">
-				User Info</div>
+				<div class="col-xs-6 col-md-6 text-left" style="left: 0px;">
+					User info
+					
+				</div>
+				<div class="col-xs-6 col-md-6 text-center" style="background-color:black;height:100%;">
+					Achievement
+				</div>
+			</div>
 		</div>
 
 		<div class="panel panel-default">

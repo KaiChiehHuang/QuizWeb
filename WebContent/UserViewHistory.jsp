@@ -21,8 +21,8 @@
 <body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers4.jpeg')">
 <%
 	String userID = (String)session.getAttribute("userID");
-	/* User user = new User(userID); */
-	User user = new User("jay");
+	User user = new User(userID);
+	/* User user = new User("jay"); */
 	ArrayList<Performance> userPerformance = new ArrayList<Performance>();
 	userPerformance = user.getQuizHistory();
 %>

@@ -16,10 +16,16 @@ public class QuizTest {
 	public void test() throws SQLException, InterruptedException {
 //		System.out.println(Category.searchByCategory("Food").size());
 //		assertEquals(2, Category.searchByCategory("Food").size());
-		MultiChoice temp = new MultiChoice("FB", true);
-		System.out.println(temp.setProblemID());
-		Random rm = new Random();
-		System.out.println(rm.nextInt(XMLParser.DEFAULTIMAGES.size()));
+//		MultiChoice temp = new MultiChoice("FB", true);
+//		System.out.println(temp.setProblemID());
+//		Random rm = new Random();
+//		System.out.println(rm.nextInt(XMLParser.DEFAULTIMAGES.size()));
+		Quiz temp = new Quiz();
+		temp.setQuizID("0000000005");
+		System.out.println(temp.getUpdateSQL());
+		temp.deleteProblem("QR0000000010");
+		System.out.println(temp.getUpdateSQL());
+		temp.updateDatabase();
 	}
 
 }

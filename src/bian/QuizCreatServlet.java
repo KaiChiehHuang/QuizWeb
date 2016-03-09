@@ -76,7 +76,7 @@ public class QuizCreatServlet extends HttpServlet {
 			quiz.setImmediateCorrection(false);
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizCreateQuestion.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizCreateQuestions.jsp");
 		dispatcher.forward(request, response);
 	}
 

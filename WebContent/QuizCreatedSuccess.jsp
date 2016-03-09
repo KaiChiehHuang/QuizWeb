@@ -24,6 +24,8 @@
 	for (Problem pr : quiz.getProblems()) {
 		pr.updateDatabase();
 	}
+	quiz.setCreating();
+	quiz.setCreatedDate();
 	quiz.updateDatabase();
 %>
 Quiz created successfully!

@@ -96,7 +96,7 @@ public class QuizAddProblem extends HttpServlet {
 			quiz.addProblem(qr);
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizCreateQuestion.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizCreateQuestions.jsp");
 		dispatcher.forward(request, response);
 	}
 

@@ -464,10 +464,10 @@ h5 {
 							<%=user.getGender()%></h4>
 					</div>
 				</div>
-				<div class="col-xs-6 col-md-6 text-center" style="height: 110%;top:14%;">
+				<div class="col-xs-6 col-md-6 text-center" style="height: 145%;top:0%;">
 					<% 
 						ArrayList<Achievement> allUserAchievements = user.getAchievements();
-						Set<String> allAchievements = Achievement.getAllAchievement();
+						ArrayList<String> allAchievements = Achievement.getAllAchievement();
 						for(Achievement ach: allUserAchievements) {
 							String imageUrl = ach.getImage();
 							String description = Achievement.getDescription(ach.getAchievementName());

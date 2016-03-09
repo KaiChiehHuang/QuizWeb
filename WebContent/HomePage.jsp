@@ -431,15 +431,14 @@
 						for(Achievement ach: allUserAchievements) {
 							String imageUrl = ach.getImage();
 							String description = ach.getDescription();
-							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" data-toggle=\"tooltip\" title=\""+ach.getAchievementName()+ " "+description+"\">";
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" data-toggle=\"tooltip\" title=\""+ach.getAchievementName()+ "<br>"+description+"\" data-html=\"true\" >";
 							out.print(achImage);
 							allAchievements.remove(ach.getAchievementName());
 						}
-						System.out.println(allAchievements);
 						for(String ach: allAchievements) {
 							String imageUrl = Achievement.getImage(ach);
-							String description = "";
-							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" class=\"grayscale\" data-toggle=\"tooltip\" title=\"" +  ach + " " + description + "\">";
+							String description = Achievement.getDescription(ach);
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" class=\"grayscale\" data-toggle=\"tooltip\" title=\"" +  ach + " <br>" + description + "\" data-html=\"true\">";
 							out.print(achImage);
 						}
 					%>

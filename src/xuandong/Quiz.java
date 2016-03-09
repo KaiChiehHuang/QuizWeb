@@ -276,7 +276,7 @@ public class Quiz {
 	 * @throws SQLException 
 	 */
 	public void deleteProblem(String problemID) throws SQLException {
-		for (int i = 0; i <= problems.size(); i++) {
+		for (int i = 0; i < problems.size(); i++) {
 			if (problems.get(i).getQuestionID().equals(problemID)) {
 				problems.remove(i);
 				break;

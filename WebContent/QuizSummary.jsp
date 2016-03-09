@@ -81,10 +81,10 @@ tbody{
 	String author = quiz.getAuthor();
 	String description = quiz.getDescription();
 	QuizSummary quizSummary = quiz.getQuizSummary();
-	int takeNum = quizSummary.getTakeNum();
-	double mean = quizSummary.getMeanScore();
-	double max = quizSummary.getMaxScore();
-	double min = quizSummary.getMinScore();
+	String takeNum = quizSummary.getTakeNum();
+	String mean = quizSummary.getMeanScore();
+	String max = quizSummary.getMaxScore();
+	String min = quizSummary.getMinScore();
 	boolean isOnePage = quiz.isOnePage();
 	boolean isPracticeMode = quiz.isPracticeMode();
 	String link = "QuizTakingOnePage.jsp";

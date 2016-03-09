@@ -18,9 +18,9 @@ public class QuizSummary {
 	private ArrayList<Performance> badPerformers;
 	private ArrayList<Performance> userPerformance;
 	private int takeNum;
-	private double meanScore;
-	private double maxScore;
-	private double minScore;
+	private String meanScore;
+	private String maxScore;
+	private String minScore;
 	
 	/**
 	 * Simple constructor, get the statistics about this quiz
@@ -40,16 +40,17 @@ public class QuizSummary {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT COUNT(UserID), AVG(Score), MAX(Score), MIN(Score) FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" GROUP BY QuizID;";
-			System.out.println(sql);
 			ResultSet res = stmt.executeQuery(sql);
-			if (res != null) {
-				res.absolute(1);
-//				System.out.println(res.getString(1));
-				takeNum = Integer.parseInt(res.getString(1));
-//				System.out.println(res.getDouble(2));
-				meanScore = Double.parseDouble(res.getString(2));
-				maxScore = Double.parseDouble(res.getString(3));
-				minScore = Double.parseDouble(res.getString(4));
+			if (res.next()) {
+				takeNum = res.getInt(1);
+				meanScore = String.format("%.2f", res.getDouble(2)) + "%";
+				maxScore = String.format("%.2f", res.getDouble(3)) + "%";
+				minScore = String.format("%.2f", res.getDouble(4)) + "%";
+			} else {
+				takeNum = 0;
+				meanScore = "Untaken";
+				maxScore = "Untaken";
+				minScore = "Untaken";
 			}
 			database.getCon().close();
 		} catch (SQLException e) {
@@ -267,15 +268,15 @@ public class QuizSummary {
 	/**
 	 * @return the number of the quiz been taken
 	 */
-	public int getTakeNum() {
-		return takeNum;
+	public String getTakeNum() {
+		return String.valueOf(takeNum);
 	}
 	
 	
 	/**
 	 * @return the average score of all users
 	 */
-	public double getMeanScore() {
+	public String getMeanScore() {
 		return meanScore;
 	}
 	
@@ -283,7 +284,7 @@ public class QuizSummary {
 	/**
 	 * @return the maximum score of all users
 	 */
-	public double getMaxScore() {
+	public String getMaxScore() {
 		return maxScore;
 	}
 	
@@ -291,7 +292,7 @@ public class QuizSummary {
 	/**
 	 * @return the minimum score of all users
 	 */
-	public double getMinScore() {
+	public String getMinScore() {
 		return minScore;
 	}
 	

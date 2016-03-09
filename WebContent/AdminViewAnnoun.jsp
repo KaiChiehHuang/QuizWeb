@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="xuandong.*" %>
+    <%@ page import="bian.*" %>
     <%@ page import="java.io.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,25 +16,69 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
-<title>Create Announcement</title>
+<title>Announcement Page</title>
 </head>
 <body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers3.jpg')">
-<form action="CreateAnnounce" method="post">
+
+
+<%
+	ArrayList<Announcement> announ = new ArrayList<Announcement>();
+	announ = Announcement.getAnnouncement();
+%>
+
 <div>
 <div class = "container">
-	<p><h3>Create Announcement </h3> </p>
-	<div>
-		<p><h5>Subject: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "announsubject" placeholder="Subject">
-	</div>
-	<div>
-		<p><h5>Content: </h5> </p>
-  		<textarea class="form-control" rows="3" name = "announce" placeholder="Announcement Content"></textarea>
-  	</div>
-  	<button type="submit" class="btn btn-success" style="position: relative; left:50%; width:80px; margin-left:-40px">Create</button>
-<div><a href="AdminDeleteUser.jsp"> Back to Administration Page </a></div>
+
+
 </div>
+<form action="DeleteAnnounServlet" method="post">
+<div class = "container">
+
+<h4>All Announcement</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Date</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%
+    	for (int i = 0; i < announ.size(); i++) {
+     		Announcement ann = new Announcement();
+     		ann = announ.get(i);
+     		String sub = ann.getSubject();
+     		String date = ann.getDate();
+    		if (i % 2 == 0) {
+    			out.println("<tr class=\"warning\">");
+    		} else {
+    			out.println("<tr class=\"active\">");
+    		}
+    		out.println("<td>");
+    		out.println(sub);
+    		out.println("</td>");
+    		
+    		out.println("<td>");
+    		out.println(date);
+    		out.println("</td>");
+    		
+    		out.println("<td>");
+    		out.println("<button name = \"announindex\" type=\"submit\" class=\"btn btn-warning\" value =\"" +i+ "\"/>Delete</button>");
+    		out.println("</td>");
+    		
+    		out.println("</tr>");	
+    	}
+    %>
+    </tbody>
+  </table>
+  <div><a href="AdminDeleteUser.jsp"> Back to Administration Page </a></div>
 </div>
+
 </form>
+</div>
+
+
+
 </body>
 </html>

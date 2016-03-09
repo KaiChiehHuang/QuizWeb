@@ -2,6 +2,7 @@ package xuandong;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Administration {
 	/**
@@ -78,5 +79,39 @@ public class Administration {
 		database.getCon().close();
 		res.next();
 		return res.getInt(1);
+	}
+	
+	/**
+	 * Get a list of all users
+	 * @return a list of all userIDs
+	 * @throws SQLException
+	 */
+	public static ArrayList<String> getAllUsers() throws SQLException {
+		ArrayList<String> users = new ArrayList<String>();
+		DBConnection database = new DBConnection();
+		String sql = "SELECT UserID FROM Users;";
+		ResultSet res = database.getStmt().executeQuery(sql);
+		while (res.next()) {
+			users.add(res.getString("UserID"));
+		}
+		database.getCon().close();
+		return users;
+	}
+	
+	/**
+	 * Get a list of all quizzes
+	 * @return a list of all quizIDs
+	 * @throws SQLException
+	 */
+	public static ArrayList<String> getAllQuizzes() throws SQLException {
+		ArrayList<String> quizzes = new ArrayList<String>();
+		DBConnection database = new DBConnection();
+		String sql = "SELECT QuizID FROM Quiz;";
+		ResultSet res = database.getStmt().executeQuery(sql);
+		while (res.next()) {
+			quizzes.add(res.getString("QuizID"));
+		}
+		database.getCon().close();
+		return quizzes;
 	}
 }

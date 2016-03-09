@@ -16,7 +16,9 @@ public class QuizTest {
 	@Test
 	public void test() throws SQLException, InterruptedException {
 //		System.out.println(Category.searchByCategory("Food").size());
-		assertEquals(2, Category.searchByCategory("Food").size());
+//		assertEquals(2, Category.searchByCategory("Food").size());
+		MultiChoice temp = new MultiChoice("MC0000000000");
+		System.out.println(temp.getInsertSQL());
 	}
 
 }

@@ -89,17 +89,17 @@ public class Problem {
 	 */
 	public void updateDatabase() throws SQLException {
 		DBConnection database = new DBConnection();
-		Statement stmt = database.getStmt();
+		Statement stmt = database.getStmt(); 
 		if (this.creating) {
-			String sql = "SELECT QuestionID FROM " + Problem.problemType.get(this.type) + " ORDER BY QuizID DESC LIMIT 1;";
+			String sql = "SELECT QuestionID FROM " + type + " ORDER BY QuizID DESC LIMIT 1;";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res.next()) {
 				int questionCount = Integer.parseInt(res.getString(1).substring(2));
 				questionCount++;
-				this.questionID = this.type + String.format("%010d", questionCount);
+				this.questionID = Problem.problemType.get(this.type) + String.format("%010d", questionCount);
 			} else {
 				int questionCount = 0;
-				this.questionID = this.type + String.format("%010d", questionCount);
+				this.questionID = Problem.problemType.get(this.type) + String.format("%010d", questionCount);
 			}
 			stmt.executeUpdate(getInsertSQL());
 		} else {
@@ -114,7 +114,7 @@ public class Problem {
 	 */
 	public String getInsertSQL() {
 		String answer = getArrayToString(answers);
-		String sql = "INSERT INTO " + Problem.problemType.get(type) + " VALUES(\"" + this.questionID + "\",\"" + this.question + "\",\"" + answer + "\");";
+		String sql = "INSERT INTO " + type + " VALUES(\"" + this.questionID + "\",\"" + this.question + "\",\"" + answer + "\");";
 		return sql;
 	}
 	
@@ -124,7 +124,7 @@ public class Problem {
 	 */
 	public String getUpdateSQL() {
 		String answer = getArrayToString(answers);
-		String sql = "UPDATE " + Problem.problemType.get(type) + " SET Question = \"" + this.question + "\" , Answer = \"" + answer + "\" WHERE QuestionID = \"" + this.questionID + "\";";
+		String sql = "UPDATE " + type + " SET Question = \"" + this.question + "\" , Answer = \"" + answer + "\" WHERE QuestionID = \"" + this.questionID + "\";";
 		return sql;
 	}
 	
@@ -154,6 +154,12 @@ public class Problem {
 			problemType.put("PR", "PictureResponse");
 			problemType.put("MC", "MultiChoice");
 			problemType.put("MR", "MultiResponse");
+			problemType.put("QuestionResponse", "QR");
+			problemType.put("SingleChoice", "SC");
+			problemType.put("FillBlank", "FB");
+			problemType.put("PictureResponse", "PR");
+			problemType.put("MultiChoice", "MC");
+			problemType.put("MultiResponse", "MR");
 			problemType.put("question-response", "QR");
 			problemType.put("fill-in-blank", "FB");
 			problemType.put("multiple-choice", "MC");

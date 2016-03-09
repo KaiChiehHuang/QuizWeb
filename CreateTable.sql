@@ -217,7 +217,7 @@ INSERT INTO Announcement(Content, AdminID, Time, Subject) VALUES ("Welcome to Qu
 CREATE TABLE Category (
 	QuizID       VARCHAR(255),
 	Category     VARCHAR(255),
-	PRIMARY KEY  (QuizID, Category),
+	PRIMARY KEY  (QuizID),
 	FOREIGN KEY  (QuizID)
 		REFERENCES Quiz(QuizID)
 		ON DELETE CASCADE ON UPDATE CASCADE

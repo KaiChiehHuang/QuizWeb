@@ -53,24 +53,24 @@ public class Quiz {
 		problems = new ArrayList<Problem>();
 	}
 	
-	/**
-	 * Set the quizID
-	 * only used when creating a new quiz
-	 * @throws SQLException
-	 */
-	public void setQuizID() throws SQLException {
-		DBConnection database = new DBConnection();
-		Statement stmt = database.getStmt();
-		String sql = "SELECT QuizID FROM Quiz ORDER BY QuizID DESC LIMIT 1;";
-		ResultSet res = stmt.executeQuery(sql);
-		if (res.next()) {
-			int quizCount = Integer.parseInt(res.getString(1)) + 1;
-			this.quizID = String.format("%010d", quizCount);
-		} else {
-			int questionCount = 0;
-			this.quizID = String.format("%010d", questionCount);
-		}
-	}
+//	/**
+//	 * Set the quizID
+//	 * only used when creating a new quiz
+//	 * @throws SQLException
+//	 */
+//	public void setQuizID() throws SQLException {
+//		DBConnection database = new DBConnection();
+//		Statement stmt = database.getStmt();
+//		String sql = "SELECT QuizID FROM Quiz ORDER BY QuizID DESC LIMIT 1;";
+//		ResultSet res = stmt.executeQuery(sql);
+//		if (res.next()) {
+//			int quizCount = Integer.parseInt(res.getString(1)) + 1;
+//			this.quizID = String.format("%010d", quizCount);
+//		} else {
+//			int questionCount = 0;
+//			this.quizID = String.format("%010d", questionCount);
+//		}
+//	}
 
 	/**
 	 * Used to get all the information of a quiz from database Please just call
@@ -170,6 +170,14 @@ public class Quiz {
 	 */
 	public ArrayList<Problem> getProblems() {
 		return problems;
+	}
+	
+	/**
+	 * Add a problem
+	 * @param pro
+	 */
+	public void addProblem(Problem pro) {
+		this.problems.add(pro);
 	}
 
 	/**

@@ -54,7 +54,7 @@ public class Performance {
 	/**
 	 * @return score
 	 */
-	public double getScore() {
-		return score;
+	public String getScore() {
+		return String.format("%.2f", this.score) + "%";
 	}
 }

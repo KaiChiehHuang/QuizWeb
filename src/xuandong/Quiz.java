@@ -571,7 +571,7 @@ public class Quiz {
 	 * @return user score with two decimal digits
 	 */
 	public String getScore() {
-		return String.format("%.2f", this.score);
+		return String.format("%.2f", this.score) + "%";
 	}
 
 	/**

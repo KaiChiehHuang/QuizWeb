@@ -26,6 +26,7 @@
 
 	Quiz quiz = new Quiz();
 	quiz.setAuthor(authorID);
+	System.out.println(quiz.getAuthor());
 	
 	session.setAttribute("newQuiz", quiz); 
 	

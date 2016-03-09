@@ -128,7 +128,7 @@ public class Announcement {
 	 */
 	public void deleteAnnouncement() throws SQLException {
 		DBConnection database = new DBConnection();
-		String sql = "DELETE FROM Announcement WHERE AdminID = \"" + this.adminID + "\", AND Time = \"" + "\";";
+		String sql = "DELETE FROM Announcement WHERE AdminID = \"" + this.adminID + "\" AND Time = \""+ this.date + "\";";
 		database.getStmt().executeUpdate(sql);
 		database.getCon().close();
 	}

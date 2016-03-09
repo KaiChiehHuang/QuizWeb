@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
 <title>Administration</title>
 </head>
-<body>
+<body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers3.jpg')">
 
 <%
 	ArrayList users = new ArrayList();
@@ -26,13 +26,15 @@
 	quizs = Administration.getAllQuizzes();
 %>
 
-<div style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers3.jpg')">
+<div >
 <div class = "container">
 <h4>Web Statistics:</h4> 
 <p>Total users number: <%=users.size()%></p>
 <p>Total quiz number: <%=quizs.size()%></p>
-<p>Total taken quiz number: <%Administration.getQuizTakenNumber();%></p>
-<a href="AdminCreateAnnoun.jsp"> Create Announcement </a>
+<p>Total taken quiz number: <%=Administration.getQuizTakenNumber()%></p>
+<div><a href="AdminCreateAnnoun.jsp"> Create Announcement </a></div>
+<a href="AdminViewAnnoun.jsp"> View all announcements </a>
+
 
 </div>
 <form action="DeleteUserServlet" method="post">

@@ -62,9 +62,10 @@ public class Administration {
 		DBConnection database = new DBConnection();
 		String sql = "SELECT Count(*) FROM Users;";
 		ResultSet res = database.getStmt().executeQuery(sql);
-		database.getCon().close();
+		int temp = res.getInt(1);
 		res.next();
-		return res.getInt(1);
+		database.getCon().close();
+		return temp;
 	}
 	
 	/**
@@ -76,9 +77,10 @@ public class Administration {
 		DBConnection database = new DBConnection();
 		String sql = "SELECT COUNT(DISTINCT QuizID) FROM QuizRecord;";
 		ResultSet res = database.getStmt().executeQuery(sql);
-		database.getCon().close();
 		res.next();
-		return res.getInt(1);
+		int temp = res.getInt(1);
+		database.getCon().close();
+		return temp;
 	}
 	
 	/**

@@ -411,14 +411,21 @@ function pageScrollUp(position) {
 				</div>
 				<div class="col-xs-6 col-md-6 text-center" style="background-color:black;height:100%;">
 					<% 
-						ArrayList<Achievement> allAchievements = user.getAchievements();
-						
-						for(Achievement ach: allAchievements) {
-							if (Achievement.getAllAchievement().contains(ach.getAchievementName())){
-								out.print("<img src=\"" + ach.getImage(ach.getAchievementName()) + "\" style=\"position:relative;top:8px;left:5%;width:90%;height:60%;\" >");
-							}else{
-								
-							}
+						ArrayList<Achievement> allUserAchievements = user.getAchievements();
+						Set<String> allAchievements = Achievement.getAllAchievement();
+						for(Achievement ach: allUserAchievements) {
+							String imageUrl = ach.getImage();
+							System.out.println(imageUrl);
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:40%;height:30%;\">";
+							out.print(achImage);
+							allAchievements.remove(ach.getAchievementName());
+						}
+						System.out.println(allAchievements);
+						for(String ach: allAchievements) {
+							String imageUrl = Achievement.getImage(ach);
+							System.out.println(imageUrl);
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:40%;height:30%;\" class=\"grayscale\">";
+							out.print(achImage);
 						}
 					%>
 				</div>

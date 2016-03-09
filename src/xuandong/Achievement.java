@@ -1,5 +1,6 @@
 package xuandong;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -25,12 +26,23 @@ public class Achievement {
 	public static final HashMap<String, String> ACHIEVEMENTIMAGE = new HashMap<String, String>();
 	static
 	{
-		ACHIEVEMENTIMAGE.put("Amateur Author", "badges/Amateur Author.jpg");
-		ACHIEVEMENTIMAGE.put("Prolific Author", "badges/Prolific Author.jpg");
-		ACHIEVEMENTIMAGE.put("Prodigious Author", "badges/Prodigious Author.jpg");
-		ACHIEVEMENTIMAGE.put("Quiz Machine", "badges/Quiz Machine.jpg");
-		ACHIEVEMENTIMAGE.put("I am the Greatest", "badges/I am the Greatest.jpg");
-		ACHIEVEMENTIMAGE.put("Practice Makes Perfect", "badges/Practice Makes Perfect.jpg");
+		ACHIEVEMENTIMAGE.put("Amateur Author", "badges/Amateur Author.png");
+		ACHIEVEMENTIMAGE.put("Prolific Author", "badges/Prolific Author.png");
+		ACHIEVEMENTIMAGE.put("Prodigious Author", "badges/Prodigious Author.png");
+		ACHIEVEMENTIMAGE.put("Quiz Machine", "badges/Quiz Machine.png");
+		ACHIEVEMENTIMAGE.put("I am the Greatest", "badges/I am the Greatest.png");
+		ACHIEVEMENTIMAGE.put("Practice Makes Perfect", "badges/Practice Makes Perfect.png");
+	};
+	
+	public static final ArrayList<String> ALLACHIEVEMENTS = new ArrayList<String>();
+	static
+	{
+		ALLACHIEVEMENTS.add("Amateur Author");
+		ALLACHIEVEMENTS.add("Prolific Author");
+		ALLACHIEVEMENTS.add("Prodigious Author");
+		ALLACHIEVEMENTS.add("Quiz Machine");
+		ALLACHIEVEMENTS.add("I am the Greatest");
+		ALLACHIEVEMENTS.add("Practice Makes Perfect");
 	};
 	
 	public Achievement() {
@@ -80,8 +92,11 @@ public class Achievement {
 		return Achievement.ACHIEVEMENTDESCRIPTION.get(achi);
 	}
 	
-	public static Set<String> getAllAchievement() {
-		return Achievement.ACHIEVEMENTDESCRIPTION.keySet();
+//	public static Set<String> getAllAchievement() {
+//		return Achievement.ACHIEVEMENTDESCRIPTION.keySet();
+//	}
+	public static ArrayList<String> getAllAchievement() {
+		return Achievement.ALLACHIEVEMENTS;
 	}
 	
 	public static String getImage(String achi) {

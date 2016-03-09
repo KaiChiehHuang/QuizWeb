@@ -109,18 +109,11 @@ public class User {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
-	/**
-	 * @return a list of this user's achievements
-	 */
-	public ArrayList<Achievement> getAchievement() {
-		return this.achievements;
-	}
 
 	/**
 	 * Get user's achievements
 	 * 
-	 * @return String[] achievements
+	 * @return
 	 */
 	public ArrayList<Achievement> getAchievements() {
 		return achievements;

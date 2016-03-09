@@ -29,7 +29,7 @@
 	
 // Performance
 	QuizSummary summary = new QuizSummary(quiz.getQuizID(), quiz.getUserID());
-	ArrayList<Performance> userPerformance = summary.getUserPerformance();
+	ArrayList<Performance> userPerformance = summary.getUserPerformanceByDate();
 %>
 
 <div class="container">

@@ -25,12 +25,12 @@ public class Achievement {
 	public static final HashMap<String, String> ACHIEVEMENTIMAGE = new HashMap<String, String>();
 	static
 	{
-		ACHIEVEMENTDESCRIPTION.put("Amateur Author", "http://vignette4.wikia.nocookie.net/leagueoflegends/images/b/b4/BronzeBadgeSeason2.png/revision/latest?cb=20130928162132");
-		ACHIEVEMENTDESCRIPTION.put("Prolific Author", "http://vignette2.wikia.nocookie.net/leagueoflegends/images/3/3f/SilverBadgeSeason2.png/revision/latest?cb=20130928162033");
-		ACHIEVEMENTDESCRIPTION.put("Prodigious Author", "http://vignette1.wikia.nocookie.net/leagueoflegends/images/7/77/GoldBadgeSeason2.png/revision/latest?cb=20130928162204");
-		ACHIEVEMENTDESCRIPTION.put("Quiz Machine", "http://vignette2.wikia.nocookie.net/leagueoflegends/images/0/03/DiamondBadge.png/revision/latest?cb=20130928162320");
-		ACHIEVEMENTDESCRIPTION.put("I am the Greatest", "http://vignette4.wikia.nocookie.net/leagueoflegends/images/d/d2/MasterBadge.png/revision/latest?cb=20150418014845");
-		ACHIEVEMENTDESCRIPTION.put("Practice Makes Perfect", "http://vignette2.wikia.nocookie.net/leagueoflegends/images/5/5f/PlatinumBadgeSeason2.png/revision/latest?cb=20130928162240");
+		ACHIEVEMENTIMAGE.put("Amateur Author", "http://vignette4.wikia.nocookie.net/leagueoflegends/images/b/b4/BronzeBadgeSeason2.png/revision/latest?cb=20130928162132");
+		ACHIEVEMENTIMAGE.put("Prolific Author", "http://vignette2.wikia.nocookie.net/leagueoflegends/images/3/3f/SilverBadgeSeason2.png/revision/latest?cb=20130928162033");
+		ACHIEVEMENTIMAGE.put("Prodigious Author", "http://vignette1.wikia.nocookie.net/leagueoflegends/images/7/77/GoldBadgeSeason2.png/revision/latest?cb=20130928162204");
+		ACHIEVEMENTIMAGE.put("Quiz Machine", "http://vignette2.wikia.nocookie.net/leagueoflegends/images/0/03/DiamondBadge.png/revision/latest?cb=20130928162320");
+		ACHIEVEMENTIMAGE.put("I am the Greatest", "http://vignette4.wikia.nocookie.net/leagueoflegends/images/d/d2/MasterBadge.png/revision/latest?cb=20150418014845");
+		ACHIEVEMENTIMAGE.put("Practice Makes Perfect", "http://vignette2.wikia.nocookie.net/leagueoflegends/images/5/5f/PlatinumBadgeSeason2.png/revision/latest?cb=20130928162240");
 	};
 	
 	public Achievement() {

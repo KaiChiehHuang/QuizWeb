@@ -1,5 +1,8 @@
 package xuandong;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Performance {
 	private String quizID;
 	private String userID;
@@ -28,6 +31,18 @@ public class Performance {
 	 */
 	public String getQuizID() {
 		return quizID;
+	}
+	
+	/**
+	 * @return quizID
+	 * @throws SQLException 
+	 */
+	public String getQuizName() throws SQLException {
+		DBConnection database = new DBConnection();
+		ResultSet res = database.getStmt().executeQuery("SELECT Name FROM Quiz WHERE QuizID = \"" + this.quizID + "\";");
+		res.next();
+		String name = res.getString("Name");
+		return name;
 	}
 	
 	/**

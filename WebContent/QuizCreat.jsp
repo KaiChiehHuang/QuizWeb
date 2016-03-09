@@ -91,15 +91,175 @@
 
 <!-- Multiple Choice Problem -->
 <div class="container">
+	<p><h3>Creating Multiple Choice Problem: </h5> </p>
 	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control" name = "problem" placeholder="Quiz Name">
-	<div class="radio">
-		  <label><input type="radio" name="ImmCorr" value="Yes">Yes</label>
+	<input type="text" class="form-control" name = "question" placeholder="Question">
+	<div>
+		<p><h5>Choices: </h5> </p>
+		<input type="text" class="form-control" name = "choices" placeholder="Choices">
 	</div>
-		<div class="radio">
-		  <label><input type="radio" name="ImmCorr" value="No">No</label>
+	<div>
+		<p><h5>Answer(Must be one of choices): </h5> </p>
+		<input type="text" class="form-control" name = "answer" placeholder="Answer">
 	</div>
-</div>	
+</div>
+
+<%-- <%!
+	/* getParameter(answer1) get the answer of user. */
+	public void createMultiChoice(JspWriter myOut, int index) throws IOException {
+		Problem pro = new MultiChoice("MC", true);
+		
+		myOut.println("<div class=\"container\">");
+		myOut.println("<p><h3>Creating Multiple Choice Problem: </h5> </p><p> <h5>Question: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"question\""+index+"placeholder=\"Question\">");
+		myOut.println("<div><p><h5>Choices: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"choices\""+index+"placeholder=\"Choices\"></div>");
+		myOut.println("<div><p><h5>Answer(Must be one of choices): </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"answer\""+index+"placeholder=\"Answer\"></div>");
+		myOut.println("</div>");
+	}
+%> --%>
+
+<!-- Single Choice Problem -->
+<div class="container">
+	<p><h3>Creating Single Choice Problem: </h5> </p>
+	<p><h5>Question: </h5> </p>
+	<input type="text" class="form-control" name = "question" placeholder="Question">
+	<div>
+		<p><h5>Choices: </h5> </p>
+		<input type="text" class="form-control" name = "choices" placeholder="Choices">
+	</div>
+	<div>
+		<p><h5>Answer(Must be one of choices) : </h5> </p>
+		<input type="text" class="form-control" name = "answer" placeholder="Answer">
+	</div>
+</div>
+
+<%-- <%!
+	/* getParameter(answer1) get the answer of user. */
+	public void createSingleChoice(JspWriter myOut, int index) throws IOException {
+		Problem pro = new SingleChoice("SC", true);
+		
+		myOut.println("<div class=\"container\">");
+		myOut.println("<p><h3>Creating Single Choice Problem: </h5> </p><p> <h5>Question: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"question\""+index+"placeholder=\"Question\">");
+		myOut.println("<div><p><h5>Choices: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"choices\""+index+"placeholder=\"Choices\"></div>");
+		myOut.println("<div><p><h5>Answer(Must be one of choices): </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"answer\""+index+"placeholder=\"Answer\"></div>");
+		myOut.println("</div>");
+	}
+%> --%>
+
+<!-- Fill Blank Problem -->
+<div class="container">
+	<p><h3>Creating Fill Blank Problem: </h5> </p>
+	<p><h5>Question: </h5> </p>
+	<div>
+		<input type="text" class="form-control" name = "question" placeholder="Question">
+		<p><h5>Blank field: </h5> </p>
+		<input type="text" class="form-control" name = "answer" placeholder="Answer">
+		<p><h5>Question part 2: </h5> </p>
+		<input type="text" class="form-control" name = "question" placeholder="Question">
+	</div>
+</div>
+
+<%-- <%!
+	/* getParameter(answer1) get the answer of user. */
+	public void createFillBlank(JspWriter myOut, int index) throws IOException {
+		Problem pro = new FillBlank("FB", true);
+		
+		myOut.println("<div class=\"container\">");
+		myOut.println("<p><h3>Creating Fill Blank Problem: </h5> </p><p> <h5>Question: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"question\""+index+"placeholder=\"Question\">");
+		myOut.println("<div><p><h5>Blank field: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"answer\""+index+"placeholder=\"Answer\"></div>");
+		myOut.println("<div><p><h5>Question part 2: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"question\""+index+"placeholder=\"Question\"></div>");
+		myOut.println("</div>");
+	}
+%> --%>
+
+<!-- Picture Respond Problem -->
+<div class="container">
+	<p><h3>Creating Picture Respond Problem: </h5> </p>
+	<p><h5>Question: </h5> </p>
+	<input type="text" class="form-control" name = "question" placeholder="Question">
+	<div>
+		<p><h5>Picture: </h5> </p>
+		<input type="text" class="form-control" name = "picture" placeholder="Picture URL">
+	</div>
+	<div>
+		<p><h5>Answer: </h5> </p>
+		<input type="text" class="form-control" name = "answer" placeholder="Answer">
+	</div>
+</div>
+
+<%-- <%!
+	/* getParameter(answer1) get the answer of user. */
+	public void createPictureResponse(JspWriter myOut, int index) throws IOException {
+		Problem pro = new PictureResponse("MC", true);
+		
+		myOut.println("<div class=\"container\">");
+		myOut.println("<p><h3>Creating Picture Respond Problem: </h5> </p><p> <h5>Question: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"question\""+index+"placeholder=\"Question\">");
+		myOut.println("<div><p><h5>Picture: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"picture\""+index+"placeholder=\"Picture URL\"></div>");
+		myOut.println("<div><p><h5>Answer: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"answer\""+index+"placeholder=\"Answer\"></div>");
+		myOut.println("</div>");
+	}
+%> --%>
+
+<!-- Question Respond Problem -->
+<div class="container">
+	<p><h3>Creating Question Respond Problem: </h5> </p>
+	<p><h5>Question: </h5> </p>
+	<input type="text" class="form-control" name = "question" placeholder="Question">
+	<div>
+		<p><h5>Answer: </h5> </p>
+		<input type="text" class="form-control" name = "answer" placeholder="Answer">
+	</div>
+</div>
+
+<%-- <%!
+	/* getParameter(answer1) get the answer of user. */
+	public void createQuestionResponse(JspWriter myOut, int index) throws IOException {
+		Problem pro = new QuestionResponse("QR", true);
+		
+		myOut.println("<div class=\"container\">");
+		myOut.println("<p><h3>Creating Question Respond Problem: </h5> </p><p> <h5>Question: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"question\""+index+"placeholder=\"Question\">");
+		myOut.println("<div><p><h5>Answer: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"answer\""+index+"placeholder=\"Answer\"></div>");
+		myOut.println("</div>");
+	}
+%> --%>
+
+<!-- Multiple Respond Problem -->
+<div class="container">
+	<p><h3>Creating Multiple Respond Problem: </h5> </p>
+	<p><h5>Question: </h5> </p>
+	<input type="text" class="form-control" name = "question" placeholder="Question">
+	<div>
+		<p><h5>Answer: </h5> </p>
+		<input type="text" class="form-control" name = "answer" placeholder="Answer">
+	</div>
+</div>
+
+<%-- <%!
+	/* getParameter(answer1) get the answer of user. */
+	public void createMultiResponse(JspWriter myOut, int index) throws IOException {
+		Problem pro = new MultiResponse("MR", true);
+		
+		myOut.println("<div class=\"container\">");
+		myOut.println("<p><h3>Creating Multiple Respond Problem: </h5> </p><p> <h5>Question: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"question\""+index+"placeholder=\"Question\">");
+		myOut.println("<div><p><h5>Answer: </h5> </p>");
+		myOut.println("<input type=\"text\" class=\"form-control\" name = \"answer\""+index+"placeholder=\"Answer\"></div>");
+		myOut.println("</div>");
+	}
+%> --%>
 
 <%-- <%
 	for (int i = 1; i < problems.size() + 1; i++) {
@@ -127,116 +287,10 @@
 		}
 	}
 %> --%>
-<input type="submit" value = "Create Quiz"/>
+<button href = "QuizCreateYY.jsp" type="submit" type="button" class="btn btn-warning" style = "position: relative; left: 50%; width: 120px; margin-left:-60px">Add Questions</button>
+
 </form>
 
-<%-- <%!
-	/* getParameter(answer1) get the answer of user. */
-	public void setProperty(JspWriter myOut) throws IOException {
-		
-		myOut.println("<div class=\"container\">");
-		
-		// Random
-		myOut.println("<p><h5>Random: Is the problems in quiz randomly ordered? </h5> </p>");
-		myOut.println("<div class=\"radio\">");
-		
-		for (int i = 0; i < choices.length; i++) {
-			
-			myOut.println("<label><input type=\"radio\" name=\"answer"+ index + "\" value=\"" + choices[i]+ "\" />" + choices[i] + "</label>");
-/* 			myOut.println("<label><input type=\"radio\" name=\"answer"+ index + "\" />" + choices[i] + "</label>"); */
-			myOut.println("</div>");
-		}
-		myOut.println("</div>");
-	}
-%>
 
-<%!
-	/* getParameter(answer1) get the answer of user. */
-	public void createSingleChoice(JspWriter myOut, MultiChoice mc, int index) throws IOException {
-		String[] choices = mc.getChoices();
-		String question = mc.getQuestion();
-		
-		myOut.println("<div class=\"container\">");
-		myOut.println("<p>"+ "<h5>Problem " + index + ": </h5>"+question +"</p>");
-		for (int i = 0; i < choices.length; i++) {
-			myOut.println("<div class=\"radio\">");
-			myOut.println("<label><input type=\"radio\" name=\"answer"+ index + "\" value=\"" + choices[i]+ "\" />" + choices[i] + "</label>");
-/* 			myOut.println("<label><input type=\"radio\" name=\"answer"+ index + "\" />" + choices[i] + "</label>"); */
-			myOut.println("</div>");
-		}
-		myOut.println("</div>");
-	}
-%>
-
-<%!
-	/* getParameter(answer2) get the answer of user. */
-	public void createFillBlank(JspWriter myOut, FillBlank fb, int index) throws IOException {
-		String que = fb.getQuestion();
-		String[] question = new String[2];
-		question = que.split("\\|\\|\\|\\|\\|\\|");
-		
-		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question[0]);
-		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" />");
-		myOut.println(question[1] + "</p></div>");
-
-	}
-%>
-
-<%!
-	/* getParameter(answer3) get the answer of user. */
-	public void createPictureResponse(JspWriter myOut, PictureResponse pr, int index) throws IOException {
-		String question = pr.getQuestion();
-		String url = pr.getURL();
-		
-		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question);
-		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" /> </p></div>");
-		myOut.println("<div class = \"container\" style = \"position: relative; left: 50%; width: 400px; margin-left:-200px\">");
-		myOut.println("<img class=\"img-thumbnail\"src =" + url + "></div>");
-
-	}
-%>
-
-<%!
-
-	/* getParameter(answer4) get the answer of user. */
-	public void createQuestionResponse(JspWriter myOut, QuestionResponse pr, int index) throws IOException {
-		String question = pr.getQuestion();
-		
-		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question);
-		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" />");
-		myOut.println("</p></div>");
-	}
-%>
-
-<%!
-	/* getParameter(answer5) get the answer of user. */
-	public void createMultiResponse(JspWriter myOut, MultiResponse pr, int index) throws IOException {
-		String question = pr.getQuestion();
-		int count = pr.getCount();
-		
-		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question);
-		for (int i = 0; i < count; i++) {
-			myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" />");
-		}
-		myOut.println("</p></div>");
-	}
-%>
-
-<%!
-	/* getParameter(answer6) get the answer of user. */
-	public void createMultiChoice(JspWriter myOut, MultiChoice mc, int index) throws IOException {
-		String question = mc.getQuestion();
-		String[] choices = mc.getChoices();
-		
-		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question + "</p>");
-		for (int i = 0; i < choices.length; i++) {
-			myOut.println("<label class=\"checkbox-inline\"> <input type=\"checkbox\" name=\"answer" + index + "\" value=\"" + choices[i] + "\">");
-			myOut.println(choices[i] +" </label><br>");
-		}
-		
-		myOut.println("</div>");
-	}
-%>
- --%>
 </body>
 </html>

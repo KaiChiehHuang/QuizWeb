@@ -1,5 +1,6 @@
 package bian;
 
+import java.awt.Choice;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,9 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.javafx.scene.control.skin.ChoiceBoxSkin;
+
+import xuandong.FillBlank;
 import xuandong.MultiChoice;
+import xuandong.MultiResponse;
 import xuandong.PictureResponse;
 import xuandong.Problem;
+import xuandong.QuestionResponse;
 import xuandong.Quiz;
 
 /**
@@ -46,20 +52,51 @@ public class QuizAddProblem extends HttpServlet {
 		Quiz quiz = (Quiz)session.getAttribute("newQuiz");
 		
 		String type = request.getParameter("type");
-		Problem problem = new Problem(type, true);
 		String question = request.getParameter("question");
-		problem.setQuestion(question);
-		if (type.equals("MC") || type.equals("SC")) {
-			String[] choices = request.getParameterValues("choices");
-			problem = (MultiChoice) problem;
+		String answer = request.getParameter("answer");
+		
+		if (type.equals("MC")) {
+			MultiChoice pro = new MultiChoice("MC", true);
+			String choice = request.getParameter("choice");
+			pro.setQuestion(question);
+			pro.setChoices(choice);
+			pro.setCount(choice.split("\\|").length);
+			pro.setAnswers(answer);
+			quiz.addProblem(pro);
+		} else if (type.equals("MR")) {
+			MultiResponse pro = new MultiResponse("MR", true);
+			pro.setAnswers(answer);
+			pro.setQuestion(question);
+			String order = request.getParameter("order");
+			if (order == "Yes") {
+				pro.setOrdered(true);
+			} else {
+				pro.setOrdered(false);
+			}
+			quiz.addProblem(pro);
+		} else if (type.equals("FB")) {
+			FillBlank fb = new FillBlank("FB", true);
+			String[] fbquestion = request.getParameterValues("fbquestion");
+			String que = "";
+			que += fbquestion[0] + "#" + fbquestion[1];
+			fb.setQuestion(que);
+			fb.setAnswers(answer);
+			quiz.addProblem(fb);
+		} else if (type.equals("PR")) {
+			PictureResponse pr = new PictureResponse("PR", true);
+			pr.setAnswers(answer);
+			pr.setQuestion(question);
+			String url = request.getParameter("picture");
+			pr.setURL(url);
+			quiz.addProblem(pr);
+		} else if (type.equals("QR")) {
+			QuestionResponse qr = new QuestionResponse("QR", true);
+			qr.setAnswers(answer);
+			qr.setQuestion(question);
+			quiz.addProblem(qr);
 		}
-		if (type.equals("PR")) {
-			problem = (PictureResponse) problem;
-		}
 		
-		
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizCreateYY.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizCreateQuestion.jsp");
 		dispatcher.forward(request, response);
 	}
 

@@ -22,16 +22,16 @@
 <h1>Create a quiz</h1>
 
 <%
-/* 	String authorID = (String) request.getParameter("userID"); 
+	String authorID = (String) request.getParameter("userID"); 
 
 	Quiz quiz = new Quiz();
 	quiz.setAuthor(authorID);
 	
-	session.setAttribute("newQuiz", quiz); */
+	session.setAttribute("newQuiz", quiz); 
 	
 %>
 
-<form action="QuizCreateServlet" method="post">
+<form action="QuizCreatServlet" method="post">
 
 <!-- Quiz Properties -->
 <!-- name description image -->

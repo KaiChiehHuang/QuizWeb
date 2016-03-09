@@ -128,7 +128,7 @@ function pageScrollUp(position) {
 </style>
 <title>Home Page</title>
 </head>
-<body style="height: 1900px;">
+<body style="height: 2200px;">
 	<div
 		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
 
@@ -166,7 +166,7 @@ function pageScrollUp(position) {
 						<li><a href="#">Menu<span class="arrow">&#9660;</span></a>
 							<ul class="sub-menu">
 								<li><a href="#">Profile</a></li>
-								<li><a href="#">Coming Soon</a></li>
+								<li><a href="QuizCreat.jsp">Create Quiz</a></li>
 								<li><a href="#">Quiz Record</a></li>
 								<li><a href="UserLogin.jsp">Logout</a></li>
 							</ul>
@@ -270,7 +270,7 @@ function pageScrollUp(position) {
 	</div>
 
 	<div
-		style="position: relative; top: 85px; left: 50%; width: 900px; height: 1300px; margin-left: -450px;">
+		style="position: relative; top: 85px; left: 50%; width: 900px; height: 1500px; margin-left: -450px;">
 
 		<div class="panel panel-default" style="height: 60px;">
 			<div class="panel-body"
@@ -433,7 +433,7 @@ function pageScrollUp(position) {
 				String quizName = quiz.getName();
 				String popularity = String.valueOf(quiz.getPopularity());
 				String heartIcon = "<br><span class=\"glyphicon glyphicon-heart\" aria-hidden=\"true\"></span>  ";
-				String showQuizName = "<h3 style=\"font-size:17px;\">"+quizName+"<small>"+heartIcon+popularity+"</small>"+"</h3>";
+				String showQuizName = "<h3 style=\"font-size:17px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; \">"+quizName+"<small>"+heartIcon+popularity+"</small>"+"</h3>";
 				out.println(showQuizName);
 				out.println("</div>");
 				// Add popularity
@@ -554,11 +554,14 @@ function pageScrollUp(position) {
 			}
 		%>
 		</table>
-			
+	</div>
+	<div style="width=100%;bottom:0px;height:22%;background-color:#ffb3b3;">
+	<hr style="
+				border:none;	
+				border-top:1px #CCCCCC solid;
+				height: 1px;
+	">	
+	</div>	
 		
-		
-		<!-- <div style="bottom:0px;background-color:#ffb3b3;width:100%;height:20%;">
-	
-	</div> -->
 </body>
 </html>

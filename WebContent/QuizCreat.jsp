@@ -25,7 +25,6 @@
 /* 	String authorID = (String) request.getParameter("userID"); 
 
 	Quiz quiz = new Quiz();
-	quiz.setQuizID();
 	quiz.setAuthor(authorID);
 	
 	session.setAttribute("newQuiz", quiz); */
@@ -89,84 +88,21 @@
 	</div>
 </div>		
 
-<!-- Multiple Choice Problem -->
-<div class="container">
-	<p><h3>Creating Multiple Choice Problem: </h5> </p>
-	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control" name = "question" placeholder="Question">
-	<div>
-		<p><h5>Choices: </h5> </p>
-		<input type="text" class="form-control" name = "choices" placeholder="Choices">
-	</div>
-	<div>
-		<p><h5>Answer(Must be one of choices): </h5> </p>
-		<input type="text" class="form-control" name = "answer" placeholder="Answer">
-	</div>
-</div>
+<button type="submit" type="button" class="btn btn-warning" style = "position: relative; left: 50%; width: 120px; margin-left:-60px">Add Questions</button>
 
-<%-- <%!
-	/* getParameter(answer1) get the answer of user. */
-	public void createMultiChoice(JspWriter myOut, int index) throws IOException {
-		Problem pro = new MultiChoice("MC", true);
-		
-		myOut.println("<div class=\"container\">");
-		myOut.println("<p><h3>Creating Multiple Choice Problem: </h5> </p><p> <h5>Question: </h5> </p>");
-		myOut.println("<input type=\"text\" class=\"form-control\" name = \"question\""+index+"placeholder=\"Question\">");
-		myOut.println("<div><p><h5>Choices: </h5> </p>");
-		myOut.println("<input type=\"text\" class=\"form-control\" name = \"choices\""+index+"placeholder=\"Choices\"></div>");
-		myOut.println("<div><p><h5>Answer(Must be one of choices): </h5> </p>");
-		myOut.println("<input type=\"text\" class=\"form-control\" name = \"answer\""+index+"placeholder=\"Answer\"></div>");
-		myOut.println("</div>");
-	}
-%> --%>
-<input type="submit" value = "Create Quiz">
 </form>
+</body>
+</html>
 
 
-<!-- Single Choice Problem -->
-<div class="container">
-	<p><h3>Creating Single Choice Problem: </h5> </p>
-	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control" name = "question" placeholder="Question">
-	<div>
-		<p><h5>Choices: </h5> </p>
-		<input type="text" class="form-control" name = "choices" placeholder="Choices">
-	</div>
-	<div>
-		<p><h5>Answer(Must be one of choices) : </h5> </p>
-		<input type="text" class="form-control" name = "answer" placeholder="Answer">
-	</div>
-</div>
 
-<%-- <%!
-	/* getParameter(answer1) get the answer of user. */
-	public void createSingleChoice(JspWriter myOut, int index) throws IOException {
-		Problem pro = new SingleChoice("SC", true);
-		
-		myOut.println("<div class=\"container\">");
-		myOut.println("<p><h3>Creating Single Choice Problem: </h5> </p><p> <h5>Question: </h5> </p>");
-		myOut.println("<input type=\"text\" class=\"form-control\" name = \"question\""+index+"placeholder=\"Question\">");
-		myOut.println("<div><p><h5>Choices: </h5> </p>");
-		myOut.println("<input type=\"text\" class=\"form-control\" name = \"choices\""+index+"placeholder=\"Choices\"></div>");
-		myOut.println("<div><p><h5>Answer(Must be one of choices): </h5> </p>");
-		myOut.println("<input type=\"text\" class=\"form-control\" name = \"answer\""+index+"placeholder=\"Answer\"></div>");
-		myOut.println("</div>");
-	}
-%> --%>
+
+
+
+
+<!-- Multiple Choice Problem -->
 
 <!-- Fill Blank Problem -->
-<div class="container">
-	<p><h3>Creating Fill Blank Problem: </h5> </p>
-	<p><h5>Question: </h5> </p>
-	<div>
-		<input type="text" class="form-control" name = "question" placeholder="Question">
-		<p><h5>Blank field: </h5> </p>
-		<input type="text" class="form-control" name = "answer" placeholder="Answer">
-		<p><h5>Question part 2: </h5> </p>
-		<input type="text" class="form-control" name = "question" placeholder="Question">
-	</div>
-</div>
-
 <%-- <%!
 	/* getParameter(answer1) get the answer of user. */
 	public void createFillBlank(JspWriter myOut, int index) throws IOException {
@@ -184,20 +120,6 @@
 %> --%>
 
 <!-- Picture Respond Problem -->
-<div class="container">
-	<p><h3>Creating Picture Respond Problem: </h5> </p>
-	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control" name = "question" placeholder="Question">
-	<div>
-		<p><h5>Picture: </h5> </p>
-		<input type="text" class="form-control" name = "picture" placeholder="Picture URL">
-	</div>
-	<div>
-		<p><h5>Answer: </h5> </p>
-		<input type="text" class="form-control" name = "answer" placeholder="Answer">
-	</div>
-</div>
-
 <%-- <%!
 	/* getParameter(answer1) get the answer of user. */
 	public void createPictureResponse(JspWriter myOut, int index) throws IOException {
@@ -215,16 +137,6 @@
 %> --%>
 
 <!-- Question Respond Problem -->
-<div class="container">
-	<p><h3>Creating Question Respond Problem: </h5> </p>
-	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control" name = "question" placeholder="Question">
-	<div>
-		<p><h5>Answer: </h5> </p>
-		<input type="text" class="form-control" name = "answer" placeholder="Answer">
-	</div>
-</div>
-
 <%-- <%!
 	/* getParameter(answer1) get the answer of user. */
 	public void createQuestionResponse(JspWriter myOut, int index) throws IOException {
@@ -240,16 +152,6 @@
 %> --%>
 
 <!-- Multiple Respond Problem -->
-<div class="container">
-	<p><h3>Creating Multiple Respond Problem: </h5> </p>
-	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control" name = "question" placeholder="Question">
-	<div>
-		<p><h5>Answer: </h5> </p>
-		<input type="text" class="form-control" name = "answer" placeholder="Answer">
-	</div>
-</div>
-
 <%-- <%!
 	/* getParameter(answer1) get the answer of user. */
 	public void createMultiResponse(JspWriter myOut, int index) throws IOException {
@@ -263,37 +165,3 @@
 		myOut.println("</div>");
 	}
 %> --%>
-
-<%-- <%
-	for (int i = 1; i < problems.size() + 1; i++) {
-		Problem pro = problems.get(i-1);
-		String type = pro.getType();
-		if (type == "QuestionResponse") {
-			QuestionResponse qr = (QuestionResponse)pro;
-			createQuestionResponse(out, qr, i);
-		} else if (type == "FillBlank") {
-			FillBlank fb = (FillBlank)pro;
-			createFillBlank(out, fb, i);
-		} else if (type == "PictureResponse") {
-			PictureResponse pr = (PictureResponse)pro;
-			createPictureResponse(out, pr, i);
-		} else if (type == "MultiChoice") {
-			MultiChoice mc = (MultiChoice)pro;
-			if (mc.getCount() == 1) {
-				createSingleChoice(out, mc, i);
-			} else {
-				createMultiChoice(out, mc, i);
-			}
-		} else if (type == "MultiResponse") {
-			MultiResponse mr = (MultiResponse) pro;
-			createMultiResponse(out, mr, i);
-		}
-	}
-%> --%>
-<button href = "QuizCreateYY.jsp" type="submit" type="button" class="btn btn-warning" style = "position: relative; left: 50%; width: 120px; margin-left:-60px">Add Questions</button>
-
-</form>
-
-
-</body>
-</html>

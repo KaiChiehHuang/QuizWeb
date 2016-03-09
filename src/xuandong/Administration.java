@@ -62,8 +62,8 @@ public class Administration {
 		DBConnection database = new DBConnection();
 		String sql = "SELECT Count(*) FROM Users;";
 		ResultSet res = database.getStmt().executeQuery(sql);
-		int temp = res.getInt(1);
 		res.next();
+		int temp = res.getInt(1);
 		database.getCon().close();
 		return temp;
 	}

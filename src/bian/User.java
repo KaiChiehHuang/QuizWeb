@@ -53,7 +53,8 @@ public class User {
 		this.id = id;
 		try {
 			rs = stmt.executeQuery(
-					"SELECT Name, Age, Gender FROM Users WHERE UserID = " + "\"" + id + "\";");
+					"SELECT Name, Age, Gender FROM Users WHERE UserID = \"" + id + "\";");
+			rs.next();
 			name = rs.getString("Name");
 			age = rs.getInt("Age");
 			gender = rs.getString("Gender");
@@ -395,6 +396,28 @@ public class User {
 		}
 		database.getCon().close();
 		return recentQuizs;
+	}
+	
+	/**
+	 * Return a list of all performance on quizzes
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<Performance> getQuizHistory() throws SQLException {
+		ArrayList<Performance> result = new ArrayList<Performance>();
+		DBConnection database = new DBConnection();
+		String sql = "SELECT QuizID, StartTime, Duration, Score FROM QuizRecord WHERE UserID = \"" + this.id + "\";";
+		ResultSet res = database.getStmt().executeQuery(sql);
+		while (res.next()) {
+			String quizID = res.getString("QuizID");
+			double score = res.getDouble("Score");
+			String startTime = res.getString("StartTime");
+			String duration = res.getString("Duration");
+			Performance temp = new Performance(quizID, this.id, startTime, duration, score);
+			result.add(temp);
+		}
+		database.getCon().close();
+		return result;
 	}
 	
 //	public static ArrayList<User> serachUser(String str) {

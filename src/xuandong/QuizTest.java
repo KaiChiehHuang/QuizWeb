@@ -10,6 +10,8 @@ import java.util.TimeZone;
 
 import org.junit.Test;
 
+import bian.User;
+
 public class QuizTest {
 
 	@Test
@@ -20,12 +22,8 @@ public class QuizTest {
 //		System.out.println(temp.setProblemID());
 //		Random rm = new Random();
 //		System.out.println(rm.nextInt(XMLParser.DEFAULTIMAGES.size()));
-		Quiz temp = new Quiz();
-		temp.setQuizID("0000000005");
-		System.out.println(temp.getUpdateSQL());
-		temp.deleteProblem("QR0000000010");
-		System.out.println(temp.getUpdateSQL());
-		temp.updateDatabase();
+		User temp = new User("xuandong");
+		System.out.println(temp.getAchievements());
 	}
 
 }

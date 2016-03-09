@@ -40,7 +40,6 @@
       <tr>
         <th>Subject</th>
         <th>Date</th>
-        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -56,15 +55,12 @@
     			out.println("<tr class=\"active\">");
     		}
     		out.println("<td>");
-    		out.println(sub);
+    		out.print("<li><a href = \"UserViewSingleAnnoun.jsp?annountoviewindex="+ i +"\">"
+    				+ sub +"</a></li>");
     		out.println("</td>");
     		
     		out.println("<td>");
     		out.println(date);
-    		out.println("</td>");
-    		
-    		out.println("<td>");
-    		out.println("<button name = \"annountodeleteindex\" type=\"submit\" class=\"btn btn-warning\" value =\"" +i+ "\"/>Delete</button>");
     		out.println("</td>");
     		
     		out.println("</tr>");	
@@ -72,7 +68,7 @@
     %>
     </tbody>
   </table>
-  <div><a href="AdminDeleteUser.jsp"> Back to Administration Page </a></div>
+  <div><a href="HomePage.jsp"> Back to Home Page </a></div>
 </div>
 
 </form>

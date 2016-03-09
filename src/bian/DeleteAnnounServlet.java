@@ -47,9 +47,9 @@ public class DeleteAnnounServlet extends HttpServlet {
 			e1.printStackTrace();
 		}
 		
-		String index = request.getParameter("announindex");
+		String index = request.getParameter("annountodeleteindex");
 		
-		for (int i = 0; i < announ.size(); i++) {
+		for (int i = announ.size() - 1; i >= 0 ; i--) {
 			if (i == Integer.parseInt(index)) {
 	     		Announcement ann = new Announcement();
 	     		ann = announ.get(i);
@@ -59,7 +59,6 @@ public class DeleteAnnounServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("AdminViewAnnoun.jsp");

@@ -19,66 +19,32 @@
 <title>Announcement Page</title>
 </head>
 <body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers3.jpg')">
-
-
 <%
-	ArrayList<Announcement> announ = new ArrayList<Announcement>();
-	announ = Announcement.getAnnouncement();
+String annountoviewindex = request.getParameter("annountoviewindex");
+int index = Integer.parseInt(annountoviewindex);
+
+ArrayList<Announcement> announ = new ArrayList<Announcement>();
+announ = Announcement.getAnnouncement();
+
+Announcement ann = new Announcement();
+for (int i = announ.size() - 1; i >= 0 ; i--) {
+	if (i == index) {	
+ 		ann = announ.get(i);
+	}
+}
+String subject = ann.getSubject();
+String content = ann.getContent();
+String date = ann.getDate();
 %>
 
-<div>
 <div class = "container">
+<h4><%=subject%></h4> 
+<p><%=date%></p>
+<p><%=content%></p>
 
-
+  <div><a href="UserViewAnnoun.jsp"> Back to All Announcement Page </a></div>
+  <div><a href="HomePage.jsp"> Back to Home Page </a></div>
 </div>
-<form action="DeleteAnnounServlet" method="post">
-<div class = "container">
-
-<h4>All Announcement</h4>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Subject</th>
-        <th>Date</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-    <%
-    	for (int i = announ.size() - 1; i >= 0 ; i--) {
-     		Announcement ann = new Announcement();
-     		ann = announ.get(i);
-     		String sub = ann.getSubject();
-     		String date = ann.getDate();
-    		if (i % 2 == 0) {
-    			out.println("<tr class=\"warning\">");
-    		} else {
-    			out.println("<tr class=\"active\">");
-    		}
-    		out.println("<td>");
-    		out.println(sub);
-    		out.println("</td>");
-    		
-    		out.println("<td>");
-    		out.println(date);
-    		out.println("</td>");
-    		
-    		out.println("<td>");
-    		out.println("<button name = \"annountodeleteindex\" type=\"submit\" class=\"btn btn-warning\" value =\"" +i+ "\"/>Delete</button>");
-    		out.println("</td>");
-    		
-    		out.println("</tr>");	
-    	}
-    %>
-    </tbody>
-  </table>
-  <div><a href="AdminDeleteUser.jsp"> Back to Administration Page </a></div>
-</div>
-
-</form>
-</div>
-
-
 
 </body>
 </html>

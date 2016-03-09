@@ -32,7 +32,7 @@
 	quiz.quizStart();
 %>
 
-
+<form action="DeleteProblemServlet" method="post">
 <%
 	for (int i = 1; i < problems.size() + 1; i++) {
 		Problem pro = problems.get(i-1);
@@ -59,6 +59,7 @@
 		}
 	}
 %>
+</form>
 <div class="text-center">
 <h2>     </h2>
 <a href="QuizEditingCreate.jsp" class="btn btn-info"  role="button">Add Problems</a>
@@ -71,9 +72,9 @@
 		
 		myOut.println("<div class=\"container\">");
 		myOut.println("<p><div class=\"row\"><div class=\"col-sm-6\">"+ "<h5>Problem " + index + ": </h5></div>");
-		myOut.println("<div class=\"col-sm-6\"><form action=\"DeleteProblemServlet\" method=\"post\">");
+		myOut.println("<div class=\"col-sm-6\">");
 		myOut.println("<button type=\"submit\" name=\"deletedquestion\" class=\"btn btn-info\" value = \""+ problems.get(index-1).getQuestionID() +" \">Delete</button>");
-		myOut.println("</form></div></div>");
+		myOut.println("</div></div>");
 		myOut.println("<div>" + question + "</div></p>");
 		for (int i = 0; i < choices.length; i++) {
 			myOut.println("<div class=\"radio\">");
@@ -93,9 +94,9 @@
 		question = que.split("\\|\\|\\|\\|\\|\\|");
 		
 		myOut.println("<div class = \"container\"><p><div class=\"row\"><div class=\"col-sm-6\">" + "<h5>Problem "+ index + ": </h5></div>");
-		myOut.println("<div class=\"col-sm-6\"><form action=\"DeleteProblemServlet\" method=\"post\">");
+		myOut.println("<div class=\"col-sm-6\">");
 		myOut.println("<button type=\"submit\" name=\"deletedquestion\" class=\"btn btn-info\" value = \""+ problems.get(index-1).getQuestionID() +" \">Delete</button>");
-		myOut.println("</form></div></div>");
+		myOut.println("</div></div>");
 		myOut.println("<div>" + question[0] + "</div>");
 		myOut.println("<input type=\"text\" disabled=\"disabled\" placeholder=\"Answer\" size=\"8\"/>");
 		myOut.println(question[1] + "</p></div>");
@@ -110,10 +111,10 @@
 		String url = pr.getURL();
 		
 		myOut.println("<div class = \"container\"><p>" + "<div class=\"row\"><div class=\"col-sm-6\"><h5>Problem "+ index + ":</h5></div>");
-		myOut.println("<div class=\"col-sm-6\"><form action=\"DeleteProblemServlet\" method=\"post\">");
+		myOut.println("<div class=\"col-sm-6\">");
 /* 		myOut.println("<input name=\"deletedquestion\" type=\"hidden\" value=\""+ problems.get(index-1).getQuestionID() +" \"/>"); */
 		myOut.println("<button type=\"submit\" name=\"deletedquestion\" class=\"btn btn-info\" value = \""+ problems.get(index-1).getQuestionID() +" \">Delete</button>");
-		myOut.println("</form></div></div>");
+		myOut.println("</div></div>");
 		myOut.println("<div>" + question + "</div>");
 		myOut.println("<input type=\"text\" disabled=\"disabled\" placeholder=\"Answer\" size=\"8\" /> </p></div>");
 		myOut.println("<div class = \"container\" style = \"position: relative; left: 50%; width: 400px; margin-left:-200px\">");
@@ -130,9 +131,9 @@
 		String question = pr.getQuestion();
 		
 		myOut.println("<div class = \"container\"><p>" + "<div class=\"row\"><div class=\"col-sm-6\"><h5>Problem "+ index + ": </h5></div>");
-		myOut.println("<div class=\"col-sm-6\"><form action=\"DeleteProblemServlet\" method=\"post\">");
+		myOut.println("<div class=\"col-sm-6\">");
 		myOut.println("<button type=\"submit\" name=\"deletedquestion\" class=\"btn btn-info\" value = \""+ problems.get(index-1).getQuestionID() +" \">Delete</button>");
-		myOut.println("</form></div></div>");
+		myOut.println("</div></div>");
 		myOut.println("<div>" + question + "</div>");
 		myOut.println("<input type=\"text\" disabled=\"disabled\" placeholder=\"Answer\" size=\"8\" />");
 		myOut.println("</p></div>");
@@ -146,9 +147,9 @@
 		int count = pr.getCount();
 		
 		myOut.println("<div class = \"container\"><p>" + "<div class=\"row\"><div class=\"col-sm-6\"><h5>Problem "+ index + ": </h5></div>");
-		myOut.println("<div class=\"col-sm-6\"><form action=\"DeleteProblemServlet\" method=\"post\">");
+		myOut.println("<div class=\"col-sm-6\">");
 		myOut.println("<button type=\"submit\" name=\"deletedquestion\" class=\"btn btn-info\" value = \""+ problems.get(index-1).getQuestionID() +" \">Delete</button>");
-		myOut.println("</form></div></div>");
+		myOut.println("</div></div>");
 		myOut.println("<div>" + question + "</div>");
 		for (int i = 0; i < count; i++) {
 			myOut.println("<input type=\"text\" disabled=\"disabled\" placeholder=\"Answer\" size=\"8\" />");
@@ -167,9 +168,9 @@
 		String[] choices = mc.getChoices();
 		
 		myOut.println("<div class = \"container\"><p>" + "<div class=\"row\"><div class=\"col-sm-6\"><h5>Problem "+ index + ": </h5></div>");
-		myOut.println("<div class=\"col-sm-6\"><form action=\"DeleteProblemServlet\" method=\"post\">");
+		myOut.println("<div class=\"col-sm-6\">");
 		myOut.println("<button type=\"submit\" name=\"deletedquestion\" class=\"btn btn-info\" value = \""+ problems.get(index-1).getQuestionID() +" \">Delete</button>");
-		myOut.println("</form></div></div>");
+		myOut.println("</div></div>");
 		myOut.println("<div>" + question + "</div></p>");
 		for (int i = 0; i < choices.length; i++) {
 			myOut.println("<label class=\"checkbox-inline\"> <input type=\"checkbox\" disabled=\"disabled\" value=\"" + choices[i] + "\">");

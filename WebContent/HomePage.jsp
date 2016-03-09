@@ -410,7 +410,12 @@ function pageScrollUp(position) {
 					
 				</div>
 				<div class="col-xs-6 col-md-6 text-center" style="background-color:black;height:100%;">
-					Achievement
+					<% 
+						ArrayList<Achievement> allAchievements = user.getAchievements();
+						for(Achievement ach: allAchievements) {
+							
+						}
+					%>
 				</div>
 			</div>
 		</div>

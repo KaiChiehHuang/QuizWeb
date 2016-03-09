@@ -49,8 +49,15 @@ public class DeleteProblemServlet extends HttpServlet {
 		Quiz quiz = (Quiz)session.getAttribute("newQuiz");
 		
 		String problemID = request.getParameter("deletedquestion");
+		System.out.println(problemID);
 		
-		quiz.deleteProblem(problemID);
+		try {
+			quiz.deleteProblem(problemID);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		try {
 			quiz.updateDatabase();
 		} catch (SQLException e) {

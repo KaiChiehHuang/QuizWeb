@@ -13,119 +13,131 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
-<script>
-function pageScrollUp(position) {
-    var yPos = window.pageYOffset;
-    yPos -= 95;
-    if(yPos<position)
-    {
-        yPos = position;
-    }
-    window.scroll(0,yPos); // horizontal and vertical scroll increments
-    scrolldelay = setTimeout('pageScrollUp(\''+position+'\')',45); // scrolls every 100 milliseconds
-    if(yPos==position)
-    {
-        clearTimeout(scrolldelay);
-    }
-}
 
+<script type='text/javascript'>
+	function pageScrollUp(position) {
+		var yPos = window.pageYOffset;
+		yPos -= 95;
+		if (yPos < position) {
+			yPos = position;
+		}
+		window.scroll(0, yPos); // horizontal and vertical scroll increments
+		scrolldelay = setTimeout('pageScrollUp(\'' + position + '\')', 45); // scrolls every 100 milliseconds
+		if (yPos == position) {
+			clearTimeout(scrolldelay);
+		}
+	}
+	$(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip({
+	        placement : 'top'
+	    });
+	});
 </script>
 
 <style>
+.grayscale {
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
 
-.grayscale {-webkit-filter: grayscale(100%); filter: grayscale(100%);}
+.tooltip-inner  {
+	white-space:pre-wrap;
+	max-width:150px;
+	word-wrap:break-word;
+}
+
 
 .carousel-control.left, .carousel-control.right {
-    background-image: none
+	background-image: none
 }
 
 .clearfix:after {
-    display:block;
-    clear:both;
+	display: block;
+	clear: both;
 }
- 
+
 /*----- Menu Outline -----*/
 .menu-wrap {
-    width:100%;
-    box-shadow:0px 1px 3px rgba(0,0,0,0.2);
-    background:black;
+	width: 100%;
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+	background: black;
 }
- 
+
 .menu {
-    width:300px;
-    margin:0px auto;
+	width: 300px;
+	margin: 0px auto;
 }
- 
+
 .menu li {
-    margin:0px;
-    list-style:none;
-    font-family:'Ek Mukta';
+	margin: 0px;
+	list-style: none;
+	font-family: 'Ek Mukta';
 }
- 
+
 .menu a {
-    transition:all linear 0.15s;
-    color:#919191;
+	transition: all linear 0.15s;
+	color: #919191;
 }
- 
-.menu li:hover > a, .menu .current-item > a {
-    text-decoration:none;
-    color:#be5b70;
+
+.menu li:hover>a, .menu .current-item>a {
+	text-decoration: none;
+	color: #be5b70;
 }
- 
+
 .menu .arrow {
-    font-size:11px;
-    line-height:0%;
+	font-size: 11px;
+	line-height: 0%;
 }
- 
+
 /*----- Top Level -----*/
-.menu > ul > li {
-    float:left;
-    display:inline-block;
-    position:relative;
-    font-size:19px;
+.menu>ul>li {
+	float: left;
+	display: inline-block;
+	position: relative;
+	font-size: 19px;
 }
- 
-.menu > ul > li > a {
-    padding:10px 30px;
-    display:inline-block;
-    text-shadow:0px 1px 0px rgba(0,0,0,0.4);
+
+.menu>ul>li>a {
+	padding: 10px 30px;
+	display: inline-block;
+	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
 }
- 
-.menu > ul > li:hover > a, .menu > ul > .current-item > a {
-    background:#2e2728;
+
+.menu>ul>li:hover>a, .menu>ul>.current-item>a {
+	background: #2e2728;
 }
- 
+
 /*----- Bottom Level -----*/
 .menu li:hover .sub-menu {
-    z-index:1;
-    opacity:1;
+	z-index: 1;
+	opacity: 1;
 }
- 
+
 .sub-menu {
-    width:140%;
-    padding:5px 0px;
-    position:absolute;
-    top:100%;
-    left:0px;
-    z-index:-1;
-    opacity:0;
-    transition:opacity linear 0.15s;
-    box-shadow:0px 2px 3px rgba(0,0,0,0.2);
-    background:#2e2728;
+	width: 140%;
+	padding: 5px 0px;
+	position: absolute;
+	top: 100%;
+	left: 0px;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity linear 0.15s;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+	background: #2e2728;
 }
- 
+
 .sub-menu li {
-    display:block;
-    font-size:16px;
+	display: block;
+	font-size: 16px;
 }
- 
+
 .sub-menu li a {
-    padding:10px 30px;
-    display:block;
+	padding: 10px 30px;
+	display: block;
 }
- 
+
 .sub-menu li a:hover, .sub-menu .current-item a {
-    background:#3e3436;
+	background: #3e3436;
 }
 </style>
 <title>Home Page</title>
@@ -406,26 +418,28 @@ function pageScrollUp(position) {
 			<div class="well"
 				style="width: 900px; height: 300px; background-color: black;">
 				<div class="col-xs-6 col-md-6 text-left" style="left: 0px;">
-					User info
-					
+					<h4>User ID:</h4>
+					<h4>User Name:</h4>
+					<h4>User Age:</h4>
+					<h4>User Gender:</h4>
 				</div>
-				<div class="col-xs-6 col-md-6 text-center" style="background-color:black;height:100%;">
+				<div class="col-xs-6 col-md-6 text-center" style="height:100%;">
 					<% 
 						ArrayList<Achievement> allUserAchievements = user.getAchievements();
 						Set<String> allAchievements = Achievement.getAllAchievement();
 						for(Achievement ach: allUserAchievements) {
 							String imageUrl = ach.getImage();
-							System.out.println(imageUrl);
-							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:40%;height:30%;\">";
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" data-toggle=\"tooltip\" title=\""+ach.getAchievementName()+"\">";
 							out.print(achImage);
 							allAchievements.remove(ach.getAchievementName());
 						}
 						System.out.println(allAchievements);
 						for(String ach: allAchievements) {
 							String imageUrl = Achievement.getImage(ach);
-							System.out.println(imageUrl);
-							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:40%;height:30%;\" class=\"grayscale\">";
+							String description = "<a href=\"#\" data-toggle=\"tooltip\" title=\"" + ach + "\">";
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" class=\"grayscale\">";
 							out.print(achImage);
+							out.print("</a>");
 						}
 					%>
 				</div>
@@ -590,6 +604,7 @@ function pageScrollUp(position) {
 				border-top:1px #CCCCCC solid;
 				height: 1px;
 	">	
+	 <a href="#"  data-toggle="tooltip" title="Defaulttooltipaetrwtsdtasdtsdtsdatsadtasdyadsyasdywerwetwetwetwewetwetweyweyeryer">Tooltip on left</a>
 	</div>	
 		
 </body>

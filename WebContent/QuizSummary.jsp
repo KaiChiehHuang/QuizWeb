@@ -31,6 +31,31 @@
     opacity: 0.4;
 }
 
+/* .bodycontainer { 
+	overflow-y: auto; 
+}
+.table-scrollable { 
+	margin: 0; padding: 0; 
+} */
+
+tr {
+width: 100%;
+display: inline-table;
+table-layout: fixed;
+}
+
+table{
+ height: 400px;              
+ display: -moz-groupbox;    
+}
+
+tbody{
+  overflow-y: scroll;      
+  height: 400px; 
+  width: 100%;          
+  position: absolute;
+}
+
 </style>
 <title>Quiz Summary</title>
 </head>
@@ -121,17 +146,23 @@
     <div class="item"
     	style="position: fixed;  width: 500px; margin-left: -250px; left: 50%;">
     	<h2>Performances History</h2>
+    	
     	<table class="table" >
+<!--     	<table class="table table-striped table-hover table-condensed" > -->
     	<thead>
      		 <tr>
         		<th class="text-center">Time</th>
         		<th class="text-center">Score</th>
         		<th class="text-center">Duration</th>
       		 </tr>
-   		 </thead>
+    	</thead>
+<!--    		 </table> -->
+   		 
+<!--    		 <div class="bodycontainer scrollable">
+         <table class="table table-hover table-striped table-condensed table-scrollable"> -->
    		 <tbody>
     	<%
-    	    ArrayList<Performance> perfU = quizSummary.getUserPerformance();
+/*     	    ArrayList<Performance> perfU = quizSummary.getUserPerformance();
     		for (int i = 0; i < perfU.size(); i++) {
     			String[] per = new String[3];
         		per[0] = perfU.get(i).getStartTime();
@@ -148,24 +179,28 @@
         			out.println("</td>");
         		}
         		out.println("</tr>");
-    		}
-    		
-/*     		for (int i = 0; i < 10; i++) {
-    			if (i % 2 == 0) {
+    		} */
+    		for (int i = 0; i < 100; i++) {
+    			String[] per = new String[3];
+        		per[0] = "1";
+        		per[1] = "2";
+        		per[2] = "3";
+        		if (i % 2 == 0) {
         			out.println("<tr class=\"success\">");
         		} else {
         			out.println("<tr class=\"warning\">");
         		}
-    			for (int j = 0; j < 3; j++) {
+        		for (int j = 0; j < 3; j++) {
         			out.println("<td>");
-        			out.println(j);
+        			out.println(per[j]);
         			out.println("</td>");
         		}
-        		out.println("</tr>");
-    		}  */
+        		out.println("</tr>");	
+    		}
     	%>
           </tbody>
-          </table>
+      </table>
+       <!--    </div> -->
     </div>
 
     <div class="item"
@@ -217,7 +252,7 @@
    		 </thead>
    		 <tbody>
     	<%
-    		ArrayList<Performance> perfHLD = quizSummary.getHighestPerformersLastDay();
+     		ArrayList<Performance> perfHLD = quizSummary.getHighestPerformersLastDay();
     		for (int i = 0; i < perfHLD.size(); i++) {
     			String[] per = new String[3];
         		per[0] = perfHLD.get(i).getUserID();
@@ -234,7 +269,7 @@
         			out.println("</td>");
         		}
         		out.println("</tr>");	
-    		}	
+    		}		
     	%>
           </tbody>
           </table>

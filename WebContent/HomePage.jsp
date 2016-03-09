@@ -5,11 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
@@ -35,6 +37,11 @@
 </script>
 
 <style>
+
+h5 {
+	color:#ff9999;
+}
+
 .grayscale {
 	-webkit-filter: grayscale(100%);
 	filter: grayscale(100%);
@@ -42,7 +49,7 @@
 
 .tooltip-inner  {
 	white-space:pre-wrap;
-	max-width:150px;
+	max-width:200px;
 	word-wrap:break-word;
 	background-color:#181818 ;
 }
@@ -150,7 +157,7 @@
 		<div
 			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color: black;">
 			<div style="position: absolute; left: 0px; top: 5px; width: 250px; height: 45; background-color: black;">
-				<a href="HomePage.jsp"><h4 style="color:#ffe6e6;">QuizThatShit</h4></a>
+				<a href="HomePage.jsp"><h4 style="color:#ffb3b3;">QuizThatShit</h4></a>
 			</div>
 		</div>
 
@@ -288,29 +295,30 @@
 
 	<div
 		style="position: relative; top: 85px; left: 50%; width: 900px; height: 1800px; margin-left: -450px;">
-		
+
 		<div class="panel panel-default" style="height: 60px;">
-			
+
 			<div class="panel-body"
 				style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
 				<div class="col-xs-6 col-md-6 text-left">
 					<a style="color: #C71585;" role="tab" data-toggle="collapse"
 						data-parent="#accordion" href="#collapseUserInfo"
-						aria-expanded="true" aria-controls="collapseUserInfo" ><span
+						aria-expanded="true" aria-controls="collapseUserInfo"><span
 						class="glyphicon glyphicon-user" aria-hidden="false"></span>&nbsp&nbspUSER
 						INFO </a>
 				</div>
 				<div class="col-xs-6 col-md-6 text-right">
 
-					<button class="btn btn-info" type="button" data-toggle="collapse"
+			<!-- 		<button class="btn btn-info" type="button" data-toggle="collapse"
 						data-target="#collapseSentEmail" aria-expanded="false"
-						aria-controls="collapseSentEmail">
+						aria-controls="collapseSentEmail"> -->
+					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
 						<span class="glyphicon glyphicon-comment"
 							style="width: 30px; font-size: 18px;"></span>
 					</button>
 					<button class="btn btn-info" type="button" data-toggle="collapse"
 						data-target="#collapseExample" aria-expanded="false"
-						aria-controls="collapseExample" >
+						aria-controls="collapseExample">
 						<span class="glyphicon glyphicon-user"
 							style="width: 30px; font-size: 18px;"></span>
 						<%
@@ -351,38 +359,45 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="collapse" id="collapseSentEmail">
-			<div class="well"
-				style="width: 900px; height: 330px; background-color: black;">
-
-				<div class="form-group" style="text-align: right;">
-					<form action="SentEmail" method="post">
- 						<div class="input-group">
-							<span class="input-group-addon" id="sizing-addon2"><span
-								class="glyphicon glyphicon-user"></span></span> <input type="text"
-								class="form-control" placeholder="Sent to which user ID?"
-								aria-describedby="sizing-addon2" name="receiverID">
+		<!-- Modal test -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="exampleModalLabel">New message</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group" style="text-align: right;">
+							<form action="SentEmail" method="post">
+								<div class="input-group">
+									<span class="input-group-addon" id="sizing-addon2"><span
+										class="glyphicon glyphicon-user"></span></span> <input type="text"
+										class="form-control" placeholder="Sent to which user ID?"
+										aria-describedby="sizing-addon2" name="receiverID">
+								</div>
+								<br>
+								<div class="input-group">
+									<span class="input-group-addon" id="sizing-addon2"><span
+										class="glyphicon glyphicon-pencil"></span></span> <input type="text"
+										class="form-control"
+										placeholder="Write a subject for this email..."
+										aria-describedby="sizing-addon2" name="emailSubject">
+								</div>
+								<br>
+								<textarea class="form-control" rows="6" id="note"
+									placeholder="Write a note to your friend..."
+									name="emailContent"></textarea>
+								<br>
+								<input type="submit" class="btn btn-info" value="submit"></input>
+							</form>
 						</div>
-						<br>
-						<div class="input-group">
-							<span class="input-group-addon" id="sizing-addon2"><span
-								class="glyphicon glyphicon-pencil"></span></span> <input type="text"
-								class="form-control"
-								placeholder="Write a subject for this email..."
-								aria-describedby="sizing-addon2" name="emailSubject">
-						</div>
-						<br>
-						<textarea class="form-control" rows="6" id="note"
-							placeholder="Write a note to your friend..." name="emailContent"></textarea>
-
-						<br> <input type="submit" class="btn btn-info" value="Send"
-							data-toggle="collapse" data-target="#collapseSentEmail"
-							aria-expanded="false" aria-controls="collapseSentEmail"></input>
-
-					</form>
-				 </div>
-
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -415,30 +430,56 @@
 				%>
 			</div>
 		</div>
-		<div class="collapse in" id="collapseUserInfo" >
+		<div class="collapse in" id="collapseUserInfo">
 			<div class="well"
-				style="width: 900px; height: 300px; background-color: black;">
+				style="width: 900px; height: 250px; background-color: black;">
 				<div class="col-xs-6 col-md-6 text-left" style="left: 0px;">
-					<h4>User ID:</h4>
-					<h4>User Name:</h4>
-					<h4>User Age:</h4>
-					<h4>User Gender:</h4>
+					<div class="col-xs-6 col-md-6 text-left" style="left: 0px;">
+						<br>
+						<br>
+						<h4>
+							User ID:
+						</h4>
+						<h4>
+							User Name:
+						</h4>
+						<h4>
+							User Age:
+						</h4>
+						<h4>
+							User Gender:
+						</h4>
+					</div>
+					<div class="col-xs-6 col-md-6 text-right" style="left: 0px;">
+						<br>
+						<br>
+						<h4>
+							<%=user.getID()%>
+						</h4>
+						<h4>
+							<%=user.getName()%></h4>
+						<h4>
+							<%= user.getAge()%></h4>
+						<h4>
+							<%=user.getGender()%></h4>
+					</div>
 				</div>
-				<div class="col-xs-6 col-md-6 text-center" style="height:100%;">
+				<div class="col-xs-6 col-md-6 text-center" style="height: 110%;top:14%;">
 					<% 
 						ArrayList<Achievement> allUserAchievements = user.getAchievements();
 						Set<String> allAchievements = Achievement.getAllAchievement();
 						for(Achievement ach: allUserAchievements) {
 							String imageUrl = ach.getImage();
-							String description = ach.getDescription();
-							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" data-toggle=\"tooltip\" title=\""+ach.getAchievementName()+ "<br>"+description+"\" data-html=\"true\" >";
+							String description = Achievement.getDescription(ach.getAchievementName());
+							String getAchTime = ach.getTime();
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" data-toggle=\"tooltip\" title=\"<h5>"+ach.getAchievementName()+ "</h5> You"+description+ "\" data-html=\"true\" >";
 							out.print(achImage);
 							allAchievements.remove(ach.getAchievementName());
 						}
 						for(String ach: allAchievements) {
 							String imageUrl = Achievement.getImage(ach);
 							String description = Achievement.getDescription(ach);
-							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" class=\"grayscale\" data-toggle=\"tooltip\" title=\"" +  ach + " <br>" + description + "\" data-html=\"true\">";
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" class=\"grayscale\" data-toggle=\"tooltip\" title=\"<h5>" +  ach + "</h5> Received when you" + description + "\" data-html=\"true\">";
 							out.print(achImage);
 						}
 					%>
@@ -604,7 +645,7 @@
 				border-top:1px #CCCCCC solid;
 				height: 1px;
 	">	
-	 <a href="#"  data-toggle="tooltip" title="Defaulttooltipaetrwtsdtasdtsdtsdatsadtasdyadsyasdywerwetwetwetwewetwetweyweyeryer">Tooltip on left</a>
+	 
 	</div>	
 		
 </body>

@@ -44,6 +44,7 @@
 	white-space:pre-wrap;
 	max-width:150px;
 	word-wrap:break-word;
+	background-color:#181818 ;
 }
 
 
@@ -429,17 +430,17 @@
 						Set<String> allAchievements = Achievement.getAllAchievement();
 						for(Achievement ach: allUserAchievements) {
 							String imageUrl = ach.getImage();
-							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" data-toggle=\"tooltip\" title=\""+ach.getAchievementName()+"\">";
+							String description = ach.getDescription();
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" data-toggle=\"tooltip\" title=\""+ach.getAchievementName()+ " "+description+"\">";
 							out.print(achImage);
 							allAchievements.remove(ach.getAchievementName());
 						}
 						System.out.println(allAchievements);
 						for(String ach: allAchievements) {
 							String imageUrl = Achievement.getImage(ach);
-							String description = "<a href=\"#\" data-toggle=\"tooltip\" title=\"" + ach + "\">";
-							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" class=\"grayscale\">";
+							String description = "";
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" class=\"grayscale\" data-toggle=\"tooltip\" title=\"" +  ach + " " + description + "\">";
 							out.print(achImage);
-							out.print("</a>");
 						}
 					%>
 				</div>

@@ -41,16 +41,30 @@ public class DeleteUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userID = request.getParameter("usertodelete");
 		String userIDtoAdmin = request.getParameter("usertoadmin");
+		String quizIdtoDelete = request.getParameter("quiztodelete");
+		String quizIDtoClear = request.getParameter("quiztoclear");
 		
-		if (userID == null) {
+		if (userIDtoAdmin != null) {
 			try {
 				Administration.addAdmin(userIDtoAdmin);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		} else {
+		} else if (userID != null){
 			try {
 				Administration.removeUser(userID);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else if (quizIdtoDelete != null) {
+			try {
+				Administration.removeQuiz(quizIdtoDelete);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				Administration.removeQuizHistory(quizIDtoClear);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

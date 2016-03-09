@@ -19,11 +19,14 @@
 </head>
 <body>
 
-<h3>Administration Page</h3>
-
-<form action="DeleteUserServlet" method="post">
 
 <div class = "container">
+<a href="AdminCreateAnnoun.jsp"> Create Announcement </a>
+</div>
+
+<form action="DeleteUserServlet" method="post">
+<div class = "container">
+<h4>Manage Users</h4>
   <table class="table">
     <thead>
       <tr>
@@ -36,9 +39,7 @@
     <%
     	ArrayList users = new ArrayList();
     	users = Administration.getAllUsers();
-    %>
-    
-    <%
+    	
     	for (int i = 0; i < users.size(); i++) {
      		String userID = (String)users.get(i);
     		if (i % 2 == 0) {
@@ -64,6 +65,49 @@
     </tbody>
   </table>
 </div>
+
+
+<div class = "container">
+<h4>Manage Quizs</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>QuizID</th>
+        <th>Delete Quiz</th>
+        <th>Clear History</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%
+    	ArrayList quizs = new ArrayList();
+    	quizs = Administration.getAllQuizzes();
+    	
+    	for (int i = 0; i < quizs.size(); i++) {
+     		String quizID = (String)quizs.get(i);
+    		if (i % 2 == 0) {
+    			out.println("<tr class=\"warning\">");
+    		} else {
+    			out.println("<tr>");
+    		}
+    		out.println("<td>");
+    		out.println(quizID);
+    		out.println("</td>");
+    		
+    		out.println("<td>");
+    		out.println("<button name = \"quiztodelete\" type=\"submit\" class=\"btn btn-warning\" value =\"" +quizID+ "\"/>Delete</button>");
+    		out.println("</td>");
+    		
+    		out.println("<td>");
+    		out.println("<button name = \"quiztoclear\" type=\"submit\" class=\"btn btn-success\" value =\"" +quizID+ "\"/>Clear</button>");
+    		out.println("</td>");
+    		
+    		out.println("</tr>");	
+    	}
+    %>
+    </tbody>
+  </table>
+</div>
+
 </form>
 
 </body>

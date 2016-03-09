@@ -5,11 +5,10 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.Random;
 import java.util.TimeZone;
 
 import org.junit.Test;
-
-import com.mysql.jdbc.util.TimezoneDump;
 
 public class QuizTest {
 
@@ -19,6 +18,8 @@ public class QuizTest {
 //		assertEquals(2, Category.searchByCategory("Food").size());
 		MultiChoice temp = new MultiChoice("FB", true);
 		System.out.println(temp.setProblemID());
+		Random rm = new Random();
+		System.out.println(rm.nextInt(XMLParser.DEFAULTIMAGES.size()));
 	}
 
 }

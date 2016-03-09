@@ -13,12 +13,12 @@ public class Achievement {
 	public static final HashMap<String, String> ACHIEVEMENTDESCRIPTION = new HashMap<String, String>();
 	static
 	{
-		ACHIEVEMENTDESCRIPTION.put("Amateur Author", "You have created a quiz.");
-		ACHIEVEMENTDESCRIPTION.put("Prolific Author", "You have created five quizzes!");
-		ACHIEVEMENTDESCRIPTION.put("Prodigious Author", "You have created ten quizzes!!");
-		ACHIEVEMENTDESCRIPTION.put("Quiz Machine", "You have taken ten quizzes!");
-		ACHIEVEMENTDESCRIPTION.put("I am the Greatest", "You had the highest score on a quiz!!");
-		ACHIEVEMENTDESCRIPTION.put("Practice Makes Perfect", "You have taken a quiz in practice mode.");
+		ACHIEVEMENTDESCRIPTION.put("Amateur Author", " have created a quiz.");
+		ACHIEVEMENTDESCRIPTION.put("Prolific Author", " have created five quizzes!");
+		ACHIEVEMENTDESCRIPTION.put("Prodigious Author", " have created ten quizzes!!");
+		ACHIEVEMENTDESCRIPTION.put("Quiz Machine", " have taken ten quizzes!");
+		ACHIEVEMENTDESCRIPTION.put("I am the Greatest", " had the highest score on a quiz!!");
+		ACHIEVEMENTDESCRIPTION.put("Practice Makes Perfect", " have taken a quiz in practice mode.");
 	};
 	
 	public Achievement() {

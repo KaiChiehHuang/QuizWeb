@@ -22,22 +22,12 @@
     display: inline;
 }
 </style>
-<title>Create Questions</title>
+<title>Add Questions</title>
 </head>
 <body>
 
-<h1>Create Questions</h1>
+<h1>Add Questions</h1>
 
-<%
-/* 	String authorID = (String) request.getParameter("userID"); 
-
-	Quiz quiz = new Quiz();
-	quiz.setQuizID();
-	quiz.setAuthor(authorID);
-	
-	session.setAttribute("newQuiz", quiz); */
-	
-%>
 
 <!-- Multiple Choice Problem -->
 <div class="container">
@@ -212,6 +202,7 @@
 	</div>
 	
 </div> 
+
 <div class="text-center">
 <a href="QuizEditing.jsp" class="btn btn-info"  role="button">Submit</a>
 </div>

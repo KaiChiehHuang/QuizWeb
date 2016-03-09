@@ -34,7 +34,7 @@ public class XMLParser {
 	 */
 	public static void main(String[] args) {
 		try {
-			File xmlFile = new File("src/quiz-xml/WWIIgenerals.xml");
+			File xmlFile = new File("src/quiz-xml/test.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(xmlFile);
@@ -153,29 +153,21 @@ public class XMLParser {
 					for (int j = 0; j < nList2.getLength(); j++) {
 						Node nNode2 = nList2.item(j);
 						if (nNode2.getNodeType() == Node.ELEMENT_NODE) {
-							Element
+							Element eEle2 = (Element) nNode2;
+							answer += eEle2.getTextContent() + "#";
 						}
 					}
-					answer += eEle.getTextContent() + "|";
+					answer = answer.substring(0, answer.length() - 1);
+					answer += "|";
+					count++;
 				}
 			}
-			
-			
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node nNode = nList.item(i);
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-					Element eEle = (Element) nNode;
-					if (eEle.getAttribute("answer").equals("answer")) {
-						answer += eEle.getTextContent() + "|";
-						count++;
-					}
-					choices += eEle.getTextContent() + "|";
-				}
+			boolean ordered = false;
+			if (ele.getAttribute("answer-ordered") != null) {
+				ordered = Boolean.parseBoolean(ele.getAttribute("answer-ordered"));
 			}
-			
-			
 			answer = answer.substring(0, answer.length() - 1);
-			String insert = "INSERT INTO QuestionResponse VALUES(\"" + id + "\",\"" + question + "\",\"" + answer + "\");";
+			String insert = "INSERT INTO MultiResponse VALUES(\"" + id + "\",\"" + question + "\",\"" + answer + "\"," + count + "," + ordered + ");";
 			stmt.executeUpdate(insert);
 			database.getCon().close();
 		} catch (SQLException e) {

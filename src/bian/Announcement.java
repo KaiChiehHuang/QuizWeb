@@ -115,7 +115,7 @@ public class Announcement {
 	 * add an announcement to the database
 	 * @throws SQLException
 	 */
-	public static void addAnnouncement() throws SQLException {
+	public void addAnnouncement() throws SQLException {
 		DBConnection database = new DBConnection();
 		String sql = "INSERT INTO Announcement(Content, AdminID, Time, Subject) VALUES(\"" + this.content + "\",\"" + this.adminID + "\",\"" + this.date + "\",\"" + this.subject + "\");";
 		database.getStmt().executeUpdate(sql);

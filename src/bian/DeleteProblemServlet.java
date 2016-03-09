@@ -55,15 +55,10 @@ public class DeleteProblemServlet extends HttpServlet {
 			System.out.println(quiz.getProblems().size());
 			quiz.deleteProblem(problemID);
 			System.out.println(quiz.getProblems().size());
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		try {
 			quiz.updateDatabase();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(quiz.getProblems().size());
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizEditing.jsp");

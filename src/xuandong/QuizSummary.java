@@ -40,10 +40,13 @@ public class QuizSummary {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT COUNT(UserID), AVG(Score), MAX(Score), MIN(Score) FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" GROUP BY QuizID;";
+			System.out.println(sql);
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
 				res.absolute(1);
+//				System.out.println(res.getString(1));
 				takeNum = Integer.parseInt(res.getString(1));
+//				System.out.println(res.getDouble(2));
 				meanScore = Double.parseDouble(res.getString(2));
 				maxScore = Double.parseDouble(res.getString(3));
 				minScore = Double.parseDouble(res.getString(4));

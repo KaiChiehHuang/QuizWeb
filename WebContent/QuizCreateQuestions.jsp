@@ -15,6 +15,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
+<style>
+.form-control-inline {
+    min-width: 0;
+    width: 600px;
+    display: inline;
+}
+</style>
 <title>Create Questions</title>
 </head>
 <body>
@@ -73,21 +80,24 @@
 	
 	<div class="collapse" id="collapseChoices">
 			<div class="well"
-				style="height: 300px; background-color: black;">
+				style="height: 400px; background-color: black;">
 				<form action="QuizCreateServlet" method="post">	
 					<div class="container">
 						<p><h3>Creating Single/Multi Choice Problem: </h5> </p>
 						<input type="hidden" name = "type" value = "MC">
 						<p><h5>Question: </h5> </p>
-						<input type="text" size = "20" name = "question" placeholder="Question">
-					<div>
+
+						<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
+
 						<p><h5>Choice: </h5> </p>
-						<input type="text" class="form-control" name = "choice" placeholder="Choice">
-					</div>
-					<div>
+
+						<input type="text" class="form-control form-control-inline" name = "choice" placeholder="Choice">
+
+
 						<p><h5>Answer(Must be one/some of choices) : </h5> </p>
-						<input type="text" class="form-control" name = "answer" placeholder="Answer">
-					</div>
+
+						<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
+
 					</div>
 				<div class="text-right">
 				<input type="submit" class="btn btn-info" value = "Add Question"></input>
@@ -98,7 +108,7 @@
 	
 	<div class="collapse" id="collapseFillBlank">
 			<div class="well"
-				style="height: 300px; background-color: black;">
+				style="height: 400px; background-color: black;">
 				<form action="QuizCreateServlet" method="post">	
 				
 <div class="container">
@@ -106,11 +116,11 @@
 	<input type="hidden" name = "type" value = "FB">
 	<p><h5>Question: </h5> </p>
 	<div>
-		<input type="text" class="form-control" name = "fbquestion" placeholder="Question">
+		<input type="text" class="form-control form-control-inline" name = "fbquestion" placeholder="Question">
 		<p><h5>Blank field: </h5> </p>
-		<input type="text" class="form-control" name = "answer" placeholder="Answer">
+		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
 		<p><h5>Question part 2: </h5> </p>
-		<input type="text" class="form-control" name = "fbquestion" placeholder="Question">
+		<input type="text" class="form-control form-control-inline" name = "fbquestion" placeholder="Question">
 	</div>
 </div>
 
@@ -123,21 +133,21 @@
 	
 	<div class="collapse" id="collapsePictureResponse">
 			<div class="well"
-				style="height: 300px; background-color: black;">
+				style="height: 400px; background-color: black;">
 				<form action="QuizCreateServlet" method="post">	
 
 <div class="container">
 	<p><h3>Creating Picture Respond Problem: </h5> </p>
 	<input type="hidden" name = "type" value = "PR">
 	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control" name = "question" placeholder="Question">
+	<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
 	<div>
 		<p><h5>Picture: </h5> </p>
-		<input type="text" class="form-control" name = "picture" placeholder="Picture URL">
+		<input type="text" class="form-control form-control-inline" name = "picture" placeholder="Picture URL">
 	</div>
 	<div>
 		<p><h5>Answer: </h5> </p>
-		<input type="text" class="form-control" name = "answer" placeholder="Answer">
+		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
 	</div>
 </div>
 
@@ -150,17 +160,17 @@
 	
 	<div class="collapse" id="collapseQuestionResponse">
 			<div class="well"
-				style="height: 300px; background-color: black;">
+				style="height: 400px; background-color: black;">
 				<form action="QuizCreateServlet" method="post">	
 
 <div class="container">
 	<p><h3>Creating Question Respond Problem: </h5> </p>
 	<input type="hidden" name = "type" value = "QR">
 	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control" name = "question" placeholder="Question">
+	<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
 	<div>
 		<p><h5>Answer: </h5> </p>
-		<input type="text" class="form-control" name = "answer" placeholder="Answer">
+		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
 	</div>
 </div>
 
@@ -173,17 +183,17 @@
 	
 	<div class="collapse" id="collapseMultiResponse">
 			<div class="well"
-				style="height: 300px; background-color: black;">
+				style="height: 400px; background-color: black;">
 				<form action="QuizCreateServlet" method="post">	
 				
 <div class="container">
 	<p><h3>Creating Multiple Respond Problem: </h5> </p>
 	<input type="hidden" name = "type" value = "MR">
 	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control" name = "question" placeholder="Question">
+	<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
 	<div>
 		<p><h5>Answer: </h5> </p>
-		<input type="text" class="form-control" name = "answer" placeholder="Answer">
+		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
 	</div>
 	<p><h5>Should the answers be ordered?</h5> </p>
 	<div class="radio">

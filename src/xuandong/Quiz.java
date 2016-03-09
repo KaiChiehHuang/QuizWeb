@@ -323,6 +323,10 @@ public class Quiz {
 	public void setCreatedDate(String date) {
 		this.createdDate = date;
 	}
+	
+	public void setCreatedDate() {
+		this.createdDate = Quiz.df.format((new Date()).getTime());
+	}
 
 	public String getCreatedDate() {
 		return this.createdDate.substring(0, this.createdDate.length() - 2);

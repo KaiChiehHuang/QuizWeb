@@ -113,7 +113,7 @@ public class MultiResponse extends Problem {
 	@Override
 	public String getUpdateSQL() {
 		String answer = getArrayToString(answers);
-		String sql = "UPDATE " + this.type + " SET Question = \"" + this.question + "\" , Answer = \"" + answer + "\", Count = " + count + " , Ordered = " + ordered + " WHERE QuestionID = \"" + this.questionID + "\";";
+		String sql = "UPDATE " + this.type + " SET Question = \"" + this.question + "\", Answer = \"" + answer + "\", Count = " + count + ", Ordered = " + ordered + " WHERE QuestionID = \"" + this.questionID + "\";";
 		return sql;
 	}
 }

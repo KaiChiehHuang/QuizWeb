@@ -48,7 +48,7 @@ public class Problem {
 	 * Please always pass true if you are creating a new problem instead of modifying one
 	 */
 	public Problem(String type, boolean creating) {
-		this.type = type;
+		this.type = Problem.problemType.get(type);
 		this.creating = creating;
 	}
 	
@@ -83,15 +83,14 @@ public class Problem {
 	}
 	
 	/**
-	 * Update the database to insert a newly created problem or update an existing problem
-	 * Please always call this method if you modified any variables of the problem
+	 * Set the problemID, only works if in creating mode
 	 * @throws SQLException
 	 */
-	public void updateDatabase() throws SQLException {
+	public String setProblemID() throws SQLException {
 		DBConnection database = new DBConnection();
 		Statement stmt = database.getStmt(); 
 		if (this.creating) {
-			String sql = "SELECT QuestionID FROM " + type + " ORDER BY QuizID DESC LIMIT 1;";
+			String sql = "SELECT QuestionID FROM " + type + " ORDER BY QuestionID DESC LIMIT 1;";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res.next()) {
 				int questionCount = Integer.parseInt(res.getString(1).substring(2));
@@ -101,6 +100,21 @@ public class Problem {
 				int questionCount = 0;
 				this.questionID = Problem.problemType.get(this.type) + String.format("%010d", questionCount);
 			}
+		}
+		database.getCon().close();
+		return this.questionID;
+	}
+	
+	/**
+	 * Update the database to insert a newly created problem or update an existing problem
+	 * Please always call this method if you modified any variables of the problem
+	 * @throws SQLException
+	 */
+	public void updateDatabase() throws SQLException {
+		DBConnection database = new DBConnection();
+		Statement stmt = database.getStmt(); 
+		if (this.creating) {
+			setProblemID();
 			stmt.executeUpdate(getInsertSQL());
 		} else {
 			stmt.executeUpdate(getUpdateSQL());

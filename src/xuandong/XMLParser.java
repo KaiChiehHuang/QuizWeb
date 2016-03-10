@@ -124,6 +124,7 @@ public class XMLParser {
 		}
 		String insert = "INSERT INTO Quiz (QuizID, Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image) VALUES(\"" + quizID + "\",\"" + name.replace("\"", "\"\"") + "\",\"" + description.replace("\"", "\"\"") + "\",\"" + authorID.replace("\"", "\"\"") + "\",\"" + questions.replace("\"", "\"\"") + "\"," + random + "," + onePage + "," + immediateCorrection + "," + practiceMode + ",\"" + time + "\",\"" + image.replace("\"", "\"\"") + "\");";
 		stmt.executeUpdate(insert);
+		Quiz.updateCreateAchievement(authorID, quizID);
 		if (doc.getElementsByTagName("category").item(0) != null) {
 			String category = doc.getElementsByTagName("category").item(0).getTextContent();
 			stmt.executeUpdate("INSERT INTO Category(QuizID, Category) VALUES(\"" + quizID + "\",\"" + category.replace("\"", "\"\"") + "\");");
@@ -340,6 +341,9 @@ public class XMLParser {
 			NodeList nList = ele.getElementsByTagName("answer");
 			String answer = "";
 			String question = "Please identify the person/city/item in the picture.";
+			if (ele.getElementsByTagName("query").item(0) != null) {
+				question = ele.getElementsByTagName("query").item(0).getTextContent();
+			}
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node nNode = nList.item(i);
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {

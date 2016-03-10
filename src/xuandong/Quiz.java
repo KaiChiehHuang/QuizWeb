@@ -13,39 +13,40 @@ import java.util.TimeZone;
 public class Quiz {
 	// used to count the real number of problems, e.g. a MultiChoice problem
 	// can be treated as several problems
-	private int pbCount = 0;
+	private double score;
 
+	private Long endTime;
+	private Long startTime;
+	
+	private int popularity;
+	private int pbCount = 0;
+	
 	private String name;
+	private String image;
 	private String quizID;
 	private String userID;
+	private String endDate;
 	private String authorID;
+	private String duration;
+	private String startDate;
+	private String createdDate;
 	private String description;
-	private ArrayList<Problem> problems;
-
+	
 	private boolean isOnePage;
 	private boolean isRandomQuiz;
 	private boolean isPracticeMode;
+	private boolean creating = false;
 	private boolean isImmediateCorrection;
-	
 	private boolean onPracticeMode = false;
-
-	private int popularity;
-	private Long startTime;
-	private Long endTime;
-	private String duration;
-	private String startDate;
-	private String endDate;
-	private String createdDate;
-	private String image;
-	private double score;
-
-	boolean creating = false;
-
+	
 	private QuizSummary quizSummary;
+	
+	private ArrayList<Problem> problems;
 
-	public static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public static final TimeZone TIME_ZONE = TimeZone.getTimeZone("UTC");
 	public static final SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+	public static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
 
 	/**
 	 * Simple constructor If you are creating a new quiz which is not in
@@ -55,24 +56,6 @@ public class Quiz {
 		problems = new ArrayList<Problem>();
 	}
 	
-//	/**
-//	 * Set the quizID
-//	 * only used when creating a new quiz
-//	 * @throws SQLException
-//	 */
-//	public void setQuizID() throws SQLException {
-//		DBConnection database = new DBConnection();
-//		Statement stmt = database.getStmt();
-//		String sql = "SELECT QuizID FROM Quiz ORDER BY QuizID DESC LIMIT 1;";
-//		ResultSet res = stmt.executeQuery(sql);
-//		if (res.next()) {
-//			int quizCount = Integer.parseInt(res.getString(1)) + 1;
-//			this.quizID = String.format("%010d", quizCount);
-//		} else {
-//			int questionCount = 0;
-//			this.quizID = String.format("%010d", questionCount);
-//		}
-//	}
 
 	/**
 	 * Used to get all the information of a quiz from database Please just call
@@ -85,8 +68,7 @@ public class Quiz {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
-			String sql = "SELECT Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image FROM Quiz WHERE QuizID = \""
-					+ quizID + "\";";
+			String sql = "SELECT Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image FROM Quiz WHERE QuizID = \"" + quizID + "\";";
 			ResultSet res = stmt.executeQuery(sql);
 			if (res != null) {
 				res.absolute(1);
@@ -138,6 +120,7 @@ public class Quiz {
 		}
 	}
 
+	
 	/**
 	 * set the mode to creating mode
 	 */
@@ -145,6 +128,7 @@ public class Quiz {
 		this.creating = true;
 	}
 
+	
 	/**
 	 * set the mode to editing mode
 	 */
@@ -152,6 +136,7 @@ public class Quiz {
 		this.creating = false;
 	}
 
+	
 	/**
 	 * @return quizID
 	 */
@@ -159,6 +144,7 @@ public class Quiz {
 		return quizID;
 	}
 
+	
 	/**
 	 * @return userID
 	 */
@@ -166,6 +152,7 @@ public class Quiz {
 		return userID;
 	}
 
+	
 	/**
 	 * @return the ArrayList containing the problems note that the ArrayList
 	 *         contains Object Problem, not Strings
@@ -173,6 +160,7 @@ public class Quiz {
 	public ArrayList<Problem> getProblems() {
 		return problems;
 	}
+	
 	
 	/**
 	 * Add a problem
@@ -182,12 +170,14 @@ public class Quiz {
 		this.problems.add(pro);
 	}
 
+	
 	/**
 	 * @return quiz name
 	 */
 	public String getName() {
 		return name;
 	}
+	
 	
 	/**
 	 * Given a quizID, return the name of this quiz
@@ -198,10 +188,15 @@ public class Quiz {
 	public static String getName(String quizID) throws SQLException {
 		DBConnection database = new DBConnection();
 		ResultSet res = database.getStmt().executeQuery("SELECT Name FROM Quiz WHERE QuizID = \"" + quizID + "\";");
-		res.next();
-		return res.getString("Name");
+		String quizName = "Not Found";
+		if (res.next()) {
+			quizName = res.getString("Name");
+		}
+		database.getCon().close();
+		return quizName;
 	}
 
+	
 	/**
 	 * @return quiz description
 	 */
@@ -209,6 +204,7 @@ public class Quiz {
 		return description;
 	}
 
+	
 	/**
 	 * @return authorID
 	 */
@@ -216,6 +212,7 @@ public class Quiz {
 		return authorID;
 	}
 
+	
 	/**
 	 * @return whether or not a random quiz
 	 */
@@ -223,6 +220,7 @@ public class Quiz {
 		return this.isRandomQuiz;
 	}
 
+	
 	/**
 	 * @return whether or not a one page quiz
 	 */
@@ -230,6 +228,7 @@ public class Quiz {
 		return this.isOnePage;
 	}
 
+	
 	/**
 	 * @return whether or not an immediate correction quiz
 	 */
@@ -237,6 +236,7 @@ public class Quiz {
 		return this.isImmediateCorrection;
 	}
 
+	
 	/**
 	 * @return whether or not a practice quiz
 	 */
@@ -244,6 +244,7 @@ public class Quiz {
 		return this.isPracticeMode;
 	}
 
+	
 	/**
 	 * Set the quiz name
 	 * 
@@ -253,6 +254,7 @@ public class Quiz {
 		this.name = name;
 	}
 
+	
 	/**
 	 * Set the quiz description
 	 * 
@@ -262,6 +264,7 @@ public class Quiz {
 		this.description = description;
 	}
 
+	
 	/**
 	 * Set the authorID
 	 * 
@@ -271,6 +274,7 @@ public class Quiz {
 		this.authorID = authorID;
 	}
 
+	
 	/**
 	 * Delete a problem from the quiz
 	 * 
@@ -290,6 +294,7 @@ public class Quiz {
 		database.con.close();
 	}
 
+	
 	/**
 	 * Set whether or not this quiz is a random quiz
 	 */
@@ -297,6 +302,7 @@ public class Quiz {
 		this.isRandomQuiz = value;
 	}
 
+	
 	/**
 	 * Set whether or not this quiz is a one page quiz
 	 */
@@ -304,11 +310,12 @@ public class Quiz {
 		this.isOnePage = value;
 	}
 
+	
 	/**
 	 * Fetch the popularity from the database for a quiz
 	 * @throws SQLException
 	 */
-	public void setPopularity() throws SQLException {
+	private void setPopularity() throws SQLException {
 		DBConnection database = new DBConnection();
 		String sql = "SELECT COUNT(*) AS Count FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\";";
 		ResultSet res = database.getStmt().executeQuery(sql);
@@ -317,28 +324,42 @@ public class Quiz {
 		database.con.close();
 	}
 	
+	
 	/**
 	 * Set the popularity
-	 * 
-	 * @param count
-	 *            the number the quiz has been taken
+	 * @param count the number the quiz has been taken
 	 */
-	public void setPopularity(int count) {
+	private void setPopularity(int count) {
 		this.popularity = count;
 	}
 
+	
+	/**
+	 * Set the date to a given date
+	 * Used when editing the quiz
+	 * @param date
+	 */
 	public void setCreatedDate(String date) {
 		this.createdDate = date;
 	}
 	
+	
+	/**
+	 * Set the date to current date
+	 */
 	public void setCreatedDate() {
 		this.createdDate = Quiz.df.format((new Date()).getTime());
 	}
 
+	
+	/**
+	 * @return the created date of this quiz
+	 */
 	public String getCreatedDate() {
 		return this.createdDate.substring(0, this.createdDate.length() - 2);
 	}
 
+	
 	/**
 	 * @return the number the quiz has been taken
 	 */
@@ -346,6 +367,7 @@ public class Quiz {
 		return this.popularity;
 	}
 
+	
 	/**
 	 * Set whether or not this quiz is a immediate correction quiz
 	 */
@@ -353,6 +375,7 @@ public class Quiz {
 		this.isImmediateCorrection = value;
 	}
 
+	
 	/**
 	 * Set whether or not this quiz is a practice quiz
 	 */
@@ -360,6 +383,7 @@ public class Quiz {
 		this.isPracticeMode = value;
 	}
 
+	
 	/**
 	 * @return image URL
 	 */
@@ -367,15 +391,16 @@ public class Quiz {
 		return image;
 	}
 
+	
 	/**
 	 * Set the image of this quiz to this url
-	 * 
 	 * @param url
 	 */
 	public void setImage(String url) {
 		this.image = url;
 	}
 
+	
 	/**
 	 * Set the user Please specify this right before you fetch QuizSummary
 	 * @param userID
@@ -384,6 +409,7 @@ public class Quiz {
 		this.userID = userID;
 	}
 
+	
 	/**
 	 * Fetch the quiz summary from database
 	 */
@@ -392,10 +418,10 @@ public class Quiz {
 		return this.quizSummary;
 	}
 
+	
 	/**
 	 * Update or insert the information about this quiz in database Please call
 	 * this method as long as you modify the variables of this quiz
-	 * 
 	 * @throws SQLException
 	 */
 	public void updateDatabase() throws SQLException {
@@ -419,6 +445,7 @@ public class Quiz {
 		database.getCon().close();
 	}
 
+	
 	/**
 	 * return the insert statement to insert this problem into database used for
 	 * creating a problem
@@ -432,6 +459,7 @@ public class Quiz {
 		return sql;
 	}
 
+	
 	/**
 	 * return the update statement to update this problem in the database used
 	 * for modifying a problem
@@ -446,10 +474,9 @@ public class Quiz {
 		return sql;
 	}
 
+	
 	/**
-	 * transfer the ArrayList of problems into a String containing the problemID
-	 * of each problem
-	 * 
+	 * transfer the ArrayList of problems into a String containing the problemID of each problem
 	 * @return
 	 */
 	public String getListToString() {
@@ -461,6 +488,7 @@ public class Quiz {
 		return str;
 	}
 
+	
 	/**
 	 * Start the quiz
 	 * 
@@ -472,12 +500,14 @@ public class Quiz {
 		return this.startTime;
 	}
 
+	
 	/**
 	 * Set the quiz is taking on practice mode
 	 */
 	public void setOnPracticeMode() {
 		onPracticeMode = true;
 	}
+	
 	
 	/**
 	 * Set the quiz is taking on quiz mode
@@ -486,9 +516,9 @@ public class Quiz {
 		onPracticeMode = false;
 	}
 	
+	
 	/**
 	 * End the quiz and update information in the database
-	 * 
 	 * @return end time
 	 */
 	public String quizEnd() {
@@ -527,6 +557,7 @@ public class Quiz {
 		return duration;
 	}
 
+	
 	/**
 	 * Add the practice achievement to the database
 	 * @throws SQLException
@@ -541,6 +572,7 @@ public class Quiz {
 		database.getCon().close();
 	}
 
+	
 	/**
 	 * Add the quiz achievement to the database
 	 * @throws SQLException
@@ -567,6 +599,7 @@ public class Quiz {
 		}
 		database.getCon().close();
 	}
+	
 	
 	/**
 	 * update created quiz achievement
@@ -596,7 +629,40 @@ public class Quiz {
 		}
 		database.getCon().close();
 	}
+	
+	
+	/**
+	 * update created quiz achievement
+	 * only called when using XML parsing
+	 * @throws SQLException
+	 */
+	public static int updateCreateAchievement(String authorID, String quizID) throws SQLException {
+		DBConnection database = new DBConnection();
+		String time = Quiz.df.format((new Date()).getTime());
+		ResultSet res = database.getStmt().executeQuery("SELECT COUNT(*) AS Count FROM Quiz WHERE AuthorID = \"" + authorID.replace("\"", "\"\"") + "\";");
+		res.next();
+		int quizCreated = res.getInt("Count");
+		if (quizCreated == 1) {
+			ResultSet test1 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + authorID.replace("\"", "\"\"") + "\" AND AchievementName = \"Amateur Author\";");
+			if (!test1.next()) {
+				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + authorID.replace("\"", "\"\"") + "\",\"" + quizID + "\",\"" + time + "\",\"Amateur Author\");");
+			}
+		} else if (quizCreated == 5) {
+			ResultSet test2 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + authorID.replace("\"", "\"\"") + "\" AND AchievementName = \"Prolific Author\";");
+			if (!test2.next()) {
+				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + authorID.replace("\"", "\"\"") + "\",\"" + quizID + "\",\"" + time + "\",\"Prolific Author\");");
+			}
+		} else if (quizCreated == 10) {
+			ResultSet test3 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + authorID.replace("\"", "\"\"") + "\" AND AchievementName = \"Prodigious Author\";");
+			if (!test3.next()) {
+				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + authorID.replace("\"", "\"\"") + "\",\"" + quizID + "\",\"" + time + "\",\"Prodigious Author\");");
+			}
+		}
+		database.getCon().close();
+		return quizCreated;
+	}
 
+	
 	/**
 	 * @return The duration time
 	 */
@@ -604,9 +670,9 @@ public class Quiz {
 		return duration;
 	}
 
+	
 	/**
 	 * get the score of the whole quiz
-	 * 
 	 * @return score, represented by double, e.g. 9/11
 	 */
 	public double calculateScore() {
@@ -617,6 +683,7 @@ public class Quiz {
 		return score / pbCount * 100;
 	}
 	
+	
 	/**
 	 * @return user score with two decimal digits
 	 */
@@ -624,10 +691,9 @@ public class Quiz {
 		return String.format("%.2f", this.score) + "%";
 	}
 
+	
 	/**
-	 * Get the most 16 popularity quizzes, ordered by the number the quiz has
-	 * been taken
-	 * 
+	 * Get the most 16 popularity quizzes, ordered by the number the quiz has been taken
 	 * @return a list contains those quizzes
 	 * @throws SQLException
 	 */
@@ -646,10 +712,9 @@ public class Quiz {
 		return popularQuizs;
 	}
 
+	
 	/**
-	 * Get the most 16 popularity quizzes, ordered by the number the quiz has
-	 * been taken
-	 * 
+	 * Get the most 16 popularity quizzes, ordered by the number the quiz has been taken
 	 * @return a list contains those quizzes
 	 * @throws SQLException
 	 */
@@ -668,6 +733,7 @@ public class Quiz {
 		return recentQuizs;
 	}
 	
+	
 	/**
 	 * Get the highest score of this quiz
 	 * @throws SQLException 
@@ -684,6 +750,7 @@ public class Quiz {
 		database.getCon().close();
 		return highest;
 	}
+	
 	
 	/**
 	 * Search a quiz by name or description or tag or category

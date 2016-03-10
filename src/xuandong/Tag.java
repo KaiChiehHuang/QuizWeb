@@ -25,6 +25,7 @@ public class Tag {
 		return quizs;
 	}
 	
+	
 	/**
 	 * Add a tag to a specific quiz
 	 * @param quizID
@@ -33,9 +34,13 @@ public class Tag {
 	 */
 	public static void addTag(String quizID, String tag) throws SQLException {
 		DBConnection database = new DBConnection();
-		database.getStmt().executeUpdate("INSERT INTO Tags(QuizID, Tag) VALUES(\"" + quizID + "\",\"" + tag.replace("\"", "\"\"") + "\");");
+		ResultSet res = database.getStmt().executeQuery("SELECT * FROM Tages WHERE QuizID = \"" + quizID + "\" AND Tag = \"" + tag.replace("\"", "\"\"") + "\";");
+		if (!res.next()) {
+			database.getStmt().executeUpdate("INSERT INTO Tags(QuizID, Tag) VALUES(\"" + quizID + "\",\"" + tag.replace("\"", "\"\"") + "\");");
+		}
 		database.getCon().close();
 	}
+	
 	
 	/**
 	 * Delete a tag for a specific quiz
@@ -49,6 +54,7 @@ public class Tag {
 		database.getCon().close();
 	}
 	
+	
 	/**
 	 * Remove all tags for a specific quiz
 	 * @param quizID
@@ -60,6 +66,7 @@ public class Tag {
 		database.getStmt().executeUpdate("DELETE FROM Tags WHERE QuizID = \"" + quizID + "\";");
 		database.getCon().close();
 	}
+	
 	
 	/**
 	 * Get all the tags for a specific quiz

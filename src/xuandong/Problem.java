@@ -193,10 +193,7 @@ public class Problem {
 		return str;
 	}
 	
-	
 
-	
-	
 	/**
 	 * returns how many sub-problems are answered right
 	 * the result is up to count
@@ -216,6 +213,7 @@ public class Problem {
 		return score;
 	}
 	
+	
 	/**
 	 * Set the user answer to the input String
 	 * If the user has multiple answers, please separate them by "|" and then concatenate them
@@ -224,12 +222,14 @@ public class Problem {
 		this.userAnswer = userAnswer;
 	}
 	
+	
 	/**
 	 * @return question statement
 	 */
 	public String getQuestion() {
 		return question;
 	}
+	
 	
 	/** 
 	 * @return problem type
@@ -238,12 +238,14 @@ public class Problem {
 		return type;
 	}
 
+	
 	/**
 	 * @return array of right answers
 	 */
 	public String[] getAnswer() {
 		return answers;
 	}
+	
 	
 	/**
 	 * @return questionID

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 import xuandong.Email;
 
 /**
@@ -47,6 +49,7 @@ public class SentEmail extends HttpServlet {
 		String emailSubject = request.getParameter("emailSubject");
 		String emailContent = request.getParameter("emailContent");
 		Email newEmail = new Email();
+		newEmail.setLink("");
 		newEmail.setReceiver(receiverID);
 		newEmail.setSender(userID);
 		newEmail.setRead(false);

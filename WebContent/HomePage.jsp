@@ -33,8 +33,10 @@
 	    $('[data-toggle="tooltip"]').tooltip({
 	        placement : 'top'
 	    });
-
 	});
+	$(function() {
+		$('[data-tooltip="true"]').tooltip();
+		});
 	function myFunction() {
 	    document.getElementById("receiver").defaultValue = "Goofy";
 	}
@@ -54,7 +56,7 @@ h6 {
 .linkButton { 
      background: none;
      border: none;
-     color: #0099FF;
+     color: #0066CC;
      text-decoration: underline;
      cursor: pointer; 
 }
@@ -358,13 +360,11 @@ h6 {
 						<span class="glyphicon glyphicon-user"
 							style="width: 30px; font-size: 18px;"></span>
 						<%
-							EmailManager eManager = new EmailManager();
-							userID = (String) session.getAttribute("userID");
-							eManager.setUser(userID);
-							int unreadEmailCount = eManager.getUnreadEmailsCount();
-							if (unreadEmailCount > 0) {
+							ArrayList<User> friendRequests = user.getFriendRequests();
+							System.out.print(friendRequests);
+							if (friendRequests.size() > 0) {
 								out.println(" <span class=\"badge\" style=\"font-size:11px;top:-5px\">"
-										+ String.valueOf(unreadEmailCount) + "</span>");
+										+ String.valueOf(friendRequests.size()) + "</span>");
 							}
 						%>
 					</button>
@@ -374,9 +374,10 @@ h6 {
 						<span class="glyphicon glyphicon-envelope"
 							style="width: 30px; font-size: 18px;"></span>
 						<% 
+							EmailManager eManager = new EmailManager();
 							userID = (String) session.getAttribute("userID");
 							eManager.setUser(userID);
-							unreadEmailCount = eManager.getUnreadEmailsCount();
+							int unreadEmailCount = eManager.getUnreadEmailsCount();
 							if (unreadEmailCount > 0) {
 								out.println(" <span class=\"badge\" style=\"font-size:11px;top:-5px\">"+ String.valueOf(unreadEmailCount) +"</span>");
 							}
@@ -429,7 +430,7 @@ h6 {
 									placeholder="Write a note to your friend..."
 									name="emailContent"></textarea>
 								<br>
-								<input type="submit" value="submit"></input>
+								<input type="submit" value="Send Message"></input>
 							</form>
 						</div>
 					</div>
@@ -446,6 +447,7 @@ h6 {
 					eManager.setUser(userID);
 					ArrayList<Email> emails = eManager.getToUserEmail();
 					for (Email mail: emails) {
+						mail.setRead(true);
 						out.println("<div class=\"media\" style=\"\">");
 						out.println("<div class=\"media-left media-middle\" style=\"width:100px !important;text-align:left !important;\">");
 						String sentEmailUserID = mail.getSenderID();
@@ -491,7 +493,7 @@ h6 {
 							out.print("<td>"+friend.getName()+"</td>");
 							out.print("<td>"+friend.getGender()+"</td>");
 							out.print("<td>"+friend.getAge()+"</td>");
-							String sentEmailButton = "<a href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" ><span class=\"glyphicon glyphicon-comment\" style=\"width: 25px; font-size: 18px;\"></span></a>";
+							String sentEmailButton = "<a href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" data-tooltip=\"true\" title=\"Message him/her!\"><span class=\"glyphicon glyphicon-comment\" style=\"width: 25px; font-size: 18px;\"></span></a>";
 							out.print("<form id=\"deleteForm\" action=\"DeleteChallengeFriendServlet\" method=\"post\"><input type=\"hidden\" name=\"friendToDeleteID\" value=\""+ friend.getID() +"\">");
 							String deleteFriendButton = "<button form=\"deleteForm\" class=\"linkButton\" value=\"Delete\" type=\"submit\"  data-toggle=\"tooltip\" title=\"Unfriend this user!\"><span class=\"glyphicon glyphicon-trash\" style=\"width: 25px; font-size: 18px;\"></span></button>";
 							String challengeFriendButton = "<a href=\"UserViewHistory.jsp\" data-toggle=\"tooltip\" title=\"Challenge your friend!\"><span class=\"glyphicon glyphicon-exclamation-sign\" style=\"width: 30px; font-size: 18px;\"></span></a>";

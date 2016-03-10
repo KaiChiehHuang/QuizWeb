@@ -41,13 +41,11 @@ public class XMLParser {
 			if (args.length == 1) {
 				path = "src/quiz-xml/testxml.xml";
 				File file = new File(path);
-				FileWriter fw = new FileWriter(file, true);
-				if (file.exists()) {
-					fw.write(args[0]);
-				} else {
+				if (!file.exists()) {
 					file.createNewFile();
-					fw.write(args[0]);
 				}
+				FileWriter fw = new FileWriter(file, true);
+				fw.write(args[0]);
 				fw.flush();
 				fw.close();
 				file.delete();

@@ -97,7 +97,7 @@ public class Announcement {
 	 */
 	public static ArrayList<Announcement> getAnnouncement() throws SQLException {
 		DBConnection database = new DBConnection();
-		ResultSet rs = database.getStmt().executeQuery("SELECT Subject, Content, Time, AdminID FROM Announcement ORDER BY Time;");
+		ResultSet rs = database.getStmt().executeQuery("SELECT Subject, Content, Time, AdminID FROM Announcement ORDER BY Time DESC;");
 		ArrayList<Announcement> announcements = new ArrayList<Announcement>();
 		while (rs.next()) {
 			Announcement temp = new Announcement();

@@ -42,10 +42,10 @@ public class LoadXMLServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String userID = (String)session.getAttribute("userID");
-		
 		String xmlString = request.getParameter("XMLfile");
-		String[] xml = new String[1];
+		String[] xml = new String[2];
 		xml[0] = xmlString;
+		xml[1] = userID;
 		
 		XMLParser.main(xml);
 	}

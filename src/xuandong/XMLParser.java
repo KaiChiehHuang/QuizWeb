@@ -4,9 +4,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
 import org.w3c.dom.*;
+import org.xml.sax.InputSource;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.*;
+import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.ResultSet;
@@ -37,23 +41,13 @@ public class XMLParser {
 	 */
 	public static void main(String[] args) {
 		try {
-			String path = "src/quiz-xml/test.xml";
-			if (args.length == 1) {
-				path = "src/quiz-xml/testxml.xml";
-				File file = new File(path);
-				if (!file.exists()) {
-					file.createNewFile();
-				}
-				FileWriter fw = new FileWriter(file, true);
-				fw.write(args[0]);
-				fw.flush();
-				fw.close();
-				file.delete();
-			}
-			File xmlFile = new File(path);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(xmlFile);
+			Document doc = dBuilder.parse(new InputSource(new StringReader(args[0])));
+			if (args.length != 2) {
+				File xmlFile = new File("src/quiz-xml/test.xml");
+				doc = dBuilder.parse(xmlFile);
+			}
 			doc.getDocumentElement().normalize();
 			NodeList nList = doc.getElementsByTagName("question");
 			String questions = "";
@@ -77,7 +71,7 @@ public class XMLParser {
 				}
 			}
 			questions = questions.substring(0, questions.length() - 1);
-			addQuiz(doc, questions);
+			addQuiz(doc, questions, args[1]);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -91,7 +85,7 @@ public class XMLParser {
 	 * @return quizID
 	 * @throws SQLException
 	 */
-	public static String addQuiz(Document doc, String questions) throws SQLException {
+	public static String addQuiz(Document doc, String questions, String author) throws SQLException {
 		DBConnection database = new DBConnection();
 		Statement stmt = database.getStmt();
 		
@@ -124,7 +118,7 @@ public class XMLParser {
 		if (quiz.getAttribute("practice-mode") != null) {
 			practiceMode = Boolean.parseBoolean(quiz.getAttribute("practice-mode"));
 		}
-		String authorID = "xuandong";
+		String authorID = author;
 		String time = Quiz.df.format(new Date().getTime());
 		Random rm = new Random();
 		String image = DEFAULTIMAGES.get(rm.nextInt(DEFAULTIMAGES.size()));

@@ -29,7 +29,7 @@ public class User {
 			fetchAchievement();
 			// Select from friends table.
 			friends = new ArrayList<String>();
-			rs = database.getStmt().executeQuery("SELECT User2ID FROM Friendship WHERE User1ID = \"" + id.replace("\"", "\"\"") + "\";");
+			rs = database.getStmt().executeQuery("SELECT User2ID FROM Friendship WHERE User1ID = \"" + id.replace("\"", "\"\"") + "\" AND Pending = " + false + ";");
 			while (rs.next()) {
 				String friend = rs.getString("User2ID");
 				friends.add(friend);
@@ -62,7 +62,7 @@ public class User {
 			fetchAchievement();
 			// Select from friends table.
 			friends = new ArrayList<String>();
-			rs = stmt.executeQuery("SELECT User2ID FROM Friendship WHERE User1ID = \"" + id.replace("\"", "\"\"") + "\";");
+			rs = stmt.executeQuery("SELECT User2ID FROM Friendship WHERE User1ID = \"" + id.replace("\"", "\"\"") + "\" AND Pending = " + false + ";");
 			while (rs.next()) {
 				String friend = rs.getString("User2ID");
 				friends.add(friend);

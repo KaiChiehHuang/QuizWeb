@@ -228,7 +228,8 @@
 	<p><h5>Question: </h5> </p>
 	<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
 	<div>
-		<p><h5>Answer: </h5></p>
+										<p><h5>Answer: If there exists parallel answers, please split them by "#"</h5></p>
+								<p>eg: CA#California</p>
 				<INPUT type="button" class="btn btn-info" value="Add Answer" onclick="addRowResponse('dataTableMR')" />
     					
 			    	<TABLE id="dataTableMR" border="1">

@@ -27,14 +27,11 @@
 %>
 
 <div>
-<div class = "container">
 
-
-</div>
 <form action="DeleteAnnounServlet" method="post">
-<div class = "container">
+<div class = "container" style = "position: relative; width:60%; top: 20px;">
 
-<h4>All Announcement</h4>
+<h2 style="text-align:center;">All Announcement</h2>
   <table class="table">
     <thead>
       <tr>

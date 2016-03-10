@@ -32,14 +32,11 @@
 	ArrayList<Performance> userPerformance = summary.getUserPerformanceByDate();
 %>
 
-<div class="container">
-  <h2>Your Performance</h2>
-  <h3>Score:</h3>
-  <p><% out.println(score); %></p>
-  <h3>Duration:</h3>
-  <p><% out.println(duration); %></p>  
-  <h2>Past Performance</h2>
-  <p>Your Past Performance on this quiz</p>            
+<div class="container" style = "position: relative; width:65%; top: 20px;">
+  <h3 style="text-align:center;">Your score is <% out.println(score); %></h3>
+  <h3 style="text-align:center;">You took <% out.println(duration); %> to finish this quiz</h3>
+
+  <h4 style="text-align:center;">Your Past Performance</h4>        
   <table class="table">
     <thead>
       <tr>

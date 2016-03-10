@@ -37,13 +37,26 @@ String content = ann.getContent();
 String date = ann.getDate();
 %>
 
-<div class = "container">
-<h4><%=subject%></h4> 
-<p><%=date%></p>
-<p><%=content%></p>
+<div class = "container" style = "position: relative; width:65%; top: 20px;">
+<h3 style="text-align:center;"><%=subject%></h3> 
+<p style="text-align:center;"><%=date%></p>
 
-  <div><a href="UserViewAnnoun.jsp"> Back to All Announcement Page </a></div>
-  <div><a href="HomePage.jsp"> Back to Home Page </a></div>
+		<div style="border-radius: 20px;
+    				border: 2px solid #73AD21;
+    				padding: 15px; 
+				    height: 300px;
+     				text-align:left;
+     				left:50%;width:600px;
+     				margin-left:-300px;
+     				top:10px;
+     				position:relative;
+     				opacity: 0.9;
+     				background-color:white;
+     				"><div><p><%=content%></p></div>
+
+     				</div>
+       				  <div><a href="UserViewAnnoun.jsp"> Back to All Announcement Page </a></div>
+  					<div><a href="HomePage.jsp"> Back to Home Page </a></div>  				
 </div>
 
 </body>

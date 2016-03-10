@@ -24,7 +24,6 @@
 
 	Quiz quiz = new Quiz();
 	quiz.setAuthor(authorID);
-	System.out.println(quiz.getAuthor());
 	
 	session.setAttribute("newQuiz", quiz); 
 	
@@ -34,7 +33,7 @@
 
 <!-- Quiz Properties -->
 <!-- name description image -->
-<div class = "container" style = "position: relative; background-color:#ffffff; top: 20px;">
+<div class = "container" style = "position: relative; background-color:#fffff6; top: 20px;">
 <h1>Create a Quiz</h1>
 <div class="container"><a href="LoadXML.jsp"> Want to Load an XML file? </a></div>
 	<p><h5>*Name: </h5> </p>

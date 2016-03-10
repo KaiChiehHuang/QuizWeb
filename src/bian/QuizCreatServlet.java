@@ -51,13 +51,17 @@ public class QuizCreatServlet extends HttpServlet {
 		String url = request.getParameter("picture");
 		quiz.setName(name);
 		quiz.setDescription(description);
-		if (url != null) {
+		System.out.println(url);
+		System.out.println(url != null);
+		if (url != "") {
 			quiz.setImage(url);
 		} else {
 			ArrayList<String> pictures = new ArrayList<String>();
 			pictures = xuandong.XMLParser.DEFAULTIMAGES;
 			Random random = new Random();
 			int next = random.nextInt(pictures.size());
+			System.out.println(next);
+			System.out.println(pictures.get(next));
 			quiz.setImage(pictures.get(next));
 		}
 		

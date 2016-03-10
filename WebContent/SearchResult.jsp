@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,xuandong.*,javax.servlet.*,KaiChieh.*,bian.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -194,11 +194,11 @@ h6 {
 			style="position: absolute; top: 8px; left: 30%; width: 40%;">
 			<form action="SearchServlet" method="post" id="search">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search for...">
+					<input type="text" name="targetToSearch" class="form-control" placeholder="Search for...">
 					<span class="input-group-btn" style="width:65px"> 
-					<select class="selectpicker form-control" id="sel1">
-							<option>Quiz</option>
-							<option>User</option>
+					<select class="selectpicker form-control" id="sel1" name="searchOption">
+							<option value="quiz">Quiz</option>
+							<option value="user">User</option>
 					</select>
 					</span> <span class="input-group-btn">
 						<button type="submit" form="search" class="btn btn-default" type="button">
@@ -241,9 +241,74 @@ h6 {
 		</div>
 		<!-- /.col-lg-6 -->
 	</div>
-	<div style="background-color:red;position:absolute;top:300px;width:200px;height:50px;left:100px;">
-		<h3> Search Result </h3>
-	</div>
+	<% 
+		String searchOption = (String) session.getAttribute("searchOption");
+		int height = 0;
+		if (searchOption.equals("user")) {
+			ArrayList<User> userSearchResult = (ArrayList<User>) session.getAttribute("searchResult");
+			height = 100+userSearchResult.size()*70;
+			out.print("<div style=\"text-align:center;background-color:black;position:absolute;top:100px;height:"+height+"px;width:700px;left:50%;margin-left:-350px;\">");
+			// make left middle right 
+			out.print("<h3> Search Result </h3>");
+			out.print("<hr></hr>");
+			
+			// Make a table 
+			int numUsers = 0;
+			out.print("<table class=\"table table-striped\">");
+			out.print("<tr>");
+			out.print("<th>#</th>");
+			out.print("<th>User ID</th>");
+			out.print("<th>User Name</th>");
+			//out.print("");
+			out.print("</tr>");
+			for(User user: userSearchResult) {
+				out.print("<tr  class=\"success\">");
+				out.print("<td>"+String.valueOf(numUsers+1)+"</td>");
+				out.print("<td>"+"<a href=\"#\">"+user.getID()+"</a>"+"</td>");
+				out.print("<td>"+user.getName()+"</td>");
+				/* String quizUrl = "QuizSummary.jsp?quizID="+user.getAge()+"&userID="+userID;
+				String quizString = "<a href=\""+quizUrl+"\">" + Quiz.getName(performance.getQuizID()) +"</a>";
+				String activity = "Took quiz: "+quizString+" and received "+performance.getScore()+"!"; */
+				//out.print("<td>"+activity+"</td>");
+				out.print("</tr>");
+				numUsers++;
+			}
+			out.print("</table>");
+			out.print("</div>");
+		}else if (searchOption.equals("quiz")){
+			ArrayList<Quiz> quizSearchResult = (ArrayList<Quiz>) session.getAttribute("searchResult");
+			height = 100+quizSearchResult.size()*70;
+			out.print("<div style=\"text-align:center;background-color:black;position:absolute;top:100px;height:"+height+"px;width:700px;left:50%;margin-left:-350px;\">");
+			// make left middle right 
+			out.print("<h3> Search Result </h3>");
+			out.print("<hr></hr>");
+			
+			// Make a table 
+			int numQuiz = 0;
+			out.print("<table class=\"table table-striped\">");
+			out.print("<tr>");
+			out.print("<th>#</th>");
+			out.print("<th>Quiz Name</th>");
+			out.print("<th>Popularity</th>");
+			//out.print("");
+			out.print("</tr>");
+			for(Quiz quiz: quizSearchResult) {
+				out.print("<tr  class=\"success\">");
+				out.print("<td>"+String.valueOf(numQuiz+1)+"</td>");
+				out.print("<td>"+"<a href=\"#\">"+quiz.getName()+"</a>"+"</td>");
+				out.print("<td>"+quiz.getPopularity()+"</td>");
+				/* String quizUrl = "QuizSummary.jsp?quizID="+user.getAge()+"&userID="+userID;
+				String quizString = "<a href=\""+quizUrl+"\">" + Quiz.getName(performance.getQuizID()) +"</a>";
+				String activity = "Took quiz: "+quizString+" and received "+performance.getScore()+"!"; */
+				//out.print("<td>"+activity+"</td>");
+				out.print("</tr>");
+				numQuiz++;
+			}
+			out.print("</table>");
+			out.print("</div>");
+		}
+		
+	%>
 
 </body>
 </html>

@@ -23,6 +23,7 @@ $(function () {
 </script>
 <title>User History</title>
 </head>
+
 <body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers4.jpeg')">
 <%
 	String userID = (String)session.getAttribute("userID");
@@ -34,8 +35,8 @@ $(function () {
 
 <form action="DeleteUserServlet" method="post">
 
-<div class="container">
-  <h2>Your Quiz History</h2>         
+<div class="container" style = "position: relative; width:80%; top: 20px;">
+  <h2 style="text-align:center;">Your Quiz History</h2>         
   <table class="table">
     <thead>
       <tr>

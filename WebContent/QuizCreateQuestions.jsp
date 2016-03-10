@@ -212,7 +212,7 @@
 		<p><h5>Answer: </h5> </p>
 		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
 	</div>
-	<p><h5>Should the answers be ordered?</h5> </p>
+	<p><h5>Should the answers be ordered? (Default: unordered)</h5> </p>
 	<div class="radio">
 		  <label><input type="radio" name="ordered" value="Yes">Yes</label>
 	</div>

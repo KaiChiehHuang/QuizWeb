@@ -17,9 +17,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
 <script> 
-$(function () {
-	  $('[data-toggle="popover"]').popover()
-	})
 </script>
 <title>User History</title>
 </head>
@@ -32,8 +29,6 @@ $(function () {
 	ArrayList<Performance> userPerformance = new ArrayList<Performance>();
 	userPerformance = user.getQuizHistory();
 %>
-
-<form action="DeleteUserServlet" method="post">
 
 <div class="container" style = "position: relative; width:80%; top: 20px;">
   <h2 style="text-align:center;">Your Quiz History</h2>         
@@ -51,12 +46,13 @@ $(function () {
     
     <%
     	for (int i = userPerformance.size() - 1; i >= 0 ; i--) {
-     		String[] per = new String[4];
+     		String[] per = new String[5];
      		per[0] = userPerformance.get(i).getQuizName();
     		per[1] = userPerformance.get(i).getStartTime();
     		per[2] = String.valueOf(userPerformance.get(i).getScore());
     		per[3] = userPerformance.get(i).getDuration();
- 
+ 			per[4] = userPerformance.get(i).getQuizID();
+    		
     		if (i % 2 == 0) {
     			out.println("<tr class=\"warning\">");
     		} else {
@@ -70,7 +66,7 @@ $(function () {
     		
     		String quizID = userPerformance.get(i).getQuizID();
     		out.println("<td>");
-    		out.println("<button data-placement=\"left\" data-toggle=\"popover\" title=\"Popover title\" data-content=\"And here's some amazing content. It's very engaging. Right?\" name = \"quizchallenge\" type=\"submit\" class=\"btn btn-warning\" value =\"" +quizID+ "\"/>Challenge</button>");
+    		out.println("<a href=\"ChallengeFriend.jsp?quizName="+per[0]+"\"><button class=\"btn btn-warning\">Challenge</button></a>");
     		out.println("</td>");
     		
     		out.println("</tr>");	

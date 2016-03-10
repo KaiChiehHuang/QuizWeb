@@ -53,7 +53,6 @@ String date = ann.getDate();
      				opacity: 0.9;
      				background-color:white;
      				"><div><p><%=content%></p></div>
-
      				</div>
        				  <div><a href="UserViewAnnoun.jsp"> Back to All Announcement Page </a></div>
   					<div><a href="HomePage.jsp"> Back to Home Page </a></div>  				

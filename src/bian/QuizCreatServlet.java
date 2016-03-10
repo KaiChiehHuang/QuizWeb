@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.org.apache.xerces.internal.parsers.XMLParser;
 
 import xuandong.*;
 
@@ -60,8 +59,6 @@ public class QuizCreatServlet extends HttpServlet {
 			pictures = xuandong.XMLParser.DEFAULTIMAGES;
 			Random random = new Random();
 			int next = random.nextInt(pictures.size());
-			System.out.println(next);
-			System.out.println(pictures.get(next));
 			quiz.setImage(pictures.get(next));
 		}
 		

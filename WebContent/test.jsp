@@ -37,6 +37,21 @@
 %>
 
 <% takeMC(out); %>
+<div class = "container">
+<p><h5>Problem1: </h5>How much planet is there in solar system?</p>
+<form role="form">
+<div class="radio">
+  <label><input type="radio" name="Anwser1" checked>Option one</label>
+</div>
+<div class="radio">
+  <label>
+    <input type="radio" name="Anwser1" value="option2">Option two</label>
+</div>
+<div class="radio disabled">
+  <label><input type="radio" name="Anwser1" value="option3" disabled>Option three is disabled</label>
+</div>
+</form>
+</div>
 
 <!-- Fill Blank -->
 <div class = "container">

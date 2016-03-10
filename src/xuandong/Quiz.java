@@ -502,13 +502,13 @@ public class Quiz {
 			try {
 				DBConnection database = new DBConnection();
 				Statement stmt = database.getStmt();
-				ResultSet res = stmt.executeQuery("SELECT FROM QuizRecord WHERE QuizID = \"" + quizID + "\" AND UserID = \"" + userID.replace("\"", "\"\"") + "\" AND StartTime = \"" + startDate + "\";");
-				if (!res.next()) {
+//				ResultSet res = stmt.executeQuery("SELECT FROM QuizRecord WHERE QuizID = \"" + quizID + "\" AND UserID = \"" + userID.replace("\"", "\"\"") + "\" AND StartTime = \"" + startDate + "\";");
+//				if (!res.next()) {
 					String sql = "INSERT INTO QuizRecord VALUES (\"" + quizID + "\",\"" + userID.replace("\"", "\"\"") + "\",\"" + startDate + "\",\""
 							+ endDate + "\",\"" + duration + "\"," + score + ");";
 					stmt.executeUpdate(sql);
 					updateQuizAchievement();
-				}
+//				}
 				database.getCon().close();
 			} catch (SQLException e) {
 				e.printStackTrace();

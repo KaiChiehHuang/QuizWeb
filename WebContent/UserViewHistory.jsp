@@ -23,7 +23,7 @@
 
 <body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers4.jpeg')">
 <%
-	String userID = (String)session.getAttribute("userID");
+	String userID = (String) session.getAttribute("userID");
 	User user = new User(userID);
 	/* User user = new User("jay"); */
 	ArrayList<Performance> userPerformance = new ArrayList<Performance>();
@@ -66,7 +66,7 @@
     		
     		String quizID = userPerformance.get(i).getQuizID();
     		out.println("<td>");
-    		out.println("<a href=\"ChallengeFriend.jsp?quizName="+per[0]+"\"><button class=\"btn btn-warning\">Challenge</button></a>");
+    		out.println("<a href=\"ChallengeFriend.jsp?quizName="+per[0]+"&quizID="+ per[4]  +"\"><button class=\"btn btn-warning\">Challenge</button></a>");
     		out.println("</td>");
     		
     		out.println("</tr>");	

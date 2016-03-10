@@ -237,9 +237,8 @@ h6 {
 	
 	<div
 		style="border-radius: 20px; border: 2px solid #73AD21; padding: 15px; height: 360px; text-align:center; left: 50%; width: 400px; margin-left: -200px; top: 100px; position: absolute; opacity: 0.9; background-color: white;">
-		<% session.setAttribute("userID","Guest"); %>
 		<h3>Challenge Your Friend</h3><br>
-		<form action="ChallengeFriend" method="post">
+		<form action="ChallengeFriendServlet" method="post">
 			<div class="input-group" style="opacity: 0.95;">
 				<span class="input-group-addon" id="basic-addon1">Quiz&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
 				<% 

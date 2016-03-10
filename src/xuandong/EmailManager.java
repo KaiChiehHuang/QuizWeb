@@ -54,7 +54,7 @@ public class EmailManager {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT SenderID, Time, Subject, Content, Link, IsRead FROM Emails WHERE ReceiverID = \""
-					+ userID.replace("\"", "\"\"") + "\";";
+					+ userID.replace("\"", "\"\"") + "\" ORDER BY Time DESC;";
 			ResultSet res = stmt.executeQuery(sql);
 			while (res.next()) {
 				Email newEmail = new Email();
@@ -82,7 +82,7 @@ public class EmailManager {
 		Statement stmt = database.getStmt();
 		try {
 			String sql = "SELECT ReceiverID, Time, Subject, Content, Link, IsRead FROM Emails WHERE SenderID = \""
-					+ userID.replace("\"", "\"\"") + "\";";
+					+ userID.replace("\"", "\"\"") + "\" ORDER BY Time DESC;";
 			ResultSet res = stmt.executeQuery(sql);
 			while (res.next()) {
 				Email newEmail = new Email();

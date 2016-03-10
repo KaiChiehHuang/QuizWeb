@@ -1,6 +1,8 @@
 package KaiChieh;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,9 +42,16 @@ public class ChallengeFriendServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String userID = (String) session.getAttribute("userID");
-		String receiverID = request.getParameter("reveiverID");
+		String receiverID = request.getParameter("receiverID");
 		String quizID = request.getParameter("quizID");
-		
+		System.out.println(userID);
+		System.out.println(receiverID);
+		System.out.println(quizID);
+		try {
+			Email.challenge(userID, quizID, receiverID);
+		}
+		catch (Exception ignore) {} 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UserViewHistory.jsp");
+		dispatcher.forward(request, response);
 	}
-
 }

@@ -155,9 +155,6 @@
 			myOut.println("<input type=\"text\" disabled=\"disabled\" placeholder=\"Answer\" size=\"8\" />");
 		}
 		myOut.println("</p></div>");
-		myOut.println("<form action=\"DeleteProbemServlet\" method=\"post\">");
-		myOut.println("<input type=\"submit\" value = \"Delete\"/>");
-		myOut.println("</form>");
 	}
 %>
 

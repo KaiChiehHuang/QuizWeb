@@ -23,6 +23,48 @@
 }
 </style>
 <title>Add Questions</title>
+<SCRIPT type="text/javascript">
+        function addRow(tableID) {
+ 
+            var table = document.getElementById(tableID);
+ 
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+ 
+            var cell1 = row.insertCell(0);
+            var element1 = document.createElement("input");
+            element1.type = "checkbox";
+            element1.name ="choicecheck";
+            element1.value = "box" + (rowCount + 1);
+            cell1.appendChild(element1);
+
+            var cell2 = row.insertCell(1);
+            var element2 = document.createElement("input");
+            element2.type = "text";
+            element2.style = "border-radius:6px; min-width: 0; width:600px;  height:34px;";
+            element2.name = "choice" + (rowCount + 1);
+            element2.placeholder="Choice";
+            cell2.appendChild(element2);
+        }
+        
+        function addRowResponse(tableID) {
+       	 
+            var table = document.getElementById(tableID);
+ 
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+ 
+
+            var cell2 = row.insertCell(0);
+            var element2 = document.createElement("input");
+            element2.type = "text";
+            element2.style = "border-radius:6px; min-width: 0; width:600px;  height:34px;";
+            element2.name = "answer" + (rowCount + 1);
+            element2.placeholder="Answer";
+            cell2.appendChild(element2);
+        }
+ 
+    </SCRIPT>
 </head>
 <body>
 
@@ -76,17 +118,21 @@
 						<p><h3>Creating Single/Multi Choice Problem: </h5> </p>
 						<input type="hidden" name = "type" value = "MC">
 						<p><h5>Question: </h5> </p>
-
+						
 						<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
 
-						<p><h5>Choice: </h5> </p>
+						<p><h5>Choice: </h5>check answers before add question </p>
 
-						<input type="text" class="form-control form-control-inline" name = "choice" placeholder="Choice">
-
-
-						<p><h5>Answer(Must be one/some of choices) : </h5> </p>
-
-						<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
+						<!-- <input type="text" class="form-control form-control-inline" name = "choice" placeholder="Choice"> -->
+						
+						<INPUT type="button" class="btn btn-info" value="Add Choice" onclick="addRow('dataTable')" />
+    					
+    					<TABLE id="dataTable" border="1">
+        					<TR>
+            				<TD><INPUT type="checkbox" name="choicecheck" value = "box1"/></TD>
+            				<TD> <INPUT type="text" class="form-control form-control-inline" name = "choice1" placeholder="Choice"> </TD>
+        					</TR>
+    					</TABLE>
 
 					</div>
 				<div class="text-right">
@@ -182,16 +228,22 @@
 	<p><h5>Question: </h5> </p>
 	<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
 	<div>
-		<p><h5>Answer: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
+		<p><h5>Answer: </h5></p>
+				<INPUT type="button" class="btn btn-info" value="Add Answer" onclick="addRowResponse('dataTableMR')" />
+    					
+			    	<TABLE id="dataTableMR" border="1">
+			        	<TR>
+			            <TD> <INPUT type="text" class="form-control form-control-inline" name = "answer1" placeholder="Answer"> </TD>
+			        	</TR>
+			    		</TABLE>	
 	</div>
-	<p><h5>Should the answers be ordered?</h5> </p>
-	<div class="radio">
-		  <label><input type="radio" name="ordered" value="Yes">Yes</label>
-	</div>
-		<div class="radio">
-		  <label><input type="radio" name="ordered" value="No">No</label>
-	</div>
+	<p><h5>Should the answers be ordered? (Default: unordered)</h5> </p>
+							<div class="radio">
+								  <label><input type="radio" name="ordered" value="Yes">Yes</label>
+							</div>
+								<div class="radio">
+								  <label><input type="radio" name="ordered" value="No">No</label>
+							</div>
 </div>
 				
 				<div class="text-right">

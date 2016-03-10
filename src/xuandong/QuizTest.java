@@ -24,6 +24,9 @@ public class QuizTest {
 //		System.out.println(rm.nextInt(XMLParser.DEFAULTIMAGES.size()));
 		User temp = new User("xuandong");
 		System.out.println(temp.getAchievements());
+		String[] a = new String[1];
+		a[0] = "fafafa";
+		XMLParser.main(a);
 	}
 
 }

@@ -194,24 +194,27 @@ public class User {
 	 */
 	public void removeFriend(String friendID) {
 		try {
-			stmt.executeUpdate(
-					"DELETE FROM Friendship WHERE User1ID = \"" + id + "\" AND User2ID = \"" + friendID + "\";");
-			stmt.executeUpdate(
-					"DELETE FROM Friendship WHERE User2ID = \"" + id + "\" AND User1ID = \"" + friendID + "\";");
+			DBConnection database = new DBConnection();
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + id + "\" AND User2ID = \"" + friendID + "\";");
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User2ID = \"" + id + "\" AND User1ID = \"" + friendID + "\";");
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
+	
+	
 	/**
 	 * Send a friend request to a user
-	 * 
 	 * @param User2ID
 	 */
 	public void sendFriendRequest(String User2ID) {
 		try {
-			stmt.executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id + "\",\"" + User2ID
-					+ "\"," + true + ");");
+			DBConnection database = new DBConnection();
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + this.id + "\" AND User2ID = \"" + User2ID + "\";");
+			database.getStmt().executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id + "\",\"" + User2ID + "\"," + true + ");");
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -219,15 +222,30 @@ public class User {
 
 	/**
 	 * Accept a friend request and update the database
-	 * 
 	 * @param pendingUserID
 	 */
 	public void acceptFriendRequest(String pendingUserID) {
 		try {
-			stmt.executeUpdate("UPDATE Friendship SET Pending = " + false + " WHERE User1ID = \"" + pendingUserID
-					+ "\" AND User2ID = \"" + id + "\";");
-			stmt.executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id + "\",\""
-					+ pendingUserID + "\"," + false + ");");
+			DBConnection database = new DBConnection();
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + this.id + "\" AND User2ID = \"" + pendingUserID + "\";");
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User2ID = \"" + this.id + "\" AND User1ID = \"" + pendingUserID + "\";");
+			database.getStmt().executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id + "\",\"" + pendingUserID + "\"," + false + ");");
+			database.getStmt().executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + pendingUserID + "\",\"" + id + "\"," + false + ");");
+			database.getCon().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Decline a friend request and update the database
+	 * @param pendingUserID
+	 */
+	public void declineFriendRequest(String pendingUserID) {
+		try {
+			DBConnection database = new DBConnection();
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + pendingUserID + "\" AND User2ID = \"" + this.id + "\";");
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -249,7 +267,6 @@ public class User {
 			}
 			database.getCon().close();
 		} catch (SQLException e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return pendingFriends;

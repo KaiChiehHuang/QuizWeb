@@ -16,6 +16,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
+<script> 
+$(function () {
+	  $('[data-toggle="popover"]').popover()
+	})
+</script>
 <title>User History</title>
 </head>
 <body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers4.jpeg')">
@@ -64,7 +69,7 @@
     		
     		String quizID = userPerformance.get(i).getQuizID();
     		out.println("<td>");
-    		out.println("<button name = \"quizchallenge\" type=\"submit\" class=\"btn btn-warning\" value =\"" +quizID+ "\"/>Challenge</button>");
+    		out.println("<button data-placement=\"left\" data-toggle=\"popover\" title=\"Popover title\" data-content=\"And here's some amazing content. It's very engaging. Right?\" name = \"quizchallenge\" type=\"submit\" class=\"btn btn-warning\" value =\"" +quizID+ "\"/>Challenge</button>");
     		out.println("</td>");
     		
     		out.println("</tr>");	

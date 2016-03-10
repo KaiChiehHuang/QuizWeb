@@ -18,7 +18,7 @@
 <title>Quiz Result</title>
 </head>
 
-<body>
+<body style="background-size:100%;background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers9.jpg')">
 
 <%
  	Quiz quiz = (Quiz) session.getAttribute("quiz");
@@ -71,7 +71,10 @@
     %>
     </tbody>
   </table>
+   <div><a href="HomePage.jsp"> Back to Home Page </a></div>
 </div>
+
+
 
 </body>
 </html>

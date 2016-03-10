@@ -28,6 +28,25 @@
 	quiz.setCreatedDate();
 	quiz.updateDatabase();
 %>
-Quiz created successfully!
+
+		<div style="border-radius: 20px;
+    				border: 2px solid #73AD21;
+    				padding: 15px; 
+				    height: 270px;
+     				text-align:left;
+     				left:50%;width:340px;
+     				margin-left:-170px;
+     				top:200px;
+     				position:absolute;
+     				opacity: 0.9;
+     				background-color:white;
+     				"><h3>Quiz Created Successfully!</h3>
+     				<h3></h3>
+     				<div class = "container" style = "position: relative; left: 50%; width: 340px; margin-left:-170px">
+     				<img class="img-thumbnail" src = "http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2015/08/emoji.jpg" >
+     				</div>
+     				</div>
+
+
 </body>
 </html>

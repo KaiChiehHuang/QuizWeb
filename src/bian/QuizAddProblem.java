@@ -80,10 +80,10 @@ public class QuizAddProblem extends HttpServlet {
 			pro.setAnswers(answer);
 			pro.setQuestion(question);
 			String order = request.getParameter("order");
-			if (order == "Yes") {
-				pro.setOrdered(true);
-			} else {
+			if (order == null || order == "No") {
 				pro.setOrdered(false);
+			} else {
+				pro.setOrdered(true);
 			}
 			quiz.addProblem(pro);
 		} else if (type.equals("FB")) {

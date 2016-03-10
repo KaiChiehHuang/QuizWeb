@@ -465,7 +465,14 @@ if (isPracticeMode) {
 }
 %>
 <%-- <a href=<%=link%> class="btn btn-info" role="button">Practice</a> --%>
-<a href="QuizEditing.jsp" class="btn btn-info"  role="button">Edit Quiz</a>
+<%
+	if (userID.equals(author)) {
+		out.print("<a href=\"QuizEditing.jsp\" class=\"btn btn-info\"  role=\"button\">Edit Quiz</a>");
+	} else {
+		out.print("<a disabled=\"disabled\" class=\"btn btn-info\"  role=\"button\">Edit Quiz</a>");
+	}
+%>
+
 </div>
 </body>
 </html>

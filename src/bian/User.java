@@ -259,10 +259,10 @@ public class User {
 		ArrayList<User> pendingFriends = new ArrayList<User>();
 		try {
 			DBConnection database = new DBConnection();
-			String sql = "SELECT User2ID FROM Friendship WHERE User1ID = \"" + this.id.replace("\"", "\"\"") + "\" AND Pending = " + true + ";";
+			String sql = "SELECT User1ID FROM Friendship WHERE User2ID = \"" + this.id.replace("\"", "\"\"") + "\" AND Pending = " + true + ";";
 			ResultSet res = database.getStmt().executeQuery(sql);
 			while (res.next()) {
-				User temp = new User(res.getString("User2ID"));
+				User temp = new User(res.getString("User1ID"));
 				pendingFriends.add(temp);
 			}
 			database.getCon().close();

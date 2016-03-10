@@ -501,6 +501,7 @@ public class Quiz {
 			try {
 				DBConnection database = new DBConnection();
 				Statement stmt = database.getStmt();
+				stmt.executeUpdate("DELETE FROM QuizRecord WHERE QuizID = \"" + quizID + "\" AND UserID = \"" + userID.replace("\"", "\"\"") + "\" AND StartTime = \"" + startDate + "\";");
 				String sql = "INSERT INTO QuizRecord VALUES (\"" + quizID + "\",\"" + userID.replace("\"", "\"\"") + "\",\"" + startDate + "\",\""
 						+ endDate + "\",\"" + duration + "\"," + score + ");";
 				stmt.executeUpdate(sql);
@@ -546,12 +547,13 @@ public class Quiz {
 		int quizTaken = res.getInt("Count");
 		String time = Quiz.df.format((new Date()).getTime());
 		if (quizTaken == 10) {
-			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, Achievement) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Quiz Machine\");");
+			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Quiz Machine\");");
 		}
 		ResultSet highest = database.getStmt().executeQuery("SELECT UserID FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" ORDER BY Score DESC, Duration ASC, EndTime ASC LIMIT 1;");
 		highest.next();
 		if (this.userID.equals(highest.getString("UserID"))) {
-			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, Achievement) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"I am the Greatest\");");
+			database.getStmt().executeUpdate("DELETE FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"I am the Greatest\";");
+			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"I am the Greatest\");");
 		}
 		database.getCon().close();
 	}

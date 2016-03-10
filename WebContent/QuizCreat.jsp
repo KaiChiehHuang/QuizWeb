@@ -15,9 +15,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
-<title>Create a quiz</title>
+<title>Create a Quiz</title>
 </head>
-<body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers12.jpg')">
+<body style="height:800px;background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers12.jpg')">
 
 <%
 	String authorID = (String) request.getParameter("userID"); 
@@ -34,18 +34,18 @@
 
 <!-- Quiz Properties -->
 <!-- name description image -->
-<div class = "container">
-<h1>Create a quiz</h1>
-	<p><h5>Name: </h5> </p>
+<div class = "container" style = "position: relative; background-color:#ffffff; top: 20px;">
+<h1>Create a Quiz</h1>
+<div class="container"><a href="LoadXML.jsp"> Want to Load an XML file? </a></div>
+	<p><h5>*Name: </h5> </p>
 	<input type="text" class="form-control" name = "name" placeholder="Quiz Name">
-	<p><h5>Quiz Description: </h5> </p>
+	<p><h5>*Quiz Description: </h5> </p>
   	<textarea class="form-control" rows="3" name = "description" placeholder="Quiz Description"></textarea>
   	<p><h5>Quiz Picture: </h5> </p>
 	<input type="text" class="form-control" name = "picture" placeholder="URL">
-</div>
+
 
 <!-- Random -->
-<div class="container">
 	<p><h5>Random: Will the problems in quiz display in randomly ordered? </h5> </p>
 	<div class="radio">
 		  <label><input type="radio" name="Random" value="Yes">Yes</label>
@@ -53,10 +53,10 @@
 		<div class="radio">
 		  <label><input type="radio" name="Random" value="No">No</label>
 	</div>
-</div>
+
 
 <!-- OnePage -->
-<div class="container">
+
 	<p><h5>Page: Will the problems in quiz display in one page or multiple pages? </h5> </p>
 	<div class="radio">
 		  <label><input type="radio" name="OnePage" value="Yes">One Page</label>
@@ -64,10 +64,10 @@
 		<div class="radio">
 		  <label><input type="radio" name="OnePage" value="No">Multiple Pages</label>
 	</div>
-</div>
+
 
 <!-- PracticeMode -->
-<div class="container">
+
 	<p><h5>Practice Mode: Will this quiz have practice mode? </h5> </p>
 	<div class="radio">
 		  <label><input type="radio" name="Practice" value="Yes">Yes</label>
@@ -75,10 +75,10 @@
 		<div class="radio">
 		  <label><input type="radio" name="Practice" value="No">No</label>
 	</div>
-</div>
+
 		  
 <!-- ImmediateCorrection -->
-<div class="container">
+
 	<p><h5>Immediate Correction: Will problems in this quiz be immediately corrected when being taken? </h5> </p>
 	<div class="radio">
 		  <label><input type="radio" name="ImmCorr" value="Yes">Yes</label>
@@ -86,12 +86,13 @@
 		<div class="radio">
 		  <label><input type="radio" name="ImmCorr" value="No">No</label>
 	</div>
-</div>		
+		
 
 <button type="submit"  class="btn btn-warning" type="button" style = "position: relative; left: 50%; width: 120px; margin-left:-60px">Add Questions</button>
+<p>     </p>
 <!-- class="btn btn-warning" -->
-<div class="container"><a href="LoadXML.jsp"> Want to Load an XML file? </a></div>
 
+</div>
 </form>
 </body>
 </html>

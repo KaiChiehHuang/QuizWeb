@@ -12,10 +12,14 @@ public class Administration {
 	 */
 	public static void addAdmin(String id) throws SQLException {
 		DBConnection database = new DBConnection();
-		String sql = "INSERT INTO Administrator(AdminID) VALUES(\"" + id.replace("\"", "\"\"") + "\");";
-		database.getStmt().executeUpdate(sql);
+		ResultSet res = database.getStmt().executeQuery("SELECT * FROM Administrator WHERE AdminID = \"" + id.replace("\"", "\"\"") + "\";");
+		if (!res.next()) {
+			String sql = "INSERT INTO Administrator(AdminID) VALUES(\"" + id.replace("\"", "\"\"") + "\");";
+			database.getStmt().executeUpdate(sql);
+		}
 		database.getCon().close();
 	}
+	
 	
 	/**
 	 * remove an user account
@@ -29,6 +33,7 @@ public class Administration {
 		database.getCon().close();
 	}
 	
+	
 	/**
 	 * remove a quiz
 	 * @param quizID
@@ -40,6 +45,7 @@ public class Administration {
 		database.getStmt().executeUpdate(sql);
 		database.getCon().close();
 	}
+	
 	
 	/**
 	 * clear all history information for a particular quiz
@@ -53,6 +59,7 @@ public class Administration {
 		database.getCon().close();
 	}
 	
+	
 	/**
 	 * get the number of users
 	 * @return
@@ -63,10 +70,11 @@ public class Administration {
 		String sql = "SELECT Count(*) FROM Users;";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		res.next();
-		int temp = res.getInt(1);
+		int userNum = res.getInt(1);
 		database.getCon().close();
-		return temp;
+		return userNum;
 	}
+	
 	
 	/**
 	 * get the number of quizzes taken
@@ -78,10 +86,11 @@ public class Administration {
 		String sql = "SELECT COUNT(DISTINCT QuizID) FROM QuizRecord;";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		res.next();
-		int temp = res.getInt(1);
+		int quizTakenCount = res.getInt(1);
 		database.getCon().close();
-		return temp;
+		return quizTakenCount;
 	}
+	
 	
 	/**
 	 * Get a list of all users
@@ -99,6 +108,7 @@ public class Administration {
 		database.getCon().close();
 		return users;
 	}
+	
 	
 	/**
 	 * Get a list of all quizzes

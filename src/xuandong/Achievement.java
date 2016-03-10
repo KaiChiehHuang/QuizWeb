@@ -10,6 +10,7 @@ public class Achievement {
 	String achievementName;
 	String description;
 	
+	
 	/**
 	 * Store all achievements' descriptions
 	 */
@@ -23,6 +24,7 @@ public class Achievement {
 		ACHIEVEMENTDESCRIPTION.put("I am the Greatest", " had the highest score on a quiz!!");
 		ACHIEVEMENTDESCRIPTION.put("Practice Makes Perfect", " have taken a quiz in practice mode.");
 	};
+	
 	
 	/**
 	 * Store all achievements' images
@@ -38,6 +40,7 @@ public class Achievement {
 		ACHIEVEMENTIMAGE.put("Practice Makes Perfect", "badges/Practice Makes Perfect.png");
 	};
 	
+	
 	/**
 	 * Store all achievements' list
 	 */
@@ -52,8 +55,13 @@ public class Achievement {
 		ALLACHIEVEMENTS.add("I am the Greatest");
 	};
 	
+	
+	/**
+	 * Simple constructor
+	 */
 	public Achievement() {
 	}
+	
 	
 	/**
 	 * Set the user of this achievement
@@ -63,6 +71,7 @@ public class Achievement {
 		this.userID = userID;
 	}
 	
+	
 	/**
 	 * Get the user of this achievement
 	 * @return
@@ -70,6 +79,7 @@ public class Achievement {
 	public String getUserID() {
 		return this.userID;
 	}
+	
 	
 	/**
 	 * Set the quiz of this achievement
@@ -79,6 +89,7 @@ public class Achievement {
 		this.quizID = quizID;
 	}
 	
+	
 	/**
 	 * Get the quiz of this achievement
 	 * @return
@@ -86,6 +97,7 @@ public class Achievement {
 	public String getQuizID() {
 		return this.quizID;
 	}
+	
 	
 	/**
 	 * Get the time of this achievement
@@ -95,6 +107,7 @@ public class Achievement {
 		return this.time.substring(0, this.time.length() - 2);
 	}
 	
+	
 	/**
 	 * Set the time of this achievement
 	 * @param time
@@ -102,6 +115,7 @@ public class Achievement {
 	public void setTime(String time) {
 		this.time = time;
 	}
+	
 	
 	/**
 	 * Set the name of this achievement
@@ -111,6 +125,7 @@ public class Achievement {
 		this.achievementName = name;
 	}
 	
+	
 	/**
 	 * Get the name of this achievement
 	 * @return
@@ -119,6 +134,7 @@ public class Achievement {
 		return this.achievementName;
 	}
 	
+	
 	/**
 	 * Set the description of this achievement
 	 */
@@ -126,31 +142,49 @@ public class Achievement {
 		this.description = Achievement.ACHIEVEMENTDESCRIPTION.get(this.achievementName);
 	}
 	
+	
 	/**
-	 * Get the description of this acievement
+	 * Get the description of this achievement
 	 * @return
 	 */
 	public String getDescription() {
 		return Achievement.ACHIEVEMENTDESCRIPTION.get(this.achievementName);
 	}
 	
+	
 	/**
-	 * 
-	 * @param achi
+	 * Get the description of a specific achievement
+	 * @param achievement name
 	 * @return
 	 */
 	public static String getDescription(String achi) {
 		return Achievement.ACHIEVEMENTDESCRIPTION.get(achi);
 	}
 	
+	
+	/**
+	 * Get all achievements
+	 * @return a list contains the names of all achievements
+	 */
 	public static ArrayList<String> getAllAchievement() {
 		return Achievement.ALLACHIEVEMENTS;
 	}
 	
+	
+	/**
+	 * Get the image of an specific achievement
+	 * @param achievement name
+	 * @return
+	 */
 	public static String getImage(String achi) {
 		return Achievement.ACHIEVEMENTIMAGE.get(achi);
 	}
 	
+	
+	/**
+	 * Get the image of this achievement
+	 * @return
+	 */
 	public String getImage() {
 		return Achievement.ACHIEVEMENTIMAGE.get(this.getAchievementName());
 	}

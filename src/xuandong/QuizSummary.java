@@ -7,20 +7,22 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class QuizSummary {
-	
-	public static final int TOP_NUM = 10;
+	private int takeNum;
 	
 	private String quizID;
 	private String userID;
-	private ArrayList<Performance> highestPerformers;
-	private ArrayList<Performance> highestPerformersLastDay;
-	private ArrayList<Performance> goodPerformers;
-	private ArrayList<Performance> badPerformers;
-	private ArrayList<Performance> userPerformance;
-	private int takeNum;
-	private String meanScore;
 	private String maxScore;
 	private String minScore;
+	private String meanScore;
+	
+	private ArrayList<Performance> badPerformers;
+	private ArrayList<Performance> goodPerformers;
+	private ArrayList<Performance> userPerformance;
+	private ArrayList<Performance> highestPerformers;
+	private ArrayList<Performance> highestPerformersLastDay;
+
+	public static final int TOP_NUM = 10;
+
 	
 	/**
 	 * Simple constructor, get the statistics about this quiz
@@ -35,7 +37,6 @@ public class QuizSummary {
 		goodPerformers = new ArrayList<Performance>();
 		badPerformers = new ArrayList<Performance>();
 		userPerformance = new ArrayList<Performance>();
-		
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
@@ -56,7 +57,6 @@ public class QuizSummary {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	
@@ -87,6 +87,7 @@ public class QuizSummary {
 		}
 		return userPerformance;
 	}
+	
 	
 	/**
 	 * Get the performance of this user ordered by score

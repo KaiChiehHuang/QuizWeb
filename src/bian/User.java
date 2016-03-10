@@ -2,19 +2,26 @@ package bian;
 
 import java.sql.*;
 import java.util.*;
-
 import xuandong.*;
 
 public class User {
-	private Statement stmt;
-	private ResultSet rs;
+	private int age;
+	
 	private String id;
 	private String name;
 	private String gender;
-	private int age;
+	
+	private ResultSet rs;
+	
+	private Statement stmt;
+	
 	private ArrayList<String> friends;
 	private ArrayList<Achievement> achievements;
 
+	/**
+	 * Simple constructor, used for not passing a statement
+	 * @param id
+	 */
 	public User(String id) {
 		this.id = id;
 		try {
@@ -25,9 +32,7 @@ public class User {
 			name = rs.getString("Name");
 			age = rs.getInt("Age");
 			gender = rs.getString("Gender");
-//			achievements = rs.getString("Achievement").split("\\|");
 			fetchAchievement();
-			// Select from friends table.
 			friends = new ArrayList<String>();
 			rs = database.getStmt().executeQuery("SELECT User2ID FROM Friendship WHERE User1ID = \"" + id.replace("\"", "\"\"") + "\" AND Pending = " + false + ";");
 			while (rs.next()) {
@@ -40,14 +45,12 @@ public class User {
 		}
 	}
 	
+	
 	/**
 	 * Simple constructor Will fetch the name, age, gender, achievement, friend
 	 * information from the database
-	 * 
-	 * @param id
-	 *            UserID
-	 * @param stmt
-	 *            Database statement
+	 * @param id UserID
+	 * @param stmt Database statement
 	 */
 	User(String id, Statement stmt) {
 		this.id = id;
@@ -58,9 +61,7 @@ public class User {
 			name = rs.getString("Name");
 			age = rs.getInt("Age");
 			gender = rs.getString("Gender");
-//			achievements = rs.getString("Achievement").split("\\|");
 			fetchAchievement();
-			// Select from friends table.
 			friends = new ArrayList<String>();
 			rs = stmt.executeQuery("SELECT User2ID FROM Friendship WHERE User1ID = \"" + id.replace("\"", "\"\"") + "\" AND Pending = " + false + ";");
 			while (rs.next()) {
@@ -72,6 +73,7 @@ public class User {
 		}
 	}
 
+	
 	/**
 	 * Get UserID
 	 */
@@ -79,6 +81,7 @@ public class User {
 		return id;
 	}
 
+	
 	/**
 	 * Get user's gender
 	 * 
@@ -88,6 +91,7 @@ public class User {
 		return gender;
 	}
 
+	
 	/**
 	 * Get user's name
 	 */
@@ -95,6 +99,7 @@ public class User {
 		return name;
 	}
 
+	
 	/**
 	 * Get user's age
 	 */
@@ -102,6 +107,7 @@ public class User {
 		return age;
 	}
 
+	
 	/**
 	 * Set User's age
 	 * 
@@ -111,6 +117,7 @@ public class User {
 		this.age = age;
 	}
 
+	
 	/**
 	 * Get user's achievements
 	 * 
@@ -120,6 +127,7 @@ public class User {
 		return achievements;
 	}
 
+	
 	/**
 	 * Get user's friends
 	 * 
@@ -129,6 +137,7 @@ public class User {
 		return friends;
 	}
 
+	
 	/**
 	 * Set user's gender
 	 */
@@ -140,6 +149,7 @@ public class User {
 		}
 	}
 
+	
 	/**
 	 * Set user's name
 	 * 
@@ -153,43 +163,45 @@ public class User {
 		}
 	}
 
-	/**
-	 * Add user's achievement
-	 * @param achievement
-	 */
-	public void addAchievement(String achievement) {
-		try {
-			rs = stmt.executeQuery("SELECT * FROM Users WHERE UserID = \"" + id + "\";");
-			String original = rs.getString("achievements");
-			String new_ach;
-			if (original.equals("")) {
-				new_ach = achievement;
-			} else {
-				new_ach = original + "|" + achievement;
-			}
-			stmt.executeUpdate("UPDATE Users SET Achievement = \"" + new_ach + "\" WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	
+//	/**
+//	 * Add user's achievement
+//	 * @param achievement
+//	 */
+//	private void addAchievement(String achievement) {
+//		try {
+//			rs = stmt.executeQuery("SELECT * FROM Users WHERE UserID = \"" + id + "\";");
+//			String original = rs.getString("achievements");
+//			String new_ach;
+//			if (original.equals("")) {
+//				new_ach = achievement;
+//			} else {
+//				new_ach = original + "|" + achievement;
+//			}
+//			stmt.executeUpdate("UPDATE Users SET Achievement = \"" + new_ach + "\" WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
-	/**
-	 * Add friend to friends table.
-	 * 
-	 * @param friendID
-	 */
-	public void addFriend(String friendID) {
-		try {
-			stmt.executeUpdate("INSERT INTO Friendship(User1ID, User2ID) VALUES(\"" + id.replace("\"", "\"\"") + "\",\"" + friendID.replace("\"", "\"\"") + "\");");
-			stmt.executeUpdate("INSERT INTO Friendship(User1ID, User2ID) VALUES(\"" + friendID.replace("\"", "\"\"") + "\",\"" + id.replace("\"", "\"\"") + "\");");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	
+//	/**
+//	 * Add friend to friends table.
+//	 * 
+//	 * @param friendID
+//	 */
+//	public void addFriend(String friendID) {
+//		try {
+//			stmt.executeUpdate("INSERT INTO Friendship(User1ID, User2ID) VALUES(\"" + id.replace("\"", "\"\"") + "\",\"" + friendID.replace("\"", "\"\"") + "\");");
+//			stmt.executeUpdate("INSERT INTO Friendship(User1ID, User2ID) VALUES(\"" + friendID.replace("\"", "\"\"") + "\",\"" + id.replace("\"", "\"\"") + "\");");
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
+	
 	/**
 	 * Remove friend in friends table.
-	 * 
 	 * @param friendID
 	 */
 	public void removeFriend(String friendID) {
@@ -202,7 +214,6 @@ public class User {
 			e.printStackTrace();
 		}
 	}
-
 	
 	
 	/**
@@ -212,14 +223,17 @@ public class User {
 	public void sendFriendRequest(String User2ID) {
 		try {
 			DBConnection database = new DBConnection();
-			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + this.id.replace("\"", "\"\"") + "\" AND User2ID = \"" + User2ID.replace("\"", "\"\"") + "\";");
-			database.getStmt().executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id.replace("\"", "\"\"") + "\",\"" + User2ID.replace("\"", "\"\"") + "\"," + true + ");");
+			ResultSet res = database.getStmt().executeQuery("SELECT * FROM Friendship WHERE User1ID = \"" + this.id.replace("\"", "\"\"") + "\" AND User2ID = \"" + User2ID.replace("\"", "\"\"") + "\";");
+			if (!res.next()) {
+				database.getStmt().executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id.replace("\"", "\"\"") + "\",\"" + User2ID.replace("\"", "\"\"") + "\"," + true + ");");
+			}
 			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
+	
 	/**
 	 * Accept a friend request and update the database
 	 * @param pendingUserID
@@ -237,6 +251,7 @@ public class User {
 		}
 	}
 	
+	
 	/**
 	 * Decline a friend request and update the database
 	 * @param pendingUserID
@@ -244,12 +259,13 @@ public class User {
 	public void declineFriendRequest(String pendingUserID) {
 		try {
 			DBConnection database = new DBConnection();
-			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + pendingUserID.replace("\"", "\"\"") + "\" AND User2ID = \"" + this.id.replace("\"", "\"\"") + "\";");
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + pendingUserID.replace("\"", "\"\"") + "\" AND User2ID = \"" + this.id.replace("\"", "\"\"") + "\" AND Pending = " + true + ";");
 			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	/**
 	 * return a list of users who has requested friendship to current user
@@ -272,6 +288,7 @@ public class User {
 		return pendingFriends;
 	}
 
+	
 	/**
 	 * Get all the achievements of this user
 	 * @return A list of achievements
@@ -298,6 +315,7 @@ public class User {
 		}
 	}
 
+	
 	/**
 	 * Get 6 most recently attained achievements of this user's friends
 	 * @return A list of achievements
@@ -326,6 +344,7 @@ public class User {
 		return achis;
 	}
 
+	
 	/**
 	 * get 6 quizzes that the user recently took if you want to get the quiz
 	 * name, please call Quiz.getName(quizID)
@@ -349,6 +368,7 @@ public class User {
 		database.getCon().close();
 		return recentQuizs;
 	}
+	
 	
 	/**
 	 * get 6 quizzes that the user's friends recently took
@@ -375,6 +395,7 @@ public class User {
 		return recentQuizs;
 	}
 
+	
 	/**
 	 * get 6 quizzes that the user recently created
 	 * @return a list of quizzes
@@ -395,6 +416,7 @@ public class User {
 		return recentQuizs;
 	}
 	
+	
 	/**
 	 * get 6 quizzes that the user's friends recently created
 	 * @return a list of quizzes
@@ -414,6 +436,7 @@ public class User {
 		database.getCon().close();
 		return recentQuizs;
 	}
+	
 	
 	/**
 	 * Return a list of all performance on quizzes
@@ -436,6 +459,7 @@ public class User {
 		database.getCon().close();
 		return result;
 	}
+	
 	
 	/**
 	 * Search a user by his name or his id

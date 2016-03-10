@@ -9,10 +9,11 @@ import xuandong.DBConnection;
 import xuandong.Quiz;
 
 public class Announcement {
-	String subject;
-	String content;
 	String date;
 	String adminID;
+	String content;
+	String subject;
+	
 	
 	/**
 	 * simple constructor, don't do anything
@@ -20,12 +21,14 @@ public class Announcement {
 	public Announcement() {
 	}
 
+	
 	/**
 	 * @return the content of the announcement
 	 */
 	public String getContent() {
 		return content;
 	}
+	
 	
 	/**
 	 * @return the date of the announcement
@@ -34,12 +37,14 @@ public class Announcement {
 		return date.substring(0, this.date.length() - 2);
 	}
 	
+	
 	/**
 	 * @return the subject of the announcement
 	 */
 	public String getSubject() {
 		return subject;
 	}
+	
 	
 	/**
 	 * get the administratorID of the announcement
@@ -49,6 +54,7 @@ public class Announcement {
 		return adminID;
 	}
 	
+	
 	/**
 	 * set the administratorID of the announcement
 	 * @param adminID
@@ -56,6 +62,7 @@ public class Announcement {
 	public void setAdminID(String adminID) {
 		this.adminID = adminID;
 	}
+	
 	
 	/**
 	 * set the content of the announcement
@@ -65,6 +72,7 @@ public class Announcement {
 		this.content = content;
 	}
 	
+	
 	/**
 	 * set the date of the announcement to the current time
 	 * usually used when creating a new announcement
@@ -73,14 +81,16 @@ public class Announcement {
 		this.date = Quiz.df.format(new Date().getTime());
 	}
 	
+	
 	/**
 	 * set the date of the announcement to a given date
 	 * usually used when fetch information from the database
 	 * @param date
 	 */
-	public void setDate(String date) {
+	private void setDate(String date) {
 		this.date = date;
 	}
+	
 	
 	/**
 	 * set the subject of the announcement
@@ -89,6 +99,7 @@ public class Announcement {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+	
 	
 	/**
 	 * Fetch the announcements from database
@@ -111,16 +122,21 @@ public class Announcement {
 		return announcements;
 	}
 	
+	
 	/**
 	 * add an announcement to the database
 	 * @throws SQLException
 	 */
 	public void addAnnouncement() throws SQLException {
 		DBConnection database = new DBConnection();
-		String sql = "INSERT INTO Announcement(Content, AdminID, Time, Subject) VALUES(\"" + this.content.replace("\"", "\"\"") + "\",\"" + this.adminID.replace("\"", "\"\"") + "\",\"" + this.date + "\",\"" + this.subject.replace("\"", "\"\"") + "\");";
-		database.getStmt().executeUpdate(sql);
+		ResultSet res = database.getStmt().executeQuery("SELECT * FROM Announcement WHERE AdminID = \"" + this.adminID.replace("\"", "\"\"") + "\" AND Time = \"" + this.date + "\";");
+		if (!res.next()) {
+			String sql = "INSERT INTO Announcement(Content, AdminID, Time, Subject) VALUES(\"" + this.content.replace("\"", "\"\"") + "\",\"" + this.adminID.replace("\"", "\"\"") + "\",\"" + this.date + "\",\"" + this.subject.replace("\"", "\"\"") + "\");";
+			database.getStmt().executeUpdate(sql);
+		}
 		database.getCon().close();
 	}
+	
 	
 	/**
 	 * delete an announcement from the database

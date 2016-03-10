@@ -39,9 +39,18 @@
   <answer>Tofu</answer>
 </question>
 
-<!-- <question type="multiple-response">
+<question type="multiple-response" answer-ordered="true">
   <query>List three of the "Eight Culinary Cuisines" of China.</query>
-  <answer>Anhui, Cantonese, Fujian, Hunan, Jiangsu, Shandong, Sichuan, Zhejiang</answer>
-</question> -->
+  <answer-list>
+    <answer>Anhui</answer>
+    <answer>Anhui Sheng</answer>
+  </answer-list>
+  <answer-list>
+    <answer>Cantonese</answer>
+  </answer-list>
+  <answer-list>
+    <answer>Fujian</answer>
+  </answer-list>
+</question>
 
 </quiz>

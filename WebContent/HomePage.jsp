@@ -33,7 +33,12 @@
 	    $('[data-toggle="tooltip"]').tooltip({
 	        placement : 'top'
 	    });
+
 	});
+	function myFunction() {
+	    document.getElementById("receiver").defaultValue = "Goofy";
+	}
+	
 </script>
 
 <style>
@@ -312,13 +317,13 @@ h5 {
 			<!-- 		<button class="btn btn-info" type="button" data-toggle="collapse"
 						data-target="#collapseSentEmail" aria-expanded="false"
 						aria-controls="collapseSentEmail"> -->
-					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
+					<button type="button" onclick="myFunction" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
 						<span class="glyphicon glyphicon-comment"
 							style="width: 30px; font-size: 18px;"></span>
 					</button>
 					<button class="btn btn-info" type="button" data-toggle="collapse"
-						data-target="#collapseExample" aria-expanded="false"
-						aria-controls="collapseExample">
+						data-target="#collapseFriendInfo" aria-expanded="false"
+						aria-controls="collapseFriendInfo">
 						<span class="glyphicon glyphicon-user"
 							style="width: 30px; font-size: 18px;"></span>
 						<%
@@ -378,7 +383,7 @@ h5 {
 									<span class="input-group-addon" id="sizing-addon2"><span
 										class="glyphicon glyphicon-user"></span></span> <input type="text"
 										class="form-control" placeholder="Sent to which user ID?"
-										aria-describedby="sizing-addon2" name="receiverID">
+										aria-describedby="sizing-addon2" name="receiverID" id="receiver">
 								</div>
 								<br>
 								<div class="input-group">
@@ -403,14 +408,15 @@ h5 {
 
 		<div class="collapse" id="collapseExample">
 			<div class="well"
-				style="width: 900px; height: 300px; background-color: black;">
+				style="width: 900px; height: 300px; background-color: black; overflow:auto;max-height:300px;">
+				
 				<%
 					userID = (String) session.getAttribute("userID");
 					eManager.setUser(userID);
 					ArrayList<Email> emails = eManager.getToUserEmail();
 					for (Email mail: emails) {
-						out.println("<div class=\"media\">");
-						out.println("<div class=\"media-left media-middle\" style=\"text-align:left !important;\">");
+						out.println("<div class=\"media\" style=\"\">");
+						out.println("<div class=\"media-left media-middle\" style=\"width:100px !important;text-align:left !important;\">");
 						String sentEmailUserID = mail.getSenderID();
 						String sentEmailUserIDUrl = "<a href=\"#\">" +sentEmailUserID+ "</a>";
 						out.println(sentEmailUserIDUrl);
@@ -426,8 +432,45 @@ h5 {
 						out.println(content);
 						out.println("</div>");
 						out.println("</div>");
+						out.println("<hr style=\"height: 1px;color:#0099CC;background-color:#0099CC;border-color:#0099CC;\">");
 					}
 				%>
+			</div>
+		</div>
+			<div class="collapse" id="collapseFriendInfo">
+			<div class="well"
+				style="width: 900px; height: 300px; background-color: black; overflow: auto; max-height: 300px;">
+				<table class="table table-striped">
+					<tr>
+						<th>#</th>
+						<th>Friend ID</th>
+						<th>Name</th>
+						<th>Gender</th>
+						<th>Age</th>
+						<th>Options</th>
+					</tr>
+					<%
+						ArrayList<String> friendsID = user.getFriends();
+						int numOfFriends = 0;
+						for (String fID : friendsID) {
+							User friend = new User(fID);
+							out.print("<tr  class=\"success\">");
+							out.print("<td>"+String.valueOf(numOfFriends+1)+"</td>");
+							out.print("<td>"+"<a href=\"#\">"+friend.getID()+"</a>"+"</td>");
+							out.print("<td>"+friend.getName()+"</td>");
+							out.print("<td>"+friend.getGender()+"</td>");
+							out.print("<td>"+friend.getAge()+"</td>");
+							String sentEmailButton = "<a data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" ><span class=\"glyphicon glyphicon-comment\" style=\"width: 30px; font-size: 18px;\"></span></a>";
+							System.out.print(friend.getID());
+							out.print("<form action=\"DeleteChallengeFriendServlet\" method=\"post\"><input type=\"hidden\" name=\"friendToDeleteID\" value=\""+ friend.getID() +"\">");
+							String deleteFriendButton = "<input value=\"Delete\" type=\"submit\"  data-toggle=\"tooltip\" title=\"Unfriend this user!\"></form>";
+							String challengeFriendButton = "<button type=\"submit\" class=\"btn btn-info\" data-toggle=\"tooltip\" title=\"Challenge your friend!\"><span class=\"glyphicon glyphicon-exclamation-sign\" style=\"width: 30px; font-size: 18px;\"></span></button>";
+							out.print("<td>"+sentEmailButton+" "+deleteFriendButton+" "+challengeFriendButton+"</td>");
+							out.print("</tr>");
+							numOfFriends++;
+						}
+					%>
+				</table>
 			</div>
 		</div>
 		<div class="collapse in" id="collapseUserInfo">
@@ -464,7 +507,7 @@ h5 {
 							<%=user.getGender()%></h4>
 					</div>
 				</div>
-				<div class="col-xs-6 col-md-6 text-center" style="height: 145%;top:0%;">
+				<div class="col-xs-6 col-md-6 text-center" style="height: 100%;top:0%;">
 					<% 
 						ArrayList<Achievement> allUserAchievements = user.getAchievements();
 						ArrayList<String> allAchievements = Achievement.getAllAchievement();
@@ -472,14 +515,14 @@ h5 {
 							String imageUrl = ach.getImage();
 							String description = Achievement.getDescription(ach.getAchievementName());
 							String getAchTime = ach.getTime();
-							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" data-toggle=\"tooltip\" title=\"<h5>"+ach.getAchievementName()+ "</h5> You"+description+ "\" data-html=\"true\" >";
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:43%;\" data-toggle=\"tooltip\" title=\"<h5>"+ach.getAchievementName()+ "</h5> You"+description+ "\" data-html=\"true\" >";
 							out.print(achImage);
 							allAchievements.remove(ach.getAchievementName());
 						}
 						for(String ach: allAchievements) {
 							String imageUrl = Achievement.getImage(ach);
 							String description = Achievement.getDescription(ach);
-							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:30%;\" class=\"grayscale\" data-toggle=\"tooltip\" title=\"<h5>" +  ach + "</h5> Received when you" + description + "\" data-html=\"true\">";
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:43%;\" class=\"grayscale\" data-toggle=\"tooltip\" title=\"<h5>" +  ach + "</h5> Received when you" + description + "\" data-html=\"true\">";
 							out.print(achImage);
 						}
 					%>

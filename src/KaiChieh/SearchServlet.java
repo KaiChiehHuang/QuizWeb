@@ -1,6 +1,7 @@
 package KaiChieh;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bian.User;
+import xuandong.Quiz;
 
 /**
  * Servlet implementation class SearchServlet
@@ -41,10 +44,20 @@ public class SearchServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String targetWord = request.getParameter("targetToSearch");
 		String searchOption = request.getParameter("searchOption");
-		if(searchOption == "quiz") {
+		HttpSession session = request.getSession();
+		if(searchOption.equals("user")) {
+			try {
+				ArrayList<User> usersFound = User.serachUser(targetWord);
+				session.setAttribute("searchResult", usersFound);
+				session.setAttribute("searchOption", "user");
+			} catch (Exception ignore) {}
 			
-		}else if (searchOption == "user") {
-			
+		}else if (searchOption.equals("quiz")) {
+			try {
+				ArrayList<Quiz> quizzesFound = Quiz.serachQuiz(targetWord);
+				session.setAttribute("searchResult", quizzesFound);
+				session.setAttribute("searchOption", "quiz");
+			} catch (Exception e) {e.printStackTrace();}
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("SearchResult.jsp");
 		dispatcher.forward(request, response);

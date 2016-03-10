@@ -7,9 +7,11 @@ import java.util.ArrayList;
 
 public class EmailManager {
 	String userID;
+	
 	ArrayList<Email> toEmails;
 	ArrayList<Email> fromEmails;
 
+	
 	/**
 	 * Simple Constructor
 	 */
@@ -18,6 +20,7 @@ public class EmailManager {
 		fromEmails = new ArrayList<Email>();
 	}
 
+	
 	/**
 	 * Set the user
 	 * Please call setUser first before you call getFromUserEmail() or getToUserEmail()
@@ -27,8 +30,9 @@ public class EmailManager {
 		this.userID = userID;
 	}
 	
+	
 	/**
-	 * @return the number of emails sent to the user that are unread
+	 * @return the number of email sent to the user that are unread
 	 */
 	public int getUnreadEmailsCount() {
 		int count = 0;
@@ -46,8 +50,9 @@ public class EmailManager {
 		return count;
 	}
 
+	
 	/**
-	 * Get all the emails that are sent to this user
+	 * Get all the email that are sent to this user
 	 */
 	public ArrayList<Email> getToUserEmail() {
 		try {
@@ -74,8 +79,9 @@ public class EmailManager {
 		return this.toEmails;
 	}
 	
+	
 	/**
-	 * Get all the emails that are sent from this user
+	 * Get all the email that are sent from this user
 	 */
 	public ArrayList<Email> getFromUserEmail() {
 		DBConnection database = new DBConnection();
@@ -102,12 +108,14 @@ public class EmailManager {
 		return this.fromEmails;
 	}
 	
+	
 	/**
 	 * @return get the userID
 	 */
 	public String getUser() {
 		return userID;
 	}
+	
 	
 	/**
 	 * Delete an email from the ArrayList and delete it from database
@@ -117,6 +125,7 @@ public class EmailManager {
 		toEmails.get(index).deleteEmail();
 		toEmails.remove(index);
 	}
+	
 	
 	/**
 	 * Delete an email from the ArrayList and delete it from database

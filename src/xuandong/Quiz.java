@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.TimeZone;
 
-import bian.User;
 
 public class Quiz {
 	// used to count the real number of problems, e.g. a MultiChoice problem
@@ -698,17 +697,17 @@ public class Quiz {
 		DBConnection database = new DBConnection();
 		ResultSet res1 = database.getStmt().executeQuery("SELECT DISTINCT QuizID FROM Quiz WHERE Name LIKE \"%" + keyword + "%\" OR Description LIKE \"%" + keyword + "%\";");
 		while (res1.next()) {
-			String temp = res1.getString("UserID");
+			String temp = res1.getString("QuizID");
 			results.add(temp);
 		}
 		ResultSet res2 = database.getStmt().executeQuery("SELECT DISTINCT QuizID FROM Tags WHERE Tag LIKE \"%" + keyword + "%\";");
 		while (res2.next()) {
-			String temp = res2.getString("UserID");
+			String temp = res2.getString("QuizID");
 			results.add(temp);
 		}
 		ResultSet res3 = database.getStmt().executeQuery("SELECT DISTINCT QuizID FROM Category WHERE Category LIKE \"%" + keyword + "%\";");
 		while (res3.next()) {
-			String temp = res3.getString("UserID");
+			String temp = res3.getString("QuizID");
 			results.add(temp);
 		}
 		for (String str : results) {

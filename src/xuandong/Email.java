@@ -5,22 +5,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
-import com.sun.j3d.utils.geometry.Text2D;
-
 public class Email {
+	String link;
+	String time;
+	String content;
+	String subject;
 	String senderID;
 	String receiverID;
-	String content;
-	String link;
-	String subject;
-	String time;
+
 	boolean read;
+	
 	
 	/**
 	 * Simple Constructor
 	 */
 	public Email() {
 	}
+	
 	
 	/**
 	 * @return senderID
@@ -29,12 +30,14 @@ public class Email {
 		return this.senderID;
 	}
 	
+	
 	/**
 	 * @return receiverID
 	 */
 	public String getReceiverID() {
 		return this.receiverID;
 	}
+	
 	
 	/**
 	 * @return email content
@@ -43,12 +46,14 @@ public class Email {
 		return this.content;
 	}
 	
+	
 	/**
 	 * @return the quiz link
 	 */
 	public String getLink() {
 		return this.link;
 	}
+	
 	
 	/**
 	 * @return email subject
@@ -57,6 +62,7 @@ public class Email {
 		return this.subject;
 	}
 	
+	
 	/**
 	 * @return email time
 	 */
@@ -64,12 +70,14 @@ public class Email {
 		return this.time.substring(0, this.time.length() - 2);
 	}
 	
+	
 	/**
 	 * @return TRUE for already read, FALSE if not
 	 */
 	public boolean getRead() {
 		return this.read;
 	}
+	
 	
 	/**
 	 * Set the senderID
@@ -79,6 +87,7 @@ public class Email {
 		senderID = sender;
 	}
 	
+	
 	/**
 	 * Set the receiverID
 	 * @param receiver
@@ -86,6 +95,7 @@ public class Email {
 	public void setReceiver(String receiver) {
 		receiverID = receiver;
 	}
+	
 	
 	/**
 	 * Set the content
@@ -95,6 +105,7 @@ public class Email {
 		this.content = content;
 	}
 	
+	
 	/**
 	 * Set the link
 	 * @param link
@@ -102,6 +113,7 @@ public class Email {
 	public void setLink(String link) {
 		this.link = link;
 	}
+	
 	
 	/**
 	 * Set the subject
@@ -111,6 +123,7 @@ public class Email {
 		this.subject = subject;
 	}
 	
+	
 	/**
 	 * Set the time of this email
 	 * @param time
@@ -119,13 +132,15 @@ public class Email {
 		this.time = Quiz.df.format(new Date().getTime());
 	}
 	
+	
 	/**
 	 * Set the time of this email to a given time
-	 * used for fetch emails from database
+	 * used for fetch email from database
 	 */
 	public void setTime(String time) {
 		this.time = time;
 	}
+	
 	
 	/**
 	 * Set whether or not this email has been read
@@ -136,8 +151,9 @@ public class Email {
 		updateDatabase();
 	}
 	
+	
 	/**
-	 * Delete an email from the databse
+	 * Delete an email from the database
 	 */
 	public void deleteEmail() {
 		try {
@@ -151,6 +167,7 @@ public class Email {
 		}
 	}
 	
+	
 	/**
 	 * Insert this email into database
 	 * Notice that we only insert an new email into database when it is being sent by someone
@@ -158,31 +175,41 @@ public class Email {
 	public void insertToDatabse() {
 		try {
 			DBConnection database = new DBConnection();
-			Statement stmt = database.getStmt();
-			String sql = "INSERT INTO Emails(SenderID, ReceiverID, Time, Subject, Content, Link, IsRead)" + " VALUES(\"" + this.senderID.replace("\"", "\"\"") + "\",\"" + this.receiverID.replace("\"", "\"\"") + "\",\"" + this.time
-				+ "\",\"" + this.subject.replace("\"", "\"\"") + "\",\"" + this.content.replace("\"", "\"\"") + "\",\"" + this.link.replace("\"", "\"\"") + "\"," + this.read + ");";
-			stmt.executeUpdate(sql);
+			ResultSet test = database.getStmt().executeQuery("SELECT * FROM Emails WHERE SenderID = \"" + this.senderID.replace("\"", "\"\"") + "\" AND ReceiverID = \"" + this.receiverID.replace("\"", "\"\"") + "\" AND Time = \"" + this.time + "\";");
+			if (!test.next()) {
+				String sql = "INSERT INTO Emails(SenderID, ReceiverID, Time, Subject, Content, Link, IsRead)" + " VALUES(\"" + this.senderID.replace("\"", "\"\"") + "\",\"" + this.receiverID.replace("\"", "\"\"") + "\",\"" + this.time + "\",\"" + this.subject.replace("\"", "\"\"") + "\",\"" + this.content.replace("\"", "\"\"") + "\",\"" + this.link.replace("\"", "\"\"") + "\"," + this.read + ");";
+				database.getStmt().executeUpdate(sql);
+			}
 			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	/**
 	 * Update the isRead Attribute in the database for this email
 	 */
-	public void updateDatabase() {
+	private void updateDatabase() {
 		try {
 			DBConnection database = new DBConnection();
-			Statement stmt = database.getStmt();
 			String sql = "UPDATE Emails SET IsRead = " + this.read + " WHERE SenderID = \"" + this.senderID.replace("\"", "\"\"") + "\" AND ReceiverID = \"" + this.receiverID.replace("\"", "\"\"") + "\" AND Time = \"" + this.time + "\";";
-			stmt.executeUpdate(sql);
+			database.getStmt().executeUpdate(sql);
 			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	
+	/**
+	 * Challenge a friend, this method will insert an email to database
+	 * Ignore this challenge if one of the input parameter is not in the database
+	 * @param senderID
+	 * @param quizID
+	 * @param receiverID
+	 * @throws SQLException
+	 */
 	public static void challenge(String senderID, String quizID, String receiverID) throws SQLException {
 		DBConnection database = new DBConnection();
 		try {

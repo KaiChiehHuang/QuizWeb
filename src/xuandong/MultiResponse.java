@@ -6,7 +6,9 @@ import java.sql.Statement;
 
 public class MultiResponse extends Problem {
 	int count;
+	
 	boolean ordered;
+	
 	
 	/**
 	 * Override the constructor of Problem.class
@@ -31,9 +33,16 @@ public class MultiResponse extends Problem {
 		}
 	}
 	
+	
+	/**
+	 * Simple constructor for creating a problem
+	 * @param type
+	 * @param creating
+	 */
 	public MultiResponse(String type, boolean creating) {
 		super(type, creating);
 	}
+	
 	
 	/**
 	 * @return the number of right answers
@@ -41,6 +50,7 @@ public class MultiResponse extends Problem {
 	public int getCount() {
 		return count;
 	}
+	
 	
 	/**
 	 * set the number of right answers
@@ -50,12 +60,14 @@ public class MultiResponse extends Problem {
 		this.count = count;
 	}
 	
+	
 	/**
 	 * @return is this problem's answer is ordered
 	 */
 	public boolean getOrdered() {
 		return this.ordered;
 	}
+	
 	
 	/**
 	 * set the problem's answer is ordered or not
@@ -64,6 +76,7 @@ public class MultiResponse extends Problem {
 	public void setOrdered(boolean value) {
 		this.ordered = value;
 	}
+	
 	
 	/**
 	 * Override the getScore() method
@@ -95,6 +108,7 @@ public class MultiResponse extends Problem {
 		return sum;	
 	}
 	
+	
 	/**
 	 * return the insert statement to insert this problem into database
 	 * used for creating a problem
@@ -105,6 +119,7 @@ public class MultiResponse extends Problem {
 		String sql = "INSERT INTO " + this.type + " VALUES(\"" + this.questionID + "\",\"" + this.question.replace("\"", "\"\"") + "\",\"" + answer.replace("\"", "\"\"") + "\"," + count + "," + ordered + ");";
 		return sql;
 	}
+	
 	
 	/**
 	 * return the update statement to update this problem in the database

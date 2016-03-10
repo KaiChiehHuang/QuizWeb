@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Achievement {
+	String time;
 	String userID;
 	String quizID;
-	String time;
-	String achievementName;
 	String description;
+	String achievementName;
 	
 	
 	/**

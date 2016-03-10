@@ -7,13 +7,40 @@ import java.util.HashMap;
 
 
 public class Problem {
+	String type;
 	String question;
-	String[] answers;
 	String userAnswer;
 	String questionID;
-	String type;
+	
+	String[] answers;
 	
 	boolean creating = false;
+	
+	
+	/**
+	 * Save all the problem types for future use
+	 */
+	public static final HashMap<String, String> problemType = new HashMap<String, String>();
+	static
+	{
+			problemType.put("QR", "QuestionResponse");
+			problemType.put("SC", "SingleChoice");
+			problemType.put("FB", "FillBlank");
+			problemType.put("PR", "PictureResponse");
+			problemType.put("MC", "MultiChoice");
+			problemType.put("MR", "MultiResponse");
+			problemType.put("QuestionResponse", "QR");
+			problemType.put("SingleChoice", "SC");
+			problemType.put("FillBlank", "FB");
+			problemType.put("PictureResponse", "PR");
+			problemType.put("MultiChoice", "MC");
+			problemType.put("MultiResponse", "MR");
+			problemType.put("question-response", "QR");
+			problemType.put("fill-in-blank", "FB");
+			problemType.put("multiple-choice", "MC");
+			problemType.put("picture-response", "PR");
+	};
+	
 	
 	/**
 	 * This constructor is used to fetch the information of a problem
@@ -39,6 +66,7 @@ public class Problem {
 		}
 	}
 	
+	
 	/**
 	 * This constructor is used to create a new problem that is not in the database
 	 * @param type Please pass me the abbreviation of the problem type
@@ -52,6 +80,7 @@ public class Problem {
 		this.creating = creating;
 	}
 	
+	
 	/**
 	 * Set the mode to creating a new problem
 	 */
@@ -59,12 +88,14 @@ public class Problem {
 		this.creating = true;
 	}
 	
+	
 	/**
 	 * Set the mode to modifying an existing problem
 	 */
 	public void setEditing() {
 		this.creating = false;
 	}
+	
 	
 	/**
 	 * Set the question statement as input String
@@ -74,6 +105,7 @@ public class Problem {
 		this.question = question;
 	}
 	
+	
 	/**
 	 * Set the answers as input String
 	 * @param answer please separate different answers by "|" and then concatenate them
@@ -81,6 +113,7 @@ public class Problem {
 	public void setAnswers(String answer) {
 		this.answers = answer.split("\\|");
 	}
+	
 	
 	/**
 	 * Set the problemID, only works if in creating mode
@@ -105,6 +138,7 @@ public class Problem {
 		return this.questionID;
 	}
 	
+	
 	/**
 	 * Update the database to insert a newly created problem or update an existing problem
 	 * Please always call this method if you modified any variables of the problem
@@ -122,6 +156,7 @@ public class Problem {
 		database.getCon().close();
 	}
 	
+	
 	/**
 	 * return the insert statement to insert this problem into database
 	 * used for creating a problem
@@ -132,6 +167,7 @@ public class Problem {
 		return sql;
 	}
 	
+	
 	/**
 	 * return the update statement to update this problem in the database
 	 * used for modifying a problem
@@ -141,6 +177,7 @@ public class Problem {
 		String sql = "UPDATE " + type + " SET Question = \"" + this.question.replace("\"", "\"\"") + "\" , Answer = \"" + answer.replace("\"", "\"\"") + "\" WHERE QuestionID = \"" + this.questionID + "\";";
 		return sql;
 	}
+	
 	
 	/**
 	 * Transfer a array of String to a String, elements are concatenated by "|"
@@ -156,29 +193,9 @@ public class Problem {
 		return str;
 	}
 	
-	/**
-	 * Save all the problem types for future use
-	 */
-	public static final HashMap<String, String> problemType = new HashMap<String, String>();
-	static
-	{
-			problemType.put("QR", "QuestionResponse");
-			problemType.put("SC", "SingleChoice");
-			problemType.put("FB", "FillBlank");
-			problemType.put("PR", "PictureResponse");
-			problemType.put("MC", "MultiChoice");
-			problemType.put("MR", "MultiResponse");
-			problemType.put("QuestionResponse", "QR");
-			problemType.put("SingleChoice", "SC");
-			problemType.put("FillBlank", "FB");
-			problemType.put("PictureResponse", "PR");
-			problemType.put("MultiChoice", "MC");
-			problemType.put("MultiResponse", "MR");
-			problemType.put("question-response", "QR");
-			problemType.put("fill-in-blank", "FB");
-			problemType.put("multiple-choice", "MC");
-			problemType.put("picture-response", "PR");
-	};
+	
+
+	
 	
 	/**
 	 * returns how many sub-problems are answered right

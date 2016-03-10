@@ -4,11 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Performance {
+	private double score;
 	private String quizID;
 	private String userID;
-	private String startTime;
 	private String duration;
-	private double score;
+	private String startTime;
+	
 	
 	/**
 	 * Simple constructor
@@ -26,12 +27,14 @@ public class Performance {
 		this.score = score;
 	}
 	
+	
 	/**
 	 * @return quizID
 	 */
 	public String getQuizID() {
 		return quizID;
 	}
+	
 	
 	/**
 	 * @return quizID
@@ -45,12 +48,14 @@ public class Performance {
 		return name;
 	}
 	
+	
 	/**
 	 * @return userID
 	 */
 	public String getUserID() {
 		return userID;
 	}
+	
 	
 	/**
 	 * @return startTime
@@ -59,12 +64,14 @@ public class Performance {
 		return startTime.substring(0, startTime.length() - 2);
 	}
 	
+	
 	/**
 	 * @return duration
 	 */
 	public String getDuration() {
 		return duration;
 	}
+	
 	
 	/**
 	 * @return score
@@ -73,6 +80,14 @@ public class Performance {
 		return String.format("%.2f", this.score) + "%";
 	}
 	
+	
+	/**
+	 * Get the highest score of a user on a specific quiz
+	 * @param userID
+	 * @param quizID
+	 * @return highest score
+	 * @throws SQLException
+	 */
 	public static String getHightestScoreOfUser(String userID, String quizID) throws SQLException {
 		String score = "";
 		DBConnection database = new DBConnection();

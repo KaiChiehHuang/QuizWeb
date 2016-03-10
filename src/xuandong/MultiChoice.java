@@ -5,8 +5,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MultiChoice extends Problem {
-	String[] choices;
 	int count;
+	
+	String[] choices;
+	
 	
 	/**
 	 * Override the constructor of Problem.class
@@ -31,6 +33,7 @@ public class MultiChoice extends Problem {
 		}
 	}
 	
+	
 	/**
 	 * This constructor is used to create a new problem that is not in the database
 	 * @param type Please pass me the abbreviation of the problem type
@@ -42,6 +45,7 @@ public class MultiChoice extends Problem {
 	public MultiChoice(String type, boolean creating) {
 		super(type, creating);
 	}
+	
 	
 	/**
 	 * Override the getScore() method
@@ -65,12 +69,14 @@ public class MultiChoice extends Problem {
 		return total;	
 	}
 	
+	
 	/**
 	 * @return a array of String containing all the possible choices
 	 */
 	public String[] getChoices() {
 		return choices;
 	}
+	
 	
 	/**
 	 * set the choices of this problem to be the input String
@@ -80,12 +86,14 @@ public class MultiChoice extends Problem {
 		this.choices = choice.split("\\|");
 	}
 	
+	
 	/**
 	 * @return the number of right answers
 	 */
 	public int getCount() {
 		return count;
 	}
+	
 	
 	/**
 	 * set the number of right answers
@@ -94,6 +102,7 @@ public class MultiChoice extends Problem {
 	public void setCount(int count) {
 		this.count = count;
 	}
+	
 	
 	/**
 	 * return the insert statement to insert this problem into database
@@ -106,6 +115,7 @@ public class MultiChoice extends Problem {
 		String sql = "INSERT INTO " + this.type + " VALUES(\"" + this.questionID + "\",\"" + this.question.replace("\"", "\"\"") + "\",\"" + choice.replace("\"", "\"\"") + "\",\"" + answer.replace("\"", "\"\"") + "\"," + count + ");";
 		return sql;
 	}
+	
 	
 	/**
 	 * return the update statement to update this problem in the database

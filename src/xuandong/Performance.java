@@ -72,4 +72,14 @@ public class Performance {
 	public String getScore() {
 		return String.format("%.2f", this.score) + "%";
 	}
+	
+	public static String getHightestScoreOfUser(String userID, String quizID) throws SQLException {
+		String score = "";
+		DBConnection database = new DBConnection();
+		ResultSet res = database.getStmt().executeQuery("SELECT MAX(Score) AS MAX FROM QuizRecord WHERE UserID = \"" + userID + "\" AND QuizID = \"" + quizID + "\";");
+		res.next();
+		score = String.format("%.2f", res.getDouble("MAX")) + "%";
+		database.getCon().close();
+		return score;
+	}
 }

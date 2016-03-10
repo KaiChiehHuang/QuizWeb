@@ -47,6 +47,18 @@ h5 {
 	color:#ff9999;
 }
 
+h6 {
+	font-size:16px;
+}
+
+.linkButton { 
+     background: none;
+     border: none;
+     color: #0099FF;
+     text-decoration: underline;
+     cursor: pointer; 
+}
+
 .grayscale {
 	-webkit-filter: grayscale(100%);
 	filter: grayscale(100%);
@@ -192,11 +204,15 @@ h5 {
 						</li>
 						<li><a href="#">Menu<span class="arrow">&#9660;</span></a>
 							<ul class="sub-menu">
-								<li><a href="#">Profile</a></li>
 								<% String userIDUrl = "QuizCreat.jsp?userID="+userID; 
 								   out.print("<li><a href=\""+ userIDUrl+"\">Create Quiz</a></li>");
 								%>
-								<li><a href="#">Quiz Record</a></li>
+								<% String quizRecordUrl = "UserViewHistory.jsp"; 
+								   out.print("<li><a href=\""+ quizRecordUrl+"\">Quiz Record</a></li>");
+								%>
+								<% String announceUrl = "UserViewAnnoun.jsp"; 
+								   out.print("<li><a href=\""+ announceUrl +"\">Announcements</a></li>");
+								%>
 								<li><a href="UserLogin.jsp">Logout</a></li>
 							</ul>
 						</li>
@@ -220,7 +236,9 @@ h5 {
 					User user = new User(userID);
 					ArrayList<Performance> recentQuizPerformances = user.getRecentTakenQuiz();
 					ArrayList<Quiz>   recentCreatedQuizzes = user.getRecentCreatedQuiz();
-					int numPages = recentQuizPerformances.size() + recentCreatedQuizzes.size();
+					ArrayList<Announcement> announcements = Announcement.getAnnouncement();
+					int numAnnounceMent = (announcements.size() > 2) ? announcements.size() : 2;
+					int numPages = recentQuizPerformances.size() + recentCreatedQuizzes.size() + numAnnounceMent;
 					for(int pageIndex = 0; pageIndex<numPages; pageIndex++) {
 						String state = "";
 						if(pageIndex == 0) {
@@ -237,22 +255,22 @@ h5 {
 			<div class="carousel-inner" role="listbox">
 				<%
 					int pageIndex = 0;
-						for(Performance performance:recentQuizPerformances) {
-				/* 					if(pageIndex==3) {
-								break;
-							} */
-							if(pageIndex==0) {
-								out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
-							}else{
-								out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
-							}
+					for (Performance performance : recentQuizPerformances) {
+/* 						if(pageIndex==4) {
+							break;
+						} */ 
+						if (pageIndex == 0) {
+							out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
+						} else {
+							out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+						}
 						Quiz quizTook = new Quiz();
 						quizTook.setQuizID(performance.getQuizID());
 						out.print("<h3 style=\"color:#C71585;\">Your Recent Performance</h3><br>");
- 						String quizID = quizTook.getQuizID();
-						String quizIDUrl = "QuizSummary.jsp?quizID="+quizID+"&userID="+userID;
-						String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">"; 
-						out.print(showQuizUrl+"<h4>Quiz: " + quizTook.getName() + "</h4>");
+						String quizID = quizTook.getQuizID();
+						String quizIDUrl = "QuizSummary.jsp?quizID=" + quizID + "&userID=" + userID;
+						String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">";
+						out.print(showQuizUrl + "<h4>Quiz: " + quizTook.getName() + "</h4>");
 						out.print("</a>");
 						out.print("<h4>Score: " + performance.getScore() + "</h4>");
 						out.print("<h4>Start Time: " + performance.getStartTime() + "</h4>");
@@ -270,14 +288,27 @@ h5 {
 							out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
 						}
 						out.print("<h3 style=\"color:#C71585;\">Your Recent Created Quiz</h3><br>");
-						String quizIDUrl = "QuizSummary.jsp?quizID="+quiz.getQuizID()+"&userID="+userID;
-						String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">"; 
-						out.print(showQuizUrl+"<h4>Name: " + quiz.getName() + "</h4>");
+						String quizIDUrl = "QuizSummary.jsp?quizID=" + quiz.getQuizID() + "&userID=" + userID;
+						String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">";
+						out.print(showQuizUrl + "<h4>Name: " + quiz.getName() + "</h4>");
 						out.print("</a>");
 						out.print("<h4>Popularity: " + quiz.getPopularity() + "</h4>");
 						out.print("<h4>Highest Score: " + quiz.getHighestScore() + "</h4>");
 						out.print("<h4>Created Time: " + quiz.getCreatedDate() + "</h4>");
 						String isPracticeMode = quiz.isPracticeMode() ? "Yes" : "No";
+						out.print("</div>");
+						pageIndex++;
+					}
+					for (int announcePage = announcements.size() - 1; announcePage > -1; announcePage--) {
+						out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+						out.print("<h3 style=\"color:#C71585;\">Annoucement!!!</h3><br>");
+						String announceIDUrl = "UserViewAnnoun.jsp";
+						String showQuizUrl = "<a href=" + "\"" + announceIDUrl + "\"" + ">";
+						out.print(showQuizUrl+"<h4 style=\"font-size:22px;\">" + announcements.get(announcePage).getSubject() + "</h4>");
+						out.print("</a>");
+						out.print("<h4>" + announcements.get(announcePage).getContent() + "</h4>");
+						out.print("<h6>" + announcements.get(announcePage).getDate() + "</h6>");
+						out.print("<h6>By: " + announcements.get(announcePage).getAdminID() + "</h6>");
 						out.print("</div>");
 						pageIndex++;
 					}
@@ -288,12 +319,12 @@ h5 {
 			<!-- Controls -->
 			<a class="left carousel-control" href="#carousel-example-generic"
 				role="button" data-slide="prev"> <span
-				class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color:#73AD21;"></span>
-				<span class="sr-only">Previous</span>
-			</a> <a class="right carousel-control" href="#carousel-example-generic"
-				role="button" data-slide="next"> <span
-				class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color:#73AD21;"></span>
-				<span class="sr-only">Next</span>
+				class="glyphicon glyphicon-chevron-left" aria-hidden="true"
+				style="color: #73AD21;"></span> <span class="sr-only">Previous</span>
+			</a> <a class="right carousel-control"
+				href="#carousel-example-generic" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"
+				style="color: #73AD21;"></span> <span class="sr-only">Next</span>
 			</a>
 		</div>
 	</div>
@@ -460,12 +491,11 @@ h5 {
 							out.print("<td>"+friend.getName()+"</td>");
 							out.print("<td>"+friend.getGender()+"</td>");
 							out.print("<td>"+friend.getAge()+"</td>");
-							String sentEmailButton = "<a data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" ><span class=\"glyphicon glyphicon-comment\" style=\"width: 30px; font-size: 18px;\"></span></a>";
-							System.out.print(friend.getID());
-							out.print("<form action=\"DeleteChallengeFriendServlet\" method=\"post\"><input type=\"hidden\" name=\"friendToDeleteID\" value=\""+ friend.getID() +"\">");
-							String deleteFriendButton = "<input value=\"Delete\" type=\"submit\"  data-toggle=\"tooltip\" title=\"Unfriend this user!\"></form>";
-							String challengeFriendButton = "<button type=\"submit\" class=\"btn btn-info\" data-toggle=\"tooltip\" title=\"Challenge your friend!\"><span class=\"glyphicon glyphicon-exclamation-sign\" style=\"width: 30px; font-size: 18px;\"></span></button>";
-							out.print("<td>"+sentEmailButton+" "+deleteFriendButton+" "+challengeFriendButton+"</td>");
+							String sentEmailButton = "<a href=\"#\" data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" ><span class=\"glyphicon glyphicon-comment\" style=\"width: 25px; font-size: 18px;\"></span></a>";
+							out.print("<form id=\"deleteForm\" action=\"DeleteChallengeFriendServlet\" method=\"post\"><input type=\"hidden\" name=\"friendToDeleteID\" value=\""+ friend.getID() +"\">");
+							String deleteFriendButton = "<button form=\"deleteForm\" class=\"linkButton\" value=\"Delete\" type=\"submit\"  data-toggle=\"tooltip\" title=\"Unfriend this user!\"><span class=\"glyphicon glyphicon-trash\" style=\"width: 25px; font-size: 18px;\"></span></button>";
+							String challengeFriendButton = "<a href=\"UserViewHistory.jsp\" data-toggle=\"tooltip\" title=\"Challenge your friend!\"><span class=\"glyphicon glyphicon-exclamation-sign\" style=\"width: 30px; font-size: 18px;\"></span></a>";
+							out.print("<td>"+sentEmailButton+deleteFriendButton+" "+challengeFriendButton+"</td>");
 							out.print("</tr>");
 							numOfFriends++;
 						}

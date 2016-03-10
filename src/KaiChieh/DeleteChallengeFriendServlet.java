@@ -40,10 +40,8 @@ public class DeleteChallengeFriendServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Delete Friend!");
 		HttpSession session = request.getSession();
 		String friendID = request.getParameter("friendToDeleteID");
-		System.out.println(friendID);
 		String userID = (String) session.getAttribute("userID");
 		User user = new User(userID);
 		user.removeFriend(friendID);

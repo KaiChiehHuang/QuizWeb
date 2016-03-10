@@ -27,6 +27,8 @@
 	userPerformance = user.getQuizHistory();
 %>
 
+<form action="DeleteUserServlet" method="post">
+
 <div class="container">
   <h2>Your Quiz History</h2>         
   <table class="table">
@@ -36,6 +38,7 @@
         <th>Start Time</th>
         <th>Score</th>
         <th>Duration</th>
+        <th>Challenge Friend</th>
       </tr>
     </thead>
     <tbody>
@@ -58,6 +61,12 @@
     			out.println(per[j]);
     			out.println("</td>");
     		}
+    		
+    		String quizID = userPerformance.get(i).getQuizID();
+    		out.println("<td>");
+    		out.println("<button name = \"quizchallenge\" type=\"submit\" class=\"btn btn-warning\" value =\"" +quizID+ "\"/>Challenge</button>");
+    		out.println("</td>");
+    		
     		out.println("</tr>");	
     	}
     %>

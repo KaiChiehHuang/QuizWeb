@@ -103,7 +103,7 @@ public class MultiChoice extends Problem {
 	public String getInsertSQL() {
 		String answer = getArrayToString(answers);
 		String choice = getArrayToString(choices);
-		String sql = "INSERT INTO " + this.type + " VALUES(\"" + this.questionID + "\",\"" + this.question + "\",\"" + choice + "\",\"" + answer + "\"," + count + ");";
+		String sql = "INSERT INTO " + this.type + " VALUES(\"" + this.questionID + "\",\"" + this.question.replace("\"", "\"\"") + "\",\"" + choice.replace("\"", "\"\"") + "\",\"" + answer.replace("\"", "\"\"") + "\"," + count + ");";
 		return sql;
 	}
 	
@@ -115,7 +115,7 @@ public class MultiChoice extends Problem {
 	public String getUpdateSQL() {
 		String answer = getArrayToString(answers);
 		String choice = getArrayToString(choices);
-		String sql = "UPDATE " + this.type+ " SET Question = \"" + this.question + "\", Answer = \"" + answer + "\", Choices = \"" + choice + "\", Count = " + count + " WHERE QuestionID = \"" + this.questionID + "\";";
+		String sql = "UPDATE " + this.type+ " SET Question = \"" + this.question.replace("\"", "\"\"") + "\", Answer = \"" + answer.replace("\"", "\"\"") + "\", Choices = \"" + choice.replace("\"", "\"\"") + "\", Count = " + count + " WHERE QuestionID = \"" + this.questionID + "\";";
 		return sql;
 	}
 }

@@ -22,7 +22,7 @@ public class AccountManager {
 	 */
 	public boolean accountExist(String id) {
 		try {
-			rs = stmt.executeQuery("SELECT * FROM Users WHERE UserID = " + "\"" + id + "\";");
+			rs = stmt.executeQuery("SELECT * FROM Users WHERE UserID = " + "\"" + id.replace("\"", "\"\"") + "\";");
 			if (rs.next()) {
 				return true;
 			}
@@ -42,7 +42,7 @@ public class AccountManager {
 		password = hashSHAPassword(password);
 //		System.out.println(password);
 		try {
-			stmt.executeUpdate("INSERT INTO Users(UserID, Password) VALUES(\"" + id + "\",\"" + password + "\");");
+			stmt.executeUpdate("INSERT INTO Users(UserID, Password) VALUES(\"" + id.replace("\"", "\"\"") + "\",\"" + password + "\");");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -56,7 +56,7 @@ public class AccountManager {
 	public boolean idPasswordMatch(String id, String password) {
 		password = hashSHAPassword(password);
 		try {
-			rs = stmt.executeQuery("SELECT * FROM Users WHERE UserID = \"" + id + "\";");
+			rs = stmt.executeQuery("SELECT * FROM Users WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
 			rs.absolute(1);
 			String right_password = rs.getString("Password");
 			if (right_password.equals(password)) {
@@ -77,7 +77,7 @@ public class AccountManager {
 		String password = hashSHAPassword(ps_new);
 		try {
 			stmt.executeUpdate("UPDATE Users SET Password = \"" + password 
-					+ "\" WHERE UserID = \"" + id + "\";");
+					+ "\" WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -89,7 +89,7 @@ public class AccountManager {
 	 */
 	public void removeAccount(String id) {
 		try {
-			stmt.executeUpdate("DELETE FROM Users WHERE UserID = \"" + id + "\";");
+			stmt.executeUpdate("DELETE FROM Users WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

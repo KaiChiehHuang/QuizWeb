@@ -140,7 +140,7 @@ public class Email {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
-			String sql = "DELETE FROM Emails WHERE SenderID = \"" + this.senderID + "\" AND ReceiverID = \"" + this.receiverID + "\" AND Time = \"" + this.time + "\";";
+			String sql = "DELETE FROM Emails WHERE SenderID = \"" + this.senderID.replace("\"", "\"\"") + "\" AND ReceiverID = \"" + this.receiverID.replace("\"", "\"\"") + "\" AND Time = \"" + this.time + "\";";
 			stmt.executeUpdate(sql);
 			database.getCon().close();
 		} catch (SQLException e) {
@@ -156,8 +156,8 @@ public class Email {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
-			String sql = "INSERT INTO Emails(SenderID, ReceiverID, Time, Subject, Content, Link, IsRead)" + " VALUES(\"" + this.senderID + "\",\"" + this.receiverID + "\",\"" + this.time
-				+ "\",\"" + this.subject + "\",\"" + this.content + "\",\"" + this.link + "\"," + this.read + ");";
+			String sql = "INSERT INTO Emails(SenderID, ReceiverID, Time, Subject, Content, Link, IsRead)" + " VALUES(\"" + this.senderID.replace("\"", "\"\"") + "\",\"" + this.receiverID.replace("\"", "\"\"") + "\",\"" + this.time
+				+ "\",\"" + this.subject.replace("\"", "\"\"") + "\",\"" + this.content.replace("\"", "\"\"") + "\",\"" + this.link.replace("\"", "\"\"") + "\"," + this.read + ");";
 			stmt.executeUpdate(sql);
 			database.getCon().close();
 		} catch (SQLException e) {
@@ -172,7 +172,7 @@ public class Email {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
-			String sql = "UPDATE Emails SET IsRead = " + this.read + " WHERE SenderID = \"" + this.senderID + "\" AND ReceiverID = \"" + this.receiverID + "\" AND Time = \"" + this.time + "\";";
+			String sql = "UPDATE Emails SET IsRead = " + this.read + " WHERE SenderID = \"" + this.senderID.replace("\"", "\"\"") + "\" AND ReceiverID = \"" + this.receiverID.replace("\"", "\"\"") + "\" AND Time = \"" + this.time + "\";";
 			stmt.executeUpdate(sql);
 			database.getCon().close();
 		} catch (SQLException e) {

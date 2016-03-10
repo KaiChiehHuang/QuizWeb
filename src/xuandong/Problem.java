@@ -128,7 +128,7 @@ public class Problem {
 	 */
 	public String getInsertSQL() {
 		String answer = getArrayToString(answers);
-		String sql = "INSERT INTO " + type + " VALUES(\"" + this.questionID + "\",\"" + this.question + "\",\"" + answer + "\");";
+		String sql = "INSERT INTO " + type + " VALUES(\"" + this.questionID + "\",\"" + this.question.replace("\"", "\"\"") + "\",\"" + answer.replace("\"", "\"\"") + "\");";
 		return sql;
 	}
 	
@@ -138,7 +138,7 @@ public class Problem {
 	 */
 	public String getUpdateSQL() {
 		String answer = getArrayToString(answers);
-		String sql = "UPDATE " + type + " SET Question = \"" + this.question + "\" , Answer = \"" + answer + "\" WHERE QuestionID = \"" + this.questionID + "\";";
+		String sql = "UPDATE " + type + " SET Question = \"" + this.question.replace("\"", "\"\"") + "\" , Answer = \"" + answer.replace("\"", "\"\"") + "\" WHERE QuestionID = \"" + this.questionID + "\";";
 		return sql;
 	}
 	

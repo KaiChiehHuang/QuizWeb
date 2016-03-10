@@ -12,7 +12,7 @@ public class Administration {
 	 */
 	public static void addAdmin(String id) throws SQLException {
 		DBConnection database = new DBConnection();
-		String sql = "INSERT INTO Administrator(AdminID) VALUES(\"" + id + "\");";
+		String sql = "INSERT INTO Administrator(AdminID) VALUES(\"" + id.replace("\"", "\"\"") + "\");";
 		database.getStmt().executeUpdate(sql);
 		database.getCon().close();
 	}
@@ -24,7 +24,7 @@ public class Administration {
 	 */
 	public static void removeUser(String userID) throws SQLException {
 		DBConnection database = new DBConnection();
-		String sql = "DELETE FROM Users WHERE UserID = \"" + userID + "\";";
+		String sql = "DELETE FROM Users WHERE UserID = \"" + userID.replace("\"", "\"\"") + "\";";
 		database.getStmt().executeUpdate(sql);
 		database.getCon().close();
 	}

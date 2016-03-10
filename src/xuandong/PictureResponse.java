@@ -54,7 +54,7 @@ public class PictureResponse extends Problem {
 	@Override
 	public String getInsertSQL() {
 		String answer = getArrayToString(answers);
-		String sql = "INSERT INTO " + this.type + " VALUES(\"" + this.questionID + "\",\"" + this.question + "\",\"" + this.url + "\",\"" + answer + "\");";
+		String sql = "INSERT INTO " + this.type + " VALUES(\"" + this.questionID + "\",\"" + this.question.replace("\"", "\"\"") + "\",\"" + this.url.replace("\"", "\"\"") + "\",\"" + answer + "\");";
 		return sql;
 	}
 	
@@ -65,7 +65,7 @@ public class PictureResponse extends Problem {
 	@Override
 	public String getUpdateSQL() {
 		String answer = getArrayToString(answers);
-		String sql = "UPDATE " + this.type + " SET Question = \"" + this.question + "\" , Answer = \"" + answer + "\", URL = " + this.url + " WHERE QuestionID = \"" + this.questionID + "\";";
+		String sql = "UPDATE " + this.type + " SET Question = \"" + this.question.replace("\"", "\"\"") + "\" , Answer = \"" + answer.replace("\"", "\"\"") + "\", URL = " + this.url.replace("\"", "\"\"") + " WHERE QuestionID = \"" + this.questionID + "\";";
 		return sql;
 	}
 }

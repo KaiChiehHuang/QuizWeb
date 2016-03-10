@@ -117,7 +117,7 @@ public class Announcement {
 	 */
 	public void addAnnouncement() throws SQLException {
 		DBConnection database = new DBConnection();
-		String sql = "INSERT INTO Announcement(Content, AdminID, Time, Subject) VALUES(\"" + this.content + "\",\"" + this.adminID + "\",\"" + this.date + "\",\"" + this.subject + "\");";
+		String sql = "INSERT INTO Announcement(Content, AdminID, Time, Subject) VALUES(\"" + this.content.replace("\"", "\"\"") + "\",\"" + this.adminID.replace("\"", "\"\"") + "\",\"" + this.date + "\",\"" + this.subject.replace("\"", "\"\"") + "\");";
 		database.getStmt().executeUpdate(sql);
 		database.getCon().close();
 	}
@@ -128,7 +128,7 @@ public class Announcement {
 	 */
 	public void deleteAnnouncement() throws SQLException {
 		DBConnection database = new DBConnection();
-		String sql = "DELETE FROM Announcement WHERE AdminID = \"" + this.adminID + "\" AND Time = \""+ this.date + "\";";
+		String sql = "DELETE FROM Announcement WHERE AdminID = \"" + this.adminID.replace("\"", "\"\"") + "\" AND Time = \""+ this.date + "\";";
 		database.getStmt().executeUpdate(sql);
 		database.getCon().close();
 	}

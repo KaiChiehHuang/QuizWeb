@@ -125,11 +125,11 @@ public class XMLParser {
 		if (doc.getElementsByTagName("quiz-image").item(0) != null) {
 			image = doc.getElementsByTagName("quiz-image").item(0).getTextContent();
 		}
-		String insert = "INSERT INTO Quiz (QuizID, Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image) VALUES(\"" + quizID + "\",\"" + name + "\",\"" + description + "\",\"" + authorID + "\",\"" + questions + "\"," + random + "," + onePage + "," + immediateCorrection + "," + practiceMode + ",\"" + time + "\",\"" + image + "\");";
+		String insert = "INSERT INTO Quiz (QuizID, Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image) VALUES(\"" + quizID + "\",\"" + name.replace("\"", "\"\"") + "\",\"" + description.replace("\"", "\"\"") + "\",\"" + authorID.replace("\"", "\"\"") + "\",\"" + questions.replace("\"", "\"\"") + "\"," + random + "," + onePage + "," + immediateCorrection + "," + practiceMode + ",\"" + time + "\",\"" + image.replace("\"", "\"\"") + "\");";
 		stmt.executeUpdate(insert);
 		if (doc.getElementsByTagName("category").item(0) != null) {
 			String category = doc.getElementsByTagName("category").item(0).getTextContent();
-			stmt.executeUpdate("INSERT INTO Category(QuizID, Category) VALUES(\"" + quizID + "\",\"" + category + "\");");
+			stmt.executeUpdate("INSERT INTO Category(QuizID, Category) VALUES(\"" + quizID + "\",\"" + category.replace("\"", "\"\"") + "\");");
 		}
 		database.getCon().close();
 		return quizID;
@@ -177,7 +177,7 @@ public class XMLParser {
 				ordered = Boolean.parseBoolean(ele.getAttribute("answer-ordered"));
 			}
 			answer = answer.substring(0, answer.length() - 1);
-			String insert = "INSERT INTO MultiResponse VALUES(\"" + id + "\",\"" + question + "\",\"" + answer + "\"," + count + "," + ordered + ");";
+			String insert = "INSERT INTO MultiResponse VALUES(\"" + id + "\",\"" + question.replace("\"", "\"\"") + "\",\"" + answer.replace("\"", "\"\"") + "\"," + count + "," + ordered + ");";
 			stmt.executeUpdate(insert);
 			database.getCon().close();
 		} catch (SQLException e) {
@@ -218,7 +218,7 @@ public class XMLParser {
 				}
 			}
 			answer = answer.substring(0, answer.length() - 1);
-			String insert = "INSERT INTO QuestionResponse VALUES(\"" + id + "\",\"" + question + "\",\"" + answer + "\");";
+			String insert = "INSERT INTO QuestionResponse VALUES(\"" + id + "\",\"" + question.replace("\"", "\"\"") + "\",\"" + answer.replace("\"", "\"\"") + "\");";
 			stmt.executeUpdate(insert);
 			database.getCon().close();
 		} catch (SQLException e) {
@@ -261,7 +261,7 @@ public class XMLParser {
 				}
 			}
 			answer = answer.substring(0, answer.length() - 1);
-			String insert = "INSERT INTO FillBlank VALUES(\"" + id + "\",\"" + question + "\",\"" + answer + "\");";
+			String insert = "INSERT INTO FillBlank VALUES(\"" + id + "\",\"" + question.replace("\"", "\"\"") + "\",\"" + answer.replace("\"", "\"\"") + "\");";
 			stmt.executeUpdate(insert);
 			database.getCon().close();
 		} catch (SQLException e) {
@@ -309,7 +309,7 @@ public class XMLParser {
 			}
 			answer = answer.substring(0, answer.length() - 1);
 			choices = choices.substring(0, choices.length() - 1);
-			String insert = "INSERT INTO MultiChoice VALUES(\"" + id + "\",\"" + question + "\",\"" + choices + "\",\"" + answer + "\"," + count + ");";
+			String insert = "INSERT INTO MultiChoice VALUES(\"" + id + "\",\"" + question.replace("\"", "\"\"") + "\",\"" + choices.replace("\"", "\"\"") + "\",\"" + answer.replace("\"", "\"\"") + "\"," + count + ");";
 			stmt.executeUpdate(insert);
 			database.getCon().close();
 		} catch (SQLException e) {
@@ -351,7 +351,7 @@ public class XMLParser {
 				}
 			}
 			answer = answer.substring(0, answer.length() - 1);
-			String insert = "INSERT INTO PictureResponse VALUES(\"" + id + "\",\"" + question + "\",\"" + url + "\",\"" + answer + "\");";
+			String insert = "INSERT INTO PictureResponse VALUES(\"" + id + "\",\"" + question.replace("\"", "\"\"") + "\",\"" + url + "\",\"" + answer.replace("\"", "\"\"") + "\");";
 			stmt.executeUpdate(insert);
 			database.getCon().close();
 		} catch (SQLException e) {

@@ -102,7 +102,7 @@ public class MultiResponse extends Problem {
 	@Override
 	public String getInsertSQL() {
 		String answer = getArrayToString(answers);
-		String sql = "INSERT INTO " + this.type + " VALUES(\"" + this.questionID + "\",\"" + this.question + "\",\"" + answer + "\"," + count + "," + ordered + ");";
+		String sql = "INSERT INTO " + this.type + " VALUES(\"" + this.questionID + "\",\"" + this.question.replace("\"", "\"\"") + "\",\"" + answer.replace("\"", "\"\"") + "\"," + count + "," + ordered + ");";
 		return sql;
 	}
 	
@@ -113,7 +113,7 @@ public class MultiResponse extends Problem {
 	@Override
 	public String getUpdateSQL() {
 		String answer = getArrayToString(answers);
-		String sql = "UPDATE " + this.type + " SET Question = \"" + this.question + "\", Answer = \"" + answer + "\", Count = " + count + ", Ordered = " + ordered + " WHERE QuestionID = \"" + this.questionID + "\";";
+		String sql = "UPDATE " + this.type + " SET Question = \"" + this.question.replace("\"", "\"\"") + "\", Answer = \"" + answer.replace("\"", "\"\"") + "\", Count = " + count + ", Ordered = " + ordered + " WHERE QuestionID = \"" + this.questionID + "\";";
 		return sql;
 	}
 }

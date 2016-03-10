@@ -423,9 +423,9 @@ public class Quiz {
 	public String getInsertSQL() {
 		String pbs = getListToString();
 		String sql = "INSERT INTO Quiz (QuizID, Name, Description, AuthorID, ProblemID, IsRandomQuiz, IsOnePage, IsImmediateCorrection, IsPracticeMode, Time, Image) VALUES(\""
-				+ this.quizID + "\",\"" + this.name + "\",\"" + this.description + "\",\"" + this.authorID + "\",\""
+				+ this.quizID + "\",\"" + this.name.replace("\"", "\"\"") + "\",\"" + this.description.replace("\"", "\"\"") + "\",\"" + this.authorID.replace("\"", "\"\"") + "\",\""
 				+ pbs + "\"," + this.isRandomQuiz + "," + this.isOnePage + "," + this.isImmediateCorrection + ","
-				+ this.isPracticeMode + ",\"" + this.createdDate + "\",\"" + this.image + "\");";
+				+ this.isPracticeMode + ",\"" + this.createdDate + "\",\"" + this.image.replace("\"", "\"\"") + "\");";
 		return sql;
 	}
 
@@ -435,11 +435,11 @@ public class Quiz {
 	 */
 	public String getUpdateSQL() {
 		String pbs = getListToString();
-		String sql = "UPDATE Quiz SET Name = \"" + this.name + "\", Description = \"" + this.description
-				+ "\", AuthorID = \"" + this.authorID + "\", ProblemID = \"" + pbs + "\" , isRandomQuiz = "
+		String sql = "UPDATE Quiz SET Name = \"" + this.name.replace("\"", "\"\"") + "\", Description = \"" + this.description.replace("\"", "\"\"")
+				+ "\", AuthorID = \"" + this.authorID.replace("\"", "\"\"") + "\", ProblemID = \"" + pbs + "\" , isRandomQuiz = "
 				+ this.isRandomQuiz + ", isOnePage = " + this.isOnePage + ", IsImmediateCorrection = "
 				+ this.isImmediateCorrection + ", IsPracticeMode = " + this.isPracticeMode + ", Time = \""
-				+ this.createdDate + "\", Image = \"" + this.image + "\" WHERE QuizID = \"" + this.quizID + "\";";
+				+ this.createdDate + "\", Image = \"" + this.image.replace("\"", "\"\"") + "\" WHERE QuizID = \"" + this.quizID + "\";";
 		return sql;
 	}
 
@@ -501,8 +501,8 @@ public class Quiz {
 			try {
 				DBConnection database = new DBConnection();
 				Statement stmt = database.getStmt();
-				String sql = "INSERT INTO QuizRecord VALUES ('" + quizID + "','" + userID + "','" + startDate + "','"
-						+ endDate + "','" + duration + "'," + score + ");";
+				String sql = "INSERT INTO QuizRecord VALUES (\"" + quizID + "\",\"" + userID.replace("\"", "\"\"") + "\",\"" + startDate + "\",\""
+						+ endDate + "\",\"" + duration + "\"," + score + ");";
 				stmt.executeUpdate(sql);
 				updateQuizAchievement();
 				database.getCon().close();
@@ -525,12 +525,12 @@ public class Quiz {
 	 */
 	private void updatePracticeAchievement() throws SQLException {
 		DBConnection database = new DBConnection();
-		ResultSet res = database.getStmt().executeQuery("SELECT COUNT(*) AS Count FROM Achievement WHERE UserID = \"" + this.userID + "\" AND AchievementName = \"Practice Makes Perfect\";");
+		ResultSet res = database.getStmt().executeQuery("SELECT COUNT(*) AS Count FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"Practice Makes Perfect\";");
 		res.next();
 		int practice = res.getInt("Count");
 		if (practice == 0) {
 			String time = Quiz.df.format((new Date()).getTime());
-			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID + "\",\"" + this.quizID + "\",\"" + time + "\",\"Practice Makes Perfect\");");
+			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Practice Makes Perfect\");");
 		}
 		database.getCon().close();
 	}
@@ -541,17 +541,17 @@ public class Quiz {
 	 */
 	private void updateQuizAchievement() throws SQLException {
 		DBConnection database = new DBConnection();
-		ResultSet res = database.getStmt().executeQuery("SELECT COUNT(DISTINCT QuizID) AS Count FROM QuizRecord WHERE UserID = \"" + this.userID + "\";");
+		ResultSet res = database.getStmt().executeQuery("SELECT COUNT(DISTINCT QuizID) AS Count FROM QuizRecord WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\";");
 		res.next();
 		int quizTaken = res.getInt("Count");
 		String time = Quiz.df.format((new Date()).getTime());
 		if (quizTaken == 10) {
-			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, Achievement) VALUES(\"" + this.userID + "\",\"" + this.quizID + "\",\"" + time + "\",\"Quiz Machine\");");
+			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, Achievement) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Quiz Machine\");");
 		}
 		ResultSet highest = database.getStmt().executeQuery("SELECT UserID FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" ORDER BY Score DESC, Duration ASC, EndTime ASC LIMIT 1;");
 		highest.next();
 		if (this.userID.equals(highest.getString("UserID"))) {
-			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, Achievement) VALUES(\"" + this.userID + "\",\"" + this.quizID + "\",\"" + time + "\",\"I am the Greatest\");");
+			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, Achievement) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"I am the Greatest\");");
 		}
 		database.getCon().close();
 	}
@@ -615,7 +615,7 @@ public class Quiz {
 	static public ArrayList<Quiz> getRecentQuizzes() throws SQLException {
 		ArrayList<Quiz> recentQuizs = new ArrayList<Quiz>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT QuizID, Time FROM Quiz Order BY Time LIMIT 12";
+		String sql = "SELECT QuizID, Time FROM Quiz Order BY Time DESC LIMIT 12";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			Quiz temp = new Quiz();

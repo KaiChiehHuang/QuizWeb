@@ -20,7 +20,7 @@ public class User {
 		try {
 			DBConnection database = new DBConnection();
 			rs = database.getStmt().executeQuery(
-					"SELECT Name, Age, Gender FROM Users WHERE UserID = " + "\"" + id + "\";");
+					"SELECT Name, Age, Gender FROM Users WHERE UserID = " + "\"" + id.replace("\"", "\"\"") + "\";");
 			rs.next();
 			name = rs.getString("Name");
 			age = rs.getInt("Age");
@@ -29,7 +29,7 @@ public class User {
 			fetchAchievement();
 			// Select from friends table.
 			friends = new ArrayList<String>();
-			rs = database.getStmt().executeQuery("SELECT User2ID FROM Friendship WHERE User1ID = \"" + id + "\";");
+			rs = database.getStmt().executeQuery("SELECT User2ID FROM Friendship WHERE User1ID = \"" + id.replace("\"", "\"\"") + "\";");
 			while (rs.next()) {
 				String friend = rs.getString("User2ID");
 				friends.add(friend);
@@ -53,7 +53,7 @@ public class User {
 		this.id = id;
 		try {
 			rs = stmt.executeQuery(
-					"SELECT Name, Age, Gender FROM Users WHERE UserID = \"" + id + "\";");
+					"SELECT Name, Age, Gender FROM Users WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
 			rs.next();
 			name = rs.getString("Name");
 			age = rs.getInt("Age");
@@ -62,7 +62,7 @@ public class User {
 			fetchAchievement();
 			// Select from friends table.
 			friends = new ArrayList<String>();
-			rs = stmt.executeQuery("SELECT User2ID FROM Friendship WHERE User1ID = \"" + id + "\";");
+			rs = stmt.executeQuery("SELECT User2ID FROM Friendship WHERE User1ID = \"" + id.replace("\"", "\"\"") + "\";");
 			while (rs.next()) {
 				String friend = rs.getString("User2ID");
 				friends.add(friend);
@@ -134,7 +134,7 @@ public class User {
 	 */
 	public void setGender(String gender) {
 		try {
-			stmt.executeUpdate("UPDATE Users SET Gender = \"" + gender + "\" WHERE UserID = \"" + id + "\";");
+			stmt.executeUpdate("UPDATE Users SET Gender = \"" + gender.replace("\"", "\"\"") + "\" WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -147,7 +147,7 @@ public class User {
 	 */
 	public void setName(String name) {
 		try {
-			stmt.executeUpdate("UPDATE Users SET Name = \"" + name + "\" WHERE UserID = \"" + id + "\";");
+			stmt.executeUpdate("UPDATE Users SET Name = \"" + name.replace("\"", "\"\"") + "\" WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -167,7 +167,7 @@ public class User {
 			} else {
 				new_ach = original + "|" + achievement;
 			}
-			stmt.executeUpdate("UPDATE Users SET Achievement = \"" + new_ach + "\" WHERE UserID = \"" + id + "\";");
+			stmt.executeUpdate("UPDATE Users SET Achievement = \"" + new_ach + "\" WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -180,8 +180,8 @@ public class User {
 	 */
 	public void addFriend(String friendID) {
 		try {
-			stmt.executeUpdate("INSERT INTO Friendship(User1ID, User2ID) VALUES(\"" + id + "\",\"" + friendID + "\");");
-			stmt.executeUpdate("INSERT INTO Friendship(User1ID, User2ID) VALUES(\"" + friendID + "\",\"" + id + "\");");
+			stmt.executeUpdate("INSERT INTO Friendship(User1ID, User2ID) VALUES(\"" + id.replace("\"", "\"\"") + "\",\"" + friendID.replace("\"", "\"\"") + "\");");
+			stmt.executeUpdate("INSERT INTO Friendship(User1ID, User2ID) VALUES(\"" + friendID.replace("\"", "\"\"") + "\",\"" + id.replace("\"", "\"\"") + "\");");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -195,8 +195,8 @@ public class User {
 	public void removeFriend(String friendID) {
 		try {
 			DBConnection database = new DBConnection();
-			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + id + "\" AND User2ID = \"" + friendID + "\";");
-			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User2ID = \"" + id + "\" AND User1ID = \"" + friendID + "\";");
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + id.replace("\"", "\"\"") + "\" AND User2ID = \"" + friendID.replace("\"", "\"\"") + "\";");
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User2ID = \"" + id.replace("\"", "\"\"") + "\" AND User1ID = \"" + friendID.replace("\"", "\"\"") + "\";");
 			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -212,8 +212,8 @@ public class User {
 	public void sendFriendRequest(String User2ID) {
 		try {
 			DBConnection database = new DBConnection();
-			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + this.id + "\" AND User2ID = \"" + User2ID + "\";");
-			database.getStmt().executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id + "\",\"" + User2ID + "\"," + true + ");");
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + this.id.replace("\"", "\"\"") + "\" AND User2ID = \"" + User2ID.replace("\"", "\"\"") + "\";");
+			database.getStmt().executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id.replace("\"", "\"\"") + "\",\"" + User2ID.replace("\"", "\"\"") + "\"," + true + ");");
 			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -227,10 +227,10 @@ public class User {
 	public void acceptFriendRequest(String pendingUserID) {
 		try {
 			DBConnection database = new DBConnection();
-			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + this.id + "\" AND User2ID = \"" + pendingUserID + "\";");
-			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User2ID = \"" + this.id + "\" AND User1ID = \"" + pendingUserID + "\";");
-			database.getStmt().executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id + "\",\"" + pendingUserID + "\"," + false + ");");
-			database.getStmt().executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + pendingUserID + "\",\"" + id + "\"," + false + ");");
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + this.id.replace("\"", "\"\"") + "\" AND User2ID = \"" + pendingUserID.replace("\"", "\"\"") + "\";");
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User2ID = \"" + this.id.replace("\"", "\"\"") + "\" AND User1ID = \"" + pendingUserID.replace("\"", "\"\"") + "\";");
+			database.getStmt().executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + id.replace("\"", "\"\"") + "\",\"" + pendingUserID.replace("\"", "\"\"") + "\"," + false + ");");
+			database.getStmt().executeUpdate("INSERT INTO Friendship (User1ID, User2ID, Pending) VALUES (\"" + pendingUserID.replace("\"", "\"\"") + "\",\"" + id.replace("\"", "\"\"") + "\"," + false + ");");
 			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -244,7 +244,7 @@ public class User {
 	public void declineFriendRequest(String pendingUserID) {
 		try {
 			DBConnection database = new DBConnection();
-			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + pendingUserID + "\" AND User2ID = \"" + this.id + "\";");
+			database.getStmt().executeUpdate("DELETE FROM Friendship WHERE User1ID = \"" + pendingUserID.replace("\"", "\"\"") + "\" AND User2ID = \"" + this.id.replace("\"", "\"\"") + "\";");
 			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -259,7 +259,7 @@ public class User {
 		ArrayList<User> pendingFriends = new ArrayList<User>();
 		try {
 			DBConnection database = new DBConnection();
-			String sql = "SELECT User2ID FROM Friendship WHERE User1ID = \"" + this.id + "\" AND Pending = " + true + ";";
+			String sql = "SELECT User2ID FROM Friendship WHERE User1ID = \"" + this.id.replace("\"", "\"\"") + "\" AND Pending = " + true + ";";
 			ResultSet res = database.getStmt().executeQuery(sql);
 			while (res.next()) {
 				User temp = new User(res.getString("User2ID"));
@@ -281,7 +281,7 @@ public class User {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
-			String sql = "SELECT UserID, QuizID, Time, AchievementName FROM Achievement WHERE UserID = \"" + id + "\";";
+			String sql = "SELECT UserID, QuizID, Time, AchievementName FROM Achievement WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";";
 			ResultSet res = stmt.executeQuery(sql);
 			while (res.next()) {
 				Achievement temp = new Achievement();
@@ -308,7 +308,7 @@ public class User {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
 			String sql = "SELECT F.User2ID AS UserID, A.QuizID AS QuizID, A.Time AS Time, A.AchievementName FROM Achievement AS A, Friendship AS F WHERE F.User1ID = \""
-					+ id + "\" AND A.UserID = F.User2ID ORDER BY A.Time DESC LIMIT 6;";
+					+ id.replace("\"", "\"\"") + "\" AND A.UserID = F.User2ID ORDER BY A.Time DESC LIMIT 6;";
 			ResultSet res = stmt.executeQuery(sql);
 			while (res.next()) {
 				Achievement temp = new Achievement();
@@ -335,7 +335,7 @@ public class User {
 	public ArrayList<Performance> getRecentTakenQuiz() throws SQLException {
 		ArrayList<Performance> recentQuizs = new ArrayList<Performance>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT QuizID, Score, StartTime, Duration FROM QuizRecord WHERE UserID = \"" + id
+		String sql = "SELECT QuizID, Score, StartTime, Duration FROM QuizRecord WHERE UserID = \"" + id.replace("\"", "\"\"")
 				+ "\" ORDER BY StartTime DESC LIMIT 6";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
@@ -359,7 +359,7 @@ public class User {
 	public ArrayList<Performance> getFriendRecentTakenQuiz() throws SQLException {
 		ArrayList<Performance> recentQuizs = new ArrayList<Performance>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT R.UserID AS UserID, R.QuizID AS QuizID, R.Score AS Score, R.StartTime AS StartTime, R.Duration AS Duration FROM QuizRecord AS R, Friendship AS F WHERE F.User1ID = \"" + id
+		String sql = "SELECT R.UserID AS UserID, R.QuizID AS QuizID, R.Score AS Score, R.StartTime AS StartTime, R.Duration AS Duration FROM QuizRecord AS R, Friendship AS F WHERE F.User1ID = \"" + id.replace("\"", "\"\"")
 				+ "\" AND F.User2ID = R.UserID ORDER BY R.StartTime DESC LIMIT 6;";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
@@ -383,7 +383,7 @@ public class User {
 	public ArrayList<Quiz> getRecentCreatedQuiz() throws SQLException {
 		ArrayList<Quiz> recentQuizs = new ArrayList<Quiz>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT QuizID FROM Quiz WHERE AuthorID = \"" + id + "\" ORDER BY Time DESC LIMIT 6";
+		String sql = "SELECT QuizID FROM Quiz WHERE AuthorID = \"" + id.replace("\"", "\"\"") + "\" ORDER BY Time DESC LIMIT 6";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			String quizID = res.getString("QuizID");
@@ -403,7 +403,7 @@ public class User {
 	public ArrayList<Quiz> getFriendRecentCreatedQuiz() throws SQLException {
 		ArrayList<Quiz> recentQuizs = new ArrayList<Quiz>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT Q.QuizID AS QuizID FROM Quiz AS Q, Friendship AS F WHERE Q.AuthorID = F.User2ID AND F.User1ID = \"" + id + "\" ORDER BY Q.Time DESC LIMIT 6";
+		String sql = "SELECT Q.QuizID AS QuizID FROM Quiz AS Q, Friendship AS F WHERE Q.AuthorID = F.User2ID AND F.User1ID = \"" + id.replace("\"", "\"\"") + "\" ORDER BY Q.Time DESC LIMIT 6";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			String quizID = res.getString("QuizID");
@@ -423,7 +423,7 @@ public class User {
 	public ArrayList<Performance> getQuizHistory() throws SQLException {
 		ArrayList<Performance> result = new ArrayList<Performance>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT QuizID, StartTime, Duration, Score FROM QuizRecord WHERE UserID = \"" + this.id + "\";";
+		String sql = "SELECT QuizID, StartTime, Duration, Score FROM QuizRecord WHERE UserID = \"" + this.id.replace("\"", "\"\"") + "\";";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			String quizID = res.getString("QuizID");

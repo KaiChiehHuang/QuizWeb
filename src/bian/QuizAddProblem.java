@@ -58,27 +58,46 @@ public class QuizAddProblem extends HttpServlet {
 		
 		if (type.equals("MC")) {
 			MultiChoice pro = new MultiChoice("MC", true);
-			
+			String[] checkbox = request.getParameterValues("choicecheck");
+			String MCAnswer = "";
 			String choice = request.getParameter("choice1");
 			String choices = "";
 			int index = 1;
 			while (choice != null) {
 				choices += "|" + choice;
-				choice = request.getParameter("choice" + index);
-				System.out.println(index);
-				System.out.println(choice);
+				for (String s: checkbox) {
+					s = s.substring(3);
+					if (s.equals(String.valueOf(index))) {
+						MCAnswer += "|" + choice;
+					}
+				}
 				index++;
+				choice = request.getParameter("choice" + index);
 			}
+			MCAnswer = MCAnswer.substring(1);
+			choices = choices.substring(1);
+//			System.out.println(MCAnswer);
+//			System.out.println(choices);
 			pro.setQuestion(question);
 			pro.setChoices(choices);
-			pro.setCount(choices.split("\\|").length);
-//			pro.setAnswers(answer);
+			pro.setCount(MCAnswer.split("\\|").length);
+			pro.setAnswers(MCAnswer);
 			quiz.addProblem(pro);
-			System.out.println(choices);
 		} else if (type.equals("MR")) {
 			MultiResponse pro = new MultiResponse("MR", true);
-			pro.setAnswers(answer);
+			String answerMR = request.getParameter("answer1");
+			String answers = "";
+			int index = 1;
+			while (answerMR != null) {
+				answers += "|" + answerMR;
+				index++;
+				answerMR = request.getParameter("answer" + index);
+			}
+			answers = answers.substring(1);
+//			System.out.println(answers);
+			pro.setAnswers(answers);
 			pro.setQuestion(question);
+			pro.setCount(answers.split("\\|").length);
 			String order = request.getParameter("order");
 			if (order == null || order == "No") {
 				pro.setOrdered(false);

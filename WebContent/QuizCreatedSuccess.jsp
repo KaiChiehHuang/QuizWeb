@@ -45,6 +45,7 @@
      				<div class = "container" style = "position: relative; left: 50%; width: 340px; margin-left:-170px">
      				<img class="img-thumbnail" src = "http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2015/08/emoji.jpg" >
      				</div>
+     				<div><a href="HomePage.jsp"> Back to Home Page </a></div>
      				</div>
 
 

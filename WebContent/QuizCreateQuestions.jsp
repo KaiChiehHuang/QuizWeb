@@ -35,15 +35,32 @@
             var element1 = document.createElement("input");
             element1.type = "checkbox";
             element1.name ="choicecheck";
-            element1.value = "box" +  + rowCount + 1;
+            element1.value = "box" + (rowCount + 1);
             cell1.appendChild(element1);
 
             var cell2 = row.insertCell(1);
             var element2 = document.createElement("input");
             element2.type = "text";
             element2.style = "border-radius:6px; min-width: 0; width:600px;  height:34px;";
-            element2.name = "choice" + rowCount + 1;
+            element2.name = "choice" + (rowCount + 1);
             element2.placeholder="Choice";
+            cell2.appendChild(element2);
+        }
+        
+        function addRowResponse(tableID) {
+        	 
+            var table = document.getElementById(tableID);
+ 
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+ 
+
+            var cell2 = row.insertCell(0);
+            var element2 = document.createElement("input");
+            element2.type = "text";
+            element2.style = "border-radius:6px; min-width: 0; width:600px;  height:34px;";
+            element2.name = "answer" + (rowCount + 1);
+            element2.placeholder="Answer";
             cell2.appendChild(element2);
         }
  
@@ -102,7 +119,7 @@
 						
 						<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
 
-						<p><h5>Choice: </h5>check answers before add question </p>
+						<p><h5>Choice: </h5>check answers before adding question </p>
 
 						<!-- <input type="text" class="form-control form-control-inline" name = "choice" placeholder="Choice"> -->
 						
@@ -128,18 +145,18 @@
 				style="height: 400px; background-color: black;">
 				<form action="QuizAddProblem" method="post">	
 				
-<div class="container">
-	<p><h3>Creating Fill Blank Problem: </h5> </p>
-	<input type="hidden" name = "type" value = "FB">
-	<p><h5>Question: </h5> </p>
-	<div>
-		<input type="text" class="form-control form-control-inline" name = "fbquestion" placeholder="Question">
-		<p><h5>Blank field: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
-		<p><h5>Question part 2: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "fbquestion" placeholder="Question">
-	</div>
-</div>
+					<div class="container">
+						<p><h3>Creating Fill Blank Problem: </h5> </p>
+						<input type="hidden" name = "type" value = "FB">
+						<p><h5>Question: </h5> </p>
+						<div>
+							<input type="text" class="form-control form-control-inline" name = "fbquestion" placeholder="Question">
+							<p><h5>Blank field: </h5> </p>
+							<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
+							<p><h5>Question part 2: </h5> </p>
+							<input type="text" class="form-control form-control-inline" name = "fbquestion" placeholder="Question">
+						</div>
+					</div>
 
 				<div class="text-right">
 				<input type="submit" class="btn btn-info" value = "Add Question"></input>
@@ -153,20 +170,20 @@
 				style="height: 400px; background-color: black;">
 				<form action="QuizAddProblem" method="post">	
 
-<div class="container">
-	<p><h3>Creating Picture Respond Problem: </h5> </p>
-	<input type="hidden" name = "type" value = "PR">
-	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
-	<div>
-		<p><h5>Picture: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "picture" placeholder="Picture URL">
-	</div>
-	<div>
-		<p><h5>Answer: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
-	</div>
-</div>
+					<div class="container">
+						<p><h3>Creating Picture Respond Problem: </h5> </p>
+						<input type="hidden" name = "type" value = "PR">
+						<p><h5>Question: </h5> </p>
+						<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
+						<div>
+							<p><h5>Picture: </h5> </p>
+							<input type="text" class="form-control form-control-inline" name = "picture" placeholder="Picture URL">
+						</div>
+						<div>
+							<p><h5>Answer: </h5> </p>
+							<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
+						</div>
+					</div>
 
 				<div class="text-right">
 				<input type="submit" class="btn btn-info" value = "Add Question"></input>
@@ -180,16 +197,16 @@
 				style="height: 400px; background-color: black;">
 				<form action="QuizAddProblem" method="post">	
 
-<div class="container">
-	<p><h3>Creating Question Respond Problem: </h5> </p>
-	<input type="hidden" name = "type" value = "QR">
-	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
-	<div>
-		<p><h5>Answer: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
-	</div>
-</div>
+					<div class="container">
+						<p><h3>Creating Question Respond Problem: </h5> </p>
+						<input type="hidden" name = "type" value = "QR">
+						<p><h5>Question: </h5> </p>
+						<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
+						<div>
+							<p><h5>Answer: </h5> </p>
+							<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
+						</div>
+					</div>
 
 				<div class="text-right">
 				<input type="submit" class="btn btn-info" value = "Add Question"></input>
@@ -203,23 +220,31 @@
 				style="height: 400px; background-color: black;">
 				<form action="QuizAddProblem" method="post">	
 				
-<div class="container">
-	<p><h3>Creating Multiple Respond Problem: </h5> </p>
-	<input type="hidden" name = "type" value = "MR">
-	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
-	<div>
-		<p><h5>Answer: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
-	</div>
-	<p><h5>Should the answers be ordered? (Default: unordered)</h5> </p>
-	<div class="radio">
-		  <label><input type="radio" name="ordered" value="Yes">Yes</label>
-	</div>
-		<div class="radio">
-		  <label><input type="radio" name="ordered" value="No">No</label>
-	</div>
-</div>
+						<div class="container">
+							<p><h3>Creating Multiple Respond Problem: </h5> </p>
+							<input type="hidden" name = "type" value = "MR">
+							<p><h5>Question: </h5> </p>
+							<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
+							<div>
+
+						
+								<p><h5>Answer: </h5></p>
+								<INPUT type="button" class="btn btn-info" value="Add Answer" onclick="addRowResponse('dataTableMR')" />
+    					
+			    					<TABLE id="dataTableMR" border="1">
+			        					<TR>
+			            				<TD> <INPUT type="text" class="form-control form-control-inline" name = "answer1" placeholder="Answer"> </TD>
+			        					</TR>
+			    					</TABLE>
+							</div>
+							<p><h5>Should the answers be ordered? (Default: unordered)</h5> </p>
+							<div class="radio">
+								  <label><input type="radio" name="ordered" value="Yes">Yes</label>
+							</div>
+								<div class="radio">
+								  <label><input type="radio" name="ordered" value="No">No</label>
+							</div>
+						</div>
 				
 				<div class="text-right">
 				<input type="submit" class="btn btn-info" value = "Add Question"></input>

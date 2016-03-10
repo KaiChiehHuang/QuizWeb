@@ -42,7 +42,7 @@ public class XMLParser {
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(new InputSource(new StringReader(args[0])));
 			if (args.length != 2) {
-				File xmlFile = new File("src/quiz-xml/test.xml");
+				File xmlFile = new File("src/quiz-xml/bunny.xml");
 				doc = dBuilder.parse(xmlFile);
 			}
 			doc.getDocumentElement().normalize();

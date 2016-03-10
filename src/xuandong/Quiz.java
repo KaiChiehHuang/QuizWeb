@@ -6,7 +6,10 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.TimeZone;
+
+import bian.User;
 
 public class Quiz {
 	// used to count the real number of problems, e.g. a MultiChoice problem
@@ -490,7 +493,9 @@ public class Quiz {
 	 * @return end time
 	 */
 	public String quizEnd() {
-		this.endTime = (new Date()).getTime();
+		if (endTime == null) {
+			this.endTime = (new Date()).getTime();
+		}
 		endDate = df.format(endTime);
 		Long dura = this.endTime - this.startTime;
 		Date tempDate = new Date();
@@ -502,13 +507,13 @@ public class Quiz {
 			try {
 				DBConnection database = new DBConnection();
 				Statement stmt = database.getStmt();
-//				ResultSet res = stmt.executeQuery("SELECT FROM QuizRecord WHERE QuizID = \"" + quizID + "\" AND UserID = \"" + userID.replace("\"", "\"\"") + "\" AND StartTime = \"" + startDate + "\";");
-//				if (!res.next()) {
+				ResultSet res = stmt.executeQuery("SELECT * FROM QuizRecord WHERE QuizID = \"" + quizID + "\" AND UserID = \"" + userID.replace("\"", "\"\"") + "\" AND StartTime = \"" + startDate + "\";");
+				if (!res.next()) {
 					String sql = "INSERT INTO QuizRecord VALUES (\"" + quizID + "\",\"" + userID.replace("\"", "\"\"") + "\",\"" + startDate + "\",\""
 							+ endDate + "\",\"" + duration + "\"," + score + ");";
 					stmt.executeUpdate(sql);
 					updateQuizAchievement();
-//				}
+				}
 				database.getCon().close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -679,5 +684,39 @@ public class Quiz {
 		}
 		database.getCon().close();
 		return highest;
+	}
+	
+	/**
+	 * Search a quiz by name or description or tag or category
+	 * @param keyword
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<Quiz> serachQuiz(String keyword) throws SQLException {
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		HashSet<String> results = new HashSet<String>();
+		DBConnection database = new DBConnection();
+		ResultSet res1 = database.getStmt().executeQuery("SELECT DISTINCT QuizID FROM Quiz WHERE Name LIKE \"%" + keyword + "%\" OR Description LIKE \"%" + keyword + "%\";");
+		while (res1.next()) {
+			String temp = res1.getString("UserID");
+			results.add(temp);
+		}
+		ResultSet res2 = database.getStmt().executeQuery("SELECT DISTINCT QuizID FROM Tags WHERE Tag LIKE \"%" + keyword + "%\";");
+		while (res2.next()) {
+			String temp = res2.getString("UserID");
+			results.add(temp);
+		}
+		ResultSet res3 = database.getStmt().executeQuery("SELECT DISTINCT QuizID FROM Category WHERE Category LIKE \"%" + keyword + "%\";");
+		while (res3.next()) {
+			String temp = res3.getString("UserID");
+			results.add(temp);
+		}
+		for (String str : results) {
+			Quiz temp = new Quiz();
+			temp.setQuizID(str);
+			quizzes.add(temp);
+		}
+		database.getCon().close();
+		return quizzes;
 	}
 }

@@ -2,8 +2,6 @@ package xuandong;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
-
 
 public class Achievement {
 	String userID;
@@ -12,6 +10,9 @@ public class Achievement {
 	String achievementName;
 	String description;
 	
+	/**
+	 * Store all achievements' descriptions
+	 */
 	public static final HashMap<String, String> ACHIEVEMENTDESCRIPTION = new HashMap<String, String>();
 	static
 	{
@@ -23,6 +24,9 @@ public class Achievement {
 		ACHIEVEMENTDESCRIPTION.put("Practice Makes Perfect", " have taken a quiz in practice mode.");
 	};
 	
+	/**
+	 * Store all achievements' images
+	 */
 	public static final HashMap<String, String> ACHIEVEMENTIMAGE = new HashMap<String, String>();
 	static
 	{
@@ -34,6 +38,9 @@ public class Achievement {
 		ACHIEVEMENTIMAGE.put("Practice Makes Perfect", "badges/Practice Makes Perfect.png");
 	};
 	
+	/**
+	 * Store all achievements' list
+	 */
 	public static final ArrayList<String> ALLACHIEVEMENTS = new ArrayList<String>();
 	static
 	{
@@ -48,53 +55,94 @@ public class Achievement {
 	public Achievement() {
 	}
 	
+	/**
+	 * Set the user of this achievement
+	 * @param userID
+	 */
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 	
+	/**
+	 * Get the user of this achievement
+	 * @return
+	 */
 	public String getUserID() {
 		return this.userID;
 	}
 	
+	/**
+	 * Set the quiz of this achievement
+	 * @param quizID
+	 */
 	public void setQuizID(String quizID) {
 		this.quizID = quizID;
 	}
 	
+	/**
+	 * Get the quiz of this achievement
+	 * @return
+	 */
 	public String getQuizID() {
 		return this.quizID;
 	}
 	
+	/**
+	 * Get the time of this achievement
+	 * @return
+	 */
 	public String getTime() {
 		return this.time.substring(0, this.time.length() - 2);
 	}
 	
+	/**
+	 * Set the time of this achievement
+	 * @param time
+	 */
 	public void setTime(String time) {
 		this.time = time;
 	}
 	
+	/**
+	 * Set the name of this achievement
+	 * @param name
+	 */
 	public void setAchievementName(String name) {
 		this.achievementName = name;
 	}
 	
+	/**
+	 * Get the name of this achievement
+	 * @return
+	 */
 	public String getAchievementName() {
 		return this.achievementName;
 	}
 	
+	/**
+	 * Set the description of this achievement
+	 */
 	public void setDescription() {
 		this.description = Achievement.ACHIEVEMENTDESCRIPTION.get(this.achievementName);
 	}
 	
+	/**
+	 * Get the description of this acievement
+	 * @return
+	 */
 	public String getDescription() {
 		return Achievement.ACHIEVEMENTDESCRIPTION.get(this.achievementName);
 	}
 	
+	/**
+	 * 
+	 * @param achi
+	 * @return
+	 */
 	public static String getDescription(String achi) {
 		return Achievement.ACHIEVEMENTDESCRIPTION.get(achi);
 	}
 	
-//	public static Set<String> getAllAchievement() {
-//		return Achievement.ACHIEVEMENTDESCRIPTION.keySet();
-//	}
 	public static ArrayList<String> getAllAchievement() {
 		return Achievement.ALLACHIEVEMENTS;
 	}

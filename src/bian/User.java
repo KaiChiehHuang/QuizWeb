@@ -437,11 +437,21 @@ public class User {
 		return result;
 	}
 	
-//	public static ArrayList<User> serachUser(String str) {
-//		ArrayList<User> users = new ArrayList<User>();
-//		DBConnection database = new DBConnection();
-//		ResultSet res = database.getStmt().executeQuery("SELECT UserID FROM Users WHERE UserID LIKE")
-//		database.getCon().close();
-//		return users;
-//	}
+	/**
+	 * Search a user by his name or his id
+	 * @param keyword
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<User> serachUser(String keyword) throws SQLException {
+		ArrayList<User> users = new ArrayList<User>();
+		DBConnection database = new DBConnection();
+		ResultSet res = database.getStmt().executeQuery("SELECT DISTINCT UserID FROM Users WHERE UserID LIKE \"%" + keyword + "%\" OR Name LIKE \"%" + keyword + "%\";");
+		while (res.next()) {
+			User temp = new User(res.getString("UserID"));
+			users.add(temp);
+		}
+		database.getCon().close();
+		return users;
+	}
 }

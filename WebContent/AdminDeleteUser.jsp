@@ -77,7 +77,6 @@
   </table>
 </div>
 
-
 <div class = "container">
 <h4>Manage Quizs</h4>
   <table class="table">

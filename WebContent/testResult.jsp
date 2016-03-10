@@ -38,7 +38,6 @@
     <tbody>
     
     <%
-
       String[] per = {"aaa", "bbb", "ccc"};
     	for (int i = 0; i < 3; i++) {
     		if (i % 2 == 0) {
@@ -54,7 +53,14 @@
     		out.println("</tr>");	
     	}
     %>
-<!--       <tr class="warning">
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
+
+<!-- 	<tr class="warning">
         <td>John</td>
         <td>Doe</td>
         <td>john@example.com</td>
@@ -64,11 +70,4 @@
         <td>Mary</td>
         <td>Moe</td>
         <td>mary@example.com</td>
-      </tr>
- -->
-    </tbody>
-  </table>
-</div>
-
-</body>
-</html>
+      </tr> -->

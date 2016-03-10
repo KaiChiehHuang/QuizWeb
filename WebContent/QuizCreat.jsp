@@ -17,9 +17,7 @@
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
 <title>Create a quiz</title>
 </head>
-<body>
-
-<h1>Create a quiz</h1>
+<body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers12.jpg')">
 
 <%
 	String authorID = (String) request.getParameter("userID"); 
@@ -37,6 +35,7 @@
 <!-- Quiz Properties -->
 <!-- name description image -->
 <div class = "container">
+<h1>Create a quiz</h1>
 	<p><h5>Name: </h5> </p>
 	<input type="text" class="form-control" name = "name" placeholder="Quiz Name">
 	<p><h5>Quiz Description: </h5> </p>
@@ -89,15 +88,13 @@
 	</div>
 </div>		
 
-<button type="submit" type="button" class="btn btn-warning" style = "position: relative; left: 50%; width: 120px; margin-left:-60px">Add Questions</button>
+<button type="submit"  class="btn btn-warning" type="button" style = "position: relative; left: 50%; width: 120px; margin-left:-60px">Add Questions</button>
+<!-- class="btn btn-warning" -->
+<div class="container"><a href="LoadXML.jsp"> Want to Load an XML file? </a></div>
 
 </form>
 </body>
 </html>
-
-
-
-
 
 
 

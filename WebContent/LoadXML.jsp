@@ -15,19 +15,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
-<title>Quiz created successfully!</title>
+<title>Create a quiz</title>
 </head>
 <body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers12.jpg')">
-<%
-	
-	Quiz quiz = (Quiz) session.getAttribute("newQuiz"); 
-	for (Problem pr : quiz.getProblems()) {
-		pr.updateDatabase();
-	}
-	quiz.setCreating();
-	quiz.setCreatedDate();
-	quiz.updateDatabase();
-%>
-Quiz created successfully!
+
+<form action="loadXMLServlet" method="post">
+
+<!-- Quiz Properties -->
+<!-- name description image -->
+<div class = "container">
+<h1>Load XML</h1>
+	<p><h5>Paste your XML file here:</h5> </p>
+  	<textarea class="form-control" rows="20" name = "XMLfile" placeholder="XML File"></textarea>
+</div>
+		
+<button type="submit" type="button" class="btn btn-success" style = "position: relative; left: 50%; width: 100px; margin-left:-50px">Load</button>
+
+</form>
 </body>
 </html>

@@ -14,7 +14,7 @@ public class Tag {
 	public static ArrayList<Quiz> searchByTag(String tag) throws SQLException {
 		ArrayList<Quiz> quizs = new ArrayList<Quiz>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT QuizID FROM Tags WHERE Tag = \"" + tag + "\";";
+		String sql = "SELECT QuizID FROM Tags WHERE Tag = \"" + tag.replace("\"", "\"\"") + "\";";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			Quiz temp = new Quiz();
@@ -33,7 +33,7 @@ public class Tag {
 	 */
 	public static void addTag(String quizID, String tag) throws SQLException {
 		DBConnection database = new DBConnection();
-		database.getStmt().executeUpdate("INSERT INTO Tags(QuizID, Tag) VALUES(\"" + quizID + "\",\"" + tag + "\");");
+		database.getStmt().executeUpdate("INSERT INTO Tags(QuizID, Tag) VALUES(\"" + quizID + "\",\"" + tag.replace("\"", "\"\"") + "\");");
 		database.getCon().close();
 	}
 	
@@ -45,7 +45,7 @@ public class Tag {
 	 */
 	public static void removeTag(String quizID, String tag) throws SQLException {
 		DBConnection database = new DBConnection();
-		database.getStmt().executeUpdate("DELETE FROM Tags WHERE QuizID = \"" + quizID + "\" AND Tag = \"" + tag + "\";");
+		database.getStmt().executeUpdate("DELETE FROM Tags WHERE QuizID = \"" + quizID + "\" AND Tag = \"" + tag.replace("\"", "\"\"") + "\";");
 		database.getCon().close();
 	}
 	

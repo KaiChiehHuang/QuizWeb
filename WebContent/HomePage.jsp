@@ -53,6 +53,16 @@ h6 {
 	font-size:16px;
 }
 
+.button-container form,
+.button-container form div {
+    display: inline;
+}
+
+.button-container button {
+    display: inline;
+    vertical-align: middle;
+}
+
 .linkButton { 
      background: none;
      border: none;
@@ -361,7 +371,6 @@ h6 {
 							style="width: 30px; font-size: 18px;"></span>
 						<%
 							ArrayList<User> friendRequests = user.getFriendRequests();
-							System.out.print(friendRequests);
 							if (friendRequests.size() > 0) {
 								out.println(" <span class=\"badge\" style=\"font-size:11px;top:-5px\">"
 										+ String.valueOf(friendRequests.size()) + "</span>");
@@ -483,8 +492,29 @@ h6 {
 						<th>Options</th>
 					</tr>
 					<%
+						ArrayList<User>   pendingFriendRequests = user.getFriendRequests();
 						ArrayList<String> friendsID = user.getFriends();
 						int numOfFriends = 0;
+						for(User newFriend: pendingFriendRequests) {
+							out.print("<tr  class=\"success\">");
+							out.print("<td>"+String.valueOf(numOfFriends+1)+"</td>");
+							out.print("<td>"+"<a href=\"#\">"+newFriend.getID()+"</a>"+"</td>");
+							out.print("<td>"+newFriend.getName()+"</td>");
+							out.print("<td>"+newFriend.getGender()+"</td>");
+							out.print("<td>"+newFriend.getAge()+"</td>");
+							out.print("<td>");
+							out.print("<div class=\"button-container\">");
+							out.print("<form id=\"addFriendForm\" action=\"AddFriendServlet\" method=\"post\"><input type=\"hidden\" name=\"friendToAddID\" value=\""+ newFriend.getID() +"\">");
+							String addFriendButton = "<button form=\"addFriendForm\" class=\"linkButton\" value=\"Delete\" type=\"submit\"  data-toggle=\"tooltip\" title=\"Accept friend request!\"><span class=\"glyphicon glyphicon-thumbs-up\" style=\"width: 25px; font-size: 18px;\"></span></button></form>";
+							out.print(addFriendButton);
+							out.print("<form id=\"declineFriendForm\" action=\"DeclineFriendServlet\" method=\"post\"><input type=\"hidden\" name=\"friendToDeclineID\" value=\""+ newFriend.getID() +"\">");
+							String declineFriendButton  = "<button form=\"declineFriendForm\" class=\"linkButton\" value=\"Delete\" type=\"submit\"  data-toggle=\"tooltip\" title=\"Decline friend request!\"><span class=\"glyphicon glyphicon-thumbs-down\" style=\"width: 25px; font-size: 18px;\"></span></button></form>";
+							out.print(declineFriendButton);
+							out.print("</div>");
+							out.print("</td>");
+							out.print("</tr>");
+							numOfFriends++;	
+						}
 						for (String fID : friendsID) {
 							User friend = new User(fID);
 							out.print("<tr  class=\"success\">");

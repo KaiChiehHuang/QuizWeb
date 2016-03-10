@@ -6,6 +6,9 @@ import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.*;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,7 +29,7 @@ public class XMLParser {
 			DEFAULTIMAGES.add("http://gonitsora.com/wp-content/uploads/2015/03/quiz.jpg");
 			DEFAULTIMAGES.add("http://www.satollo.net/wp-content/uploads/2015/03/quiz.jpg");
 	};
-	
+
 	/**
 	 * Main method in XMLParser
 	 * @param args the relative path of the file you want to parse
@@ -34,7 +37,22 @@ public class XMLParser {
 	 */
 	public static void main(String[] args) {
 		try {
-			File xmlFile = new File("src/quiz-xml/test.xml");
+			String path = "src/quiz-xml/test.xml";
+			if (args.length == 1) {
+				path = "src/quiz-xml/testxml.xml";
+				File file = new File(path);
+				FileWriter fw = new FileWriter(file, true);
+				if (file.exists()) {
+					fw.write(args[0]);
+				} else {
+					file.createNewFile();
+					fw.write(args[0]);
+				}
+				fw.flush();
+				fw.close();
+				file.delete();
+			}
+			File xmlFile = new File(path);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(xmlFile);

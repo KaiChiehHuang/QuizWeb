@@ -58,7 +58,7 @@ public class Email {
 	 * @return email time
 	 */
 	public String getTime() {
-		return this.time;
+		return this.time.substring(0, this.time.length() - 2);
 	}
 	
 	/**

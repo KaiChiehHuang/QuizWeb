@@ -40,9 +40,9 @@ public class Achievement {
 		ALLACHIEVEMENTS.add("Amateur Author");
 		ALLACHIEVEMENTS.add("Prolific Author");
 		ALLACHIEVEMENTS.add("Prodigious Author");
+		ALLACHIEVEMENTS.add("Practice Makes Perfect");
 		ALLACHIEVEMENTS.add("Quiz Machine");
 		ALLACHIEVEMENTS.add("I am the Greatest");
-		ALLACHIEVEMENTS.add("Practice Makes Perfect");
 	};
 	
 	public Achievement() {

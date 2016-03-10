@@ -7,12 +7,7 @@ import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.InputStream;
-import java.io.*;
 import java.io.StringReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -32,6 +27,8 @@ public class XMLParser {
 			DEFAULTIMAGES.add("http://www.yadavdilse.com/wp-content/uploads/2015/08/Optimized-quiz.jpg");
 			DEFAULTIMAGES.add("http://gonitsora.com/wp-content/uploads/2015/03/quiz.jpg");
 			DEFAULTIMAGES.add("http://www.satollo.net/wp-content/uploads/2015/03/quiz.jpg");
+			DEFAULTIMAGES.add("http://www.pinewoodschool.co.uk/wp-content/uploads/2014/12/Quiz.jpg");
+			DEFAULTIMAGES.add("http://www.discoverhongkong.com/eng/images/plan-your-trip/large/5.4.5-Frequently-Asked-Questions_03.jpg");
 	};
 
 	/**

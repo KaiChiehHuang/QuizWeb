@@ -1,8 +1,11 @@
 package xuandong;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
+
+import com.sun.j3d.utils.geometry.Text2D;
 
 public class Email {
 	String senderID;
@@ -177,6 +180,32 @@ public class Email {
 			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static void challenge(String senderID, String quizID, String receiverID) throws SQLException {
+		DBConnection database = new DBConnection();
+		try {
+			Statement stmt = database.getStmt();
+			ResultSet test1 = database.getStmt().executeQuery("SELECT * FROM Users WHERE UserID = \"" + senderID + "\";");
+			if (test1.next()) {
+				ResultSet test2 = database.getStmt().executeQuery("SELECT * FROM Users WHERE UserID = \"" + receiverID + "\";");
+				if (test2.next()) {
+					ResultSet test3 = database.getStmt().executeQuery("SELECT * FROM Quiz WHERE QuizID = \"" + quizID + "\";");
+					if (test3.next()) {
+						String time = Quiz.df.format((new Date()).getTime());
+						String subject = "You Received a New Quiz Challenge!";
+						String content = "Hi " + receiverID + ",<br>You received a new quiz challenge from your friend " + senderID + ".<br>The quiz is <a href=\"QuizSummary.jsp?quizID=" + quizID + "&userID=" + receiverID + "\">" + Quiz.getName(quizID) + "</a ><br>Your friend's highest score on this quiz is: " + Performance.getHightestScoreOfUser(senderID, quizID) + ".";
+						String link = "";
+						String sql = "INSERT INTO Emails(SenderID, ReceiverID, Time, Subject, Content, Link, IsRead) VALUES(\"" + senderID.replace("\"", "\"\"") + "\",\"" + receiverID.replace("\"", "\"\"") + "\",\"" + time + "\",\"" + subject.replace("\"", "\"\"") + "\",\"" + content.replace("\"", "\"\"") + "\",\"" + link + "\"," + false + ");";
+						stmt.executeUpdate(sql);
+					}
+				}
+			}
+			database.getCon().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			database.getCon().close();
 		}
 	}
 }

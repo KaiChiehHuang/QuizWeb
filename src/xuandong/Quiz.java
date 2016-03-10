@@ -410,6 +410,7 @@ public class Quiz {
 				quizID = String.format("%010d", questionCount);
 			}
 			stmt.executeUpdate(getInsertSQL());
+			updateCreateAchievement();
 		} else {
 			stmt.executeUpdate(getUpdateSQL());
 		}
@@ -501,11 +502,13 @@ public class Quiz {
 			try {
 				DBConnection database = new DBConnection();
 				Statement stmt = database.getStmt();
-				stmt.executeUpdate("DELETE FROM QuizRecord WHERE QuizID = \"" + quizID + "\" AND UserID = \"" + userID.replace("\"", "\"\"") + "\" AND StartTime = \"" + startDate + "\";");
-				String sql = "INSERT INTO QuizRecord VALUES (\"" + quizID + "\",\"" + userID.replace("\"", "\"\"") + "\",\"" + startDate + "\",\""
-						+ endDate + "\",\"" + duration + "\"," + score + ");";
-				stmt.executeUpdate(sql);
-				updateQuizAchievement();
+				ResultSet res = stmt.executeQuery("SELECT FROM QuizRecord WHERE QuizID = \"" + quizID + "\" AND UserID = \"" + userID.replace("\"", "\"\"") + "\" AND StartTime = \"" + startDate + "\";");
+				if (!res.next()) {
+					String sql = "INSERT INTO QuizRecord VALUES (\"" + quizID + "\",\"" + userID.replace("\"", "\"\"") + "\",\"" + startDate + "\",\""
+							+ endDate + "\",\"" + duration + "\"," + score + ");";
+					stmt.executeUpdate(sql);
+					updateQuizAchievement();
+				}
 				database.getCon().close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -526,11 +529,9 @@ public class Quiz {
 	 */
 	private void updatePracticeAchievement() throws SQLException {
 		DBConnection database = new DBConnection();
-		ResultSet res = database.getStmt().executeQuery("SELECT COUNT(*) AS Count FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"Practice Makes Perfect\";");
-		res.next();
-		int practice = res.getInt("Count");
-		if (practice == 0) {
-			String time = Quiz.df.format((new Date()).getTime());
+		String time = Quiz.df.format((new Date()).getTime());
+		ResultSet test1 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"Practice Makes Perfect\";");
+		if (!test1.next()) {
 			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Practice Makes Perfect\");");
 		}
 		database.getCon().close();
@@ -541,19 +542,53 @@ public class Quiz {
 	 * @throws SQLException
 	 */
 	private void updateQuizAchievement() throws SQLException {
+		String time = Quiz.df.format((new Date()).getTime());
 		DBConnection database = new DBConnection();
 		ResultSet res = database.getStmt().executeQuery("SELECT COUNT(DISTINCT QuizID) AS Count FROM QuizRecord WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\";");
 		res.next();
 		int quizTaken = res.getInt("Count");
-		String time = Quiz.df.format((new Date()).getTime());
 		if (quizTaken == 10) {
-			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Quiz Machine\");");
+			ResultSet test1 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"Quiz Machine\";");
+			if (!test1.next()) {
+				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Quiz Machine\");");
+			}
 		}
 		ResultSet highest = database.getStmt().executeQuery("SELECT UserID FROM QuizRecord WHERE QuizID = \"" + this.quizID + "\" ORDER BY Score DESC, Duration ASC, EndTime ASC LIMIT 1;");
 		highest.next();
 		if (this.userID.equals(highest.getString("UserID"))) {
-			database.getStmt().executeUpdate("DELETE FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"I am the Greatest\";");
-			database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"I am the Greatest\");");
+			ResultSet test2 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"I am the Greatest\";");
+			if (!test2.next()) {
+				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"I am the Greatest\");");
+			}
+		}
+		database.getCon().close();
+	}
+	
+	/**
+	 * update created quiz achievement
+	 * @throws SQLException
+	 */
+	private void updateCreateAchievement() throws SQLException {
+		DBConnection database = new DBConnection();
+		String time = Quiz.df.format((new Date()).getTime());
+		ResultSet res = database.getStmt().executeQuery("SELECT COUNT(*) AS Count FROM Quiz WHERE AuthorID = \"" + this.userID.replace("\"", "\"\"") + "\";");
+		res.next();
+		int quizCreated = res.getInt("Count");
+		if (quizCreated == 1) {
+			ResultSet test1 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"Amateur Author\";");
+			if (!test1.next()) {
+				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Amateur Author\");");
+			}
+		} else if (quizCreated == 5) {
+			ResultSet test2 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"Prolific Author\";");
+			if (!test2.next()) {
+				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Prolific Author\");");
+			}
+		} else if (quizCreated == 10) {
+			ResultSet test3 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"Prodigious Author\";");
+			if (!test3.next()) {
+				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Prodigious Author\");");
+			}
 		}
 		database.getCon().close();
 	}

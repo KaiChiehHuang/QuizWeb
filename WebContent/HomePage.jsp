@@ -185,19 +185,29 @@ h6 {
 
 		<div
 			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color: black;">
-			<div style="position: absolute; left: 0px; top: 5px; width: 250px; height: 45; background-color: black;">
-				<a href="HomePage.jsp"><h4 style="color:#ffb3b3;">QuizThatShit</h4></a>
+			<div
+				style="position: absolute; left: 0px; top: 5px; width: 250px; height: 45; background-color: black;">
+				<a href="HomePage.jsp"><h4 style="color: #ffb3b3;">QuizThatShit</h4></a>
 			</div>
 		</div>
 
 		<div class="col-lg-6"
 			style="position: absolute; top: 8px; left: 30%; width: 40%;">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Search for...">
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" style="font-size:20px;"></span></button>
-				</span>
-			</div>
+			<form action="SearchServlet" method="post" id="search">
+				<div class="input-group">
+					<input type="text" name="targetToSearch" class="form-control" placeholder="Search for...">
+					<span class="input-group-btn" style="width:65px"> 
+					<select class="selectpicker form-control" id="sel1" name="searchOption">
+							<option value="quiz">Quiz</option>
+							<option value="user">User</option>
+					</select>
+					</span> <span class="input-group-btn">
+						<button type="submit" form="search" class="btn btn-default" type="button">
+							<span class="glyphicon glyphicon-search" style="font-size: 20px;"></span>
+						</button>
+					</span>
+				</div>
+			</form>
 			<!-- /input-group -->
 		</div>
 		<div

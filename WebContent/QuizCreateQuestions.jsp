@@ -23,7 +23,7 @@
 }
 </style>
 <title>Create Questions</title>
-    <SCRIPT language="javascript">
+    <SCRIPT type="text/javascript">
         function addRow(tableID) {
  
             var table = document.getElementById(tableID);
@@ -34,52 +34,26 @@
             var cell1 = row.insertCell(0);
             var element1 = document.createElement("input");
             element1.type = "checkbox";
-            element1.name ="chk";
-            element1.value = rowCount + 1;
+            element1.name ="choicecheck";
+            element1.value = "box" +  + rowCount + 1;
             cell1.appendChild(element1);
 
- 
             var cell2 = row.insertCell(1);
             var element2 = document.createElement("input");
             element2.type = "text";
-            element2.style = "border-radius: 6px; min-width: 0; width: 600px;  height: 34px;";
-            element2.name = "choice";
+            element2.style = "border-radius:6px; min-width: 0; width:600px;  height:34px;";
+            element2.name = "choice" + rowCount + 1;
             element2.placeholder="Choice";
-            element2.value = rowCount + 1;
-            cel23.appendChild(element2);
- 
- 
-        }
- 
-        function deleteRow(tableID) {
-            try {
-            var table = document.getElementById(tableID);
-            var rowCount = table.rows.length;
- 
-            for(var i=0; i<rowCount; i++) {
-                var row = table.rows[i];
-                var chkbox = row.cells[0].childNodes[0];
-                if(null != chkbox && true == chkbox.checked) {
-                    table.deleteRow(i);
-                    rowCount--;
-                    i--;
-                }
- 
- 
-            }
-            }catch(e) {
-                alert(e);
-            }
+            cell2.appendChild(element2);
         }
  
     </SCRIPT>
 </head>
-<body>
-
-<h1>Create Questions</h1>
+<body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers12.jpg')">
 
 <!-- Multiple Choice Problem -->
 <div class="container">
+<h1>Create Questions</h1>
 	<div class="panel panel-default" style="height: 60px;">
 		<div class="panel-body"
 			style="font-family: 'Ek Mukta'; color: #C71585; font-size: 18px; font-weight: bold;">
@@ -133,13 +107,11 @@
 						<!-- <input type="text" class="form-control form-control-inline" name = "choice" placeholder="Choice"> -->
 						
 						<INPUT type="button" class="btn btn-info" value="Add Choice" onclick="addRow('dataTable')" />
- 
-    					<INPUT type="button" class="btn btn-info" value="Delete Choice" onclick="deleteRow('dataTable')" />
     					
     					<TABLE id="dataTable" border="1">
         					<TR>
-            				<TD><INPUT type="checkbox" name="chk" value = "1" /></TD>
-            				<TD> <INPUT type="text" class="form-control form-control-inline" name = "choice" value = "1" placeholder="Choice"> </TD>
+            				<TD><INPUT type="checkbox" name="choicecheck" value = "box1"/></TD>
+            				<TD> <INPUT type="text" class="form-control form-control-inline" name = "choice1" placeholder="Choice"> </TD>
         					</TR>
     					</TABLE>
 

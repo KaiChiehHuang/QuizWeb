@@ -58,12 +58,23 @@ public class QuizAddProblem extends HttpServlet {
 		
 		if (type.equals("MC")) {
 			MultiChoice pro = new MultiChoice("MC", true);
-			String choice = request.getParameter("choice");
+			
+			String choice = request.getParameter("choice1");
+			String choices = "";
+			int index = 1;
+			while (choice != null) {
+				choices += "|" + choice;
+				choice = request.getParameter("choice" + index);
+				System.out.println(index);
+				System.out.println(choice);
+				index++;
+			}
 			pro.setQuestion(question);
-			pro.setChoices(choice);
-			pro.setCount(choice.split("\\|").length);
-			pro.setAnswers(answer);
+			pro.setChoices(choices);
+			pro.setCount(choices.split("\\|").length);
+//			pro.setAnswers(answer);
 			quiz.addProblem(pro);
+			System.out.println(choices);
 		} else if (type.equals("MR")) {
 			MultiResponse pro = new MultiResponse("MR", true);
 			pro.setAnswers(answer);

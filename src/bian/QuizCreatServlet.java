@@ -2,6 +2,7 @@ package bian;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import xuandong.Problem;
-import xuandong.Quiz;
+import com.sun.org.apache.xerces.internal.parsers.XMLParser;
+
+import xuandong.*;
 
 /**
  * Servlet implementation class QuizCreatServlet
@@ -49,28 +51,36 @@ public class QuizCreatServlet extends HttpServlet {
 		String url = request.getParameter("picture");
 		quiz.setName(name);
 		quiz.setDescription(description);
-		quiz.setImage(url);
+		if (url != null) {
+			quiz.setImage(url);
+		} else {
+			ArrayList<String> pictures = new ArrayList<String>();
+			pictures = xuandong.XMLParser.DEFAULTIMAGES;
+			Random random = new Random();
+			int next = random.nextInt(pictures.size());
+			quiz.setImage(pictures.get(next));
+		}
 		
 		String random = request.getParameter("Random");
 		String onepage = request.getParameter("OnePage");
 		String practice = request.getParameter("Practice");
 		String immcorr = request.getParameter("ImmCorr");
-		if (random.equals("Yes")) {
+		if (random == null || random.equals("Yes")) {
 			quiz.setRandomQuiz(true);
 		}else {
 			quiz.setRandomQuiz(false);
 		}
-		if (onepage.equals("Yes")) {
+		if (onepage == null || onepage.equals("Yes")) {
 			quiz.setOnePage(true);
 		}else {
 			quiz.setOnePage(false);
 		}
-		if (practice.equals("Yes")) {
+		if (practice == null ||practice.equals("Yes")) {
 			quiz.setPracticeMode(true);
 		}else {
 			quiz.setPracticeMode(false);
 		}
-		if (immcorr.equals("Yes")) {
+		if (immcorr == null || immcorr.equals("Yes")) {
 			quiz.setImmediateCorrection(true);
 		}else {
 			quiz.setImmediateCorrection(false);

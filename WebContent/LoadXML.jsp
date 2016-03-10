@@ -19,7 +19,7 @@
 </head>
 <body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers12.jpg')">
 
-<form action="loadXMLServlet" method="post">
+<form action="LoadXMLServlet" method="post">
 
 <!-- Quiz Properties -->
 <!-- name description image -->

@@ -2,6 +2,7 @@
 <quiz random="true" one-page="false" practice-mode="true" immediate-correction="true">
 <title>Cities</title>
 <category>Culture</category>
+<quiz-image>http://www.futureofcities.ox.ac.uk/media/2014/04/Future-City-1300x728-600x270.jpg</quiz-image>
 <description>See how well you recognize these famous cities.</description>
 
 <question type="picture-response">
@@ -15,7 +16,7 @@
 </question>
 
 <question type="picture-response">
-  <image-location>http://upload.wikimedia.org/wikipedia/en/thumb/4/40/Paris_Collage.png/280px-Paris_Collage.png</image-location>
+  <image-location>http://vignette2.wikia.nocookie.net/olympians/images/8/89/Paris.jpg/revision/latest?cb=20140107153745</image-location>
   <answer-list>
     <answer preferred="preferred">Paris</answer>
 	<answer>Paris, France</answer>

@@ -66,7 +66,8 @@ public class Quiz {
 	 */
 	public void setQuizID(String quizID) {
 		this.quizID = quizID;
-		problems = new ArrayList<Problem>();
+		this.problems = new ArrayList<Problem>();
+		endTime = (long) 0;
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
@@ -537,7 +538,7 @@ public class Quiz {
 	 */
 	public String quizEnd() {
 		if (!onPracticeMode) {
-			if (endTime == null) {
+			if (endTime == 0) {
 				this.endTime = (new Date()).getTime();
 			}
 			endDate = df.format(endTime);
@@ -693,6 +694,7 @@ public class Quiz {
 		double score = 0.0;
 		for (Problem pr : problems) {
 			score += pr.getScore();
+			System.out.println(score);
 		}
 		return score / pbCount * 100;
 	}

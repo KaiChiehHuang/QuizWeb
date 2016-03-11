@@ -31,6 +31,7 @@ public class Quiz {
 	private String startDate;
 	private String createdDate;
 	private String description;
+	private String category = "";
 	
 	private boolean isOnePage;
 	private boolean isRandomQuiz;
@@ -112,6 +113,9 @@ public class Quiz {
 				this.isPracticeMode = res.getBoolean("IsPracticeMode");
 				this.createdDate = res.getString("Time");
 				this.image = res.getString("Image");
+				if (!Category.getCategory(this.quizID).isEmpty()) {
+					this.category = Category.getCategory(this.quizID).get(0);
+				}
 				this.setPopularity();
 			}
 			database.getCon().close();
@@ -236,6 +240,15 @@ public class Quiz {
 		return this.isImmediateCorrection;
 	}
 
+	
+	/**
+	 * Return the category of this quiz
+	 * @return
+	 */
+	public String getCategory() {
+		return this.category;
+	}
+	
 	
 	/**
 	 * @return whether or not a practice quiz
@@ -522,17 +535,17 @@ public class Quiz {
 	 * @return end time
 	 */
 	public String quizEnd() {
-		if (endTime == null) {
-			this.endTime = (new Date()).getTime();
-		}
-		endDate = df.format(endTime);
-		Long dura = this.endTime - this.startTime;
-		Date tempDate = new Date();
-		tempDate.setTime(dura);
-		format.setTimeZone(TIME_ZONE);
-		duration = format.format(tempDate);
-		score = this.calculateScore();
 		if (!onPracticeMode) {
+			if (endTime == null) {
+				this.endTime = (new Date()).getTime();
+			}
+			endDate = df.format(endTime);
+			Long dura = this.endTime - this.startTime;
+			Date tempDate = new Date();
+			tempDate.setTime(dura);
+			format.setTimeZone(TIME_ZONE);
+			duration = format.format(tempDate);
+			score = this.calculateScore();
 			try {
 				DBConnection database = new DBConnection();
 				Statement stmt = database.getStmt();

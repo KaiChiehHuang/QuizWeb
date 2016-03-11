@@ -1,7 +1,6 @@
 package bian;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,22 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import xuandong.Quiz;
-import xuandong.XMLParser;
 
 /**
- * Servlet implementation class LoadXMLServlet
+ * Servlet implementation class QuizTakingMultiPageQuestion
  */
-@WebServlet("/LoadXMLServlet")
-public class LoadXMLServlet extends HttpServlet {
+@WebServlet("/QuizTakingMultiPageQuestion")
+public class QuizTakingMultiPageQuestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoadXMLServlet() {
+    public QuizTakingMultiPageQuestion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,16 +36,9 @@ public class LoadXMLServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String userID = (String)session.getAttribute("userID");
-		String xmlString = request.getParameter("XMLfile");
-		String[] xml = new String[2];
-		xml[0] = xmlString;
-		xml[1] = userID;
-		
-		XMLParser.main(xml);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("LoadXMLSuccess.jsp");
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizTakingMultiPageQuestion.jsp");
 		dispatcher.forward(request, response);
 	}
 

@@ -242,7 +242,7 @@ tbody{
 
 %>
 <!-- <div style="border-radius: 20px; position: relative; top: 65px; left: 50%; width: 800px; height: 550px; margin-left: -400px; border-radius: 10px; background-color: rgba(0, 0, 0, 0); overflow: hidden; border: 2px solid #73AD21; padding: 15px;"> -->
-<div class="container" style = "position: relative; width:70%; top: 50px;">
+<div class="container" style = "position: relative; width:70%; top: 50px; height: 500px">
   <h2 style="text-align:center;">Quiz Summary</h2> 
   		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
@@ -271,7 +271,7 @@ tbody{
   </ol>
 
   <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox" style="width: 600px; left: 50%; margin-left: -300px">
+  <div class="carousel-inner" role="listbox" style="width: 600px; left: 50%; margin-left: -300px; overflow: auto;">
     <div class="item active" style="height:400px;text-align:center;">
 
     	<h2 style="color:#C71585;">Basic Information</h2> 
@@ -284,6 +284,7 @@ tbody{
     	<h4>Author: <%=author %></h4>
     	<h2>     </h2>
     	<h4>Description: <%=description %></h4>
+
     	<div>
     	<span><strong>Categories: </strong></span>
     	<%

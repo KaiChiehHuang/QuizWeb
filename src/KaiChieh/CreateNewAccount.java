@@ -46,6 +46,7 @@ public class CreateNewAccount extends HttpServlet {
 		String password = request.getParameter("password");
 		String userName = request.getParameter("name");
 		String userAge = request.getParameter("age");
+		String userGender = request.getParameter("gender");
 		ServletContext context = getServletContext();
 		AccountManager manager = (AccountManager) context.getAttribute("AccountManager");
 		response.setContentType("text/html; charset=UTF-8");
@@ -56,6 +57,26 @@ public class CreateNewAccount extends HttpServlet {
 			HttpSession session = request.getSession(); 
 			session.setAttribute("userID", userID);
 			manager.createAccount(userID, password);
+			User newUser = new User(userID);
+			if(userName==""){
+				newUser.setGender("Unknown");
+			}else {
+				newUser.setGender(userName);
+			}
+			if(userAge==""){
+				newUser.setAge(0);
+			}else{
+				newUser.setAge(Integer.parseInt(userAge));
+			}
+			if(userGender==""){
+				newUser.setGender("Unknown");
+			}else if(userGender=="Secret") {
+				newUser.setGender("Unknown");
+			}else{
+				newUser.setGender(userGender);
+			}
+			
+			newUser.setName(userName);
 			Statement statement = (Statement) context.getAttribute("statement");
 			// TODO need to add user name and age to database
 			RequestDispatcher dispatcher = request.getRequestDispatcher("HomePage.jsp");

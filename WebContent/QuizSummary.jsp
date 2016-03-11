@@ -212,7 +212,12 @@ tbody{
 
 <%
   	String quizID = (String) request.getParameter("quizID"); 
-/* 	String userID = (String) request.getParameter("userID"); */ 
+/*  	String userID = (String) request.getParameter("userID"); */
+	boolean isGuest = false;
+	if (userID.equals("Guest")) {
+		isGuest = true;
+	}
+ 	
   	Quiz quizTest = (Quiz) session.getAttribute("quiz");
  	if(quizTest==null){
   		Quiz newQuiz = new Quiz();
@@ -286,7 +291,7 @@ tbody{
     	<h4>Description: <%=description %></h4>
 
     	<div>
-    	<span><strong>Categories: </strong></span>
+    	<span><strong>Category: </strong></span>
     	<%
 			String[] colors = new String[4];
 /* 			colors[0] = "success";
@@ -307,6 +312,7 @@ tbody{
 		%>	
 		</div>
 		<div>
+		<h4> </h4>
     	<span><strong>Tags: </strong></span>
     	<%
 /* 			String[] colors = new String[4];
@@ -385,7 +391,7 @@ tbody{
    		 <tbody>
     	<%
      	    ArrayList<Performance> perfUD = quizSummary.getUserPerformanceByDate();
-/*     		for (int i = 0; i < perfUD.size(); i++) {
+     		for (int i = 0; i < perfUD.size(); i++) {
     			String[] per = new String[3];
         		per[0] = perfUD.get(i).getStartTime();
         		per[1] = String.valueOf(perfUD.get(i).getScore());
@@ -401,9 +407,9 @@ tbody{
         			out.println("</td>");
         		}
         		out.println("</tr>");
-    		} */
+    		}
     		
-    		for (int i = 0; i < 100; i++) {
+/*     		for (int i = 0; i < 100; i++) {
     			String[] per = new String[3];
         		per[0] = "hi";
         		per[1] = "awkward";
@@ -419,7 +425,7 @@ tbody{
         			out.println("</td>");
         		}
         		out.println("</tr>");
-    		}
+    		} */
     	%>
           		</tbody>
       		</table>
@@ -447,7 +453,7 @@ tbody{
         		} else {
         			out.println("<tr class=\"warning\">");
         		}
-        		for (int j = 0; j < 3; j++) {
+         		for (int j = 0; j < 3; j++) {
         			out.println("<td>");
         			out.println(per[j]);
         			out.println("</td>");
@@ -570,6 +576,7 @@ tbody{
     <div class="item"
     	style="height:400px;text-align:center;">
         <h2 style="color:#C71585;">Recent Good Performances</h2>
+        <h4 style="color:#73AD21;">Better than 80%</h4>
     	<table class="table" >
     	<thead>
      		 <tr>
@@ -606,6 +613,7 @@ tbody{
     <div class="item"
     	style="height:400px;text-align:center;">
         <h2 style="color:#C71585;">Recent Bad Performances</h2>
+        <h4 style="color:#73AD21;">Worse than 40%</h4>
     	<table class="table" >
     	<thead>
      		 <tr>
@@ -653,20 +661,23 @@ tbody{
 
 <div class="text-center"
 style="position: relative;  width: 100%; height: 20%; top: 0; left: 0;">
-<h2>     </h2>
+
+<br>
+<br>
+<div  style="" class="btn-group" role="group">
+<div class="col-xs-6 col-md-6 text-right">
 <form action="QuizTakingStart" method="post">
-<input type="submit" class="btn btn-info" value = "Start Quiz"/>
-</form>
-<%-- <a href=<%=link%> class="btn btn-info" role="button">Start Quiz</a> --%>
-<!-- <a href="QuizTakingMultiPage.jsp" class="btn btn-info" role="button">Start Quiz</a> -->
 <%
-if (isPracticeMode) {
-	out.println("<a href=\"" + linkPractice+ "\" class=\"btn btn-info\" role=\"button\">Practice</a>");
+if (!isGuest) {
+	out.println("<input type=\"submit\" class=\"btn btn-info\" value = \"Start Quiz\"/>");
 } else {
-	out.println("<a class=\"btn btn-info\" disabled=\"disabled\" role=\"button\">Practice</a>");
+	out.println("<input type=\"submit\" class=\"btn btn-info\" disabled = \"disabled\" value = \"Start Quiz\"/>");
+/* 	out.println("<a class=\"btn btn-info\" disabled=\"disabled\" role=\"button\">Practice</a>"); */
 }
 %>
-<%-- <a href=<%=link%> class="btn btn-info" role="button">Practice</a> --%>
+</form>			
+</div>
+<div class="col-xs-6 col-md-6 text-left">
 <%
 	if (userID.equals(author)) {
 		out.print("<a href=\"QuizEditing.jsp\" class=\"btn btn-info\"  role=\"button\">Edit Quiz</a>");
@@ -674,7 +685,12 @@ if (isPracticeMode) {
 		out.print("<a disabled=\"disabled\" class=\"btn btn-info\"  role=\"button\">Edit Quiz</a>");
 	}
 %>
- <div><a href="HomePage.jsp"> Back to Home Page </a></div>
+</div>
+
+</div>
+<br>
+<br>
+<div><a href="HomePage.jsp"> Back to Home Page </a></div>
 </div>
 </div>
 </div>

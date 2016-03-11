@@ -229,7 +229,7 @@ public class Problem {
 	 * If the user has multiple answers, please separate them by "|" and then concatenate them
 	 */
 	public void setUserAnswer(String userAnswer) {
-		this.userAnswer = userAnswer;
+		this.userAnswer = userAnswer.toLowerCase();
 	}
 	
 	

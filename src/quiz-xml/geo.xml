@@ -16,7 +16,7 @@
 
 <question type="picture-response">
   <query>Which country is in this picture?</query>
-  <image-location>https://recodetech.files.wordpress.com/2014/05/china-1-of-1.jpg?quality=80&strip=info&w=640</image-location>
+  <image-location>http://www.cn.undp.org/content/dam/undp/images/design_images/country_office_maps/dark_blue/png/china_2.png</image-location>
   <answer>China</answer>
   <answer>Chinese</answer>
   <answer>P.R.C</answer>

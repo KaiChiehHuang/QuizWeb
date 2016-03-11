@@ -110,7 +110,7 @@
 	
 	<div class="collapse" id="collapseChoices">
 			<div class="well"
-				style="height: 400px; background-color: black;">
+				style="height: 400px; background-color: black;overflow: auto;">
 				<form action="QuizAddProblem" method="post">	
 					<div class="container">
 						<p><h3>Creating Single/Multi Choice Problem: </h5> </p>
@@ -142,7 +142,7 @@
 	
 	<div class="collapse" id="collapseFillBlank">
 			<div class="well"
-				style="height: 400px; background-color: black;">
+				style="height: 400px; background-color: black;overflow: auto;">
 				<form action="QuizAddProblem" method="post">	
 				
 					<div class="container">
@@ -167,7 +167,7 @@
 	
 	<div class="collapse" id="collapsePictureResponse">
 			<div class="well"
-				style="height: 400px; background-color: black;">
+				style="height: 400px; background-color: black;overflow: auto;">
 				<form action="QuizAddProblem" method="post">	
 
 					<div class="container">
@@ -194,7 +194,7 @@
 	
 	<div class="collapse" id="collapseQuestionResponse">
 			<div class="well"
-				style="height: 400px; background-color: black;">
+				style="height: 400px; background-color: black;overflow: auto;">
 				<form action="QuizAddProblem" method="post">	
 
 					<div class="container">
@@ -217,7 +217,7 @@
 	
 	<div class="collapse" id="collapseMultiResponse">
 			<div class="well"
-				style="height: 400px; background-color: black;">
+				style="height: 400px; background-color: black;overflow: auto;">
 				<form action="QuizAddProblem" method="post">	
 				
 						<div class="container">
@@ -256,32 +256,6 @@
 	
 </div> 
 
-<%--  <%
-	for (int i = 1; i < problems.size() + 1; i++) {
-		Problem pro = problems.get(i-1);
-		String type = pro.getType();
-		if (type == "QuestionResponse") {
-			QuestionResponse qr = (QuestionResponse)pro;
-			createQuestionResponse(out, qr, i);
-		} else if (type == "FillBlank") {
-			FillBlank fb = (FillBlank)pro;
-			createFillBlank(out, fb, i);
-		} else if (type == "PictureResponse") {
-			PictureResponse pr = (PictureResponse)pro;
-			createPictureResponse(out, pr, i);
-		} else if (type == "MultiChoice") {
-			MultiChoice mc = (MultiChoice)pro;
-			if (mc.getCount() == 1) {
-				createSingleChoice(out, mc, i);
-			} else {
-				createMultiChoice(out, mc, i);
-			}
-		} else if (type == "MultiResponse") {
-			MultiResponse mr = (MultiResponse) pro;
-			createMultiResponse(out, mr, i);
-		}
-	}
-%> --%>
 <div class="text-center">
 <a href="QuizCreatedSuccess.jsp" class="btn btn-info"  role="button">Submit</a>
 </div>

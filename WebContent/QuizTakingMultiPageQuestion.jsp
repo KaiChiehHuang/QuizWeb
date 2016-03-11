@@ -204,67 +204,65 @@
 	}
 	quiz.quizStart(); */
 %>
-<form action="MultiPageTransfer" method="post">
-<div class="container" style = "position: relative; width:70%; top: 50px;">
-  <h2 style="text-align:center;">Quiz Problem</h2> 
-  		<div style="border-radius: 20px;
-    				border: 2px solid #73AD21;
-    				padding: 15px; 
-				    height: 520px;
-     				text-align:left;
-     				left:50%;width:800px;
-     				margin-left:-400px;
-     				top:70px;
-     				position:absolute;
-     				opacity: 0.9;
-     				background-color:white;
-     				">
-		<%
-				Problem pro = problems.get(index-1);
-				String type = pro.getType();
-				if (type == "QuestionResponse") {
-					QuestionResponse qr = (QuestionResponse)pro;
-					takeQuestionResponse(out, qr, index);
-				} else if (type == "FillBlank") {
-					FillBlank fb = (FillBlank)pro;
-					takeFillBlank(out, fb, index);
-				} else if (type == "PictureResponse") {
-					PictureResponse pr = (PictureResponse)pro;
-					takePictureResponse(out, pr, index);
-				} else if (type == "MultiChoice") {
-					MultiChoice mc = (MultiChoice)pro;
-					if (mc.getCount() == 1) {
-						takeSingleChoice(out, mc, index);
-					} else {
-						takeMultiChoice(out, mc, index);
+	<form action="MultiPageTransfer" method="post">
+		<div class="container"
+			style="position: relative; width: 70%; top: 50px; height:500px; overflow: auto;">
+			<h2 style="text-align: center;">Quiz Problem</h2>
+			<div
+				style="border-radius: 20px; border: 2px solid #73AD21; padding: 15px; height: 400px; text-align: left; left: 50%; width: 800px; margin-left: -400px; top: 70px; position: absolute; opacity: 0.9; background-color: white;">
+				<%
+					Problem pro = problems.get(index - 1);
+					String type = pro.getType();
+					if (type == "QuestionResponse") {
+						QuestionResponse qr = (QuestionResponse) pro;
+						takeQuestionResponse(out, qr, index);
+					} else if (type == "FillBlank") {
+						FillBlank fb = (FillBlank) pro;
+						takeFillBlank(out, fb, index);
+					} else if (type == "PictureResponse") {
+						PictureResponse pr = (PictureResponse) pro;
+						takePictureResponse(out, pr, index);
+					} else if (type == "MultiChoice") {
+						MultiChoice mc = (MultiChoice) pro;
+						if (mc.getCount() == 1) {
+							takeSingleChoice(out, mc, index);
+						} else {
+							takeMultiChoice(out, mc, index);
+						}
+					} else if (type == "MultiResponse") {
+						MultiResponse mr = (MultiResponse) pro;
+						takeMultiResponse(out, mr, index);
 					}
-				} else if (type == "MultiResponse") {
-					MultiResponse mr = (MultiResponse) pro;
-					takeMultiResponse(out, mr, index);
-				}
-		%>
-
-
-<%!
-	/* getParameter(answer1) get the answer of user. */
+				%>
+			</div>
+		</div>
+		
+		<div class="text-center"
+			style="position:relative; width: 100%; height: 20%; top: 10px; left: 0px;">
+			<h2></h2>
+			<input type="submit" class="btn btn-info" value="Next" />
+		</div>
+		</form>
+	
+	<%!/* getParameter(answer1) get the answer of user. */
 	public void takeSingleChoice(JspWriter myOut, MultiChoice mc, int index) throws IOException {
 		String[] choices = mc.getChoices();
 		String question = mc.getQuestion();
-		
+
 		myOut.println("<div class=\"item\" style=\"height:450px;text-align:center;\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%;\">");
-		myOut.println("<p>"+ "<h5>Problem " + index + ": </h5>"+question +"</p>");
+		myOut.println("<p>" + "<h5>Problem " + index + ": </h5>" + question + "</p>");
 		myOut.println("<div style=\"text-align: left\">");
 		for (int i = 0; i < choices.length; i++) {
 			myOut.println("<div class=\"radio\">");
-			myOut.println("<label><input type=\"radio\" name=\"answer"+ index + "\" value=\"" + choices[i]+ "\" />" + choices[i] + "</label>");
+			myOut.println("<label><input type=\"radio\" name=\"answer" + index + "\" value=\"" + choices[i] + "\" />"
+					+ choices[i] + "</label>");
 			myOut.println("</div>");
 		}
 		myOut.println("</div>");
 		myOut.println("</div>");
 		myOut.println("</div>");
-	}
-%>
+	}%>
 
 <%!
 	/* getParameter(answer2) get the answer of user. */
@@ -357,13 +355,5 @@
 
 
 
-<div class="text-center"
-style="position: relative;  width: 100%; height: 20%; top: 0; left: 0;">
-<h2>     </h2>
-<input type="submit" class="btn btn-info" value = "Next"/>
-</form>
-</div>
-</div>
-</div>
 </body>
 </html>

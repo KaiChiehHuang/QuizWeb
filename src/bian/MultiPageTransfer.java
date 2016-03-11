@@ -57,11 +57,20 @@ public class MultiPageTransfer extends HttpServlet {
 			}
 			answer = answer.substring(0, answer.length() - 1);
 		}
-		problems.get(index).setUserAnswer(answer);
-		String result = problems.get(index).getCorrectAnswerNumber();
+		problems.get(index-1).setUserAnswer(answer);
+		String result = problems.get(index-1).getCorrectAnswerNumber();
 		session.setAttribute("result", result);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizTakingMultiPageResult.jsp");
-		dispatcher.forward(request, response);
+		if(quiz.isImmediateCorrection()) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("QuizTakingMultiPageResult.jsp");
+			dispatcher.forward(request, response);
+		} else if (index+1 <= problems.size()){
+			RequestDispatcher dispatcher = request.getRequestDispatcher("QuizTakingMultiPageQuestion.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("QuizResult.jsp");
+			dispatcher.forward(request, response);
+		}
+
 	}
 
 }

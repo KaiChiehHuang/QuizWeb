@@ -364,8 +364,8 @@ h6 {
 	</div>
 
 	<div
-		style="position: relative; top: 85px; left: 50%; width: 900px; height: 1700px; margin-left: -450px;">
-
+		style="position: relative; top: 85px; left: 50%; width: 900px; height: 1000px; margin-left: -450px;">
+		
 		<div class="panel panel-default" style="height: 60px;">
 
 			<div class="panel-body"
@@ -763,14 +763,14 @@ h6 {
 		%>
 		</table>
 	</div>
-	<div style="position:relative;width=100%;bottom:0px;height:22%;background-color:#ffb3b3;">
+<!-- 	<div style="position:relative;width=100%;bottom:0px;height:22%;background-color:#ffb3b3;">
 	<hr style="
 				border:none;	
 				border-top:1px #CCCCCC solid;
 				height: 1px;
 	">	
 	 
-	</div>	
+	</div>	 -->
 		
 </body>
 </html>

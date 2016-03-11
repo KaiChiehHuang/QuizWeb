@@ -12,22 +12,21 @@
 <title>Online Quizbook</title>
 </head>
 <body style="background-color:#FFFAFA; background-image:url(loginBackground.jpg);background-size: 100%;">
-		<h1 style="text-align:center;">Playing and creating quizzes</h1>
 		
 		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
-    				padding: 15px; 
-				    height: 310px;
+    				padding: 10px; 
+				    height: 300px;
      				text-align:left;
      				left:50%;width:400px;
      				margin-left:-200px;
      				top:200px;
      				position:absolute;
-     				opacity: 0.9;
-     				background-color:white;
+     				background-color: rgba(255,255,255,0.9);
      				">
      	<% session.setAttribute("userID","Guest"); %>
-		<p> Please log in or<!-- Need to inform HomePage it's guest --><a href="HomePage.jsp"> log in as Guest </a> / <a href="AdminLogin.jsp" style="color:#B22222;"> log in as Admin </a></p>
+     	
+		<p> Please log in or<!-- Need to inform HomePage it's guest --><a href="GuestHomePage.jsp"> log in as Guest </a> / <a href="AdminLogin.jsp" style="color:#B22222;"> log in as Admin </a></p>
 			<form action="UserLogin" method="post"> 
 			<div class="input-group" style="opacity: 0.95;">
 	  			<span class="input-group-addon" id="basic-addon1">ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>

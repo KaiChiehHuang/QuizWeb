@@ -69,6 +69,16 @@ public class MultiChoice extends Problem {
 		return total;	
 	}
 	
+	/**
+	 * The percent this problem got right
+	 * @return right number/question number
+	 */
+	@Override
+	public String getCorrectAnswerNumber() {
+		int total = getScore();
+		return Integer.toString(total) + "/" + Integer.toString(this.count);
+	}
+	
 	
 	/**
 	 * @return a array of String containing all the possible choices

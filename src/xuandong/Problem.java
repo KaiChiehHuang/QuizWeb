@@ -114,6 +114,15 @@ public class Problem {
 		this.answers = answer.split("\\|");
 	}
 	
+	/**
+	 * The percent this problem got right
+	 * @return right number/question number
+	 */
+	public String getCorrectAnswerNumber() {
+		int count = getScore();
+		return Integer.toString(count) + "/1";
+	}
+	
 	
 	/**
 	 * Set the problemID, only works if in creating mode

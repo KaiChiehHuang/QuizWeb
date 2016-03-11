@@ -100,6 +100,10 @@
 	background: #3e3436;
 }
 
+.carousel-control.right {
+    background-image: none
+}
+
 <script type='text/javascript'>
 	function pageScrollUp(position) {
 		var yPos = window.pageYOffset;
@@ -130,8 +134,7 @@
 <title>Quiz</title>
 </head>
 <body style="height:770px;background-size:100%;background-color:#fffff6;">
-<div
-		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
+<div style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
 
 		<div
 			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color: black;">
@@ -184,10 +187,10 @@
 		</div>
 		<!-- /.col-lg-6 -->
 	</div>
-<h1>Quiz Problem</h1>
 
 <%
 	Quiz quiz = (Quiz)session.getAttribute("quiz");
+	String url = quiz.getImage();
 	String name = quiz.getName();
 	String author = quiz.getAuthor();
 	String description = quiz.getDescription();
@@ -200,65 +203,123 @@
 	quiz.quizStart();
 %>
 <form action="QuizResultServlet" method="post">
-<div style="border-radius: 20px; position: relative; top: 65px; left: 50%; width: 800px; height: 550px; margin-left: -400px; border-radius: 10px; background-color: rgba(0, 0, 0, 0); overflow: hidden; border: 2px solid #73AD21; padding: 15px;">
+<div class="container" style = "position: relative; width:70%; top: 50px;">
+  <h2 style="text-align:center;">Quiz Problem</h2> 
+  		<div style="border-radius: 20px;
+    				border: 2px solid #73AD21;
+    				padding: 15px; 
+				    height: 520px;
+     				text-align:left;
+     				left:50%;width:800px;
+     				margin-left:-400px;
+     				top:70px;
+     				position:absolute;
+     				opacity: 0.9;
+     				background-color:white;
+     				">
 		<div id="carousel-example-generic" class="carousel slide"
 			data-ride="carousel" data-interval="false"
 			style="border-radius: 20px; position: relative; left: 0%; width: 100%; height: 100%;">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active" style="background-color: #73AD21"></li>
- <%
-    for (int i = 1; i < problems.size() + 1; i++) {
-    	out.println("<li data-target=\"#myCarousel\" data-slide-to=\"" + i + "\"style=\"background-color: #73AD21\"></li>");
-    }
- %>
- 	<li data-target="#myCarousel" data-slide-to="<%=problems.size() + 1%>" class="active"></li>
-  </ol>
+			  <!-- Indicators -->
+			  <ol class="carousel-indicators">
+			    <li data-target="#myCarousel" data-slide-to="0" class="active" style="background-color: #73AD21"></li>
+			 <%
+			    for (int i = 1; i < problems.size() + 1; i++) {
+			    	out.println("<li data-target=\"#myCarousel\" data-slide-to=\"" + i + "\"style=\"background-color: #73AD21\"></li>");
+			    }
+			 %>
+			 	<li data-target="#myCarousel" data-slide-to="<%=problems.size() + 1%>" class="active"></li>
+			  </ol>
 
-<div class="carousel-inner" role="listbox" style="width: 600px; left: 50%; margin-left: -300px">
-    <div class="item active" style="height:450px;text-align:center;">
+		<div class="carousel-inner" role="listbox" style="width: 600px; left: 50%; margin-left: -300px">
+		    <div class="item active" style="height:450px;text-align:center;">
+
     	<h2 style="color:#C71585;">Basic Information</h2> 
+    	<center>
+    	<img src=<%=url %> width="140" height="140" border="0" class="img-circle">
+    	</center>
     	<h2>     </h2>
     	<h4>Name: <%=name %></h4>
     	<h2>     </h2>
     	<h4>Author: <%=author %></h4>
     	<h2>     </h2>
     	<h4>Description: <%=description %></h4>
-    </div>
-<%
-	for (int i = 1; i < problems.size() + 1; i++) {
-		Problem pro = problems.get(i-1);
-		String type = pro.getType();
-		if (type == "QuestionResponse") {
-			QuestionResponse qr = (QuestionResponse)pro;
-			takeQuestionResponse(out, qr, i);
-		} else if (type == "FillBlank") {
-			FillBlank fb = (FillBlank)pro;
-			takeFillBlank(out, fb, i);
-		} else if (type == "PictureResponse") {
-			PictureResponse pr = (PictureResponse)pro;
-			takePictureResponse(out, pr, i);
-		} else if (type == "MultiChoice") {
-			MultiChoice mc = (MultiChoice)pro;
-			if (mc.getCount() == 1) {
-				takeSingleChoice(out, mc, i);
-			} else {
-				takeMultiChoice(out, mc, i);
+    	<div>
+    	<span><strong>Categories: </strong></span>
+    	<%
+			String[] colors = new String[4];
+/* 			colors[0] = "success";
+			colors[1] = "info";
+			colors[2] = "warning";
+			colors[3] = "danger"; */
+			ArrayList<String> cates = Category.getCategory(quiz.getQuizID());
+			for (int i = 0; i < cates.size(); i++) {
+				if (i % 3 == 0) {
+				out.print("<span class=\"label label-success\">" + cates.get(i) + "</span>");
+				} else if (i % 3 == 2) {
+				out.print("<span class=\"label label-info\">" + cates.get(i) + "</span>");
+				} else {
+				out.print("<span class=\"label label-danger\">" + cates.get(i) + "</span>");
+				}
+								
 			}
-		} else if (type == "MultiResponse") {
-			MultiResponse mr = (MultiResponse) pro;
-			takeMultiResponse(out, mr, i);
-		}
-	}
-%>
-    <div class="item"
-    	style="position: fixed;  width: 600px; margin-left: -300px; left: 50%;">
-    	<h2>Congratulations!</h2> 
-    	<h2>     </h2>
-    	<h4>You can submit now!</h4>
+		%>	
+		</div>
+		<div>
+    	<span><strong>Tags: </strong></span>
+    	<%
+/* 			String[] colors = new String[4];
+			colors[0] = "success";
+			colors[1] = "info";
+			colors[2] = "warning";
+			colors[3] = "danger"; */
+			ArrayList<String> tags = Tag.getTags(quiz.getQuizID());
+			for (int i = 0; i < tags.size(); i++) {
+				if (i % 3 == 0) {
+				out.print("<span class=\"label label-success\">" + tags.get(i) + "</span>");
+				} else if (i % 3 == 2) {
+				out.print("<span class=\"label label-info\">" + tags.get(i) + "</span>");
+				} else {
+				out.print("<span class=\"label label-danger\">" + tags.get(i) + "</span>");
+				}
+								
+			}
+		%>
+		</div>
     </div>
-</div>
-</div>
+		<%
+			for (int i = 1; i < problems.size() + 1; i++) {
+				Problem pro = problems.get(i-1);
+				String type = pro.getType();
+				if (type == "QuestionResponse") {
+					QuestionResponse qr = (QuestionResponse)pro;
+					takeQuestionResponse(out, qr, i);
+				} else if (type == "FillBlank") {
+					FillBlank fb = (FillBlank)pro;
+					takeFillBlank(out, fb, i);
+				} else if (type == "PictureResponse") {
+					PictureResponse pr = (PictureResponse)pro;
+					takePictureResponse(out, pr, i);
+				} else if (type == "MultiChoice") {
+					MultiChoice mc = (MultiChoice)pro;
+					if (mc.getCount() == 1) {
+						takeSingleChoice(out, mc, i);
+					} else {
+						takeMultiChoice(out, mc, i);
+					}
+				} else if (type == "MultiResponse") {
+					MultiResponse mr = (MultiResponse) pro;
+					takeMultiResponse(out, mr, i);
+				}
+			}
+		%>
+		    <div class="item"
+		    	style="height:450px;text-align:center;">
+		    	<h2 style="color:#C71585;">Congratulations!</h2> 
+		    	<h2>     </h2>
+		    	<h3>You can submit now!</h4>
+		    </div>
+		</div>
 
 
 <%!
@@ -371,7 +432,7 @@
 	}
 %>
 
-<!-- Right controls -->
+			<!-- Right controls -->
 			</a> <a class="right carousel-control"
 				href="#carousel-example-generic" role="button" data-slide="next">
 				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"
@@ -380,12 +441,13 @@
  
 </div>
 
+
 <div class="text-center"
-style="position: fixed;  width: 100%; height: 20%; top: 80%; left: 0; background-color: rgba(225, 196, 193, 0.6)">
+style="position: relative;  width: 100%; height: 20%; top: 0; left: 0;">
 <h2>     </h2>
-<input type="submit" value = "Submit Answer"/>
+<input type="submit" class="btn btn-info" value = "Submit Answer"/>
 </form>
 </div>
-
+</div>
 </body>
 </html>

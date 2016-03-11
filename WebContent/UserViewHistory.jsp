@@ -269,9 +269,6 @@ tbody{
     		String quizID = userPerformance.get(i).getQuizID();
     		out.println("<td style=\"text-align:center;\">");
     		out.println("<a href=\"ChallengeFriend.jsp?quizName="+per[0]+"&quizID="+ per[4]  +"\"><button class=\"btn btn-warning\">Challenge</button></a>");
-    		
-    		out.println("<td style=\"text-align:center;\">");
-    		out.println("<button name = \"quizchallenge\" type=\"submit\" class=\"btn btn-sm btn-warning\" value =\"" +quizID+ "\"/>Challenge</button>");
 
     		out.println("</td style=\"text-align:center;\">");
     		out.println("</tr>");	

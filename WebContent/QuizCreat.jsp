@@ -287,13 +287,13 @@ tbody{
 
 <!-- PracticeMode -->
 
-	<p><h5>Practice Mode: Will this quiz have practice mode? </h5> </p>
+<!-- 	<p><h5>Practice Mode: Will this quiz have practice mode? </h5> </p>
 	<div class="radio">
 		  <label><input type="radio" name="Practice" value="Yes">Yes</label>
 	</div>
 		<div class="radio">
 		  <label><input type="radio" name="Practice" value="No">No</label>
-	</div>
+	</div> -->
 
 		  
 <!-- ImmediateCorrection -->

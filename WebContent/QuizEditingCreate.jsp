@@ -112,7 +112,7 @@
 	
 	<div class="collapse" id="collapseChoices">
 			<div class="well"
-				style="height: 400px; background-color: black;">
+				style="height: 400px; background-color: black; overflow: auto;">
 				<form action="QuizEditingAddProblem" method="post">	
 					<div class="container">
 						<p><h3>Creating Single/Multi Choice Problem: </h5> </p>
@@ -130,7 +130,7 @@
     					<TABLE id="dataTable" border="1">
         					<TR>
             				<TD><INPUT type="checkbox" name="choicecheck" value = "box1"/></TD>
-            				<TD> <INPUT type="text" class="form-control form-control-inline" name = "choice1" placeholder="Choice"> </TD>
+            				<TD> <INPUT type="text" style="border-radius:6px; min-width: 0; width:600px;  height:34px;" name = "choice1" placeholder="Choice"> </TD>
         					</TR>
     					</TABLE>
 
@@ -144,21 +144,21 @@
 	
 	<div class="collapse" id="collapseFillBlank">
 			<div class="well"
-				style="height: 400px; background-color: black;">
+				style="height: 400px; background-color: black;overflow: auto;">
 				<form action="QuizEditingAddProblem" method="post">	
 				
-<div class="container">
-	<p><h3>Creating Fill Blank Problem: </h5> </p>
-	<input type="hidden" name = "type" value = "FB">
-	<p><h5>Question: </h5> </p>
-	<div>
-		<input type="text" class="form-control form-control-inline" name = "fbquestion" placeholder="Question">
-		<p><h5>Blank field: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
-		<p><h5>Question part 2: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "fbquestion" placeholder="Question">
-	</div>
-</div>
+					<div class="container">
+						<p><h3>Creating Fill Blank Problem: </h5> </p>
+						<input type="hidden" name = "type" value = "FB">
+						<p><h5>Question: </h5> </p>
+						<div>
+							<input type="text" class="form-control form-control-inline" name = "fbquestion" placeholder="Question">
+							<p><h5>Blank field: </h5> </p>
+							<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
+							<p><h5>Question part 2: </h5> </p>
+							<input type="text" class="form-control form-control-inline" name = "fbquestion" placeholder="Question">
+						</div>
+					</div>
 
 				<div class="text-right">
 				<input type="submit" class="btn btn-info" value = "Add Question"></input>
@@ -169,23 +169,23 @@
 	
 	<div class="collapse" id="collapsePictureResponse">
 			<div class="well"
-				style="height: 400px; background-color: black;">
+				style="height: 400px; background-color: black;overflow: auto;">
 				<form action="QuizEditingAddProblem" method="post">	
 
-<div class="container">
-	<p><h3>Creating Picture Respond Problem: </h5> </p>
-	<input type="hidden" name = "type" value = "PR">
-	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
-	<div>
-		<p><h5>Picture: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "picture" placeholder="Picture URL">
-	</div>
-	<div>
-		<p><h5>Answer: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
-	</div>
-</div>
+					<div class="container">
+						<p><h3>Creating Picture Respond Problem: </h5> </p>
+						<input type="hidden" name = "type" value = "PR">
+						<p><h5>Question: </h5> </p>
+						<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
+						<div>
+							<p><h5>Picture: </h5> </p>
+							<input type="text" class="form-control form-control-inline" name = "picture" placeholder="Picture URL">
+						</div>
+						<div>
+							<p><h5>Answer: </h5> </p>
+							<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
+						</div>
+					</div>
 
 				<div class="text-right">
 				<input type="submit" class="btn btn-info" value = "Add Question"></input>
@@ -196,19 +196,19 @@
 	
 	<div class="collapse" id="collapseQuestionResponse">
 			<div class="well"
-				style="height: 400px; background-color: black;">
+				style="height: 400px; background-color: black;overflow: auto;">
 				<form action="QuizEditingAddProblem" method="post">	
 
-<div class="container">
-	<p><h3>Creating Question Respond Problem: </h5> </p>
-	<input type="hidden" name = "type" value = "QR">
-	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
-	<div>
-		<p><h5>Answer: </h5> </p>
-		<input type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
-	</div>
-</div>
+					<div class="container">
+						<p><h3>Creating Question Respond Problem: </h5> </p>
+						<input type="hidden" name = "type" value = "QR">
+						<p><h5>Question: </h5> </p>
+						<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
+						<div>
+							<p><h5>Answer: </h5> </p>
+							<input type="text" style="border-radius:6px; min-width: 0; width:600px;  height:34px;" name = "answer" placeholder="Answer">
+						</div>
+					</div>
 
 				<div class="text-right">
 				<input type="submit" class="btn btn-info" value = "Add Question"></input>
@@ -219,15 +219,15 @@
 	
 	<div class="collapse" id="collapseMultiResponse">
 			<div class="well"
-				style="height: 400px; background-color: black;">
+				style="height: 400px; background-color: black;overflow: auto;">
 				<form action="QuizEditingAddProblem" method="post">	
 				
-<div class="container">
-	<p><h3>Creating Multiple Respond Problem: </h5> </p>
-	<input type="hidden" name = "type" value = "MR">
-	<p><h5>Question: </h5> </p>
-	<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
-	<div>
+							<div class="container">
+								<p><h3>Creating Multiple Respond Problem: </h5> </p>
+								<input type="hidden" name = "type" value = "MR">
+								<p><h5>Question: </h5> </p>
+								<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
+								<div>
 										<p><h5>Answer: If there exists parallel answers, please split them by "#"</h5></p>
 								<p>eg: CA#California</p>
 				<INPUT type="button" class="btn btn-info" value="Add Answer" onclick="addRowResponse('dataTableMR')" />
@@ -237,15 +237,15 @@
 			            <TD> <INPUT type="text" class="form-control form-control-inline" name = "answer1" placeholder="Answer"> </TD>
 			        	</TR>
 			    		</TABLE>	
-	</div>
-	<p><h5>Should the answers be ordered? (Default: unordered)</h5> </p>
+	            </div>
+	              <p><h5>Should the answers be ordered? (Default: unordered)</h5> </p>
 							<div class="radio">
 								  <label><input type="radio" name="ordered" value="Yes">Yes</label>
 							</div>
 								<div class="radio">
 								  <label><input type="radio" name="ordered" value="No">No</label>
 							</div>
-</div>
+               </div>
 				
 				<div class="text-right">
 				<input type="submit" class="btn btn-info" value = "Add Question"></input>

@@ -269,21 +269,15 @@ $(function () {
                 <div class="modal-footer">
                     <center>
                     <%
-                    ArrayList<String> friends = new ArrayList<String>();
-                    User user = new User("xuandong");
-                    /* "xuandong" is viewUser */
-                    friends = user.getFriends();
-                    boolean isFriend = false;
-                    for (int i = 0; i < friends.size(); i++){
-                    	if (friends.get(i).equals("xuandong") || userID.equals("xuandong")) {
-                    		isFriend = true;
-                    	}
-                    }
-                    if (!isFriend) {
-                    	out.print("<button type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Add Friend</button>");
-                    } else {
-                    	out.print("<button disabled=\"disabled\" type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Add Friend</button>");
-                    }
+	                    if (User.checkFriend(userID, viewUserID)) {
+	                    	out.print("<button disabled=\"disabled\" type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Friend<span class=\"glyphicon glyphicon-ok-sign\"></span></button>");
+	                    } else {
+	                    	if(User.checkFriendRequest(userID,  viewUserID)) { 
+	                    		out.print("<button disabled=\"disabled\" type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Request Sent<span class=\"glyphicon glyphicon-question-sign\"></span></button>");
+	                    	}else {
+	                    		out.print("<button type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Add Friend</button>"); 
+	                    	}
+	                    }
                     %>
                     </center>
                 </div>

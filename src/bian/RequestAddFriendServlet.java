@@ -45,7 +45,7 @@ public class RequestAddFriendServlet extends HttpServlet {
 		
 		user.sendFriendRequest(friendID);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("HomePage.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UserProfile.jsp");
 		dispatcher.forward(request, response);
 	}
 

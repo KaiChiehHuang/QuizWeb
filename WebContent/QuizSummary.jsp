@@ -653,7 +653,10 @@ tbody{
 <div class="text-center"
 style="position: relative;  width: 100%; height: 20%; top: 0; left: 0;">
 <h2>     </h2>
-<a href=<%=link%> class="btn btn-info" role="button">Start Quiz</a>
+<form action="QuizTakingStart" method="post">
+<input type="submit" class="btn btn-info" value = "Start Quiz"/>
+</form>
+<%-- <a href=<%=link%> class="btn btn-info" role="button">Start Quiz</a> --%>
 <!-- <a href="QuizTakingMultiPage.jsp" class="btn btn-info" role="button">Start Quiz</a> -->
 <%
 if (isPracticeMode) {

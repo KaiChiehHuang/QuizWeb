@@ -247,57 +247,14 @@ h6 {
 	</div>
 	<%
 		String searchOption = (String) session.getAttribute("searchOption");
-			int height = 0;
-			if (searchOption.equals("user")) {
-		ArrayList<User> userSearchResult = (ArrayList<User>) session.getAttribute("searchResult");
-		height = 150 + userSearchResult.size() * 40;
-		out.print("<div style=\"text-align:center;background-color:white;position:absolute;top:100px;height:"
-				+ height
-				+ "px;width:700px;left:50%;margin-left:-350px;border-radius: 20px;border: 2px solid #73AD21;padding: 15px; \">");
-		
-		out.print("<div class=\"col-xs-6 col-md-4 text-left\" style=\"left: 0px;top:30px;\">");
-		out.print("<a href=\"HomePage.jsp\">Back to HomePage</a>");
-		out.print("</div>");
-		out.print("<div class=\"col-xs-6 col-md-4 text-center\">");
-		out.print("<h3> Search Result </h3>");
-		out.print("</div>");
-		out.print("<div class=\"col-xs-6 col-md-4 text-left\">");
-		out.print("</div>");
-		// Make a table 
-		if (userSearchResult.size() > 0) {
-			int numUsers = 0;
-			out.print("<br>");
-			out.print("<table class=\"table table-striped\">");
-			out.print("<tr>");
-			out.print("<th>#</th>");
-			out.print("<th>User ID</th>");
-			out.print("<th>User Name</th>");
-			//out.print("");
-			out.print("</tr>");
-			for (User user : userSearchResult) {
-				out.print("<tr  class=\"success\">");
-				out.print("<td>" + String.valueOf(numUsers + 1) + "</td>");
-				out.print("<td>" + "<a href=\"#\">" + user.getID() + "</a>" + "</td>");
-				out.print("<td>" + user.getName() + "</td>");
-				/* String quizUrl = "QuizSummary.jsp?quizID="+user.getAge()+"&userID="+userID;
-				String quizString = "<a href=\""+quizUrl+"\">" + Quiz.getName(performance.getQuizID()) +"</a>";
-				String activity = "Took quiz: "+quizString+" and received "+performance.getScore()+"!"; */
-				//out.print("<td>"+activity+"</td>");
-				out.print("</tr>");
-				numUsers++;
-			}
-			out.print("</table>");
-		}else {
-			out.print("<hr style=\"border:none;border-top:1px #CCCCCC solid;height: 1px;\"></hr>");
-			out.print("<h4>Can't find match result!</h4>");
-		}
-			out.print("</div>");
-		} else if (searchOption.equals("quiz")) {
-			ArrayList<Quiz> quizSearchResult = (ArrayList<Quiz>) session.getAttribute("searchResult");
-			height = 130 + quizSearchResult.size() * 40;
+		int height = 0;
+		if (searchOption.equals("user")) {
+			ArrayList<User> userSearchResult = (ArrayList<User>) session.getAttribute("searchResult");
+			height = 150 + userSearchResult.size() * 40;
 			out.print("<div style=\"text-align:center;background-color:white;position:absolute;top:100px;height:"
 					+ height
 					+ "px;width:700px;left:50%;margin-left:-350px;border-radius: 20px;border: 2px solid #73AD21;padding: 15px; \">");
+			out.print("<div class=\"row\">");
 			out.print("<div class=\"col-xs-6 col-md-4 text-left\" style=\"left: 0px;top:30px;\">");
 			out.print("<a href=\"HomePage.jsp\">Back to HomePage</a>");
 			out.print("</div>");
@@ -305,6 +262,52 @@ h6 {
 			out.print("<h3> Search Result </h3>");
 			out.print("</div>");
 			out.print("<div class=\"col-xs-6 col-md-4 text-left\">");
+			out.print("</div>");
+			out.print("</div>");
+			// Make a table 
+			if (userSearchResult.size() > 0) {
+				int numUsers = 0;
+				out.print("<br>");
+				out.print("<table class=\"table table-striped\">");
+				out.print("<tr>");
+				out.print("<th>#</th>");
+				out.print("<th>User ID</th>");
+				out.print("<th>User Name</th>");
+				//out.print("");
+				out.print("</tr>");
+				for (User user : userSearchResult) {
+					out.print("<tr  class=\"success\">");
+					out.print("<td>" + String.valueOf(numUsers + 1) + "</td>");
+					out.print("<td>" + "<a href=\"UserProfile.jsp?usertoview="+user.getID()+"\">" + user.getID() + "</a>" + "</td>");
+					out.print("<td>" + user.getName() + "</td>");
+					/* String quizUrl = "QuizSummary.jsp?quizID="+user.getAge()+"&userID="+userID;
+					String quizString = "<a href=\""+quizUrl+"\">" + Quiz.getName(performance.getQuizID()) +"</a>";
+					String activity = "Took quiz: "+quizString+" and received "+performance.getScore()+"!"; */
+					//out.print("<td>"+activity+"</td>");
+					out.print("</tr>");
+					numUsers++;
+				}
+				out.print("</table>");
+			} else {
+				out.print("<hr style=\"border:none;border-top:1px #CCCCCC solid;height: 1px;\"></hr>");
+				out.print("<h4>Can't find match result!</h4>");
+			}
+			out.print("</div>");
+		} else if (searchOption.equals("quiz")) {
+			ArrayList<Quiz> quizSearchResult = (ArrayList<Quiz>) session.getAttribute("searchResult");
+			height = 150 + quizSearchResult.size() * 40;
+			out.print("<div style=\"text-align:center;background-color:white;position:absolute;top:100px;height:"
+					+ height
+					+ "px;width:700px;left:50%;margin-left:-350px;border-radius: 20px;border: 2px solid #73AD21;padding: 15px; \">");
+			out.print("<div class=\"row\">");
+			out.print("<div class=\"col-xs-6 col-md-4 text-left\" style=\"left: 0px;top:30px;\">");
+			out.print("<a href=\"HomePage.jsp\">Back to HomePage</a>");
+			out.print("</div>");
+			out.print("<div class=\"col-xs-6 col-md-4 text-center\">");
+			out.print("<h3> Search Result </h3>");
+			out.print("</div>");
+			out.print("<div class=\"col-xs-6 col-md-4 text-left\">");
+			out.print("</div>");
 			out.print("</div>");
 			if (quizSearchResult.size() > 0) {
 				// Make a table 
@@ -320,7 +323,9 @@ h6 {
 				for (Quiz quiz : quizSearchResult) {
 					out.print("<tr  class=\"success\">");
 					out.print("<td>" + String.valueOf(numQuiz + 1) + "</td>");
-					out.print("<td>" + "<a href=\"#\">" + quiz.getName() + "</a>" + "</td>");
+					String quizUrl = "QuizSummary.jsp?quizID="+quiz.getQuizID()+"&userID="+userID;
+					String quizString = "<a href=\""+quizUrl+"\">" + quiz.getName() +"</a>";
+					out.print("<td>" + quizString + "</td>");
 					out.print("<td>" + quiz.getPopularity() + "</td>");
 					/* String quizUrl = "QuizSummary.jsp?quizID="+user.getAge()+"&userID="+userID;
 					String quizString = "<a href=\""+quizUrl+"\">" + Quiz.getName(performance.getQuizID()) +"</a>";
@@ -330,6 +335,9 @@ h6 {
 					numQuiz++;
 				}
 				out.print("</table>");
+			} else {
+				out.print("<hr style=\"border:none;border-top:1px #CCCCCC solid;height: 1px;\"></hr>");
+				out.print("<h4>Can't find match result!</h4>");
 			}
 			out.print("</div>");
 		}

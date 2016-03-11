@@ -508,7 +508,7 @@ h6 {
 						for(User newFriend: pendingFriendRequests) {
 							out.print("<tr  class=\"success\">");
 							out.print("<td>"+String.valueOf(numOfFriends+1)+"</td>");
-							out.print("<td>"+"<a href=\"#\">"+newFriend.getID()+"</a>"+"</td>");
+							out.print("<td>"+"<a href=\"UserProfile.jsp?usertoview="+newFriend.getID()+"\">"+newFriend.getID()+"</a>"+"</td>");
 							out.print("<td>"+newFriend.getName()+"</td>");
 							out.print("<td>"+newFriend.getGender()+"</td>");
 							out.print("<td>"+newFriend.getAge()+"</td>");
@@ -529,7 +529,7 @@ h6 {
 							User friend = new User(fID);
 							out.print("<tr  class=\"success\">");
 							out.print("<td>"+String.valueOf(numOfFriends+1)+"</td>");
-							out.print("<td>"+"<a href=\"#\">"+friend.getID()+"</a>"+"</td>");
+							out.print("<td>"+"<a href=\"UserProfile.jsp?usertoview="+fID+"\">"+fID+"</a>"+"</td>");
 							out.print("<td>"+friend.getName()+"</td>");
 							out.print("<td>"+friend.getGender()+"</td>");
 							out.print("<td>"+friend.getAge()+"</td>");
@@ -714,7 +714,7 @@ h6 {
 			for(Performance performance: friendRecentPerformance) {
 				out.print("<tr  class=\"success\">");
 				out.print("<td>"+String.valueOf(numOfActivity+1)+"</td>");
-				out.print("<td>"+"<a href=\"#\">"+performance.getUserID()+"</a>"+"</td>");
+				out.print("<td>"+"<a href=\"UserProfile.jsp?usertoview="+performance.getUserID()+"\">"+performance.getUserID()+"</a>"+"</td>");
 				out.print("<td>"+performance.getStartTime()+"</td>");
 				String quizUrl = "QuizSummary.jsp?quizID="+performance.getQuizID()+"&userID="+userID;
 				String quizString = "<a href=\""+quizUrl+"\">" + Quiz.getName(performance.getQuizID()) +"</a>";
@@ -727,7 +727,7 @@ h6 {
 			for(Quiz quiz: friendRecentCreatedQuiz) {
 				out.print("<tr  class=\"warning\">");
 				out.print("<td>"+String.valueOf(numOfActivity+1)+"</td>");
-				out.print("<td>"+"<a href=\"#\">"+quiz.getAuthor()+"</a>"+"</td>");
+				out.print("<td>"+"<a href=\"UserProfile.jsp?usertoview="+quiz.getAuthor()+"\">"+quiz.getAuthor()+"</a>"+"</td>");
 				out.print("<td>"+quiz.getCreatedDate()+"</td>");
 				String quizUrl = "QuizSummary.jsp?quizID="+quiz.getQuizID()+"&userID="+userID;
 				String quizString = "<a href=\""+quizUrl+"\">" + quiz.getName() +"</a>";
@@ -740,7 +740,7 @@ h6 {
 			for(Achievement Achi: friendRecentAchievement) {
 				out.print("<tr  class=\"danger\">");
 				out.print("<td>"+String.valueOf(numOfActivity+1)+"</td>");
-				out.print("<td>"+"<a href=\"#\">"+Achi.getUserID()+"</a>"+"</td>");
+				out.print("<td>"+"<a href=\"UserProfile.jsp?usertoview="+Achi.getUserID()+"\">"+Achi.getUserID()+"</a>"+"</td>");
 				out.print("<td>"+Achi.getTime()+"</td>");
 				String activity = Achi.getUserID() +" " + Achi.getDescription() + " And achieved " + Achi.getAchievementName()+"!";
 				out.print("<td>"+activity+"</td>");

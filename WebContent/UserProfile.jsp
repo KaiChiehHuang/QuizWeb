@@ -197,10 +197,10 @@ $(function () {
 	</div>
 
 <%
-/* 	String viewUserID = request.getParameter("usertoview");
-	User viewUser = new User(viewUserID); */
-	String viewUserID = "jay";
-	User viewUser = new User("jay");
+    String viewUserID = request.getParameter("usertoview");
+	User viewUser = new User(viewUserID); 
+/* 	String viewUserID = "jay";
+	User viewUser = new User("jay"); */
 %>
 
 <form action="RequestAddFriendServlet" method="post">

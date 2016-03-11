@@ -181,13 +181,13 @@ h6 {
 </head>
 <body style="height: 2200px;background-color:#fffff6;">
 	<div
-		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
+		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.8;">
 
 		<div
-			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color: black;">
+			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color:black;">
 			<div
 				style="position: absolute; left: 0px; top: 5px; width: 250px; height: 45; background-color: black;">
-				<a href="HomePage.jsp"><h4 style="color: #ffb3b3;">QuizThatShit</h4></a>
+				<a href="HomePage.jsp"><h4 style="color: #ffb3b3;">QuizzGo</h4></a>
 			</div>
 		</div>
 
@@ -216,7 +216,7 @@ h6 {
 			<div class="menu-wrap">
 				<nav class="menu">
 					<ul class="clearfix">
-						<li><a href="javascript:pageScrollUp(0)" style="color:yellow;">
+						<li style="left:-10px;width:110px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"><a href="javascript:pageScrollUp(0)" style="top:30px;padding:10px 1px;color:yellow;">
 							<%
 								String userID = (String) session.getAttribute("userID");
 								String welcome = "Hi "+userID+"!";
@@ -259,7 +259,7 @@ h6 {
 					ArrayList<Performance> recentQuizPerformances = user.getRecentTakenQuiz();
 					ArrayList<Quiz>   recentCreatedQuizzes = user.getRecentCreatedQuiz();
 					ArrayList<Announcement> announcements = Announcement.getAnnouncement();
-					int numAnnounceMent = (announcements.size() > 2) ? announcements.size() : 2;
+					int numAnnounceMent = (announcements.size() > 2) ? 2 : announcements.size();
 					int numPages = recentQuizPerformances.size() + recentCreatedQuizzes.size() + numAnnounceMent;
 					for(int pageIndex = 0; pageIndex<numPages; pageIndex++) {
 						String state = "";
@@ -277,62 +277,74 @@ h6 {
 			<div class="carousel-inner" role="listbox">
 				<%
 					int pageIndex = 0;
-					for (Performance performance : recentQuizPerformances) {
-/* 						if(pageIndex==4) {
-							break;
-						} */ 
-						if (pageIndex == 0) {
-							out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
-						} else {
-							out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+					if (numPages == 0) {
+						out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
+						out.print("<br><br><h2 style=\"color:#C71585;\">No Recent Activities</h2><br>");
+						out.print("</div>");
+					} else {
+						for (int announcePage = announcements.size() - 1; announcePage > announcements.size() - numAnnounceMent
+								- 1; announcePage--) {
+							if (pageIndex == 0) {
+								out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
+							} else {
+								out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+							}
+							out.print("<h3 style=\"color:#C71585;\">Annoucement!!!</h3><br>");
+							String announceIDUrl = "UserViewAnnoun.jsp";
+							String showQuizUrl = "<a href=" + "\"" + announceIDUrl + "\"" + ">";
+							out.print(showQuizUrl + "<h4 style=\"font-size:22px;\">"
+									+ announcements.get(announcePage).getSubject() + "</h4>");
+							out.print("</a>");
+							out.print("<h4>" + announcements.get(announcePage).getContent() + "</h4>");
+							out.print("<h6>" + announcements.get(announcePage).getDate() + "</h6>");
+							out.print("<h6>By: " + announcements.get(announcePage).getAdminID() + "</h6>");
+							out.print("</div>");
+							pageIndex++;
 						}
-						Quiz quizTook = new Quiz();
-						quizTook.setQuizID(performance.getQuizID());
-						out.print("<h3 style=\"color:#C71585;\">Your Recent Performance</h3><br>");
-						String quizID = quizTook.getQuizID();
-						String quizIDUrl = "QuizSummary.jsp?quizID=" + quizID + "&userID=" + userID;
-						String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">";
-						out.print(showQuizUrl + "<h4>Quiz: " + quizTook.getName() + "</h4>");
-						out.print("</a>");
-						out.print("<h4>Score: " + performance.getScore() + "</h4>");
-						out.print("<h4>Start Time: " + performance.getStartTime() + "</h4>");
-						out.print("<h4>Duration: " + performance.getDuration() + "</h4>");
-						out.print("</div>");
-						pageIndex++;
-					}
-					for (Quiz quiz : recentCreatedQuizzes) {
-						/* 					if(pageIndex==3) {
-												break;
-											} */
-						if (pageIndex == 0) {
-							out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
-						} else {
-							out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+						for (Performance performance : recentQuizPerformances) {
+							/* 						if(pageIndex==4) {
+														break;
+													} */
+							if (pageIndex == 0) {
+								out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
+							} else {
+								out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+							}
+							Quiz quizTook = new Quiz();
+							quizTook.setQuizID(performance.getQuizID());
+							out.print("<h3 style=\"color:#C71585;\">Your Recent Performance</h3><br>");
+							String quizID = quizTook.getQuizID();
+							String quizIDUrl = "QuizSummary.jsp?quizID=" + quizID + "&userID=" + userID;
+							String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">";
+							out.print(showQuizUrl + "<h4>Quiz: " + quizTook.getName() + "</h4>");
+							out.print("</a>");
+							out.print("<h4>Score: " + performance.getScore() + "</h4>");
+							out.print("<h4>Start Time: " + performance.getStartTime() + "</h4>");
+							out.print("<h4>Duration: " + performance.getDuration() + "</h4>");
+							out.print("</div>");
+							pageIndex++;
 						}
-						out.print("<h3 style=\"color:#C71585;\">Your Recent Created Quiz</h3><br>");
-						String quizIDUrl = "QuizSummary.jsp?quizID=" + quiz.getQuizID() + "&userID=" + userID;
-						String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">";
-						out.print(showQuizUrl + "<h4>Name: " + quiz.getName() + "</h4>");
-						out.print("</a>");
-						out.print("<h4>Popularity: " + quiz.getPopularity() + "</h4>");
-						out.print("<h4>Highest Score: " + quiz.getHighestScore() + "</h4>");
-						out.print("<h4>Created Time: " + quiz.getCreatedDate() + "</h4>");
-						String isPracticeMode = quiz.isPracticeMode() ? "Yes" : "No";
-						out.print("</div>");
-						pageIndex++;
-					}
-					for (int announcePage = announcements.size() - 1; announcePage > -1; announcePage--) {
-						out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
-						out.print("<h3 style=\"color:#C71585;\">Annoucement!!!</h3><br>");
-						String announceIDUrl = "UserViewAnnoun.jsp";
-						String showQuizUrl = "<a href=" + "\"" + announceIDUrl + "\"" + ">";
-						out.print(showQuizUrl+"<h4 style=\"font-size:22px;\">" + announcements.get(announcePage).getSubject() + "</h4>");
-						out.print("</a>");
-						out.print("<h4>" + announcements.get(announcePage).getContent() + "</h4>");
-						out.print("<h6>" + announcements.get(announcePage).getDate() + "</h6>");
-						out.print("<h6>By: " + announcements.get(announcePage).getAdminID() + "</h6>");
-						out.print("</div>");
-						pageIndex++;
+						for (Quiz quiz : recentCreatedQuizzes) {
+							/* 					if(pageIndex==3) {
+													break;
+												} */
+							if (pageIndex == 0) {
+								out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
+							} else {
+								out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+							}
+							out.print("<h3 style=\"color:#C71585;\">Your Recent Created Quiz</h3><br>");
+							String quizIDUrl = "QuizSummary.jsp?quizID=" + quiz.getQuizID() + "&userID=" + userID;
+							String showQuizUrl = "<a href=" + "\"" + quizIDUrl + "\"" + ">";
+							out.print(showQuizUrl + "<h4>Name: " + quiz.getName() + "</h4>");
+							out.print("</a>");
+							out.print("<h4>Popularity: " + quiz.getPopularity() + "</h4>");
+							out.print("<h4>Highest Score: " + quiz.getHighestScore() + "</h4>");
+							out.print("<h4>Created Time: " + quiz.getCreatedDate() + "</h4>");
+							String isPracticeMode = quiz.isPracticeMode() ? "Yes" : "No";
+							out.print("</div>");
+							pageIndex++;
+						}
 					}
 				%>
 
@@ -352,7 +364,7 @@ h6 {
 	</div>
 
 	<div
-		style="position: relative; top: 85px; left: 50%; width: 900px; height: 1800px; margin-left: -450px;">
+		style="position: relative; top: 85px; left: 50%; width: 900px; height: 1700px; margin-left: -450px;">
 
 		<div class="panel panel-default" style="height: 60px;">
 
@@ -677,7 +689,7 @@ h6 {
 					String quizName = quiz.getName();
 					String createTime = String.valueOf(quiz.getCreatedDate());
 					String heartIcon = "<br><span class=\"glyphicon glyphicon-time\" aria-hidden=\"true\"></span>  ";
-					String showQuizName = "<h3 style=\"font-size:17px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; \">" + quizName + "<small>" + heartIcon
+					String showQuizName = "<h3 style=\"font-size:17px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;\">" + quizName + "<small>" + heartIcon
 							+ createTime + "</small>" + "</h3>";
 					out.println(showQuizName);
 					out.println("</div>");
@@ -751,7 +763,7 @@ h6 {
 		%>
 		</table>
 	</div>
-	<div style="width=100%;bottom:0px;height:22%;background-color:#ffb3b3;">
+	<div style="position:relative;width=100%;bottom:0px;height:22%;background-color:#ffb3b3;">
 	<hr style="
 				border:none;	
 				border-top:1px #CCCCCC solid;

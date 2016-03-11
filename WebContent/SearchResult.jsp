@@ -184,13 +184,13 @@ h6 {
 </head>
 <body style="background-color:#fffff6;">
 	<div
-		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
+		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.8;">
 
 		<div
-			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color: black;">
+			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color:black;">
 			<div
 				style="position: absolute; left: 0px; top: 5px; width: 250px; height: 45; background-color: black;">
-				<a href="HomePage.jsp"><h4 style="color: #ffb3b3;">QuizThatShit</h4></a>
+				<a href="HomePage.jsp"><h4 style="color: #ffb3b3;">QuizzGo</h4></a>
 			</div>
 		</div>
 
@@ -218,28 +218,30 @@ h6 {
 
 			<div class="menu-wrap">
 				<nav class="menu">
-				<ul class="clearfix">
-					<li><a href="javascript:pageScrollUp(0)"
-						style="color: yellow;"> <%
+					<ul class="clearfix">
+						<li style="left:-10px;width:110px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"><a href="javascript:pageScrollUp(0)" style="top:30px;padding:10px 1px;color:yellow;">
+							<%
 								String userID = (String) session.getAttribute("userID");
 								String welcome = "Hi "+userID+"!";
 								out.println(welcome);
 							%>
-					</a></li>
-					<li><a href="#">Menu<span class="arrow">&#9660;</span></a>
-						<ul class="sub-menu">
-							<% String userIDUrl = "QuizCreat.jsp?userID="+userID; 
+							</a>
+						</li>
+						<li><a href="#">Menu<span class="arrow">&#9660;</span></a>
+							<ul class="sub-menu">
+								<% String userIDUrl = "QuizCreat.jsp?userID="+userID; 
 								   out.print("<li><a href=\""+ userIDUrl+"\">Create Quiz</a></li>");
 								%>
-							<% String quizRecordUrl = "UserViewHistory.jsp"; 
+								<% String quizRecordUrl = "UserViewHistory.jsp"; 
 								   out.print("<li><a href=\""+ quizRecordUrl+"\">Quiz Record</a></li>");
 								%>
-							<% String announceUrl = "UserViewAnnoun.jsp"; 
+								<% String announceUrl = "UserViewAnnoun.jsp"; 
 								   out.print("<li><a href=\""+ announceUrl +"\">Announcements</a></li>");
 								%>
-							<li><a href="UserLogin.jsp">Logout</a></li>
-						</ul></li>
-				</ul>
+								<li><a href="UserLogin.jsp">Logout</a></li>
+							</ul>
+						</li>
+					</ul>
 				</nav>
 			</div>
 		</div>
@@ -273,13 +275,14 @@ h6 {
 				out.print("<th>#</th>");
 				out.print("<th>User ID</th>");
 				out.print("<th>User Name</th>");
-				//out.print("");
+				out.print("<th>User Gender</th>");
 				out.print("</tr>");
 				for (User user : userSearchResult) {
 					out.print("<tr  class=\"success\">");
 					out.print("<td>" + String.valueOf(numUsers + 1) + "</td>");
 					out.print("<td>" + "<a href=\"UserProfile.jsp?usertoview="+user.getID()+"\">" + user.getID() + "</a>" + "</td>");
 					out.print("<td>" + user.getName() + "</td>");
+					out.print("<td>" + user.getGender() + "</td>");
 					/* String quizUrl = "QuizSummary.jsp?quizID="+user.getAge()+"&userID="+userID;
 					String quizString = "<a href=\""+quizUrl+"\">" + Quiz.getName(performance.getQuizID()) +"</a>";
 					String activity = "Took quiz: "+quizString+" and received "+performance.getScore()+"!"; */
@@ -317,7 +320,8 @@ h6 {
 				out.print("<tr>");
 				out.print("<th>#</th>");
 				out.print("<th>Quiz Name</th>");
-				//out.print("<th>Category</th>");
+				out.print("<th>Category</th>");
+				out.print("<th>Author</th>");
 				out.print("<th>Popularity</th>");
 				//out.print("");
 				out.print("</tr>");
@@ -327,7 +331,8 @@ h6 {
 					String quizUrl = "QuizSummary.jsp?quizID="+quiz.getQuizID()+"&userID="+userID;
 					String quizString = "<a href=\""+quizUrl+"\">" + quiz.getName() +"</a>";
 					out.print("<td>" + quizString + "</td>");
-					//out.print("<td>" + quiz.get+ "</td>");
+					out.print("<td>" + quiz.getCategory()+ "</td>");
+					out.print("<td><a href=\"UserProfile.jsp?usertoview="+quiz.getAuthor()+"\">" + quiz.getAuthor()+ "</a></td>");
 					out.print("<td>" + quiz.getPopularity() + "</td>");
 					/* String quizUrl = "QuizSummary.jsp?quizID="+user.getAge()+"&userID="+userID;
 					String quizString = "<a href=\""+quizUrl+"\">" + Quiz.getName(performance.getQuizID()) +"</a>";

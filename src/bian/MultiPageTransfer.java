@@ -3,6 +3,7 @@ package bian;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import xuandong.Problem;
-import xuandong.Quiz;
+import xuandong.*;
 
 /**
  * Servlet implementation class MultiPageTransfer
@@ -58,7 +58,10 @@ public class MultiPageTransfer extends HttpServlet {
 			answer = answer.substring(0, answer.length() - 1);
 		}
 		problems.get(index).setUserAnswer(answer);
-		session.setAttribute("result", problems.get(index).getCorrectNumber(answer));
+		String result = problems.get(index).getCorrectAnswerNumber();
+		session.setAttribute("result", result);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizTakingMultiPageResult.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

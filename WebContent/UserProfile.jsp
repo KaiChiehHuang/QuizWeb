@@ -280,9 +280,9 @@ $(function () {
                     	}
                     }
                     if (!isFriend) {
-                    	out.print("<button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Add Friend</button>");
+                    	out.print("<button type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Add Friend</button>");
                     } else {
-                    	out.print("<button disabled=\"disabled\" type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Add Friend</button>");
+                    	out.print("<button disabled=\"disabled\" type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Add Friend</button>");
                     }
                     %>
                     </center>

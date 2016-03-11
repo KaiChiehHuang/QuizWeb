@@ -38,7 +38,8 @@ public class RequestAddFriendServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("userID");
+		String userID = (String) session.getAttribute("userID");
+		User user = new User(userID);
 		
 		String friendID = request.getParameter("friendtoadd");
 		

@@ -59,9 +59,9 @@ public class CreateNewAccount extends HttpServlet {
 			manager.createAccount(userID, password);
 			User newUser = new User(userID);
 			if(userName==""){
-				newUser.setGender("Unknown");
+				newUser.setName("Unknown");
 			}else {
-				newUser.setGender(userName);
+				newUser.setName(userName);
 			}
 			if(userAge==""){
 				newUser.setAge(0);

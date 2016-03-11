@@ -114,7 +114,13 @@ public class User {
 	 * @param age
 	 */
 	public void setAge(int age) {
-		this.age = age;
+		try{
+			DBConnection database = new DBConnection();
+			database.getStmt().executeUpdate("UPDATE Users SET Age = " + age + " WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
+			database.getCon().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -143,7 +149,9 @@ public class User {
 	 */
 	public void setGender(String gender) {
 		try {
-			stmt.executeUpdate("UPDATE Users SET Gender = \"" + gender.replace("\"", "\"\"") + "\" WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
+			DBConnection database = new DBConnection();
+			database.getStmt().executeUpdate("UPDATE Users SET Gender = \"" + gender + "\" WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -157,47 +165,13 @@ public class User {
 	 */
 	public void setName(String name) {
 		try {
-			stmt.executeUpdate("UPDATE Users SET Name = \"" + name.replace("\"", "\"\"") + "\" WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
+			DBConnection database = new DBConnection();
+			database.getStmt().executeUpdate("UPDATE Users SET Name = \"" + name.replace("\"", "\"\"") + "\" WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
+			database.getCon().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
-	
-//	/**
-//	 * Add user's achievement
-//	 * @param achievement
-//	 */
-//	private void addAchievement(String achievement) {
-//		try {
-//			rs = stmt.executeQuery("SELECT * FROM Users WHERE UserID = \"" + id + "\";");
-//			String original = rs.getString("achievements");
-//			String new_ach;
-//			if (original.equals("")) {
-//				new_ach = achievement;
-//			} else {
-//				new_ach = original + "|" + achievement;
-//			}
-//			stmt.executeUpdate("UPDATE Users SET Achievement = \"" + new_ach + "\" WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";");
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	
-//	/**
-//	 * Add friend to friends table.
-//	 * 
-//	 * @param friendID
-//	 */
-//	public void addFriend(String friendID) {
-//		try {
-//			stmt.executeUpdate("INSERT INTO Friendship(User1ID, User2ID) VALUES(\"" + id.replace("\"", "\"\"") + "\",\"" + friendID.replace("\"", "\"\"") + "\");");
-//			stmt.executeUpdate("INSERT INTO Friendship(User1ID, User2ID) VALUES(\"" + friendID.replace("\"", "\"\"") + "\",\"" + id.replace("\"", "\"\"") + "\");");
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	
 	/**

@@ -31,13 +31,14 @@
 	ArrayList<Problem> practiceProblems = new ArrayList<Problem>(problems);
 	practiceProblems.addAll(problems);
 	practiceProblems.addAll(problems);
+	session.setAttribute("practiceProblems", practiceProblems);
 	quiz.setOnPracticeMode();
 	if (quiz.isRandomQuiz()) {
 		Collections.shuffle(practiceProblems);
 	}
 	quiz.quizStart();
 %>
-<form action="QuizResultServlet" method="post">
+<form action="PracticePageTransfer" method="post">
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false"
      style="position: fixed;  width: 100%; height: 80%; top: 0; left: 0; text-align: center; background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)), url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG')">
   <!-- Indicators -->

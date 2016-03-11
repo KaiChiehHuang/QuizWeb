@@ -14,7 +14,7 @@ public class Category {
 	public static ArrayList<Quiz> searchByCategory(String category) throws SQLException {
 		ArrayList<Quiz> quizs = new ArrayList<Quiz>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT QuizID FROM Category WHERE Category = \"" + category.replace("\"", "\"\"") + "\";";
+		String sql = "SELECT QuizID FROM Category WHERE Category LIKE \"" + category.replace("\"", "\"\"") + "\";";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			Quiz temp = new Quiz();

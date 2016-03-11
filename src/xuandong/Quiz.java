@@ -608,23 +608,23 @@ public class Quiz {
 	private void updateCreateAchievement() throws SQLException {
 		DBConnection database = new DBConnection();
 		String time = Quiz.df.format((new Date()).getTime());
-		ResultSet res = database.getStmt().executeQuery("SELECT COUNT(*) AS Count FROM Quiz WHERE AuthorID = \"" + this.userID.replace("\"", "\"\"") + "\";");
+		ResultSet res = database.getStmt().executeQuery("SELECT COUNT(*) AS Count FROM Quiz WHERE AuthorID = \"" + this.authorID.replace("\"", "\"\"") + "\";");
 		res.next();
 		int quizCreated = res.getInt("Count");
 		if (quizCreated == 1) {
-			ResultSet test1 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"Amateur Author\";");
+			ResultSet test1 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + this.authorID.replace("\"", "\"\"") + "\" AND AchievementName = \"Amateur Author\";");
 			if (!test1.next()) {
-				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Amateur Author\");");
+				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.authorID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Amateur Author\");");
 			}
 		} else if (quizCreated == 5) {
-			ResultSet test2 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"Prolific Author\";");
+			ResultSet test2 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + this.authorID.replace("\"", "\"\"") + "\" AND AchievementName = \"Prolific Author\";");
 			if (!test2.next()) {
-				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Prolific Author\");");
+				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.authorID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Prolific Author\");");
 			}
 		} else if (quizCreated == 10) {
-			ResultSet test3 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + this.userID.replace("\"", "\"\"") + "\" AND AchievementName = \"Prodigious Author\";");
+			ResultSet test3 = database.getStmt().executeQuery("SELECT * FROM Achievement WHERE UserID = \"" + this.authorID.replace("\"", "\"\"") + "\" AND AchievementName = \"Prodigious Author\";");
 			if (!test3.next()) {
-				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.userID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Prodigious Author\");");
+				database.getStmt().executeUpdate("INSERT INTO Achievement(UserID, QuizID, Time, AchievementName) VALUES(\"" + this.authorID.replace("\"", "\"\"") + "\",\"" + this.quizID + "\",\"" + time + "\",\"Prodigious Author\");");
 			}
 		}
 		database.getCon().close();

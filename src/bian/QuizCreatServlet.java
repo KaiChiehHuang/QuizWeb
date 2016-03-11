@@ -50,8 +50,6 @@ public class QuizCreatServlet extends HttpServlet {
 		String url = request.getParameter("picture");
 		quiz.setName(name);
 		quiz.setDescription(description);
-		System.out.println(url);
-		System.out.println(url != null);
 		if (url != "") {
 			quiz.setImage(url);
 		} else {

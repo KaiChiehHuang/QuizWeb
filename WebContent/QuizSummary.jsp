@@ -225,6 +225,7 @@ tbody{
  	quiz.setQuizID(quizID);
   	quiz.setUser(userID);
   	
+  	String url = quiz.getImage();
 	String name = quiz.getName();
 	String author = quiz.getAuthor();
 	String description = quiz.getDescription();
@@ -263,12 +264,57 @@ tbody{
     <div class="item active" style="height:450px;text-align:center;">
 
     	<h2 style="color:#C71585;">Basic Information</h2> 
+    	<center>
+    	<img src=<%=url %> width="140" height="140" border="0" class="img-circle">
+    	</center>
     	<h2>     </h2>
     	<h4>Name: <%=name %></h4>
     	<h2>     </h2>
     	<h4>Author: <%=author %></h4>
     	<h2>     </h2>
     	<h4>Description: <%=description %></h4>
+    	<div>
+    	<span><strong>Categories: </strong></span>
+    	<%
+			String[] colors = new String[4];
+/* 			colors[0] = "success";
+			colors[1] = "info";
+			colors[2] = "warning";
+			colors[3] = "danger"; */
+			ArrayList<String> cates = Category.getCategory(quiz.getQuizID());
+			for (int i = 0; i < cates.size(); i++) {
+				if (i % 3 == 0) {
+				out.print("<span class=\"label label-success\">" + cates.get(i) + "</span>");
+				} else if (i % 3 == 2) {
+				out.print("<span class=\"label label-info\">" + cates.get(i) + "</span>");
+				} else {
+				out.print("<span class=\"label label-danger\">" + cates.get(i) + "</span>");
+				}
+								
+			}
+		%>	
+		</div>
+		<div>
+    	<span><strong>Tags: </strong></span>
+    	<%
+/* 			String[] colors = new String[4];
+			colors[0] = "success";
+			colors[1] = "info";
+			colors[2] = "warning";
+			colors[3] = "danger"; */
+			ArrayList<String> tags = Tag.getTags(quiz.getQuizID());
+			for (int i = 0; i < tags.size(); i++) {
+				if (i % 3 == 0) {
+				out.print("<span class=\"label label-success\">" + tags.get(i) + "</span>");
+				} else if (i % 3 == 2) {
+				out.print("<span class=\"label label-info\">" + tags.get(i) + "</span>");
+				} else {
+				out.print("<span class=\"label label-danger\">" + tags.get(i) + "</span>");
+				}
+								
+			}
+		%>
+		</div>
     </div>
     
     <div class="item"
@@ -582,17 +628,6 @@ tbody{
     </div>
     
   </div>
-
-  <!-- Left and right controls -->
-<!--   <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a> -->
-  <!-- Controls -->
 			<a class="left carousel-control" href="#carousel-example-generic"
 				role="button" data-slide="prev"> <span
 				class="glyphicon glyphicon-chevron-left" aria-hidden="true"

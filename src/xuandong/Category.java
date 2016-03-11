@@ -81,4 +81,19 @@ public class Category {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Get all the tags for a specific quiz
+	 */
+	public static ArrayList<String> getCategory(String quizID) throws SQLException {
+		ArrayList<String> category = new ArrayList<String>();
+		DBConnection database = new DBConnection();
+		String sql = "SELECT Category FROM Category WHERE QuizID = \"" + quizID + "\";";
+		ResultSet res = database.getStmt().executeQuery(sql);
+		while (res.next()) {
+			category.add(res.getString("Category"));
+		}
+		database.getCon().close();
+		return category;
+	}
 }

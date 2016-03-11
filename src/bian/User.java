@@ -272,7 +272,7 @@ public class User {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
-			String sql = "SELECT UserID, QuizID, Time, AchievementName FROM Achievement WHERE UserID = \"" + id.replace("\"", "\"\"") + "\" ORDER BY Time DESC;";
+			String sql = "SELECT UserID, QuizID, Time, AchievementName FROM Achievement WHERE UserID = \"" + id.replace("\"", "\"\"") + "\" ORDER BY Time ASC;";
 			ResultSet res = stmt.executeQuery(sql);
 			while (res.next()) {
 				Achievement temp = new Achievement();
@@ -465,9 +465,11 @@ public class User {
 		boolean result = false;
 		DBConnection database = new DBConnection();
 		ResultSet res1 = database.getStmt().executeQuery("SELECT * FROM Friendship WHERE User1ID = \"" + user1ID.replace("\"", "\"\"") + "\" AND User2ID = \"" + user2ID.replace("\"", "\"\"") + "\" AND Pending = " + false + ";");
-		ResultSet res2 = database.getStmt().executeQuery("SELECT * FROM Friendship WHERE User2ID = \"" + user1ID.replace("\"", "\"\"") + "\" AND User1ID = \"" + user2ID.replace("\"", "\"\"") + "\" AND Pending = " + false + ";");
-		if (res1.next() && res2.next()) {
-			result = true;
+		if (res1.next()) {
+			ResultSet res2 = database.getStmt().executeQuery("SELECT * FROM Friendship WHERE User2ID = \"" + user1ID.replace("\"", "\"\"") + "\" AND User1ID = \"" + user2ID.replace("\"", "\"\"") + "\" AND Pending = " + false + ";");
+			if (res2.next()) {
+				result = true;
+			}
 		}
 		database.getCon().close();
 		return result;

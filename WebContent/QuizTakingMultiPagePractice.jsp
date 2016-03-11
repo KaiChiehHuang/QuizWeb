@@ -28,6 +28,7 @@
 	String description = quiz.getDescription();
 	ArrayList<Problem> problems = new ArrayList<Problem>();
 	problems = quiz.getProblems();
+	for (int i = 1; i <= 2; i)
 	quiz.setOnPracticeMode();
 	if (quiz.isRandomQuiz()) {
 		Collections.shuffle(problems);

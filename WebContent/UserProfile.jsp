@@ -203,7 +203,7 @@ $(function () {
 	User viewUser = new User("jay"); */
 %>
 
-<form action="RequestAddFriendServlet" method="post">
+<form action="RequestAddFriendServlet" method="post" id="addFriend">
 <div class="container" style = "position: relative; width:70%; top: 50px;">
   <h2 style="text-align:center;">Personal Profile</h2> 
   		<div style="border-radius: 20px;
@@ -224,20 +224,21 @@ $(function () {
                     <h4 class="modal-title" id="myModalLabel">About <%=viewUser.getID() %></h4>
                     </div>
                 <div class="modal-body">
-                    <center>
-                    <!-- "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" -->
-                    <!-- "http://eyelidsurgerysydney.typepad.com/.a/6a0148c6efc82f970c014e86367c69970d-popup" -->
-                    <%
+					<center>
+						<!-- "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" -->
+						<!-- "http://eyelidsurgerysydney.typepad.com/.a/6a0148c6efc82f970c014e86367c69970d-popup" -->
+						<%
                     	if(viewUser.getGender().equals("Male")) {
                     		out.print("<img src=\"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R\" name=\"aboutme\" width=\"140\" height=\"140\" border=\"0\" class=\"img-circle\"></a>");
                     	} else {
                     		out.print("<img src=\"http://www.newwavefilm.com/images/jeanne-moreau-gallery/jeanne-moreau14.png\" name=\"aboutme\" width=\"140\" height=\"140\" border=\"0\" class=\"img-circle\"></a>");
                     	}
                     %>
-                    <!-- <img src="http://www.newwavefilm.com/images/jeanne-moreau-gallery/jeanne-moreau14.png" name="aboutme" width="140" height="140" border="0" class="img-circle"></a> -->
-                    <h3 class="media-heading"><%=viewUser.getName() %> <small>USA</small></h3>
-                    <span><strong>Achievements: </strong></span>
-					    <%
+						<!-- <img src="http://www.newwavefilm.com/images/jeanne-moreau-gallery/jeanne-moreau14.png" name="aboutme" width="140" height="140" border="0" class="img-circle"></a> -->
+						<h3 class="media-heading"><%=viewUser.getName() %>
+						</h3>
+						<span><strong>Achievements: </strong></span>
+						<%
 							String[] colors = new String[4];
 					    	colors[0] = "success";
 					    	colors[1] = "info";
@@ -256,26 +257,40 @@ $(function () {
 								}
 								
 							}
-						%>	
+						%>
 
-                    </center>
-                    <hr>
-                    <center>
-                    <p class="text-left"><strong>Bio: </strong><br>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
-                    <br>
-                    </center>
-                </div>
+					</center>
+					<hr
+						style="border: none; border-top: 1px #CCCCCC solid; height: 1px;border-color:#DDDDDD;">
+					<center>
+						<p class="text-left">
+							<strong>Bio: </strong><br>
+							<%
+								String userBio = viewUser.getName() + " is ";
+								if (viewUser.getGender() == "Male") {
+									userBio += "a handsome man ";
+								} else if (viewUser.getGender() == "Female") {
+									userBio += "an elegant woman ";
+								} else {
+									userBio += "a smart person ";
+								}
+								userBio = userBio + "and is now " + viewUser.getAge() + " years old.";
+								out.print(userBio);
+							%>
+						</p>
+						<br>
+					</center>
+				</div>
                 <div class="modal-footer">
                     <center>
                     <%
 	                    if (User.checkFriend(userID, viewUserID)) {
-	                    	out.print("<button disabled=\"disabled\" type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Friend<span class=\"glyphicon glyphicon-ok-sign\"></span></button>");
+	                    	out.print("<button disabled=\"disabled\" type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Friend <span class=\"glyphicon glyphicon-ok-sign\"></span></button>");
 	                    } else {
 	                    	if(User.checkFriendRequest(userID,  viewUserID)) { 
-	                    		out.print("<button disabled=\"disabled\" type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Request Sent<span class=\"glyphicon glyphicon-question-sign\"></span></button>");
+	                    		out.print("<button disabled=\"disabled\" type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Request Sent <span class=\"glyphicon glyphicon-question-sign\"></span></button>");
 	                    	}else {
-	                    		out.print("<button type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Add Friend</button>"); 
+	                    		out.print("<button type=\"submit\" form=\"addFriend\" type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\">Add Friend</button>"); 
 	                    	}
 	                    }
                     %>

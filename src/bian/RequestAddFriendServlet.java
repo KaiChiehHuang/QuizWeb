@@ -40,12 +40,10 @@ public class RequestAddFriendServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String userID = (String) session.getAttribute("userID");
 		User user = new User(userID);
-		
 		String friendID = request.getParameter("friendtoadd");
-		
 		user.sendFriendRequest(friendID);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("UserProfile.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UserProfile.jsp?usertoview="+friendID);
 		dispatcher.forward(request, response);
 	}
 

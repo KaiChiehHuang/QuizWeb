@@ -317,6 +317,7 @@ h6 {
 				out.print("<tr>");
 				out.print("<th>#</th>");
 				out.print("<th>Quiz Name</th>");
+				//out.print("<th>Category</th>");
 				out.print("<th>Popularity</th>");
 				//out.print("");
 				out.print("</tr>");
@@ -326,6 +327,7 @@ h6 {
 					String quizUrl = "QuizSummary.jsp?quizID="+quiz.getQuizID()+"&userID="+userID;
 					String quizString = "<a href=\""+quizUrl+"\">" + quiz.getName() +"</a>";
 					out.print("<td>" + quizString + "</td>");
+					//out.print("<td>" + quiz.get+ "</td>");
 					out.print("<td>" + quiz.getPopularity() + "</td>");
 					/* String quizUrl = "QuizSummary.jsp?quizID="+user.getAge()+"&userID="+userID;
 					String quizString = "<a href=\""+quizUrl+"\">" + Quiz.getName(performance.getQuizID()) +"</a>";

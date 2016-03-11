@@ -136,17 +136,21 @@ public class AccountManager {
 	 * @return
 	 * @throws SQLException
 	 */
-	public boolean checkAdmin(String userID, String password) throws SQLException {
+	public boolean checkAdmin(String userID, String password) {
 		boolean result = false;
-		ResultSet res = stmt.executeQuery("SELECT * FROM Administrator WHERE AdminID = \"" + userID + "\";");
-		if (res.next()) {
-			password = hashSHAPassword(password);
-			rs = stmt.executeQuery("SELECT Password FROM Users WHERE UserID = \"" + userID.replace("\"", "\"\"") + "\";");
-			rs.next();
-			String right_password = rs.getString("Password");
-			if (right_password.equals(password)) {
-				result = true;
+		try {
+			ResultSet res = stmt.executeQuery("SELECT * FROM Administrator WHERE AdminID = \"" + userID + "\";");
+			if (res.next()) {
+				password = hashSHAPassword(password);
+				rs = stmt.executeQuery("SELECT Password FROM Users WHERE UserID = \"" + userID.replace("\"", "\"\"") + "\";");
+				rs.next();
+				String right_password = rs.getString("Password");
+				if (right_password.equals(password)) {
+					result = true;
+				}
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return result;
 	}

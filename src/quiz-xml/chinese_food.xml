@@ -39,7 +39,7 @@
   <answer>Tofu</answer>
 </question>
 
-<question type="multiple-response" answer-ordered="true">
+<question type="multiple-response" answer-ordered="false">
   <query>List three of the "Eight Culinary Cuisines" of China.</query>
   <answer-list>
     <answer>Anhui</answer>

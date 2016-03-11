@@ -110,6 +110,17 @@ public class MultiResponse extends Problem {
 	
 	
 	/**
+	 * The percent this problem got right
+	 * @return right number/question number
+	 */
+	@Override
+	public String getCorrectAnswerNumber() {
+		int total = getScore();
+		return Integer.toString(total) + "/" + Integer.toString(this.count);
+	}
+	
+	
+	/**
 	 * return the insert statement to insert this problem into database
 	 * used for creating a problem
 	 */

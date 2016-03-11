@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<quiz random="true" one-page="false" practice-mode="false">
+<title>Geography Exam</title>
+<quiz-image>https://pioneerwoman.files.wordpress.com/2013/04/geographyquiz2.jpg</quiz-image>
+<category>Geography</category>
+<description>Let's test how well you know about geography.</description>
+
+<question type="picture-response">
+  <query>What continent is in this picture?</query>
+  <image-location>http://www.ethnologue.com/sites/default/files/maps/afr_web_1.png</image-location>
+  <answer-list>
+    <answer preferred="preferred">Africa</answer>
+    <answer>feizhou</answer>
+  </answer-list>
+</question>
+
+<question type="picture-response">
+  <query>Which country is in this picture?</query>
+  <image-location>https://recodetech.files.wordpress.com/2014/05/china-1-of-1.jpg?quality=80&strip=info&w=640</image-location>
+  <answer>Leporidae</answer>
+</question>
+
+<question type="fill-in-blank">
+  <blank-query><pre>The book</pre><blank /><post>Down, about a bunch of rabbits, won the 1972 Carnegie Medal</post></blank-query>
+  <answer>Watership</answer>
+</question>
+
+<question type="multiple-choice">
+  <query>Which of the following statements is false</query>
+  <option>Aztec mythology includes a rabbit pantheon.</option>
+  <option>In Japanese folklore, rabbits live on the moon.</option>
+  <option answer="answer">In Stanford tradition, rubbing the nose of a rabbit guarantees an A on the CS108 class project</option>
+</question>
+
+<question type="multiple-response" answer-ordered="false">
+  <query>List three of the "Eight Culinary Cuisines" of China.</query>
+  <answer-list>
+    <answer>Anhui</answer>
+    <answer>Anhui Sheng</answer>
+  </answer-list>
+  <answer-list>
+    <answer>Cantonese</answer>
+  </answer-list>
+  <answer-list>
+    <answer>Fujian</answer>
+  </answer-list>
+</question>
+
+</quiz>

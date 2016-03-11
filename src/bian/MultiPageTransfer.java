@@ -67,6 +67,7 @@ public class MultiPageTransfer extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("QuizTakingMultiPageQuestion.jsp");
 			dispatcher.forward(request, response);
 		} else {
+			quiz.quizEnd();
 			RequestDispatcher dispatcher = request.getRequestDispatcher("QuizResult.jsp");
 			dispatcher.forward(request, response);
 		}

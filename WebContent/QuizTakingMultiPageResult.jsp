@@ -190,15 +190,16 @@
 
 <%
 String result = (String)session.getAttribute("result");
+Quiz quiz = (Quiz)session.getAttribute("quiz");
 int index = (Integer)session.getAttribute("index");
 ArrayList<Problem> problems = (ArrayList<Problem>)session.getAttribute("problems");
-String servlet = "QuizTakingMultiPageQuestion";
+String link = "QuizTakingMultiPageQuestion.jsp";
 if (index > problems.size()) {
-	servlet = "QuizResultServlet";
+	quiz.quizEnd();
+	link = "QuizResult.jsp";
 }
-
+String completed = (index-1) + "/" + problems.size();
 %>
-<form action=<%=servlet %> method="post">
 <div class="container" style = "position: relative; width:70%; top: 50px; height:500px; overflow: auto">
   <h2 style="text-align:center;">Quiz Problem</h2> 
   		<div style="border-radius: 20px;
@@ -215,14 +216,14 @@ if (index > problems.size()) {
      				">
      	<div style="position: relative; top: 30% ">
      	<h3 style="text-align:center; color:#C71585">You got: <%=result %></h3>
+     	<h3 style="text-align:center; color:#C71585">You completed: <%=completed %></h3>
      	</div> 
 </div>
 </div>
 <div class="text-center"
 style="position: relative;  width: 100%; height: 20%; top: 10px; left: 0;">
 <h2>     </h2>
-<input type="submit" class="btn btn-info" value = "Next"/>
-</form>
+<a href=<%=link%> class="btn btn-info" role="button">Next</a>
 </div>
 </body>
 </html>

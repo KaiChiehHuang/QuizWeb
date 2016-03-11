@@ -272,7 +272,7 @@ public class User {
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
-			String sql = "SELECT UserID, QuizID, Time, AchievementName FROM Achievement WHERE UserID = \"" + id.replace("\"", "\"\"") + "\";";
+			String sql = "SELECT UserID, QuizID, Time, AchievementName FROM Achievement WHERE UserID = \"" + id.replace("\"", "\"\"") + "\" ORDER BY Time DESC;";
 			ResultSet res = stmt.executeQuery(sql);
 			while (res.next()) {
 				Achievement temp = new Achievement();

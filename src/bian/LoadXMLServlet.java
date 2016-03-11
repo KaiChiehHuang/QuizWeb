@@ -3,6 +3,7 @@ package bian;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,6 +49,9 @@ public class LoadXMLServlet extends HttpServlet {
 		xml[1] = userID;
 		
 		XMLParser.main(xml);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizCreatedSuccess.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

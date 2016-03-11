@@ -251,9 +251,9 @@
 		String[] choices = mc.getChoices();
 		String question = mc.getQuestion();
 
-		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center; overflow: auto\">");
+		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%;\">");
-		myOut.println("<p>" + "<h5>Problem " + index + ": </h5>" + question + "</p>");
+		myOut.println("<p>" + "<h4>Problem " + index + ": </h4>" + "<h5 style=\"font-weight: bold; text-align: left\">" + question + "</h5>" + "</p>");
 		myOut.println("<div style=\"text-align: left\">");
 		for (int i = 0; i < choices.length; i++) {
 			myOut.println("<div class=\"radio\">");
@@ -273,9 +273,9 @@
 		String[] question = new String[2];
 		question = que.split("\\|\\|\\|\\|\\|\\|");
 		
-		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;overflow: auto\">");
+		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%\">");
-		myOut.println("<p><h5>Problem "+ index + ": </h5>" + question[0]);
+		myOut.println("<p><h4>Problem "+ index + ": </h4>" + question[0]);
 		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" />");
 		myOut.println(question[1] + "</p></div>");
 		myOut.println("</div>");
@@ -288,11 +288,11 @@
 		String question = pr.getQuestion();
 		String url = pr.getURL();
 		
-		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;overflow: auto\">");
+		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%\">");
-		myOut.println("<p>"+ "<h5>Problem " + index + ": </h5>"+ question);
+		myOut.println("<p>"+ "<h4>Problem " + index + ": </h4>" + question);
 		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" /> </p></div>");
-		myOut.println("<div class = \"container\" style = \"position: relative; left: 50%; width: 300px; margin-left:-150px; max-height: 300px ;overflow: auto\">");
+		myOut.println("<div class = \"container\" style = \"position: relative; left: 50%; width: 200px; margin-left:-150px; max-height: 200px\">");
 		myOut.println("<img class=\"img-thumbnail\"src =" + url + "></div>");
 		myOut.println("</div>");
 
@@ -305,9 +305,9 @@
 	public void takeQuestionResponse(JspWriter myOut, QuestionResponse pr, int index) throws IOException {
 		String question = pr.getQuestion();
 		
-		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;overflow: auto\">");
+		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%\">");
-		myOut.println("<p>"+ "<h5>Problem "+ index + ": </h5>" + question);
+		myOut.println("<p>"+ "<h4>Problem "+ index + ": </h4>" + question);
 		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" />");
 		myOut.println("</p></div>");
 		myOut.println("</div>");
@@ -320,9 +320,9 @@
 		String question = pr.getQuestion();
 		int count = pr.getCount();
 		
-		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;overflow: auto\">");
+		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%\">");
-		myOut.println("<p>" + "<h5>Problem "+ index + ": </h5>" + question);
+		myOut.println("<p>" + "<h4>Problem "+ index + ": </h4>" + question);
 		
 		for (int i = 0; i < count; i++) {
 			myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"5\" name=\"answer"+ index + "\" />");
@@ -341,7 +341,7 @@
 		
 		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%\">");
-		myOut.println("<p>" + "<h5>Problem "+ index + ": </h5>" + question + "</p>");
+		myOut.println("<p>" + "<h4>Problem "+ index + ": </h4>" + "<h5 style=\"font-weight: bold; text-align: left\">" + question + "</h5>" + "</p>");
 		
 		myOut.println("<div style=\"text-align: left\">");
 		for (int i = 0; i < choices.length; i++) {

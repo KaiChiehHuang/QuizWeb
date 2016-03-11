@@ -216,7 +216,7 @@ String completed = (index-1) + "/" + problems.size();
      				">
      	<div style="position: relative; top: 30% ">
      	<h3 style="text-align:center; color:#C71585">You got: <%=result %></h3>
-     	<h3 style="text-align:center; color:#C71585">You completed: <%=completed %></h3>
+     	<h3 style="text-align:center; color:#3366ff">You completed: <%=completed %></h3>
      	</div> 
 </div>
 </div>

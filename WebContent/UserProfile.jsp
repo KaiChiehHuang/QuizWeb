@@ -267,9 +267,9 @@ $(function () {
 							<strong>Bio: </strong><br>
 							<%
 								String userBio = viewUser.getName() + " is ";
-								if (viewUser.getGender() == "Male") {
+								if (viewUser.getGender().equals("Male")) {
 									userBio += "a handsome man ";
-								} else if (viewUser.getGender() == "Female") {
+								} else if (viewUser.getGender().equals("Female")) {
 									userBio += "an elegant woman ";
 								} else {
 									userBio += "a smart person ";

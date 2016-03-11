@@ -154,9 +154,6 @@ tbody{
 </head>
 
 <body style="height:770px;background-size:100%;background-color:#fffff6;">
-<!-- <div style="position: fixed;  width: 100%; height: 80px; top: 0px;">
-<h1>Quiz Summary</h1>
-</div> -->
 
 <div
 		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
@@ -244,7 +241,21 @@ tbody{
 	}
 
 %>
-<div style="border-radius: 20px; position: relative; top: 65px; left: 50%; width: 800px; height: 550px; margin-left: -400px; border-radius: 10px; background-color: rgba(0, 0, 0, 0); overflow: hidden; border: 2px solid #73AD21; padding: 15px;">
+<!-- <div style="border-radius: 20px; position: relative; top: 65px; left: 50%; width: 800px; height: 550px; margin-left: -400px; border-radius: 10px; background-color: rgba(0, 0, 0, 0); overflow: hidden; border: 2px solid #73AD21; padding: 15px;"> -->
+<div class="container" style = "position: relative; width:70%; top: 50px;">
+  <h2 style="text-align:center;">Quiz Summary</h2> 
+  		<div style="border-radius: 20px;
+    				border: 2px solid #73AD21;
+    				padding: 15px; 
+				    height: 500px;
+     				text-align:left;
+     				left:50%;width:800px;
+     				margin-left:-400px;
+     				top:70px;
+     				position:absolute;
+     				opacity: 0.9;
+     				background-color:white;
+     				">
 		<div id="carousel-example-generic" class="carousel slide"
 			data-ride="carousel" data-interval="4000"
 			style="border-radius: 20px; position: relative; left: 0%; width: 100%; height: 100%;">
@@ -261,7 +272,7 @@ tbody{
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox" style="width: 600px; left: 50%; margin-left: -300px">
-    <div class="item active" style="height:450px;text-align:center;">
+    <div class="item active" style="height:400px;text-align:center;">
 
     	<h2 style="color:#C71585;">Basic Information</h2> 
     	<center>
@@ -318,7 +329,7 @@ tbody{
     </div>
     
     <div class="item"
-    	style="height:450px;text-align:center;">
+    	style="height:400px;text-align:center;">
     	<h2 style="color:#C71585;">Statistics</h2>
     	<h2>     </h2>
     	<h4>Number of Takers: <%=takeNum %></h4>
@@ -331,7 +342,7 @@ tbody{
     </div>
     
     <div class="item"
-    	style="height:450px;text-align:center;">
+    	style="height:400px;text-align:center;">
     	<h2 style="color:#C71585;">Performances History</h2>
     	
     	<div class="panel panel-default" style="height: 60px; background: rgba(122, 130, 136, 0.2)">
@@ -484,7 +495,7 @@ tbody{
     </div>
 
     <div class="item"
-    	style="height:450px;text-align:center;">
+    	style="height:400px;text-align:center;">
     	<h2 style="color:#C71585;">Highest Performances</h2>
     	<table class="table" >
     	<thead>
@@ -520,7 +531,7 @@ tbody{
     </div>
 
     <div class="item"
-    	style="height:450px;text-align:center;">
+    	style="height:400px;text-align:center;">
         <h2 style="color:#C71585;">Highest Performances Last Day</h2>
     	<table class="table" >
     	<thead>
@@ -556,7 +567,7 @@ tbody{
     </div>
 
     <div class="item"
-    	style="height:450px;text-align:center;">
+    	style="height:400px;text-align:center;">
         <h2 style="color:#C71585;">Recent Good Performances</h2>
     	<table class="table" >
     	<thead>
@@ -592,7 +603,7 @@ tbody{
     </div>
     
     <div class="item"
-    	style="height:450px;text-align:center;">
+    	style="height:400px;text-align:center;">
         <h2 style="color:#C71585;">Recent Bad Performances</h2>
     	<table class="table" >
     	<thead>
@@ -638,9 +649,9 @@ tbody{
 				style="color: #73AD21;"></span> <span class="sr-only">Next</span>
 			</a>
 </div>
-</div>
+
 <div class="text-center"
-style="position: fixed;  width: 100%; height: 20%; top: 80%; left: 0;">
+style="position: relative;  width: 100%; height: 20%; top: 0; left: 0;">
 <h2>     </h2>
 <a href=<%=link%> class="btn btn-info" role="button">Start Quiz</a>
 <!-- <a href="QuizTakingMultiPage.jsp" class="btn btn-info" role="button">Start Quiz</a> -->
@@ -659,7 +670,9 @@ if (isPracticeMode) {
 		out.print("<a disabled=\"disabled\" class=\"btn btn-info\"  role=\"button\">Edit Quiz</a>");
 	}
 %>
-
+ <div><a href="HomePage.jsp"> Back to Home Page </a></div>
+</div>
+</div>
 </div>
 </body>
 </html>

@@ -199,21 +199,23 @@ if (index > problems.size()) {
 
 %>
 <form action=<%=servlet %> method="post">
-<div class="container" style = "position: relative; width:70%; top: 50px; height:500px; overflow: auto;">
+<div class="container" style = "position: relative; width:70%; top: 50px; height:500px; overflow: auto">
   <h2 style="text-align:center;">Quiz Problem</h2> 
   		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
     				padding: 15px; 
 				    height: 400px;
      				text-align:left;
-     				left:50%;width:800px;
-     				margin-left:-400px;
+     				left:50%;width:600px;
+     				margin-left:-300px;
      				top:70px;
      				position:absolute;
      				opacity: 0.9;
      				background-color:white;
      				">
-     	<h3 style="text-align:center;">You got: <%=result %></h3> 
+     	<div style="position: relative; top: 30% ">
+     	<h3 style="text-align:center; color:#C71585">You got: <%=result %></h3>
+     	</div> 
 </div>
 </div>
 <div class="text-center"

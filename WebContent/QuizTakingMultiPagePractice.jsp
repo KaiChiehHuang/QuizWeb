@@ -28,10 +28,12 @@
 	String description = quiz.getDescription();
 	ArrayList<Problem> problems = new ArrayList<Problem>();
 	problems = quiz.getProblems();
-	for (int i = 1; i <= 2; i)
+	ArrayList<Problem> practiceProblems = new ArrayList<Problem>(problems);
+	practiceProblems.addAll(problems);
+	practiceProblems.addAll(problems);
 	quiz.setOnPracticeMode();
 	if (quiz.isRandomQuiz()) {
-		Collections.shuffle(problems);
+		Collections.shuffle(practiceProblems);
 	}
 	quiz.quizStart();
 %>

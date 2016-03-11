@@ -38,6 +38,10 @@
                         <span class="label label-info">Adobe CS 5.5</span>
                         <span class="label label-info">Microsoft Office</span>
                         <span class="label label-success">Windows XP, Vista, 7</span>
+                        <span class="label label-warning"><span class="glyphicon glyphicon-user"></span> User Number</span>
+                        <span class="label label-info"><span class="glyphicon glyphicon-book"></span> Quiz Number</span>
+                        <span class="label label-success"><span class="glyphicon glyphicon-list-alt"></span> Quiz Taken Number</span>
+                        
                     </center>
                     <hr>
                     <center>

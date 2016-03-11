@@ -181,8 +181,7 @@ public class Email {
 				database.getStmt().executeUpdate(sql);
 			}
 			database.getCon().close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ignore) {
 		}
 	}
 	

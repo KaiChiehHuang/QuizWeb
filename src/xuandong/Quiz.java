@@ -54,7 +54,6 @@ public class Quiz {
 	 * database, please don't use this one
 	 */
 	public Quiz() {
-		problems = new ArrayList<Problem>();
 	}
 	
 
@@ -66,6 +65,7 @@ public class Quiz {
 	 */
 	public void setQuizID(String quizID) {
 		this.quizID = quizID;
+		problems = new ArrayList<Problem>();
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();

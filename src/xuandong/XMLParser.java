@@ -96,8 +96,14 @@ public class XMLParser {
 			int questionCount = 0;
 			quizID = String.format("%010d", questionCount);
 		}
-		String name = doc.getElementsByTagName("title").item(0).getTextContent();
-		String description = doc.getElementsByTagName("description").item(0).getTextContent();
+		String name = "";
+		if (doc.getElementsByTagName("title").item(0) != null) {
+			name = doc.getElementsByTagName("title").item(0).getTextContent();
+		}
+		String description = "";
+		if (doc.getElementsByTagName("description").item(0) != null) {
+			description = doc.getElementsByTagName("description").item(0).getTextContent();
+		}
 		Element quiz = (Element) doc.getElementsByTagName("quiz").item(0);
 		boolean random = false;
 		if (quiz.getAttribute("random") != null) {

@@ -68,6 +68,7 @@ public class Quiz {
 		this.quizID = quizID;
 		this.problems = new ArrayList<Problem>();
 		endTime = (long) 0;
+		pbCount = 0;
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
@@ -276,7 +277,7 @@ public class Quiz {
 	 * @param description
 	 */
 	public void setDescription(String description) {
-		this.description = description.replace("'", "\'");
+		this.description = description;
 	}
 
 	
@@ -299,26 +300,6 @@ public class Quiz {
 	public void deleteProblem(String problemID) throws SQLException {
 		for (int i = 0; i < problems.size(); i++) {
 			if (problems.get(i).getQuestionID().equals(problemID)) {
-				String type = problems.get(i).getQuestionID().substring(0, 2);
-				switch (type) {
-				case "FB":
-					pbCount -= 1;
-					break;
-				case "MC":
-					MultiChoice newMC = (MultiChoice) problems.get(i);
-					pbCount -= newMC.getCount();
-					break;
-				case "MR":
-					MultiResponse newMR = (MultiResponse) problems.get(i);
-					pbCount -= newMR.getCount();
-					break;
-				case "PR":
-					pbCount -= 1;
-					break;
-				case "QR":
-					pbCount -= 1;
-					break;
-				}
 				problems.remove(i);
 				break;
 			}

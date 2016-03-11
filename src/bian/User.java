@@ -469,6 +469,7 @@ public class User {
 		if (res1.next() && res2.next()) {
 			result = true;
 		}
+		database.getCon().close();
 		return result;
 	}
 	
@@ -487,6 +488,7 @@ public class User {
 		if (res.next()) {
 			result = true;
 		}
+		database.getCon().close();
 		return result;
 	}
 }

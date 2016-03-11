@@ -3,6 +3,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
+import xuandong.DBConnection;
+
 public class AccountManager {
 	private Statement stmt;
 	private ResultSet rs;
@@ -40,7 +42,6 @@ public class AccountManager {
 	 */
 	public void createAccount(String id, String password) {
 		password = hashSHAPassword(password);
-//		System.out.println(password);
 		try {
 			stmt.executeUpdate("INSERT INTO Users(UserID, Password) VALUES(\"" + id.replace("\"", "\"\"") + "\",\"" + password + "\");");
 		} catch (SQLException e) {
@@ -127,5 +128,26 @@ public class AccountManager {
 		}
 		return buff.toString();
 	}
-
+	
+	/**
+	 * Check if a given userID is a administrator
+	 * @param userID
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean checkAdmin(String userID, String password) throws SQLException {
+		boolean result = false;
+		ResultSet res = stmt.executeQuery("SELECT * FROM Administrator WHERE AdminID = \"" + userID + "\";");
+		if (res.next()) {
+			password = hashSHAPassword(password);
+			rs = stmt.executeQuery("SELECT Password FROM Users WHERE UserID = \"" + userID.replace("\"", "\"\"") + "\";");
+			rs.next();
+			String right_password = rs.getString("Password");
+			if (right_password.equals(password)) {
+				result = true;
+			}
+		}
+		return result;
+	}
 }

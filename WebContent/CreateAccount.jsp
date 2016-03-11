@@ -71,7 +71,7 @@
 				<div style="text-align: center">
 					<p>Don't want to create an account?</p>
 					<!-- Need to inform HomePage it's guest -->
-					<a href="UserLogin.jsp"> Back to login</a> / <a href="HomePage.jsp">
+					<a href="UserLogin.jsp"> Back to login</a> / <a href="GuestHomePage.jsp">
 						Log in as guest</a>
 				</div>
 		</form>

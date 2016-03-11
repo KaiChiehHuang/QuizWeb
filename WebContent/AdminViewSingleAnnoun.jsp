@@ -1,10 +1,11 @@
-<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="xuandong.*" %>
-    <%@ page import="java.io.*" %>
+    <%@ page import="bian.*" %>
+    <%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,6 +16,36 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
+<script> 
+</script>
+
+<script type='text/javascript'>
+	function pageScrollUp(position) {
+		var yPos = window.pageYOffset;
+		yPos -= 95;
+		if (yPos < position) {
+			yPos = position;
+		}
+		window.scroll(0, yPos); // horizontal and vertical scroll increments
+		scrolldelay = setTimeout('pageScrollUp(\'' + position + '\')', 45); // scrolls every 100 milliseconds
+		if (yPos == position) {
+			clearTimeout(scrolldelay);
+		}
+	}
+	$(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip({
+	        placement : 'top'
+	    });
+	});
+	$(function() {
+		$('[data-tooltip="true"]').tooltip();
+		});
+	function myFunction() {
+	    document.getElementById("receiver").defaultValue = "Goofy";
+	}
+	
+</script>
+
 <style>
 /*----- Menu Outline -----*/
 .menu-wrap {
@@ -100,41 +131,33 @@
 	background: #3e3436;
 }
 
-.carousel-control.right {
-    background-image: none
+tr {
+width: 100%;
+display: inline-table;
+table-layout: fixed;
 }
 
-<script type='text/javascript'>
-	function pageScrollUp(position) {
-		var yPos = window.pageYOffset;
-		yPos -= 95;
-		if (yPos < position) {
-			yPos = position;
-		}
-		window.scroll(0, yPos); // horizontal and vertical scroll increments
-		scrolldelay = setTimeout('pageScrollUp(\'' + position + '\')', 45); // scrolls every 100 milliseconds
-		if (yPos == position) {
-			clearTimeout(scrolldelay);
-		}
-	}
-	$(document).ready(function(){
-	    $('[data-toggle="tooltip"]').tooltip({
-	        placement : 'top'
-	    });
-	});
-	$(function() {
-		$('[data-tooltip="true"]').tooltip();
-		});
-	function myFunction() {
-	    document.getElementById("receiver").defaultValue = "Goofy";
-	}
-	
-</script>
+table{
+ height: 480px;             
+ display: -moz-groupbox;    
+}
+
+tbody{
+  overflow-y: scroll;      
+  height: 420px; 
+  width: 97%;          
+  position: absolute;
+}
+
 </style>
-<title>Quiz</title>
+
+<title>View Announcement</title>
 </head>
-<body style="height:770px;background-size:100%;background-color:#fffff6;">
-<div style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
+<!-- background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers9.jpg') -->
+<body style="height:300px;background-size:100%;background-color:#fffff6;">
+
+	<div
+		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
 
 		<div
 			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color: black;">
@@ -188,42 +211,47 @@
 		<!-- /.col-lg-6 -->
 	</div>
 
+
 <%
-String result = (String)session.getAttribute("result");
-Quiz quiz = (Quiz)session.getAttribute("quiz");
-int index = (Integer)session.getAttribute("index");
-ArrayList<Problem> problems = (ArrayList<Problem>)session.getAttribute("problems");
-String link = "QuizTakingMultiPageQuestion.jsp";
-if (index > problems.size()) {
-	quiz.quizEnd();
-	link = "QuizResult.jsp";
+String annountoviewindex = request.getParameter("annountoviewindex");
+int index = Integer.parseInt(annountoviewindex);
+
+ArrayList<Announcement> announ = new ArrayList<Announcement>();
+announ = Announcement.getAnnouncement();
+
+Announcement ann = new Announcement();
+for (int i = announ.size() - 1; i >= 0 ; i--) {
+	if (i == index) {	
+ 		ann = announ.get(i);
+	}
 }
-String completed = (index-1) + "/" + problems.size();
+String subject = ann.getSubject();
+String content = ann.getContent();
+String date = ann.getDate();
 %>
-<div class="container" style = "position: relative; width:70%; top: 50px; height:500px; overflow: auto">
-  <h2 style="text-align:center;">Quiz Problem</h2> 
-  		<div style="border-radius: 20px;
+
+<div class = "container" style = "position: relative; width:65%; top: 60px;">
+<h2 style="text-align:center;"><%=subject%></h2> 
+<p style="text-align:center;"><%=date%></p>
+
+		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
     				padding: 15px; 
-				    height: 400px;
+				    height: 350px;
      				text-align:left;
      				left:50%;width:600px;
      				margin-left:-300px;
-     				top:70px;
-     				position:absolute;
+     				top:7px;
+     				position:relative;
      				opacity: 0.9;
      				background-color:white;
-     				">
-     	<div style="position: relative; top: 30% ">
-     	<h3 style="text-align:center; color:#C71585">You got: <%=result %></h3>
-     	<h3 style="text-align:center; color:#C71585">You completed: <%=completed %></h3>
-     	</div> 
+     				"><div><p><%=content%></p></div>
+     				
+     				  <div  style = "position: relative;top:320px; width:80%;"><a href="AdminViewAnnoun.jsp" > Back to All Announcement Page </a></div>
+  					  <div  style = "position: relative;top:320px; width:80%;"><a href="AdminDeleteUser.jsp"> Back to Admin Page </a></div>
+     	</div> 				
 </div>
-</div>
-<div class="text-center"
-style="position: relative;  width: 100%; height: 20%; top: 10px; left: 0;">
-<h2>     </h2>
-<a href=<%=link%> class="btn btn-info" role="button">Next</a>
-</div>
+
+
 </body>
 </html>

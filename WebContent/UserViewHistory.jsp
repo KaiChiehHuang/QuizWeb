@@ -260,7 +260,18 @@ tbody{
     		} else {
     			out.println("<tr class=\"active\">");
     		}
-    		for (int j = 0; j < 4; j++) {
+    		
+/* 			out.println("<td style=\"text-align:center;\">");
+			out.println(per[0]);
+			out.println("</td>"); */
+			
+    		out.println("<td style=\"text-align:center;\">");
+    		out.print("<li><a href = \"QuizSummary.jsp?quizID="+ per[4] +"\">"
+    				+ per[0] +"</a></li>");
+    		out.println("</td>");
+			
+    		
+    		for (int j = 1; j < 4; j++) {
     			out.println("<td style=\"text-align:center;\">");
     			out.println(per[j]);
     			out.println("</td>");
@@ -268,11 +279,8 @@ tbody{
     		
     		String quizID = userPerformance.get(i).getQuizID();
     		out.println("<td style=\"text-align:center;\">");
-    		out.println("<a href=\"ChallengeFriend.jsp?quizName="+per[0]+"&quizID="+ per[4]  +"\"><button class=\"btn btn-warning\">Challenge</button></a>");
+    		out.println("<a href=\"ChallengeFriend.jsp?quizName="+per[0]+"&quizID="+ per[4]  +"\"><button class=\"btn btn-sm btn-warning\">Challenge</button></a>");
     		
-    		out.println("<td style=\"text-align:center;\">");
-    		out.println("<button name = \"quizchallenge\" type=\"submit\" class=\"btn btn-sm btn-warning\" value =\"" +quizID+ "\"/>Challenge</button>");
-
     		out.println("</td style=\"text-align:center;\">");
     		out.println("</tr>");	
     	}

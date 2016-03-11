@@ -248,7 +248,7 @@ String date = ann.getDate();
      				"><div><p><%=content%></p></div>
      				
      				  <div  style = "position: relative;top:320px; width:80%;"><a href="UserViewAnnoun.jsp" > Back to All Announcement Page </a></div>
-  					  <div  style = "position: relative;top:320px; width:80%;"><a href="HomePage.jsp"> Back to Home Page </a></div> 
+  					  <div  style = "position: relative;top:320px; width:80%;"><a href="HomePage.jsp"> Back to Home Page </a></div>
      	</div> 				
 </div>
 

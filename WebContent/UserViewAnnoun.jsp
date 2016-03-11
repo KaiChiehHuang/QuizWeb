@@ -141,13 +141,13 @@ table-layout: fixed;
 }
 
 table{
- height: 480px;             
+ height: 430px;             
  display: -moz-groupbox;    
 }
 
 tbody{
   overflow-y: scroll;      
-  height: 420px; 
+  height: 380px; 
   width: 97%;          
   position: absolute;
 }
@@ -224,10 +224,10 @@ tbody{
   		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
     				padding: 15px; 
-				    height: 500px;
+				    height: 450px;
      				text-align:left;
-     				left:50%;width:900px;
-     				margin-left:-450px;
+     				left:50%;width:800px;
+     				margin-left:-400px;
      				top:70px;
      				position:absolute;
      				opacity: 0.9;

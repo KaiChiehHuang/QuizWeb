@@ -18,77 +18,63 @@
 
 <title>Create New Account</title>
 </head>
-<body style="height:800px;">
+<body style="height:800px;background-image:url(loginBackground.jpg);background-size: 100%;"">
 		<h1 style="text-align:center;">Create Your Account</h1>
-		
-		<div style="border-radius: 20px;
-    				border: 2px solid #73AD21;
-    				padding: 40px; 
-				    height: 550px;
-     				text-align:left;
-     				left:50%;width:500px;
-     				margin-left:-250px;
-     				top:180px;
-     				position:absolute;
-     				">
-			<p> Please enter your ID, Password, and Info... </p>
-			<hr style="
-				border:none;	
-				border-top:1px #CCCCCC solid;
-				height: 1px;
-				">	
-			<form action="CreateNewAccount" method="post"> 
-			<div class="input-group">
-	  			<span class="input-group-addon" id="basic-addon1">ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-	  			<input type="text" class="form-control" placeholder="UserID" aria-describedby="basic-addon1" name="userID">
+
+	<div
+		style="border-radius: 20px; border: 2px solid #73AD21; padding: 40px; height: 610px; text-align: left; left: 50%; width: 500px; margin-left: -250px; top: 180px; position: absolute;opacity: 0.9;background-color:white;">
+		<p>Please enter your ID, Password, and Info...</p>
+		<hr style="border: none; border-top: 1px #CCCCCC solid; height: 1px;">
+		<form action="CreateNewAccount" method="post" data-toggle="validator" role="form">
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+					<input type="text" class="form-control" placeholder="UserID"
+						aria-describedby="basic-addon1" name="userID" required>
+				</div>
 			</div>
-			<hr style="
-				border:none;	
-				border-top:1px #CCCCCC solid;
-				height: 1px;
-				">	
-			<div class="input-group">
-	  			<span class="input-group-addon" id="basic-addon1">Password</span>
-	  			<input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="password">
-			</div>	
-			<hr style="
-				border:none;	
-				border-top:1px #CCCCCC solid;
-				height: 1px;
-				">	
-			<div class="input-group">
-	  			<span class="input-group-addon" id="basic-addon1">Name&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-	  			<input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1" name="name">
-			</div>	
-			<hr style="
-				border:none;	
-				border-top:1px #CCCCCC solid;
-				height: 1px;
-				">	
-			<div class="input-group">
-	  			<span class="input-group-addon" id="basic-addon1">Age&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-	  			<input type="text" class="form-control" placeholder="Age" aria-describedby="basic-addon1" name="age">
-			</div>
-			<select class="selectpicker" multiple data-max-options="2">
-  				<option>Mustard</option>
-  				<option>Ketchup</option>
-  				<option>Relish</option>
-			</select>	
-			<div style="text-align:center">
-				<br>
-				<input type="submit" class="btn btn-danger" value="Create"></input>
-			</div>
-			<hr style="
-				border:none;	
-				border-top:1px #CCCCCC solid;
-				height: 1px;
-				">	
-			<div style="text-align:center">
-				<p> Don't want to create an account? </p>
-				<!-- Need to inform HomePage it's guest -->
-				<a href="UserLogin.jsp"> Back to login</a> / <a href="HomePage.jsp"> Log in as guest</a>
-			</div>
-			</form>
-		</div>
+				<hr
+					style="border: none; border-top: 1px #CCCCCC solid; height: 1px;">
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">Password</span> <input
+						type="text" class="form-control" placeholder="Password"
+						aria-describedby="basic-addon1" name="password" required>
+				</div>
+				<hr
+					style="border: none; border-top: 1px #CCCCCC solid; height: 1px;">
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">Name&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+					<input type="text" class="form-control" placeholder="Name"
+						aria-describedby="basic-addon1" name="name" >
+				</div>
+				<hr
+					style="border: none; border-top: 1px #CCCCCC solid; height: 1px;">
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">Age&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+					<input type="text" class="form-control" placeholder="Age"
+						aria-describedby="basic-addon1" name="age" >
+				</div>
+				<hr
+					style="border: none; border-top: 1px #CCCCCC solid; height: 1px;">
+				<select class="form-control" name="gender">
+					<option value="Secret">Select Gender</option>
+					<option value="Secret">Secret</option>
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+				</select>
+				<div style="text-align: center">
+					<br> <input type="submit" class="btn btn-danger"
+						value="Create"></input>
+				</div>
+				<hr
+					style="border: none; border-top: 1px #CCCCCC solid; height: 1px;">
+				<div style="text-align: center">
+					<p>Don't want to create an account?</p>
+					<!-- Need to inform HomePage it's guest -->
+					<a href="UserLogin.jsp"> Back to login</a> / <a href="HomePage.jsp">
+						Log in as guest</a>
+				</div>
+		</form>
+	</div>
 </body>
 </html>

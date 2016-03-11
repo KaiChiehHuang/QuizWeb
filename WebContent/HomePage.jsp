@@ -582,7 +582,8 @@ h6 {
 				<div class="col-xs-6 col-md-6 text-center" style="height: 100%;top:0%;">
 					<% 
 						ArrayList<Achievement> allUserAchievements = user.getAchievements();
-						ArrayList<String> allAchievements = Achievement.getAllAchievement();
+						ArrayList<String> AllAchievements = Achievement.getAllAchievement();
+						ArrayList<String> allAchievements = new ArrayList<String>(AllAchievements);
 						for(Achievement ach: allUserAchievements) {
 							String imageUrl = ach.getImage();
 							String description = Achievement.getDescription(ach.getAchievementName());

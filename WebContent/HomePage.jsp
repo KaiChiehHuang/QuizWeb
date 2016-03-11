@@ -179,7 +179,7 @@ h6 {
 </style>
 <title>Home Page</title>
 </head>
-<body style="height: 2200px;">
+<body style="height: 2200px;background-color:#fffff6;">
 	<div
 		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
 

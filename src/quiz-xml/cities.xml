@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <quiz random="true" one-page="false" practice-mode="true" immediate-correction="true">
 <title>Cities</title>
+<category>Culture</category>
 <description>See how well you recognize these famous cities.</description>
 
 <question type="picture-response">

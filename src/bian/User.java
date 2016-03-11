@@ -470,12 +470,49 @@ public class User {
 	public static ArrayList<User> serachUser(String keyword) throws SQLException {
 		ArrayList<User> users = new ArrayList<User>();
 		DBConnection database = new DBConnection();
-		ResultSet res = database.getStmt().executeQuery("SELECT DISTINCT UserID FROM Users WHERE UserID LIKE \"%" + keyword + "%\" OR Name LIKE \"%" + keyword + "%\";");
+		ResultSet res = database.getStmt().executeQuery("SELECT DISTINCT UserID FROM Users WHERE UserID LIKE \"%" + keyword.replace("\"", "\"\"") + "%\" OR Name LIKE \"%" + keyword.replace("\"", "\"\"") + "%\";");
 		while (res.next()) {
 			User temp = new User(res.getString("UserID"));
 			users.add(temp);
 		}
 		database.getCon().close();
 		return users;
+	}
+	
+	
+	/**
+	 * Check if two person is friend or not, the order doesn't matter
+	 * @param user1ID
+	 * @param user2ID
+	 * @return TRUE for friends, FALSE for not friends
+	 * @throws SQLException
+	 */
+	public static boolean checkFriend(String user1ID, String user2ID) throws SQLException {
+		boolean result = false;
+		DBConnection database = new DBConnection();
+		ResultSet res1 = database.getStmt().executeQuery("SELECT * FROM Friendship WHERE User1ID = \"" + user1ID.replace("\"", "\"\"") + "\" AND User2ID = \"" + user2ID.replace("\"", "\"\"") + "\" AND Pending = " + false + ";");
+		ResultSet res2 = database.getStmt().executeQuery("SELECT * FROM Friendship WHERE User2ID = \"" + user1ID.replace("\"", "\"\"") + "\" AND User1ID = \"" + user2ID.replace("\"", "\"\"") + "\" AND Pending = " + false + ";");
+		if (res1.next() && res2.next()) {
+			result = true;
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * Check if user has sent a friend request to a person
+	 * @param userID
+	 * @param personYouWantToAdd
+	 * @return TRUE for already sent, FALSE for not sent yet
+	 * @throws SQLException
+	 */
+	public static boolean checkFriendRequest(String userID, String personYouWantToAdd) throws SQLException {
+		boolean result = false;
+		DBConnection database = new DBConnection();
+		ResultSet res = database.getStmt().executeQuery("SELECT * FROM Friendship WHERE User1ID = \"" + userID.replace("\"", "\"\"") + "\" AND User2ID = \"" + personYouWantToAdd.replace("\"", "\"\"") + "\" AND Pending = " + true + ";");
+		if (res.next()) {
+			result = true;
+		}
+		return result;
 	}
 }

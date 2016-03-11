@@ -206,11 +206,12 @@
 %>
 	<form action="MultiPageTransfer" method="post">
 		<div class="container"
-			style="position: relative; width: 70%; top: 50px; height:500px; overflow: auto;">
+			style="position: relative; width: 70%; top: 50px; height:500px;">
 			<h2 style="text-align: center;">Quiz Problem</h2>
 			<div
-				style="border-radius: 20px; border: 2px solid #73AD21; padding: 15px; height: 400px; text-align: left; left: 50%; width: 800px; margin-left: -400px; top: 70px; position: absolute; opacity: 0.9; background-color: white;">
+				style="border-radius: 20px; border: 2px solid #73AD21; padding: 15px; height: 400px; text-align: left; left: 50%; width: 600px; margin-left: -300px; top: 70px; position: absolute; opacity: 0.9; background-color: white; overflow: auto">
 				<%
+					out.println("<div style=\"position: relative; top: 7%\">");
 					Problem pro = problems.get(index - 1);
 					String type = pro.getType();
 					if (type == "QuestionResponse") {
@@ -233,6 +234,7 @@
 						MultiResponse mr = (MultiResponse) pro;
 						takeMultiResponse(out, mr, index);
 					}
+					out.println("</div>");
 				%>
 			</div>
 		</div>
@@ -249,7 +251,7 @@
 		String[] choices = mc.getChoices();
 		String question = mc.getQuestion();
 
-		myOut.println("<div class=\"item\" style=\"height:450px;text-align:center;\">");
+		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center; overflow: auto\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%;\">");
 		myOut.println("<p>" + "<h5>Problem " + index + ": </h5>" + question + "</p>");
 		myOut.println("<div style=\"text-align: left\">");
@@ -271,7 +273,7 @@
 		String[] question = new String[2];
 		question = que.split("\\|\\|\\|\\|\\|\\|");
 		
-		myOut.println("<div class=\"item\" style=\"height:450px;text-align:center;\">");
+		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;overflow: auto\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%\">");
 		myOut.println("<p><h5>Problem "+ index + ": </h5>" + question[0]);
 		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" />");
@@ -286,11 +288,11 @@
 		String question = pr.getQuestion();
 		String url = pr.getURL();
 		
-		myOut.println("<div class=\"item\" style=\"height:450px;text-align:center;\">");
+		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;overflow: auto\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%\">");
 		myOut.println("<p>"+ "<h5>Problem " + index + ": </h5>"+ question);
 		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" /> </p></div>");
-		myOut.println("<div class = \"container\" style = \"position: relative; left: 50%; width: 400px; margin-left:-200px\">");
+		myOut.println("<div class = \"container\" style = \"position: relative; left: 50%; width: 300px; margin-left:-150px; max-height: 300px ;overflow: auto\">");
 		myOut.println("<img class=\"img-thumbnail\"src =" + url + "></div>");
 		myOut.println("</div>");
 
@@ -303,7 +305,7 @@
 	public void takeQuestionResponse(JspWriter myOut, QuestionResponse pr, int index) throws IOException {
 		String question = pr.getQuestion();
 		
-		myOut.println("<div class=\"item\" style=\"height:450px;text-align:center;\">");
+		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;overflow: auto\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%\">");
 		myOut.println("<p>"+ "<h5>Problem "+ index + ": </h5>" + question);
 		myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" />");
@@ -318,12 +320,12 @@
 		String question = pr.getQuestion();
 		int count = pr.getCount();
 		
-		myOut.println("<div class=\"item\" style=\"height:450px;text-align:center;\">");
+		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;overflow: auto\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%\">");
 		myOut.println("<p>" + "<h5>Problem "+ index + ": </h5>" + question);
 		
 		for (int i = 0; i < count; i++) {
-			myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"8\" name=\"answer"+ index + "\" />");
+			myOut.println("<input type=\"text\" placeholder=\"Answer\" size=\"5\" name=\"answer"+ index + "\" />");
 		}
 		
 		myOut.println("</p></div>");
@@ -337,7 +339,7 @@
 		String question = mc.getQuestion();
 		String[] choices = mc.getChoices();
 		
-		myOut.println("<div class=\"item\" style=\"height:450px;text-align:center;\">");
+		myOut.println("<div class=\"item\" style=\"height:400px;text-align:center;\">");
 		myOut.println("<div style=\"position: relative;  width: 400px; margin-left: -200px; left: 50%\">");
 		myOut.println("<p>" + "<h5>Problem "+ index + ": </h5>" + question + "</p>");
 		

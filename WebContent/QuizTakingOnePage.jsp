@@ -225,75 +225,71 @@ tbody{
 	quiz.quizStart();
 %>
 
-<div class="container" style = "position: relative; left:50%;width:900px;
-     				margin-left:-450px; top: 50px;">
-  <h2 style="text-align:center;">Take Quiz!</h2> 
-  		<div style="
-     				text-align:left;
-     				left:50%;width:900px;
-     				margin-left:-450px;
-     				top:70px;
-     				position:absolute;
-     				">
-     				
+	<div class="container"
+		style="position: relative; left: 50%; width: 900px; margin-left: -450px; top: 50px;">
+		<h2 style="text-align: center;">Take Quiz!</h2>
+		<div
+			style="text-align: left; left: 50%; width: 900px; margin-left: -450px; top: 70px; position: absolute;">
 
-<form action="QuizResultServlet" method="post">
-<%
-	for (int i = 1; i < problems.size() + 1; i++) {
-		out.println("<hr style=\"border:none;border-top:1px #CCCCCC solid;height: 1px;\">");
-		Problem pro = problems.get(i-1);
-		String type = pro.getType();
-		if (type == "QuestionResponse") {
-			QuestionResponse qr = (QuestionResponse)pro;
-			takeQuestionResponse(out, qr, i);
-		} else if (type == "FillBlank") {
-			FillBlank fb = (FillBlank)pro;
-			takeFillBlank(out, fb, i);
-		} else if (type == "PictureResponse") {
-			PictureResponse pr = (PictureResponse)pro;
-			takePictureResponse(out, pr, i);
-		} else if (type == "MultiChoice") {
-			MultiChoice mc = (MultiChoice)pro;
-			if (mc.getCount() == 1) {
-				takeSingleChoice(out, mc, i);
-			} else {
-				takeMultiChoice(out, mc, i);
-			}
-		} else if (type == "MultiResponse") {
-			MultiResponse mr = (MultiResponse) pro;
-			takeMultiResponse(out, mr, i);
-		}
-	}
-%>
 
-<hr style="border:none;border-top:1px #CCCCCC solid;height: 1px;">
-<button type="submit" class="btn btn-success" style="position: relative; left:50%; width:80px; margin-left:-40px">Submit</button>
+			<form action="QuizResultServlet" method="post">
+				<%
+					for (int i = 1; i < problems.size() + 1; i++) {
+						out.println("<hr style=\"border:none;border-top:1px #CCCCCC solid;height: 1px;\">");
+						Problem pro = problems.get(i - 1);
+						String type = pro.getType();
+						if (type == "QuestionResponse") {
+							QuestionResponse qr = (QuestionResponse) pro;
+							takeQuestionResponse(out, qr, i);
+						} else if (type == "FillBlank") {
+							FillBlank fb = (FillBlank) pro;
+							takeFillBlank(out, fb, i);
+						} else if (type == "PictureResponse") {
+							PictureResponse pr = (PictureResponse) pro;
+							takePictureResponse(out, pr, i);
+						} else if (type == "MultiChoice") {
+							MultiChoice mc = (MultiChoice) pro;
+							if (mc.getCount() == 1) {
+								takeSingleChoice(out, mc, i);
+							} else {
+								takeMultiChoice(out, mc, i);
+							}
+						} else if (type == "MultiResponse") {
+							MultiResponse mr = (MultiResponse) pro;
+							takeMultiResponse(out, mr, i);
+						}
+					}
+				%>
 
-</form>
+				<hr
+					style="border: none; border-top: 1px #CCCCCC solid; height: 1px;">
+				<button type="submit" class="btn btn-success"
+					style="position: relative; left: 50%; width: 80px; margin-left: -40px">Submit</button>
 
-</div>
+			</form>
 
-</div>
+		</div>
 
-<%!
-	/* getParameter(answer1) get the answer of user. */
+	</div>
+
+	<%!/* getParameter(answer1) get the answer of user. */
 	public void takeSingleChoice(JspWriter myOut, MultiChoice mc, int index) throws IOException {
 		String[] choices = mc.getChoices();
 		String question = mc.getQuestion();
-		
+
 		myOut.println("<div class = \"container\"><div class=\"col-xs-6 col-md-12 text-left\" style=\"left: 0px;\">");
-		myOut.println("<div class=\"container\"><p>"+ "<h5>Problem " + index + ": </h5>"+question +"</p>");
+		myOut.println("<div class=\"container\"><p>" + "<h5>Problem " + index + ": </h5>" + question + "</p>");
 		for (int i = 0; i < choices.length; i++) {
 			myOut.println("<div class=\"radio\">");
-			myOut.println("<label><input type=\"radio\" name=\"answer"+ index + "\" value=\"" + choices[i]+ "\" />" + choices[i] + "</label>");
-/* 			myOut.println("<label><input type=\"radio\" name=\"answer"+ index + "\" />" + choices[i] + "</label>"); */
+			myOut.println("<label><input type=\"radio\" name=\"answer" + index + "\" value=\"" + choices[i] + "\" />"
+					+ choices[i] + "</label>");
+			/* 			myOut.println("<label><input type=\"radio\" name=\"answer"+ index + "\" />" + choices[i] + "</label>"); */
 			myOut.println("</div>");
 		}
 		myOut.println("</div></div><div class=\"col-xs-6 col-md-0 text-left\" style=\"left: 0px;\"></div></div>");
-	}
-%>
+	}%>
 
-<%!
+	<%!
 	/* getParameter(answer2) get the answer of user. */
 	public void takeFillBlank(JspWriter myOut, FillBlank fb, int index) throws IOException {
 		String que = fb.getQuestion();
@@ -310,76 +306,74 @@ tbody{
 	}
 %>
 
-<%!
-	/* getParameter(answer3) get the answer of user. */
+	<%!/* getParameter(answer3) get the answer of user. */
 	public void takePictureResponse(JspWriter myOut, PictureResponse pr, int index) throws IOException {
 		String question = pr.getQuestion();
 		String url = pr.getURL();
-		
+
 		myOut.println("<div class = \"container\">");
 		myOut.println("<div class=\"col-xs-6 col-md-4 text-left\" style=\"left: 0px;\">");
-		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5></p><p>" + question + "</p>");
-		myOut.println("<input style=\"width:20%\" class=\"form-control form-control-inline\" type=\"text\" placeholder=\"Answer\" name=\"answer"+ index + "\"/></p></div></div>");
-
+		myOut.println("<div class = \"container\"><p>" + "<h5>Problem " + index + ": </h5></p><p>" + question + "</p>");
+		myOut.println(
+				"<input style=\"width:20%\" class=\"form-control form-control-inline\" type=\"text\" placeholder=\"Answer\" name=\"answer"
+						+ index + "\"/></p></div></div>");
 
 		myOut.println("<div class=\"col-xs-6 col-md-8 text-left\" style=\"left: 0px;\">");
-		myOut.println("<div class = \"container\" style = \"position: relative; left: 50%; width: 400px; margin-left:-250px\">");
+		myOut.println(
+				"<div class = \"container\" style = \"position: relative; left: 50%; width: 400px; margin-left:-250px\">");
 		myOut.println("<img class=\"img-thumbnail\"src =" + url + "></div></div></div>");
 
-	}
-%>
+	}%>
 
-<%!
-
-	/* getParameter(answer4) get the answer of user. */
+	<%!/* getParameter(answer4) get the answer of user. */
 	public void takeQuestionResponse(JspWriter myOut, QuestionResponse pr, int index) throws IOException {
 		String question = pr.getQuestion();
-		
+
 		myOut.println("<div class = \"container\"><div class=\"col-xs-6 col-md-12 text-left\" style=\"left: 0px;\">");
-		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question);
-		myOut.println("<textarea style = \"width:50%\" class=\"form-control\" rows=\"4\" placeholder=\"Answer\" name=\"answer"+ index + "\" ></textarea>");
+		myOut.println("<div class = \"container\"><p>" + "<h5>Problem " + index + ": </h5>" + question);
+		myOut.println(
+				"<textarea style = \"width:50%\" class=\"form-control\" rows=\"4\" placeholder=\"Answer\" name=\"answer"
+						+ index + "\" ></textarea>");
 		myOut.println("</p></div><div class=\"col-xs-6 col-md-0 text-left\" style=\"left: 0px;\"></div></div></div>");
-	}
-%>
+	}%>
 
 
 
-<%!
-	/* getParameter(answer5) get the answer of user. */
+	<%!/* getParameter(answer5) get the answer of user. */
 	public void takeMultiResponse(JspWriter myOut, MultiResponse pr, int index) throws IOException {
 		String question = pr.getQuestion();
 		int count = pr.getCount();
-		
+
 		myOut.println("<div class = \"container\"><div class=\"col-xs-6 col-md-12 text-left\" style=\"left: 0px;\">");
-		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question);
+		myOut.println("<div class = \"container\"><p>" + "<h5>Problem " + index + ": </h5>" + question);
 		for (int i = 0; i < count; i++) {
-			myOut.println("<input style=\"width:50%\" class=\"form-control form-control-inline\" type=\"text\" placeholder=\"Answer\" name=\"answer"+ index + "\" />");
+			myOut.println(
+					"<input style=\"width:50%\" class=\"form-control form-control-inline\" type=\"text\" placeholder=\"Answer\" name=\"answer"
+							+ index + "\" />");
 		}
 		myOut.println("</p></div></div>");
 		myOut.println("<div class=\"col-xs-6 col-md-0 text-left\" style=\"left: 0px;\"></div></div>");
-	}
-%>
+	}%>
 
 
 
 
-<%!
-	/* getParameter(answer6) get the answer of user. */
+	<%!/* getParameter(answer6) get the answer of user. */
 	public void takeMultiChoice(JspWriter myOut, MultiChoice mc, int index) throws IOException {
 		String question = mc.getQuestion();
 		String[] choices = mc.getChoices();
-		
+
 		myOut.println("<div class = \"container\"><div class=\"col-xs-6 col-md-12 text-left\" style=\"left: 0px;\">");
-		myOut.println("<div class = \"container\"><p>" + "<h5>Problem "+ index + ": </h5>" + question + "</p>");
+		myOut.println("<div class = \"container\"><p>" + "<h5>Problem " + index + ": </h5>" + question + "</p>");
 		for (int i = 0; i < choices.length; i++) {
-			myOut.println("<label class=\"checkbox-inline\"> <input type=\"checkbox\" name=\"answer" + index + "\" value=\"" + choices[i] + "\">");
-			myOut.println(choices[i] +" </label><br>");
+			myOut.println("<label class=\"checkbox-inline\"> <input type=\"checkbox\" name=\"answer" + index
+					+ "\" value=\"" + choices[i] + "\">");
+			myOut.println(choices[i] + " </label><br>");
 		}
-		
+
 		myOut.println("</div></div>");
 		myOut.println("<div class=\"col-xs-6 col-md-0 text-left\" style=\"left: 0px;\"></div></div>");
-	}
-%>
+	}%>
 
 
 

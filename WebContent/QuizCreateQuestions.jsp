@@ -128,7 +128,7 @@
     					<TABLE id="dataTable" border="1">
         					<TR>
             				<TD><INPUT type="checkbox" name="choicecheck" value = "box1"/></TD>
-            				<TD> <INPUT type="text" class="form-control form-control-inline" name = "choice1" placeholder="Choice"> </TD>
+            				<TD> <INPUT type="text" style="border-radius:6px; min-width: 0; width:600px;  height:34px;" name = "choice1" placeholder="Choice"> </TD>
         					</TR>
     					</TABLE>
 
@@ -224,7 +224,7 @@
 							<p><h3>Creating Multiple Respond Problem: </h5> </p>
 							<input type="hidden" name = "type" value = "MR">
 							<p><h5>Question: </h5> </p>
-							<input type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
+							<input type="text" style="border-radius:6px; min-width: 0; width:600px;  height:34px;" name = "question" placeholder="Question">
 							<div>
 
 						

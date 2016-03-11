@@ -49,8 +49,8 @@ public class LoadXMLServlet extends HttpServlet {
 		xml[1] = userID;
 		
 		XMLParser.main(xml);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizCreatedSuccess.jsp");
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("LoadXMLSuccess.jsp");
 		dispatcher.forward(request, response);
 	}
 

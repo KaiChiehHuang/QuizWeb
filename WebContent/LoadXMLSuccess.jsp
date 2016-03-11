@@ -151,7 +151,7 @@ tbody{
 
 </style>
 
-<title>Create a Quiz</title>
+<title>Quiz Created Successfully</title>
 </head>
 <!-- background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers9.jpg') -->
 <body style="height:400px; background-color:#fffff6;">
@@ -211,33 +211,25 @@ tbody{
 		<!-- /.col-lg-6 -->
 	</div>
 
-<form action="LoadXMLServlet" method="post">
-<div class="container" style = "position: relative; width:70%; top: 50px;" >
-  <h2 style="text-align:center;">Create a Quiz</h2> 
-  		<div style="border-radius: 20px;
+		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
     				padding: 15px; 
-				    height: 520px;
+				    height: 320px;
      				text-align:left;
-     				left:50%;width:900px;
-     				margin-left:-450px;
-     				top:70px;
+     				left:50%;width:400px;
+     				margin-left:-200px;
+     				top:200px;
      				position:absolute;
      				opacity: 0.9;
      				background-color:white;
-     				">
-<div class = "container">
-	<div>
-		<p><h4>Load XML: </h4> </p>
-		<p>Paste your XML file here:</p>
-  		<textarea style = "width:72%" class="form-control" rows="17" name = "XMLfile" placeholder="XML file "></textarea>
-  	</div>
-  	<div style = "position: relative; width:100%; top: 20px;">
-  	<button type="submit" class="btn btn-success" style="position: relative; left:35%; width:80px; margin-left:-40px">Load</button>
-	</div>
-</div>
-</div>
-</form>
+     				"><h3>Quiz Created Successfully!</h3>
+     				<h3></h3>
+     				<div class = "container" style = "position: relative; left: 50%; width: 400px; margin-left:-200px">
+     				<img class="img-thumbnail" src = "http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2015/08/emoji.jpg" >
+     				</div>
+     				<div  style = "position: relative; width:100%; top: 60px;"><a href="HomePage.jsp"> Back to Home Page </a></div>
+     				</div>
+
+
 </body>
 </html>
-

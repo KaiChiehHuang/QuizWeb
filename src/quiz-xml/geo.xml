@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<quiz random="true" one-page="false" practice-mode="false">
+<quiz random="true" one-page="false" practice-mode="false" immediate-correction="true">
 <title>Geography Exam</title>
 <quiz-image>https://pioneerwoman.files.wordpress.com/2013/04/geographyquiz2.jpg</quiz-image>
 <category>Geography</category>
@@ -17,32 +17,35 @@
 <question type="picture-response">
   <query>Which country is in this picture?</query>
   <image-location>https://recodetech.files.wordpress.com/2014/05/china-1-of-1.jpg?quality=80&strip=info&w=640</image-location>
-  <answer>Leporidae</answer>
+  <answer>China</answer>
+  <answer>Chinese</answer>
+  <answer>P.R.C</answer>
 </question>
 
 <question type="fill-in-blank">
-  <blank-query><pre>The book</pre><blank /><post>Down, about a bunch of rabbits, won the 1972 Carnegie Medal</post></blank-query>
-  <answer>Watership</answer>
+  <blank-query><pre></pre><blank /><post>is the biggest country in the world.</post></blank-query>
+  <answer>Russia</answer>
+  <answer>The Russia</answer>
 </question>
 
 <question type="multiple-choice">
-  <query>Which of the following statements is false</query>
-  <option>Aztec mythology includes a rabbit pantheon.</option>
-  <option>In Japanese folklore, rabbits live on the moon.</option>
-  <option answer="answer">In Stanford tradition, rubbing the nose of a rabbit guarantees an A on the CS108 class project</option>
+  <query>California, New Mexico and Canada are all_____________</query>
+  <option answer="answer">Bigger than Stanford</option>
+  <option>Countries</option>
+  <option>States</option>
+  <option answer="answer">In North America</option>
 </question>
 
-<question type="multiple-response" answer-ordered="false">
-  <query>List three of the "Eight Culinary Cuisines" of China.</query>
+<question type="multiple-response" answer-ordered="true">
+  <query>List the top three biggest oceans in the world.</query>
   <answer-list>
-    <answer>Anhui</answer>
-    <answer>Anhui Sheng</answer>
+    <answer>Pacific</answer>
   </answer-list>
   <answer-list>
-    <answer>Cantonese</answer>
+    <answer>Atlantic</answer>
   </answer-list>
   <answer-list>
-    <answer>Fujian</answer>
+    <answer>Indian</answer>
   </answer-list>
 </question>
 

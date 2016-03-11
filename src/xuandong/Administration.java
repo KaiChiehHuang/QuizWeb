@@ -100,7 +100,7 @@ public class Administration {
 	public static ArrayList<String> getAllUsers() throws SQLException {
 		ArrayList<String> users = new ArrayList<String>();
 		DBConnection database = new DBConnection();
-		String sql = "SELECT UserID FROM Users;";
+		String sql = "SELECT UserID FROM Users WHERE UserID NOT IN (SELECT AdminID FROM Administrator);";
 		ResultSet res = database.getStmt().executeQuery(sql);
 		while (res.next()) {
 			users.add(res.getString("UserID"));

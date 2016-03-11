@@ -54,6 +54,7 @@ public class Quiz {
 	 * database, please don't use this one
 	 */
 	public Quiz() {
+		problems = new ArrayList<Problem>();
 	}
 	
 

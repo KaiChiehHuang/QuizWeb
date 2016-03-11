@@ -17,9 +17,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
 <script> 
-$(function () {
-	  $('[data-toggle="popover"]').popover()
-	})
 </script>
 
 <script type='text/javascript'>
@@ -141,20 +138,20 @@ table-layout: fixed;
 }
 
 table{
- height: 430px;             
+ height: 480px;             
  display: -moz-groupbox;    
 }
 
 tbody{
   overflow-y: scroll;      
-  height: 380px; 
+  height: 420px; 
   width: 97%;          
   position: absolute;
 }
 
 </style>
 
-<title>Announcement Page</title>
+<title>View Announcement</title>
 </head>
 <!-- background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers9.jpg') -->
 <body style="height:300px;background-size:100%;background-color:#fffff6;">
@@ -214,65 +211,47 @@ tbody{
 		<!-- /.col-lg-6 -->
 	</div>
 
+
 <%
-	ArrayList<Announcement> announ = new ArrayList<Announcement>();
-	announ = Announcement.getAnnouncement();
+String annountoviewindex = request.getParameter("annountoviewindex");
+int index = Integer.parseInt(annountoviewindex);
+
+ArrayList<Announcement> announ = new ArrayList<Announcement>();
+announ = Announcement.getAnnouncement();
+
+Announcement ann = new Announcement();
+for (int i = announ.size() - 1; i >= 0 ; i--) {
+	if (i == index) {	
+ 		ann = announ.get(i);
+	}
+}
+String subject = ann.getSubject();
+String content = ann.getContent();
+String date = ann.getDate();
 %>
 
-<div class="container" style = "position: relative; width:70%; top: 50px;">
-  <h2 style="text-align:center;">All Announcement</h2> 
-  		<div style="border-radius: 20px;
+<div class = "container" style = "position: relative; width:65%; top: 60px;">
+<h2 style="text-align:center;"><%=subject%></h2> 
+<p style="text-align:center;"><%=date%></p>
+
+		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
     				padding: 15px; 
-				    height: 450px;
+				    height: 350px;
      				text-align:left;
-     				left:50%;width:800px;
-     				margin-left:-400px;
-     				top:70px;
-     				position:absolute;
+     				left:50%;width:600px;
+     				margin-left:-300px;
+     				top:7px;
+     				position:relative;
      				opacity: 0.9;
      				background-color:white;
-     				">
-  <table class="table">
-    <thead>
-      <tr>
-        <th class="text-center">Subject</th>
-        <th class="text-center">Date</th>
-      </tr>
-    </thead>
-    <tbody>
-    <%
-    	for (int i = announ.size() - 1; i >= 0 ; i--) {
-     		Announcement ann = new Announcement();
-     		ann = announ.get(i);
-     		String sub = ann.getSubject();
-     		String date = ann.getDate();
-    		if (i % 2 == 0) {
-    			out.println("<tr class=\"warning\">");
-    		} else {
-    			out.println("<tr class=\"active\">");
-    		}
-    		out.println("<td style=\"text-align:center;\">");
-    		out.print("<li><a href = \"UserViewSingleAnnoun.jsp?annountoviewindex="+ i +"\">"
-    				+ sub +"</a></li>");
-    		out.println("</td>");
-    		
-    		out.println("<td style=\"text-align:center;\">");
-    		out.println(date);
-    		out.println("</td>");
-    		
-    		out.println("</tr>");	
-    	}
-    %>
-    </tbody>
-  </table>
-
-
-  <div  style = "position: relative; width:80%;"><a href="HomePage.jsp"> Back to Home Page </a></div>
+     				"><div><p><%=content%></p></div>
+     				
+     				  <div  style = "position: relative;top:320px; width:80%;"><a href="AdminViewAnnoun.jsp" > Back to All Announcement Page </a></div>
+  					  <div  style = "position: relative;top:320px; width:80%;"><a href="AdminDeleteUser.jsp"> Back to Admin Page </a></div>
+     	</div> 				
 </div>
 
-</div>
 
 </body>
 </html>
-

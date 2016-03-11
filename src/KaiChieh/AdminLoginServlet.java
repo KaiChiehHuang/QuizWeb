@@ -47,6 +47,8 @@ public class AdminLoginServlet extends HttpServlet {
 		AccountManager manager = (AccountManager) context.getAttribute("AccountManager");
 		response.setContentType("text/html; charset=UTF-8");
 		if(manager.checkAdmin(adminID, adminPassword)) {
+			HttpSession session = request.getSession(); 
+			session.setAttribute("userID",adminID);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("AdminDeleteUser.jsp");
 			dispatcher.forward(request, response);
 		}else{

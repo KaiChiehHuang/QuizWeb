@@ -10,8 +10,6 @@ public class QuizTest {
 
 	@Test
 	public void test() throws SQLException {
-		Long x;
-		x=(long) 0;
-		System.out.println(x==0);
+//		System.out.println("I said' high you".replace("'", "\'"));
 	}
 }

@@ -35,7 +35,7 @@ CREATE TABLE Users (
 );
 
 INSERT INTO Users VALUES("Administration","b8be3d1264310c3b8c848d4b90d5206179a40cc4","Admin",0,"unknown","");
-INSERT INTO Users VALUES("guest","35675e68f4b5af7b995d9205ad0fc43842f16450","Guest",0,"unknown","");
+INSERT INTO Users VALUES("Guest","35675e68f4b5af7b995d9205ad0fc43842f16450","Guest",0,"unknown","");
 INSERT INTO Users VALUES("jay","f1bfbf317598ea9c3b0fd25a90f4bbd0b434bbc7","Kaijie Huang",25,"Male","");
 INSERT INTO Users VALUES("xuandong","e26c25174fc72c4e3f9073342eec938ec27b1887","Xuandong Lei",23,"Male","");
 INSERT INTO Users VALUES("bian","fd9959b8097a0363d19da68eea7b97f8a6ae6f6d","Lu Bian",23,"Female","");
@@ -185,9 +185,7 @@ CREATE TABLE Achievement (
 	PRIMARY KEY (UserID, AchievementName),
 	FOREIGN KEY (UserID)
 		REFERENCES Users(UserID)
-		ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (QuizID)
-		REFERENCES Quiz(QuizID)
+		ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Administrator (

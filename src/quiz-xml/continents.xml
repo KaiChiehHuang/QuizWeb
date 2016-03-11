@@ -3,6 +3,7 @@
 	<title>Continents By Population</title>
 	<quiz-image>http://www.anglaisfacile.com/cgi2/myexam/images/25249.gif</quiz-image>
 	<category>Geography</category>
+	<description>See how well you know about continents.</description>
 	<question type="question-response">
 		<query>What is the most populous continent?</query>
 		<answer>Asia</answer>

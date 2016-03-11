@@ -68,6 +68,7 @@ public class Quiz {
 		this.quizID = quizID;
 		this.problems = new ArrayList<Problem>();
 		endTime = (long) 0;
+		pbCount = 0;
 		try {
 			DBConnection database = new DBConnection();
 			Statement stmt = database.getStmt();
@@ -694,7 +695,6 @@ public class Quiz {
 		double score = 0.0;
 		for (Problem pr : problems) {
 			score += pr.getScore();
-			System.out.println(score);
 		}
 		return score / pbCount * 100;
 	}

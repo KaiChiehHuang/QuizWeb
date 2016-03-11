@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <quiz immediate-correction="false" one-page="true" practice-mode="false" random="false">
 	<title>Continents By Population</title>
-	<description/>
 	<category>Geography</category>
 	<question type="question-response">
 		<query>What is the most populous continent?</query>

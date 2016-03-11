@@ -296,7 +296,7 @@ tbody{
 		<div class="radio">
 		  <label><input type="radio" name="ImmCorr" value="No">No</label>
 	</div>
-<button type="submit"  class="btn btn-warning" type="button" style = "position: relative; left: 40%; width: 120px; margin-left:-60px">Add Questions</button>
+<button type="submit"  class="btn btn-success" type="button" style = "position: relative; left: 35%; width: 120px; margin-left:-60px">Add Questions</button>
 
 
   <div  style = "position: relative; width:80%; top: 25px;"><a href="HomePage.jsp"> Back to Home Page </a></div>

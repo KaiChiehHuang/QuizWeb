@@ -1,11 +1,10 @@
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="xuandong.*" %>
-    <%@ page import="bian.*" %>
-    <%@ page import="java.util.*" %>
+    <%@ page import="java.io.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,39 +15,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
-<script> 
-$(function () {
-	  $('[data-toggle="popover"]').popover()
-	})
-</script>
-
-<script type='text/javascript'>
-	function pageScrollUp(position) {
-		var yPos = window.pageYOffset;
-		yPos -= 95;
-		if (yPos < position) {
-			yPos = position;
-		}
-		window.scroll(0, yPos); // horizontal and vertical scroll increments
-		scrolldelay = setTimeout('pageScrollUp(\'' + position + '\')', 45); // scrolls every 100 milliseconds
-		if (yPos == position) {
-			clearTimeout(scrolldelay);
-		}
-	}
-	$(document).ready(function(){
-	    $('[data-toggle="tooltip"]').tooltip({
-	        placement : 'top'
-	    });
-	});
-	$(function() {
-		$('[data-tooltip="true"]').tooltip();
-		});
-	function myFunction() {
-	    document.getElementById("receiver").defaultValue = "Goofy";
-	}
-	
-</script>
-
 <style>
 /*----- Menu Outline -----*/
 .menu-wrap {
@@ -134,33 +100,41 @@ $(function () {
 	background: #3e3436;
 }
 
-tr {
-width: 100%;
-display: inline-table;
-table-layout: fixed;
+.carousel-control.right {
+    background-image: none
 }
 
-table{
- height: 480px;             
- display: -moz-groupbox;    
-}
-
-tbody{
-  overflow-y: scroll;      
-  height: 420px; 
-  width: 97%;          
-  position: absolute;
-}
-
+<script type='text/javascript'>
+	function pageScrollUp(position) {
+		var yPos = window.pageYOffset;
+		yPos -= 95;
+		if (yPos < position) {
+			yPos = position;
+		}
+		window.scroll(0, yPos); // horizontal and vertical scroll increments
+		scrolldelay = setTimeout('pageScrollUp(\'' + position + '\')', 45); // scrolls every 100 milliseconds
+		if (yPos == position) {
+			clearTimeout(scrolldelay);
+		}
+	}
+	$(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip({
+	        placement : 'top'
+	    });
+	});
+	$(function() {
+		$('[data-tooltip="true"]').tooltip();
+		});
+	function myFunction() {
+	    document.getElementById("receiver").defaultValue = "Goofy";
+	}
+	
+</script>
 </style>
-
-<title>Announcement Page</title>
+<title>Quiz</title>
 </head>
-<!-- background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers9.jpg') -->
-<body style="height:300px;background-size:100%;background-color:#fffff6;">
-
-	<div
-		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
+<body style="height:770px;background-size:100%;background-color:#fffff6;">
+<div style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
 
 		<div
 			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color: black;">
@@ -215,64 +189,39 @@ tbody{
 	</div>
 
 <%
-	ArrayList<Announcement> announ = new ArrayList<Announcement>();
-	announ = Announcement.getAnnouncement();
-%>
+String result = (String)session.getAttribute("result");
+int index = (Integer)session.getAttribute("index");
+ArrayList<Problem> problems = (ArrayList<Problem>)session.getAttribute("problems");
+String servlet = "QuizTakingMultiPageQuestion";
+if (index > problems.size()) {
+	servlet = "QuizResultServlet";
+}
 
+%>
+<form action=<%=servlet %> method="post">
 <div class="container" style = "position: relative; width:70%; top: 50px;">
-  <h2 style="text-align:center;">All Announcement</h2> 
+  <h2 style="text-align:center;">Quiz Problem</h2> 
   		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
     				padding: 15px; 
-				    height: 500px;
+				    height: 520px;
      				text-align:left;
-     				left:50%;width:900px;
-     				margin-left:-450px;
+     				left:50%;width:800px;
+     				margin-left:-400px;
      				top:70px;
      				position:absolute;
      				opacity: 0.9;
      				background-color:white;
      				">
-  <table class="table">
-    <thead>
-      <tr>
-        <th class="text-center">Subject</th>
-        <th class="text-center">Date</th>
-      </tr>
-    </thead>
-    <tbody>
-    <%
-    	for (int i = announ.size() - 1; i >= 0 ; i--) {
-     		Announcement ann = new Announcement();
-     		ann = announ.get(i);
-     		String sub = ann.getSubject();
-     		String date = ann.getDate();
-    		if (i % 2 == 0) {
-    			out.println("<tr class=\"warning\">");
-    		} else {
-    			out.println("<tr class=\"active\">");
-    		}
-    		out.println("<td style=\"text-align:center;\">");
-    		out.print("<li><a href = \"UserViewSingleAnnoun.jsp?annountoviewindex="+ i +"\">"
-    				+ sub +"</a></li>");
-    		out.println("</td>");
-    		
-    		out.println("<td style=\"text-align:center;\">");
-    		out.println(date);
-    		out.println("</td>");
-    		
-    		out.println("</tr>");	
-    	}
-    %>
-    </tbody>
-  </table>
+     	<h3 style="text-align:center;"><%=result %></h3> 
 
-
-  <div  style = "position: relative; width:80%;"><a href="HomePage.jsp"> Back to Home Page </a></div>
+<div class="text-center"
+style="position: relative;  width: 100%; height: 20%; top: 0; left: 0;">
+<h2>     </h2>
+<input type="submit" class="btn btn-info" value = "Next"/>
+</form>
 </div>
-
 </div>
-
+</div>
 </body>
 </html>
-

@@ -1,7 +1,7 @@
 package bian;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import xuandong.Problem;
 import xuandong.Quiz;
-import xuandong.XMLParser;
 
 /**
- * Servlet implementation class LoadXMLServlet
+ * Servlet implementation class QuizTakingStart
  */
-@WebServlet("/LoadXMLServlet")
-public class LoadXMLServlet extends HttpServlet {
+@WebServlet("/QuizTakingStart")
+public class QuizTakingStart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoadXMLServlet() {
+    public QuizTakingStart() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,17 +41,26 @@ public class LoadXMLServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		String userID = (String)session.getAttribute("userID");
-		String xmlString = request.getParameter("XMLfile");
-		String[] xml = new String[2];
-		xml[0] = xmlString;
-		xml[1] = userID;
-		
-		XMLParser.main(xml);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("QuizCreatedSuccess.jsp");
-		dispatcher.forward(request, response);
+		Quiz quiz = (Quiz)session.getAttribute("quiz");
+		session.setAttribute("index", 1);
+		session.setAttribute("result", "");
+		ArrayList<Problem> problems = new ArrayList<Problem>();
+		problems = quiz.getProblems();
+		quiz.setOnQuizMode();
+		quiz.quizStart();
+		if (quiz.isRandomQuiz()) {
+			Collections.shuffle(problems);
+		}
+		session.setAttribute("problems", problems);
+		if (quiz.isOnePage()) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("QuizTakingOnePage.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("QuizTakingMultiPageQuestion.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 }

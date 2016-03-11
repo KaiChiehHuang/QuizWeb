@@ -138,7 +138,7 @@ table-layout: fixed;
 }
 
 table{  
-height: 500px;           
+height: 220px;           
  display: -moz-groupbox;    
 }
 
@@ -154,7 +154,7 @@ tbody{
 <title>Administration</title>
 </head>
 <!-- background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers9.jpg') -->
-<body style="height:400px; background-color:#fffff6;">
+<body style="height:1000px; background-color:#fffff6;">
 
 	<div
 		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">

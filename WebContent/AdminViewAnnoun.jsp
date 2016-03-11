@@ -144,7 +144,7 @@ table{
 
 tbody{
   overflow-y: scroll;      
-  height: 480px; 
+  height: 420px; 
   width: 97%;          
   position: absolute;
 }
@@ -154,7 +154,7 @@ tbody{
 <title>Manage Announcement</title>
 </head>
 <!-- background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers9.jpg') -->
-<body style="height:710px;background-size:100%;background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers3.jpg');">
+<body style="height:300px;background-size:100%; background-color:#fffff6;">
 
 	<div
 		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
@@ -223,7 +223,7 @@ announ = Announcement.getAnnouncement();
   		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
     				padding: 15px; 
-				    height: 550px;
+				    height: 500px;
      				text-align:left;
      				left:50%;width:900px;
      				margin-left:-450px;
@@ -263,7 +263,7 @@ announ = Announcement.getAnnouncement();
 		out.println("</td>");
 		
 		out.println("<td style=\"text-align:center;\">");
-		out.println("<button name = \"annountodeleteindex\" type=\"submit\" class=\"btn btn-warning\" value =\"" +i+ "\"/>Delete</button>");
+		out.println("<button name = \"annountodeleteindex\" type=\"submit\" class=\"btn btn-sm btn-warning\" value =\"" +i+ "\"/>Delete</button>");
 		out.println("</td>");
 		
 		out.println("</tr>");	
@@ -273,7 +273,7 @@ announ = Announcement.getAnnouncement();
     </tbody>
   </table>
 
-  <div  style = "position: relative; width:80%; top: 45px;"><a href="HomePage.jsp"> Back to Home Page </a></div>
+  <div  style = "position: relative; width:80%;"><a href="HomePage.jsp"> Back to Home Page </a></div>
 </div>
 
 </div>

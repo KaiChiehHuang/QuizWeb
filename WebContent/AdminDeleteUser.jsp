@@ -138,13 +138,13 @@ table-layout: fixed;
 }
 
 table{  
-height: 480px;           
+height: 500px;           
  display: -moz-groupbox;    
 }
 
 tbody{
   overflow-y: scroll;      
-  height: 480px; 
+  height: 220px; 
   width: 97%;          
   position: absolute;
 }
@@ -154,7 +154,7 @@ tbody{
 <title>Administration</title>
 </head>
 <!-- background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers9.jpg') -->
-<body style="height:900px; background-color:#fffff6;">
+<body style="height:400px; background-color:#fffff6;">
 
 	<div
 		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
@@ -220,15 +220,16 @@ tbody{
 <center>
 <div class = "container" style = "position: relative; width:70%; top: 50px;">
 <h2 style="text-align:center;">Web Statistics:</h2> 
-<p><span class="label label-warning"><span class="glyphicon glyphicon-user"></span> User Number</span> <%=users.size()%>
-<span class="label label-info"><span class="glyphicon glyphicon-book"></span> Quiz Number</span> <%=quizs.size()%>
-<span class="label label-success"><span class="glyphicon glyphicon-list-alt"></span> Quiz Taken Number</span> <%=Administration.getQuizTakenNumber()%></p>
+<p><span class="label label-warning"><span class="glyphicon glyphicon-user"></span> User Number: <%=users.size()%></span> 
+<span class="label label-info"><span class="glyphicon glyphicon-book"></span> Quiz Number: <%=quizs.size()%></span> 
+<span class="label label-success"><span class="glyphicon glyphicon-list-alt"></span> Quiz Taken Number: <%=Administration.getQuizTakenNumber()%></span></p>
 <div><a href="AdminCreateAnnoun.jsp"> Create Announcement </a></div>
-<a href="AdminViewAnnoun.jsp"> View all announcements </a>
+<div><a href="AdminViewAnnoun.jsp"> View all announcements </a></div>
 </div>
 </center>
+
 <form action="DeleteUserServlet" method="post">
-<div class="container" style = "position: relative; width:70%; top: 50px;">
+<div class="container" style = "position: relative; width:70%; top: 50px;" >
   <h2 style="text-align:center;">Manage Users</h2> 
   		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
@@ -241,7 +242,6 @@ tbody{
      				position:absolute;
      				opacity: 0.9;
      				background-color:white;
-     				overflow:auto;max-height:300px;
      				">
      				
   <table class="table">
@@ -280,7 +280,7 @@ tbody{
   </table>
 </div>
 
-<div style="top:320px;position:relative;">
+<div style="top:335px;position:relative;">
 	<h2 style="text-align:center;">Manage Quiz</h2>
 </div>
 <div class="container" style = "position: relative; width:70%; top: 50px;"> 
@@ -295,7 +295,6 @@ tbody{
      				position:absolute;
      				opacity: 0.9;
      				background-color:white;
-     				overflow:auto;max-height:300px;
      				">
     <table class="table">
     <thead>
@@ -341,7 +340,7 @@ tbody{
 </div>
 
 
- <div  style = "position: relative; width:80%; top: 570px;"><a href="HomePage.jsp"> Back to Home Page </a></div>
+<div  style = "position: relative; width:100%; top: 610px;"><a href="HomePage.jsp"> Back to Home Page </a></div>
 </div>
 </form>
 </body>

@@ -109,7 +109,7 @@ public class QuizAddProblem extends HttpServlet {
 			FillBlank fb = new FillBlank("FB", true);
 			String[] fbquestion = request.getParameterValues("fbquestion");
 			String que = "";
-			que += fbquestion[0] + "#" + fbquestion[1];
+			que += fbquestion[0] + " |||||| " + fbquestion[1];
 			fb.setQuestion(que);
 			fb.setAnswers(answer);
 			quiz.addProblem(fb);

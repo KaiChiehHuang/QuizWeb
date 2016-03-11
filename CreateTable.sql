@@ -197,6 +197,8 @@ CREATE TABLE Administrator (
 );
 
 INSERT INTO Administrator(AdminID) VALUES ("Administration");
+INSERT INTO Administrator(AdminID) VALUES ("jay");
+INSERT INTO Administrator(AdminID) VALUES ("xuandong");
 
 CREATE TABLE Announcement (
 	Content   TEXT,

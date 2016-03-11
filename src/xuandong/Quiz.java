@@ -276,7 +276,7 @@ public class Quiz {
 	 * @param description
 	 */
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = description.replace("'", "\'");
 	}
 
 	
@@ -299,6 +299,26 @@ public class Quiz {
 	public void deleteProblem(String problemID) throws SQLException {
 		for (int i = 0; i < problems.size(); i++) {
 			if (problems.get(i).getQuestionID().equals(problemID)) {
+				String type = problems.get(i).getQuestionID().substring(0, 2);
+				switch (type) {
+				case "FB":
+					pbCount -= 1;
+					break;
+				case "MC":
+					MultiChoice newMC = (MultiChoice) problems.get(i);
+					pbCount -= newMC.getCount();
+					break;
+				case "MR":
+					MultiResponse newMR = (MultiResponse) problems.get(i);
+					pbCount -= newMR.getCount();
+					break;
+				case "PR":
+					pbCount -= 1;
+					break;
+				case "QR":
+					pbCount -= 1;
+					break;
+				}
 				problems.remove(i);
 				break;
 			}
@@ -694,7 +714,6 @@ public class Quiz {
 		double score = 0.0;
 		for (Problem pr : problems) {
 			score += pr.getScore();
-			System.out.println(score);
 		}
 		return score / pbCount * 100;
 	}

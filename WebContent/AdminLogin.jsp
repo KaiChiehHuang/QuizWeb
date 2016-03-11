@@ -9,11 +9,24 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<title>Online Quizbook</title>
+<title>Admin Login</title>
 </head>
-<body style="background-color:#FFFAFA; background-image:url(loginBackground.jpg);background-size: 100%;">
-		<h1 style="text-align:center;">Playing and creating quizzes</h1>
-		
+<body style="background-color:#282828;">
+		<hr style="
+				position:relative;top:40px;
+				border:none;	
+				border-top:1px #CCCCCC solid;
+				height: 1px;
+				width:60%;
+				">	
+		<h1 style="text-align:center;position:relative;top:60px;color:white;">Admin Login</h1>
+		<hr style="
+				position:relative;top:80px;
+				border:none;	
+				border-top:1px #CCCCCC solid;
+				height: 1px;
+				width:60%;
+				">	
 		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
     				padding: 15px; 
@@ -21,26 +34,26 @@
      				text-align:left;
      				left:50%;width:400px;
      				margin-left:-200px;
-     				top:200px;
+     				top:220px;
      				position:absolute;
-     				opacity: 0.9;
+     				opacity: 0.8;
      				background-color:white;
      				">
      	<% session.setAttribute("userID","Guest"); %>
-		<p> Please log in or<!-- Need to inform HomePage it's guest --><a href="HomePage.jsp"> log in as Guest </a> / <a href="AdminLogin.jsp" style="color:#B22222;"> log in as Admin </a></p>
-			<form action="UserLogin" method="post"> 
+		<p style="display: inline-block;"> Please log in as <a href="#" > Administrator </a></p>
+			<form action="AdminLoginServlet" method="post"> 
 			<div class="input-group" style="opacity: 0.95;">
-	  			<span class="input-group-addon" id="basic-addon1">ID&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-	  			<input type="text" class="form-control" placeholder="UserID" aria-describedby="basic-addon1" name="userID">
+	  			<span class="input-group-addon" id="basic-addon1">Admin ID&nbsp</span>
+	  			<input type="text" class="form-control" placeholder="Administrator ID" aria-describedby="basic-addon1" name="adminID">
 			</div>
 			<br>
 			<div class="input-group" style="opacity: 0.95;">
 	  			<span class="input-group-addon" id="basic-addon1">Password</span>
-	  			<input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="password">
+	  			<input type="text" class="form-control" placeholder="Administrator Password" aria-describedby="basic-addon1" name="adminPassword">
 			</div>	
 			<br>
 			<div style="text-align:right">
-				<input type="submit" class="btn btn-info" value="Login"></input>
+				<input type="submit" class="btn btn-block" value="Login" style="color:white;background-color:#505050;" ></input>
 			</div>
 			<hr style="
 				border:none;	
@@ -48,8 +61,8 @@
 				height: 1px;
 				">	
 			<div style="text-align:center">
-				<p> Don't have an account? </p>
-				<a href="CreateAccount.jsp"> Create New Account </a>
+				<p> Changed your mind? </p>
+				<a href="UserLogin.jsp" > Back to user login </a>
 			</div>
 			</form>
 		</div>

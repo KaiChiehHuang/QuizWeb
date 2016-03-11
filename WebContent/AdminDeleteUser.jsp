@@ -1,10 +1,11 @@
-<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="xuandong.*" %>
-    <%@ page import="java.io.*" %>
+    <%@ page import="bian.*" %>
+    <%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,9 +16,200 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ek+Mukta">
+<script> 
+</script>
+
+<script type='text/javascript'>
+	function pageScrollUp(position) {
+		var yPos = window.pageYOffset;
+		yPos -= 95;
+		if (yPos < position) {
+			yPos = position;
+		}
+		window.scroll(0, yPos); // horizontal and vertical scroll increments
+		scrolldelay = setTimeout('pageScrollUp(\'' + position + '\')', 45); // scrolls every 100 milliseconds
+		if (yPos == position) {
+			clearTimeout(scrolldelay);
+		}
+	}
+	$(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip({
+	        placement : 'top'
+	    });
+	});
+	$(function() {
+		$('[data-tooltip="true"]').tooltip();
+		});
+	function myFunction() {
+	    document.getElementById("receiver").defaultValue = "Goofy";
+	}
+	
+</script>
+
+<style>
+/*----- Menu Outline -----*/
+.menu-wrap {
+	width: 100%;
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+	background: black;
+}
+
+.menu {
+	width: 300px;
+	margin: 0px auto;
+}
+
+.menu li {
+	margin: 0px;
+	list-style: none;
+	font-family: 'Ek Mukta';
+}
+
+.menu a {
+	transition: all linear 0.15s;
+	color: #919191;
+}
+
+.menu li:hover>a, .menu .current-item>a {
+	text-decoration: none;
+	color: #be5b70;
+}
+
+.menu .arrow {
+	font-size: 11px;
+	line-height: 0%;
+}
+
+/*----- Top Level -----*/
+.menu>ul>li {
+	float: left;
+	display: inline-block;
+	position: relative;
+	font-size: 19px;
+}
+
+.menu>ul>li>a {
+	padding: 10px 30px;
+	display: inline-block;
+	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.menu>ul>li:hover>a, .menu>ul>.current-item>a {
+	background: #2e2728;
+}
+
+/*----- Bottom Level -----*/
+.menu li:hover .sub-menu {
+	z-index: 1;
+	opacity: 1;
+}
+
+.sub-menu {
+	width: 140%;
+	padding: 5px 0px;
+	position: absolute;
+	top: 100%;
+	left: 0px;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity linear 0.15s;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+	background: #2e2728;
+}
+
+.sub-menu li {
+	display: block;
+	font-size: 16px;
+}
+
+.sub-menu li a {
+	padding: 10px 30px;
+	display: block;
+}
+
+.sub-menu li a:hover, .sub-menu .current-item a {
+	background: #3e3436;
+}
+
+tr {
+width: 100%;
+display: inline-table;
+table-layout: fixed;
+}
+
+table{  
+height: 480px;           
+ display: -moz-groupbox;    
+}
+
+tbody{
+  overflow-y: scroll;      
+  height: 480px; 
+  width: 97%;          
+  position: absolute;
+}
+
+</style>
+
 <title>Administration</title>
 </head>
-<body style="background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers3.jpg')">
+<!-- background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('http://stylearena.net/wp-content/uploads/2015/03/cute-hd-wallpapers9.jpg') -->
+<body style="height:900px; background-color:#fffff6;">
+
+	<div
+		style="position: fixed; width: 100%; height: 50px; top: 0px; left: 0; z-index: 2; text-align: center; background-color: black; color: #FAF0E6; opacity: 0.95;">
+
+		<div
+			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color: black;">
+			<div style="position: absolute; left: 0px; top: 5px; width: 250px; height: 45; background-color: black;">
+				<a href="HomePage.jsp"><h4 style="color:#ffb3b3;">QuizThatShit</h4></a>
+			</div>
+		</div>
+
+		<div class="col-lg-6"
+			style="position: absolute; top: 8px; left: 30%; width: 40%;">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search for...">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" style="font-size:20px;"></span></button>
+				</span>
+			</div>
+			<!-- /input-group -->
+		</div>
+		<div
+			style="position: absolute; right: 5px; width: 300px; height: 100%; background-color: black;">
+
+			<div class="menu-wrap">
+				<nav class="menu">
+					<ul class="clearfix">
+						<li><a href="javascript:pageScrollUp(0)" style="color:yellow;">
+							<%
+								String userID = (String) session.getAttribute("userID");
+								String welcome = "Hi "+userID+"!";
+								out.println(welcome);
+							%>
+							</a>
+						</li>
+						<li><a href="#">Menu<span class="arrow">&#9660;</span></a>
+							<ul class="sub-menu">
+								<% String userIDUrl = "QuizCreat.jsp?userID="+userID; 
+								   out.print("<li><a href=\""+ userIDUrl+"\">Create Quiz</a></li>");
+								%>
+								<% String quizRecordUrl = "UserViewHistory.jsp"; 
+								   out.print("<li><a href=\""+ quizRecordUrl+"\">Quiz Record</a></li>");
+								%>
+								<% String announceUrl = "UserViewAnnoun.jsp"; 
+								   out.print("<li><a href=\""+ announceUrl +"\">Announcements</a></li>");
+								%>
+								<li><a href="UserLogin.jsp">Logout</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- /.col-lg-6 -->
+	</div>
 
 <%
 	ArrayList users = new ArrayList();
@@ -25,49 +217,60 @@
 	ArrayList quizs = new ArrayList();
 	quizs = Administration.getAllQuizzes();
 %>
-
-<div >
-<div class = "container">
-<h4>Web Statistics:</h4> 
-<p>Total users number: <%=users.size()%></p>
-<p>Total quiz number: <%=quizs.size()%></p>
-<p>Total taken quiz number: <%=Administration.getQuizTakenNumber()%></p>
+<center>
+<div class = "container" style = "position: relative; width:70%; top: 50px;">
+<h2 style="text-align:center;">Web Statistics:</h2> 
+<p><span class="label label-warning"><span class="glyphicon glyphicon-user"></span> User Number</span> <%=users.size()%>
+<span class="label label-info"><span class="glyphicon glyphicon-book"></span> Quiz Number</span> <%=quizs.size()%>
+<span class="label label-success"><span class="glyphicon glyphicon-list-alt"></span> Quiz Taken Number</span> <%=Administration.getQuizTakenNumber()%></p>
 <div><a href="AdminCreateAnnoun.jsp"> Create Announcement </a></div>
 <a href="AdminViewAnnoun.jsp"> View all announcements </a>
-
-
 </div>
+</center>
 <form action="DeleteUserServlet" method="post">
-<div class = "container">
-
-<h4>Manage Users</h4>
+<div class="container" style = "position: relative; width:70%; top: 50px;">
+  <h2 style="text-align:center;">Manage Users</h2> 
+  		<div style="border-radius: 20px;
+    				border: 2px solid #73AD21;
+    				padding: 15px; 
+				    height: 300px;
+     				text-align:left;
+     				left:50%;width:900px;
+     				margin-left:-450px;
+     				top:70px;
+     				position:absolute;
+     				opacity: 0.9;
+     				background-color:white;
+     				overflow:auto;max-height:300px;
+     				">
+     				
   <table class="table">
     <thead>
       <tr>
-        <th>UserID</th>
-        <th>Delete User</th>
-        <th>Promote Admin</th>
+        <th class="text-center">UserID</th>
+        <th class="text-center">Delete User</th>
+        <th class="text-center">Promote Admin</th>
       </tr>
     </thead>
     <tbody>
     <%
     	for (int i = 0; i < users.size(); i++) {
-     		String userID = (String)users.get(i);
+     		String eachUserID = (String)users.get(i);
     		if (i % 2 == 0) {
     			out.println("<tr class=\"warning\">");
     		} else {
     			out.println("<tr class=\"active\">");
     		}
-    		out.println("<td>");
-    		out.println(userID);
+    		out.println("<td style=\"text-align:center;\">");
+    		out.println(eachUserID);
     		out.println("</td>");
     		
-    		out.println("<td>");
-    		out.println("<button name = \"usertodelete\" type=\"submit\" class=\"btn btn-warning\" value =\"" +userID + "\"/>Delete</button>");
+    		out.println("<td style=\"text-align:center;\">");
+    		out.println("<button name = \"usertodelete\" type=\"submit\" class=\"btn btn-sm btn-warning\" value =\"" +eachUserID + "\"/>Delete</button>");
     		out.println("</td>");
     		
-    		out.println("<td>");
-    		out.println("<button name = \"usertoadmin\" type=\"submit\" class=\"btn btn-success\" value =\"" +userID + "\"/>Promote</button>");
+    		out.println("<td style=\"text-align:center;\">");
+    		out.println("<button name = \"usertoadmin\" type=\"submit\" class=\"btn btn-sm btn-success\" value =\"" +eachUserID + "\"/>Promote</button>");
     		out.println("</td>");
     		
     		out.println("</tr>");	
@@ -77,14 +280,30 @@
   </table>
 </div>
 
-<div class = "container">
-<h4>Manage Quizs</h4>
-  <table class="table">
+<div style="top:320px;position:relative;">
+	<h2 style="text-align:center;">Manage Quiz</h2>
+</div>
+<div class="container" style = "position: relative; width:70%; top: 50px;"> 
+  		<div style="border-radius: 20px;
+    				border: 2px solid #73AD21;
+    				padding: 15px; 
+				    height: 300px;
+     				text-align:left;
+     				left:50%;width:900px;
+     				margin-left:-450px;
+     				top:300px;
+     				position:absolute;
+     				opacity: 0.9;
+     				background-color:white;
+     				overflow:auto;max-height:300px;
+     				">
+    <table class="table">
     <thead>
       <tr>
-        <th>QuizID</th>
-        <th>Delete Quiz</th>
-        <th>Clear History</th>
+        <th class="text-center">QuizID</th>
+        <th class="text-center">Quiz Name</th>
+        <th class="text-center">Delete Quiz</th>
+        <th class="text-center">Clear History</th>
       </tr>
     </thead>
     <tbody>
@@ -96,16 +315,22 @@
     		} else {
     			out.println("<tr class=\"active\">");
     		}
-    		out.println("<td>");
+    		
+    		out.println("<td style=\"text-align:center;\">");
     		out.println(quizID);
     		out.println("</td>");
     		
-    		out.println("<td>");
-    		out.println("<button name = \"quiztodelete\" type=\"submit\" class=\"btn btn-warning\" value =\"" +quizID+ "\"/>Delete</button>");
+    		out.println("<td style=\"text-align:center;\">");
+    		String quizName = Quiz.getName(quizID);
+    		out.println(quizName);
     		out.println("</td>");
     		
-    		out.println("<td>");
-    		out.println("<button name = \"quiztoclear\" type=\"submit\" class=\"btn btn-success\" value =\"" +quizID+ "\"/>Clear</button>");
+    		out.println("<td style=\"text-align:center;\">");
+    		out.println("<button name = \"quiztodelete\" type=\"submit\" class=\"btn btn-sm btn-warning\" value =\"" +quizID+ "\"/>Delete</button>");
+    		out.println("</td>");
+    		
+    		out.println("<td style=\"text-align:center;\">");
+    		out.println("<button name = \"quiztoclear\" type=\"submit\" class=\"btn btn-sm btn-success\" value =\"" +quizID+ "\"/>Clear</button>");
     		out.println("</td>");
     		
     		out.println("</tr>");	
@@ -115,7 +340,10 @@
   </table>
 </div>
 
-</form>
+
+ <div  style = "position: relative; width:80%; top: 570px;"><a href="HomePage.jsp"> Back to Home Page </a></div>
 </div>
+</form>
 </body>
 </html>
+

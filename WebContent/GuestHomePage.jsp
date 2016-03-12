@@ -280,9 +280,9 @@ h6 {
 						for (int announcePage = announcements.size() - 1; announcePage > announcements.size() - numAnnounceMent
 								- 1; announcePage--) {
 							if (pageIndex == 0) {
-								out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
+								out.print("<div class=\"item active\" style=\"left:50%;width:420px;margin-left:-210px;height:220px;text-align:center;overflow:scroll;\">");
 							} else {
-								out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+								out.print("<div class=\"item\" style=\"left:50%;width:420px;margin-left:-210px;height:220px;text-align:center;overflow:scroll;\">");
 							}
 							out.print("<h3 style=\"color:#C71585;\">Annoucement!!!</h3><br>");
 							String announceIDUrl = "UserViewAnnoun.jsp";

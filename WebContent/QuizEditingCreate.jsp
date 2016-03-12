@@ -261,12 +261,13 @@
 		<!-- /.col-lg-6 -->
 	</div>
 
+
 <div class="container" style = "position: relative; width:70%; top: 50px;">
   <h2 style="text-align:center;">Create Questions</h2> 
   		<div style="border-radius: 20px;
     				border: 2px solid #73AD21;
     				padding: 15px; 
-				    height: 520px;
+				    height: 500px;
      				text-align:left;
      				left:50%;width:800px;
      				margin-left:-400px;
@@ -317,7 +318,7 @@
 	
 	<div class="collapse" id="collapseChoices">
 			<div class="well"
-				style="height: 410px; width:65%;background-color: white;">
+				style="height: 380px; width:65%;background-color: white;">
 				<form action="QuizEditingAddProblem" method="post">	
 					<div class="container">
 						<input type="hidden" name = "type" value = "MC">
@@ -331,7 +332,7 @@
 						
 						<INPUT type="button" class="btn btn-info btn-sm" value="Add Choice" onclick="addRow('dataTable')" />
     					<div style="overflow:auto;">
-    					<TABLE id="dataTable" border="0" style="position: relative; width:60%; max-height:200px; overflow:auto">
+    					<TABLE id="dataTable" border="0" style="position: relative; width:60%; max-height:150px; overflow:auto">
         					<TR>
             				<TD style="width:1.5%;"><INPUT type="checkbox" style="width:10px;" name="choicecheck" value = "box1"/></TD>
             				<TD style="width:58.5%;"> <INPUT type="text" style="border-radius:6px; min-width: 0; width:640px; height:34px;" name = "choice1" placeholder="Choice"> </TD>
@@ -339,17 +340,16 @@
     					</TABLE>
 						</div>
 					</div>
-				<div class="btn-group" role="group" aria-label="..." style="position: relative; top:5px;width:300px; left:50%; margin-left:-100px">
+				<div class="btn-group" role="group" aria-label="..." style="position: relative; top:15px;width:300px; left:50%; margin-left:-60px">
 				  <input type="submit" class="btn btn-info btn-sm" value = "Add Question"></input>
-				  <a href="QuizEditing.jsp" class="btn btn-sm btn-info"  role="button">Submit</a>
-				 </div>
+				</div>
                 </form>
 			</div>
 	</div>
 	
 	<div class="collapse" id="collapseFillBlank">
 			<div class="well"
-				style="height: 410px; width:65%;background-color: white;">
+				style="height: 320px; width:65%;background-color: white;">
 				<form action="QuizEditingAddProblem" method="post">	
 				
 					<div class="container">
@@ -364,17 +364,16 @@
 						</div>
 					</div>
 
-				<div class="btn-group" role="group" aria-label="..." style="position: relative; top:8px;width:300px; left:50%; margin-left:-100px">
+				<div class="btn-group" role="group" aria-label="..." style="position: relative; top:25px;width:300px; left:50%; margin-left:-60px">
 				  <input type="submit" class="btn btn-info btn-sm" value = "Add Question"></input>
-				  <a href="QuizEditing.jsp" class="btn btn-sm btn-info"  role="button">Submit</a>
-				 </div>
+				</div>
                 </form>
 			</div>
 	</div>
 	
 	<div class="collapse" id="collapsePictureResponse">
 			<div class="well"
-				style="height: 410px; width:65%;background-color: white;">
+				style="height: 320px; width:65%;background-color: white;">
 				<form action="QuizEditingAddProblem" method="post">	
 
 					<div class="container">
@@ -391,17 +390,16 @@
 						</div>
 					</div>
 
-				<div class="btn-group" role="group" aria-label="..." style="position: relative; top:8px;width:300px; left:50%; margin-left:-100px">
+				<div class="btn-group" role="group" aria-label="..." style="position: relative; top:25px;width:300px; left:50%; margin-left:-60px">
 				  <input type="submit" class="btn btn-info btn-sm" value = "Add Question"></input>
-				  <a href="QuizEditing.jsp" class="btn btn-sm btn-info"  role="button">Submit</a>
-				 </div>
+				</div>
                 </form>
 			</div>
 	</div>
 	
 	<div class="collapse" id="collapseQuestionResponse">
 			<div class="well"
-				style="height: 410px; width:65%;background-color: white;">
+				style="height: 250px; width:65%;background-color: white;">
 				<form action="QuizEditingAddProblem" method="post">	
 
 					<div class="container">
@@ -414,9 +412,8 @@
 						</div>
 					</div>
 
-				<div class="btn-group" role="group" aria-label="..." style="position: relative; top:8px;width:300px; left:50%; margin-left:-100px">
+				<div class="btn-group" role="group" aria-label="..." style="position: relative; top:25px;width:300px; left:50%; margin-left:-60px">
 				  <input type="submit" class="btn btn-info btn-sm" value = "Add Question"></input>
-				  <a href="QuizEditing.jsp" class="btn btn-sm btn-info"  role="button">Submit</a>
 				</div>
                 </form>
 			</div>
@@ -424,7 +421,7 @@
 	
 	<div class="collapse" id="collapseMultiResponse">
 			<div class="well"
-				style="height: 410px; width:65%;background-color: white;">
+				style="height: 390px; width:65%;background-color: white;">
 				<form action="QuizEditingAddProblem" method="post">	
 				
 						<div class="container">
@@ -432,8 +429,8 @@
 							<p><h5>Question: </h5> </p>
 							<input style="width:56%;" type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
 							<div>
-								<p><h5>Answer: If there exists parallel answers, please split them by "#"</h5></p>
-								<p>eg: CA#California</p>
+								<p><h5>Answer: If there exists parallel answers, please split them by "#" (eg: CA#California)</h5></p>
+								
 								<INPUT type="button" class="btn btn-info btn-sm" value="Add Answer" onclick="addRowResponse('dataTableMR')" />
     							<div style="overflow:auto;">
 			    					<TABLE id="dataTableMR" border="0" style="position: relative; width:618px;; max-height:100px; overflow:auto">
@@ -452,20 +449,17 @@
 							</div>
 						</div>
 				
-				<div class="btn-group" role="group" aria-label="..." style="position: relative; width:300px; left:50%; margin-left:-100px">
+				<div class="btn-group" role="group" aria-label="..." style="position: relative; width:300px; left:50%; margin-left:-60px">
 				  <input type="submit" class="btn btn-info btn-sm" value = "Add Question"></input>
-				  <a href="QuizEditing.jsp" class="btn btn-sm btn-info"  role="button">Submit</a>
 				</div>
 				
                 </form>
 			</div>
 	</div>
 
-
-
-
-
-  <div  style = "position: absolute; width:80%; top:530px;"><a href="HomePage.jsp"> Back to Home Page </a></div>
+  <div  style = "position: absolute; width:80%; top:510px; left:50%; margin-left:-90px;">
+	<a href="QuizEditing.jsp" class="btn  btn-success"  role="button">Complete</a>
+  </div>
 </div>
 
 </div>

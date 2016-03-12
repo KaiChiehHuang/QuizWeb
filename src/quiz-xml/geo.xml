@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<quiz random="true" one-page="false" practice-mode="false" immediate-correction="true">
+<quiz random="false" one-page="false" practice-mode="false" immediate-correction="true">
 <title>Geography Exam</title>
 <quiz-image>https://pioneerwoman.files.wordpress.com/2013/04/geographyquiz2.jpg</quiz-image>
 <category>Geography</category>
@@ -36,7 +36,7 @@
   <option answer="answer">In North America</option>
 </question>
 
-<question type="multiple-response" answer-ordered="true">
+<question type="multiple-response" answer-ordered="false">
   <query>List the top three biggest oceans in the world.</query>
   <answer-list>
     <answer>Pacific</answer>

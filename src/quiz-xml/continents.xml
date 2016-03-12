@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<quiz immediate-correction="false" one-page="true" practice-mode="false" random="false">
+<quiz immediate-correction="false" one-page="false" practice-mode="false" random="true">
 	<title>Continents By Population</title>
 	<quiz-image>http://www.anglaisfacile.com/cgi2/myexam/images/25249.gif</quiz-image>
 	<category>Geography</category>

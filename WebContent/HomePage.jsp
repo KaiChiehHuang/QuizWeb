@@ -285,9 +285,9 @@ h6 {
 						for (int announcePage = announcements.size() - 1; announcePage > announcements.size() - numAnnounceMent
 								- 1; announcePage--) {
 							if (pageIndex == 0) {
-								out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
+								out.print("<div class=\"item active\" style=\"left:50%;width:420px;margin-left:-210px;height:220px;text-align:center;overflow:scroll;\">");
 							} else {
-								out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+								out.print("<div class=\"item\" style=\"left:50%;width:420px;margin-left:-210px;height:220px;text-align:center;overflow:scroll;\">");
 							}
 							out.print("<h3 style=\"color:#C71585;\">Annoucement!!!</h3><br>");
 							String announceIDUrl = "UserViewAnnoun.jsp";
@@ -306,9 +306,9 @@ h6 {
 														break;
 													} */
 							if (pageIndex == 0) {
-								out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
+								out.print("<div class=\"item active\" style=\"left:50%;width:420px;margin-left:-210px;height:220px;text-align:center;overflow:scroll;\">");
 							} else {
-								out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+								out.print("<div class=\"item\" style=\"left:50%;width:420px;margin-left:-210px;height:220px;text-align:center;overflow:scroll;\">");
 							}
 							Quiz quizTook = new Quiz();
 							quizTook.setQuizID(performance.getQuizID());
@@ -329,9 +329,9 @@ h6 {
 													break;
 												} */
 							if (pageIndex == 0) {
-								out.print("<div class=\"item active\" style=\"height:280px;text-align:center;\">");
+								out.print("<div class=\"item active\" style=\"left:50%;width:420px;margin-left:-210px;height:220px;text-align:center;overflow:scroll;\">");
 							} else {
-								out.print("<div class=\"item\" style=\"height:280px;text-align:center;\">");
+								out.print("<div class=\"item\" style=\"left:50%;width:420px;margin-left:-210px;height:220px;text-align:center;overflow:scroll;\">");
 							}
 							out.print("<h3 style=\"color:#C71585;\">Your Recent Created Quiz</h3><br>");
 							String quizIDUrl = "QuizSummary.jsp?quizID=" + quiz.getQuizID() + "&userID=" + userID;
@@ -600,7 +600,7 @@ h6 {
 							String imageUrl = ach.getImage();
 							String description = Achievement.getDescription(ach.getAchievementName());
 							String getAchTime = ach.getTime();
-							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:43%;\" data-toggle=\"tooltip\" title=\"<h5>"+ach.getAchievementName()+ "</h5> You"+description+ "\" data-html=\"true\" >";
+							String achImage = "<img src=\"" + imageUrl +"\" style=\"position:relative;top:8px;left:5%;width:30%;height:43%;\" data-toggle=\"tooltip\" title=\"<h5>"+ach.getAchievementName()+ "</h5> You"+description+" Received at: " + ach.getTime() +  "\" data-html=\"true\" >";
 							out.print(achImage);
 							allAchievements.remove(ach.getAchievementName());
 						}

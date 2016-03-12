@@ -623,7 +623,7 @@ h6 {
 					QUIZZES
 				</div>
 				<div class="col-xs-6 col-md-6 text-right">
-					<a href="#">More...</a>
+			
 				</div>
 			</div>
 		</div>
@@ -666,7 +666,7 @@ h6 {
 					CREATED QUIZZES
 				</div>
 				<div class="col-xs-6 col-md-6 text-right">
-					<a href="#">More...</a>
+					
 				</div>
 			</div>
 		</div>
@@ -709,7 +709,7 @@ h6 {
 					<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp&nbspFRIEND ACTIVITIES
 				</div>
 				<div class="col-xs-6 col-md-6 text-right">
-					<a href="#">More...</a>
+				
 				</div>
 			</div>
 		</div>

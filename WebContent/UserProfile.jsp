@@ -291,20 +291,29 @@ $(function () {
 					</center>
 				</div>
                 <div class="modal-footer">
-                    <center>
-                    <%
-	                    if (User.checkFriend(userID, viewUserID)) {
-	                    	out.print("<button disabled=\"disabled\" type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Friend <span class=\"glyphicon glyphicon-ok-sign\"></span></button>");
-	                    } else {
-	                    	if(User.checkFriendRequest(userID,  viewUserID)) { 
-	                    		out.print("<button disabled=\"disabled\" type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\" data-dismiss=\"modal\">Request Sent <span class=\"glyphicon glyphicon-question-sign\"></span></button>");
-	                    	}else {
-	                    		out.print("<button type=\"submit\" form=\"addFriend\" type=\"button\" name=\"friendtoadd\" value=\""+viewUserID+"\"class=\"btn btn-primary\">Add Friend</button>"); 
-	                    	}
-	                    }
-                    %>
-                    </center>
-                </div>
+					<center>
+						<%
+							if (!userID.equals("Guest")) {
+								if (User.checkFriend(userID, viewUserID)) {
+									out.print("<button disabled=\"disabled\" type=\"button\" name=\"friendtoadd\" value=\"" + viewUserID
+											+ "\"class=\"btn btn-primary\" data-dismiss=\"modal\">Friend <span class=\"glyphicon glyphicon-ok-sign\"></span></button>");
+								} else {
+									if (User.checkFriendRequest(userID, viewUserID)) {
+										out.print("<button disabled=\"disabled\" type=\"button\" name=\"friendtoadd\" value=\""
+												+ viewUserID
+												+ "\"class=\"btn btn-primary\" data-dismiss=\"modal\">Request Sent <span class=\"glyphicon glyphicon-question-sign\"></span></button>");
+									} else {
+										out.print(
+												"<button type=\"submit\" form=\"addFriend\" type=\"button\" name=\"friendtoadd\" value=\""
+														+ viewUserID + "\"class=\"btn btn-primary\">Add Friend</button>");
+									}
+								}
+							}else{
+								out.print("<br><br>");
+							}
+						%>
+					</center>
+				</div>
 
   <div  style = "position: relative; width:80%; top: 45px;"><a href="HomePage.jsp"> Back to Home Page </a></div>
 </div>

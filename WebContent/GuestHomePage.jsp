@@ -326,7 +326,7 @@ h6 {
 					QUIZZES
 				</div>
 				<div class="col-xs-6 col-md-6 text-right">
-					<a href="#">More...</a>
+					
 				</div>
 			</div>
 		</div>
@@ -369,7 +369,7 @@ h6 {
 					CREATED QUIZZES
 				</div>
 				<div class="col-xs-6 col-md-6 text-right">
-					<a href="#">More...</a>
+					
 				</div>
 			</div>
 		</div>

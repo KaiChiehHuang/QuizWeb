@@ -19,10 +19,8 @@
 <title>Create New Account</title>
 </head>
 <body style="height:800px;background-image:url(loginBackground.jpg);background-size: 100%;"">
-		<h1 style="text-align:center;">Create Your Account</h1>
-
 	<div
-		style="border-radius: 20px; border: 2px solid #73AD21; padding: 40px; height: 610px; text-align: left; left: 50%; width: 500px; margin-left: -250px; top: 180px; position: absolute;opacity: 0.9;background-color:white;">
+		style="border-radius: 20px; border: 2px solid #73AD21; padding: 40px; height: 610px; text-align: left; left: 50%; width: 500px; margin-left: -250px; top: 160px; position: absolute;opacity: 0.9;background-color:white;">
 		<p>Please enter your ID, Password, and Info...</p>
 		<hr style="border: none; border-top: 1px #CCCCCC solid; height: 1px;">
 		<form action="CreateNewAccount" method="post" data-toggle="validator" role="form">

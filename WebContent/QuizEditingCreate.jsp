@@ -21,6 +21,131 @@
     width: 600px;
     display: inline;
 }
+
+
+.button-container form,
+.button-container form div {
+    display: inline;
+}
+
+.button-container button {
+    display: inline;
+    vertical-align: middle;
+}
+
+.linkButton { 
+     background: none;
+     border: none;
+     color: #0066CC;
+     text-decoration: underline;
+     cursor: pointer; 
+}
+
+.grayscale {
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
+
+.tooltip-inner  {
+	white-space:pre-wrap;
+	max-width:200px;
+	word-wrap:break-word;
+	background-color:#181818 ;
+}
+
+
+.carousel-control.left, .carousel-control.right {
+	background-image: none
+}
+
+.clearfix:after {
+	display: block;
+	clear: both;
+}
+
+/*----- Menu Outline -----*/
+.menu-wrap {
+	width: 100%;
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+	background: black;
+}
+
+.menu {
+	width: 300px;
+	margin: 0px auto;
+}
+
+.menu li {
+	margin: 0px;
+	list-style: none;
+	font-family: 'Ek Mukta';
+}
+
+.menu a {
+	transition: all linear 0.15s;
+	color: #919191;
+}
+
+.menu li:hover>a, .menu .current-item>a {
+	text-decoration: none;
+	color: #be5b70;
+}
+
+.menu .arrow {
+	font-size: 11px;
+	line-height: 0%;
+}
+
+/*----- Top Level -----*/
+.menu>ul>li {
+	float: left;
+	display: inline-block;
+	position: relative;
+	font-size: 19px;
+}
+
+.menu>ul>li>a {
+	padding: 10px 30px;
+	display: inline-block;
+	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.menu>ul>li:hover>a, .menu>ul>.current-item>a {
+	background: #2e2728;
+}
+
+/*----- Bottom Level -----*/
+.menu li:hover .sub-menu {
+	z-index: 1;
+	opacity: 1;
+}
+
+.sub-menu {
+	width: 140%;
+	padding: 5px 0px;
+	position: absolute;
+	top: 100%;
+	left: 0px;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity linear 0.15s;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+	background: #2e2728;
+}
+
+.sub-menu li {
+	display: block;
+	font-size: 16px;
+}
+
+.sub-menu li a {
+	padding: 10px 30px;
+	display: block;
+}
+
+.sub-menu li a:hover, .sub-menu .current-item a {
+	background: #3e3436;
+}
 </style>
 <title>Add Questions</title>
     <SCRIPT type="text/javascript">
@@ -69,7 +194,6 @@
  
     </SCRIPT>
 </head>
-<body>
 <body style="height:300px; width:100%;background-size:100%;background-color:#fffff6;">
 
 <div
@@ -79,14 +203,7 @@
 			style="position: absolute; left: 0px; width: 300px; height: 100%; background-color:black;">
 			<div
 				style="position: absolute; left: 0px; top: 5px; width: 250px; height: 45; background-color: black;">
-				<% 
-					String userID = (String) session.getAttribute("userID");
-					if(userID.equals("Guest")) {
-						out.print("<a href=\"GuestHomePage.jsp\"><h4 style=\"color: #ffb3b3;\">QuizzGo</h4></a>");
-					}else{
-						out.print("<a href=\"HomePage.jsp\"><h4 style=\"color: #ffb3b3;\">QuizzGo</h4></a>");
-					}
-				%>
+				<a href="HomePage.jsp"><h4 style="color: #ffb3b3;">QuizzGo</h4></a>
 			</div>
 		</div>
 
@@ -117,7 +234,7 @@
 					<ul class="clearfix">
 						<li style="left:-10px;width:110px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"><a href="javascript:pageScrollUp(0)" style="top:30px;padding:10px 1px;color:yellow;">
 							<%
-								userID = (String) session.getAttribute("userID");
+								String userID = (String) session.getAttribute("userID");
 								String welcome = "Hi "+userID+"!";
 								out.println(welcome);
 							%>
@@ -125,15 +242,11 @@
 						</li>
 						<li><a href="#">Menu<span class="arrow">&#9660;</span></a>
 							<ul class="sub-menu">
-								<% 
-								   if(userID.equals("Guest")) {
-									   out.print("<li><a href=\"CreateAccount.jsp\">Create Account</a></li>");
-								   }else{
-									   String userIDUrl = "QuizCreat.jsp?userID="+userID; 
-									   String quizRecordUrl = "UserViewHistory.jsp"; 
-									   out.print("<li><a href=\""+ userIDUrl+"\">Create Quiz</a></li>");
-									   out.print("<li><a href=\""+ quizRecordUrl+"\">Quiz Record</a></li>");
-								   }
+								<% String userIDUrl = "QuizCreat.jsp?userID="+userID; 
+								   out.print("<li><a href=\""+ userIDUrl+"\">Create Quiz</a></li>");
+								%>
+								<% String quizRecordUrl = "UserViewHistory.jsp"; 
+								   out.print("<li><a href=\""+ quizRecordUrl+"\">Quiz Record</a></li>");
 								%>
 								<% String announceUrl = "UserViewAnnoun.jsp"; 
 								   out.print("<li><a href=\""+ announceUrl +"\">Announcements</a></li>");
@@ -147,7 +260,6 @@
 		</div>
 		<!-- /.col-lg-6 -->
 	</div>
-
 
 <div class="container" style = "position: relative; width:70%; top: 50px;">
   <h2 style="text-align:center;">Create Questions</h2> 

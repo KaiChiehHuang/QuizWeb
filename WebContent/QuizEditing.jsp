@@ -230,7 +230,8 @@ tbody{
 	Quiz quiz = (Quiz)session.getAttribute("quiz");
 	ArrayList<Problem> problems = new ArrayList<Problem>();
 	problems = quiz.getProblems();
-	quiz.setOnPracticeMode();
+	quiz.setEditing();
+	quiz.updateDatabase();
 /* 	if (quiz.isRandomQuiz()) {
 		Collections.shuffle(problems);
 	} */
@@ -276,7 +277,10 @@ tbody{
 <div class="text-center">
 <h2>     </h2>
 <a href="QuizEditingCreate.jsp" class="btn btn-info"  role="button">Add Problems</a>
+<br><br>
+<div><a href="HomePage.jsp"> Back to Home Page </a></div>
 </div>
+
 <%!
 	/* getParameter(answer1) get the answer of user. */
 	public void takeSingleChoice(JspWriter myOut, MultiChoice mc, int index, ArrayList<Problem> problems) throws IOException {

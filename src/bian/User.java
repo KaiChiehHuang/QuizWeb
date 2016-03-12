@@ -444,7 +444,7 @@ public class User {
 	public static ArrayList<User> serachUser(String keyword) throws SQLException {
 		ArrayList<User> users = new ArrayList<User>();
 		DBConnection database = new DBConnection();
-		ResultSet res = database.getStmt().executeQuery("SELECT DISTINCT UserID FROM Users WHERE UserID LIKE \"%" + keyword.replace("\"", "\"\"") + "%\" OR Name LIKE \"%" + keyword.replace("\"", "\"\"") + "%\";");
+		ResultSet res = database.getStmt().executeQuery("SELECT DISTINCT UserID FROM Users WHERE (UserID LIKE \"%" + keyword.replace("\"", "\"\"") + "%\" OR Name LIKE \"%" + keyword.replace("\"", "\"\"") + "%\") AND UserID <> \"Guest\" AND UserID <> \"Administration\";");
 		while (res.next()) {
 			User temp = new User(res.getString("UserID"));
 			users.add(temp);

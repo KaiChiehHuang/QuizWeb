@@ -232,7 +232,10 @@ tbody{
 	quiz.setCreatedDate();
 	quiz.updateDatabase();
 	String cate = (String)session.getAttribute("cate");
-	Category.addCategory(quiz.getQuizID(), cate);
+	cate = cate.trim();
+	if (!cate.equals("")) {
+		Category.addCategory(quiz.getQuizID(), cate);
+	}
 %>
 
 		<div style="border-radius: 20px;

@@ -60,15 +60,15 @@ public class MultiPageTransfer extends HttpServlet {
 		problems.get(index-1).setUserAnswer(answer);
 		String result = problems.get(index-1).getCorrectAnswerNumber();
 		session.setAttribute("result", result);
-		if(quiz.isImmediateCorrection()) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("QuizTakingMultiPageResult.jsp");
-			dispatcher.forward(request, response);
-		} else if (index+1 <= problems.size()){
-			RequestDispatcher dispatcher = request.getRequestDispatcher("QuizTakingMultiPageQuestion.jsp");
-			dispatcher.forward(request, response);
-		} else {
+		if (index+1 > problems.size()) {
 			quiz.quizEnd();
 			RequestDispatcher dispatcher = request.getRequestDispatcher("QuizResult.jsp");
+			dispatcher.forward(request, response);
+		} else if(quiz.isImmediateCorrection()) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("QuizTakingMultiPageResult.jsp");
+			dispatcher.forward(request, response);
+		} else{
+			RequestDispatcher dispatcher = request.getRequestDispatcher("QuizTakingMultiPageQuestion.jsp");
 			dispatcher.forward(request, response);
 		}
 

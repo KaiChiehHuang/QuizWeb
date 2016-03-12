@@ -79,6 +79,10 @@ public class QuizEditingAddProblem extends HttpServlet {
 			pro.setChoices(choices);
 			pro.setCount(MCAnswer.split("\\|").length);
 			pro.setAnswers(MCAnswer);
+			try {
+				pro.setCreating();
+				pro.updateDatabase();
+			} catch (Exception ignore) {}
 			quiz.addProblem(pro);
 		} else if (type.equals("MR")) {
 			MultiResponse pro = new MultiResponse("MR", true);
@@ -101,14 +105,22 @@ public class QuizEditingAddProblem extends HttpServlet {
 			} else {
 				pro.setOrdered(true);
 			}
+			try {
+				pro.setCreating();
+				pro.updateDatabase();
+			} catch (Exception ignore) {}
 			quiz.addProblem(pro);
 		} else if (type.equals("FB")) {
 			FillBlank fb = new FillBlank("FB", true);
 			String[] fbquestion = request.getParameterValues("fbquestion");
 			String que = "";
-			que += fbquestion[0] + "#" + fbquestion[1];
+			que += fbquestion[0] + " |||||| " + fbquestion[1];
 			fb.setQuestion(que);
 			fb.setAnswers(answer);
+			try {
+				fb.setCreating();
+				fb.updateDatabase();
+			} catch (Exception ignore) {}
 			quiz.addProblem(fb);
 		} else if (type.equals("PR")) {
 			PictureResponse pr = new PictureResponse("PR", true);
@@ -116,11 +128,19 @@ public class QuizEditingAddProblem extends HttpServlet {
 			pr.setQuestion(question);
 			String url = request.getParameter("picture");
 			pr.setURL(url);
+			try {
+				pr.setCreating();
+				pr.updateDatabase();
+			} catch (Exception ignore) {}
 			quiz.addProblem(pr);
 		} else if (type.equals("QR")) {
 			QuestionResponse qr = new QuestionResponse("QR", true);
 			qr.setAnswers(answer);
 			qr.setQuestion(question);
+			try {
+				qr.setCreating();
+				qr.updateDatabase();
+			} catch (Exception ignore) {}
 			quiz.addProblem(qr);
 		}
 

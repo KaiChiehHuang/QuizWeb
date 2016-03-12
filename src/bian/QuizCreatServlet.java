@@ -48,6 +48,8 @@ public class QuizCreatServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
 		String url = request.getParameter("picture");
+		String cate = request.getParameter("cate");
+		session.setAttribute("cate", cate);
 		quiz.setName(name);
 		quiz.setDescription(description);
 		if (url != "") {

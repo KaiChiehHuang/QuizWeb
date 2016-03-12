@@ -260,6 +260,8 @@ tbody{
 	<input style = "width:72%" type="text" class="form-control form-control-inline" name = "name" placeholder="Quiz Name">
 	<p><h5>*Quiz Description: </h5> </p>
   	<textarea style = "width:72%" class="form-control" rows="3" name = "description" placeholder="Quiz Description"></textarea>
+  	<p><h5>Category: </h5> </p>
+	<input style = "width:72%" type="text" class="form-control form-control-inline" name = "cate" placeholder="Quiz Category">
   	<p><h5>Quiz Picture: </h5> </p>
 	<input style = "width:72%" type="text" class="form-control" name = "picture" placeholder="URL">
 
@@ -305,6 +307,7 @@ tbody{
 		<div class="radio">
 		  <label><input type="radio" name="ImmCorr" value="No">No</label>
 	</div>
+	
 <button type="submit"  class="btn btn-success" type="button" style = "position: relative; left: 35%; width: 120px; margin-left:-60px">Add Questions</button>
 
 

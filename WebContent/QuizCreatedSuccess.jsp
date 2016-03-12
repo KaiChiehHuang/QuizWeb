@@ -231,6 +231,8 @@ tbody{
 	quiz.setCreating();
 	quiz.setCreatedDate();
 	quiz.updateDatabase();
+	String cate = (String)session.getAttribute("cate");
+	Category.addCategory(quiz.getQuizID(), cate);
 %>
 
 		<div style="border-radius: 20px;

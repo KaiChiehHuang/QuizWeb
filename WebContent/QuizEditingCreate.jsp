@@ -357,7 +357,7 @@
 						<p><h5>Question: </h5> </p>
 						<div>
 							<input style="width:60%;" type="text" class="form-control form-control-inline" name = "fbquestion" placeholder="Question">
-							<p><h5>Blank field: </h5> </p>
+							<p><h5>Blank field: If there exists parallel answers, please split them by "|" (eg: CA|California)</h5> </p>
 							<input style="width:60%;" type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
 							<p><h5>Question part 2: </h5> </p>
 							<input style="width:60%;" type="text" class="form-control form-control-inline" name = "fbquestion" placeholder="Question">
@@ -385,7 +385,7 @@
 							<input style="width:60%;"type="text" class="form-control form-control-inline" name = "picture" placeholder="Picture URL">
 						</div>
 						<div>
-							<p><h5>Answer: </h5> </p>
+							<p><h5>Answer: If there exists parallel answers, please split them by "|" (eg: CA|California)</h5> </p>
 							<input style="width:60%;"type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
 						</div>
 					</div>
@@ -407,7 +407,7 @@
 						<p><h5>Question: </h5> </p>
 						<input style="width:60%;" type="text" class="form-control form-control-inline" name = "question" placeholder="Question">
 						<div>
-							<p><h5>Answer: </h5> </p>
+							<p><h5>Answer: If there exists parallel answers, please split them by "|" (eg: CA|California)</h5> </p>
 							<input style="width:60%;" type="text" class="form-control form-control-inline" name = "answer" placeholder="Answer">
 						</div>
 					</div>
@@ -457,7 +457,7 @@
 			</div>
 	</div>
 
-  <div  style = "position: absolute; width:80%; top:510px; left:50%; margin-left:-90px;">
+  <div  style = "text-align:center;position: absolute; width:180px; top:510px; left:50%; margin-left:-90px;">
 	<a href="QuizEditing.jsp" class="btn  btn-success"  role="button">Complete</a>
   </div>
 </div>
